@@ -165,6 +165,20 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - décisions issues de la recherche d'architecture :
   `docs/research/GAME_ARCHITECTURE_RESEARCH.md`.
 
+## Projection validée des catalogues publiés
+
+Cette liste est une projection documentaire, jamais une seconde autorité. Les
+Resources `.tres` restent souveraines ; le test de contrat compare
+dynamiquement leurs identifiants avec ce bloc afin qu'un ajout ou un retrait de
+contenu impose la mise à jour de la mémoire du projet sans figer la taille des
+catalogues.
+
+<!-- CATALOG_PROJECTION_BEGIN -->
+- `mission_maps` : `toxic_coast`
+- `enemy_archetypes` : `vacuum_trooper`
+- `ground_pieces/toxic_coast` : `industrial_catwalk_medium`, `military_bunker_block_medium`, `natural_ledge_medium`, `toxic_pipe_bridge_medium`
+<!-- CATALOG_PROJECTION_END -->
+
 ## Protection opérationnelle
 
 - dépôt Git initialisé sur la branche `main` ;
@@ -235,10 +249,11 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/permanent_ground_module_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/weapon_projectile_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/class_glossary_contract_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/project_state_catalog_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --quit-after 240
 python3 pipeline/assets/tools/validate_vacuum_trooper_hit_death_candidate.py
 ```
 
-Dernière validation complète : 2026-08-27, les 22 contrats headless passent.
+Dernière validation complète : 2026-08-27, les 23 contrats headless passent.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames
 d'atterrissage : marche, impact, éjection et épave suivent la pente.

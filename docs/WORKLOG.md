@@ -894,3 +894,17 @@
   décisions qu'elle documentait ;
 - prochaine action recommandée : ajouter une validation ciblée entre l'état
   documenté et les catalogues publiés.
+
+## 2026-08-27 — Contrat catalogues vers mémoire projet
+
+- ajouté dans `PROJECT_STATE.md` une projection lisible des identifiants
+  publiés pour les cartes, ennemis et Ground Pieces Côte toxique ;
+- conservé les Resources `.tres` comme autorités uniques : la documentation
+  est explicitement un dérivé contrôlé ;
+- ajouté `project_state_catalog_contract_test.gd`, qui construit ses attentes
+  depuis les catalogues runtime et compare dynamiquement les ensembles triés ;
+- aucun nombre de pièces ni identifiant de contenu n'est codé en dur dans le
+  test ; enrichir un catalogue exige seulement d'actualiser sa projection dans
+  la mémoire du projet ;
+- prochaine action recommandée : corriger séparément le contrat runtime fragile
+  des dégâts d'explosion.
