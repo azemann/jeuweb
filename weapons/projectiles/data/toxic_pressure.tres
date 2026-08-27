@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://weapons/projectiles/projectile_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://effects/toxic_pressure/toxic_pressure_impact_2d.tscn" id="2_impact"]
+
+[resource]
+script = ExtResource("1_script")
+projectile_id = &"toxic_pressure"
+display_name = "Pression toxique"
+speed = 185.0
+lifetime = 4.0
+damage = 8.0
+impulse = 30.0
+impact_scene = ExtResource("2_impact")
+tracer_color = Color(0.67451, 0.960784, 0.117647, 1)
+core_color = Color(0.94902, 1, 0.392157, 1)
+tracer_length = 18.0
+tracer_width = 7.0

@@ -945,3 +945,17 @@
   et temporel encore `candidate`, gameplay `unmapped` ;
 - point de décision avant publication : accepter ou régénérer l'échelle plus
   petite imposée par la longue trompe de l'attaque.
+
+## 2026-08-27 — Publication et branchement de l'attaque toxique
+
+- validation visuelle acceptée ; publié l'atlas d'attaque, le projectile et
+  l'impact sous `art/` avec les SHA des exports candidats ;
+- ajouté `vacuum_trooper_attack_frames.tres`, les frames projectile/impact et
+  `ProjectileData` `toxic_pressure` ;
+- ajouté `EnemyAttackComponent` dans le SceneTree : détection par portée,
+  anticipation en huit poses, émission à la frame `release`, récupération et
+  reprise de la patrouille ;
+- ajouté `AttackOrigin` visible et transformé selon l'orientation du Trooper ;
+- validations Godot `FOUNDATION_SMOKE_TEST`, `ENEMY_CONTRACT_TEST` et
+  `ASSET_PIPELINE_CONTRACT_TEST` passées ;
+- point de restauration publié : `72e8c5e` (candidats), intégration en cours.

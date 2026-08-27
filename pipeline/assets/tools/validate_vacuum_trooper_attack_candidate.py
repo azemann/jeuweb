@@ -32,11 +32,11 @@ def main() -> None:
     ]
     assert [frame["phase"] for frame in report["frames"]] == phases
     animation = profile["animations"]["toxic_attack"]
-    assert profile["status"] == "candidate"
+    assert profile["status"] == "published"
     assert profile["runtimeRoot"] == report["runtime_root"]
     assert animation["phases"] == phases
     assert animation["durationsMs"] == [frame["duration_ms"] for frame in report["frames"]]
-    assert manifest["status"] == "candidate"
+    assert manifest["status"] == "published"
     assert manifest["statuses"] == report["statuses"]
     for asset in manifest["assets"]:
         if "sha256" in asset:

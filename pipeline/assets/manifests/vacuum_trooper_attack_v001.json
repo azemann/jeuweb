@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "lotId": "vacuum-trooper-toxic-attack-v001",
-  "status": "candidate",
+  "status": "published",
   "assets": [
     {
       "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/attack_v001/vacuum-trooper-toxic-attack-sheet-candidate-v001.png",
@@ -12,27 +12,32 @@
     {
       "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/attack_v001/vacuum-trooper-toxic-attack-sheet-transparent-candidate-v001.png",
       "role": "corrected-imagegen-source-sheet",
-      "status": "candidate-source",
+      "status": "approved-source",
       "sha256": "fa9ee236d7a4dae4f0af4d5ad9852ffd5f85099599228a01b8fe0cc4ae3db0f7"
     },
     {
       "path": "pipeline/assets/exports/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-4x2-256-candidate-v001.png",
       "role": "normalized-runtime-export",
-      "status": "candidate",
+      "status": "approved",
       "sha256": "f6a2a0fbc7ef375c4c507218f4d8a7e63520541a2bb7ec977c55d8b81ee8a1c3"
     }
   ],
   "profile": "pipeline/assets/profiles/vacuum_trooper_attack_profile_v001.json",
   "recipe": "pipeline/assets/recipes/vacuum_trooper_attack_v001.md",
   "qa": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-v001-qa.json",
+  "publishedAt": "2026-08-27",
+  "publishedRuntime": {
+    "path": "art/characters/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-4x2-256-v001.png",
+    "sha256": "f6a2a0fbc7ef375c4c507218f4d8a7e63520541a2bb7ec977c55d8b81ee8a1c3"
+  },
   "statuses": {
-    "visual": "candidate",
-    "temporal": "candidate",
+    "visual": "passed",
+    "temporal": "passed",
     "technical": "passed",
-    "gameplay": "unmapped"
+    "gameplay": "integrated"
   },
   "knownLimits": [
     "La longue trompe impose une échelle commune plus petite que la marche publiée.",
-    "Publication et correspondance SpriteFrames interdites avant revue humaine explicite."
+    "La longue trompe impose une échelle commune plus petite que la marche publiée."
   ]
 }

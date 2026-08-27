@@ -11,6 +11,8 @@ extends CharacterBody2D
 @export_node_path("EnemyPatrolComponent") var patrol_component_path := NodePath("Components/Patrol")
 ## Composant propriétaire des points de vie runtime.
 @export_node_path("EnemyHealthComponent") var health_component_path := NodePath("Components/Health")
+## Composant qui télégraphie et exécute l'attaque data-driven de l'archétype.
+@export_node_path("EnemyAttackComponent") var attack_component_path := NodePath("Components/Attack")
 ## Composant traduisant la patrouille en animation et orientation.
 @export_node_path("EnemyPresentationComponent") var presentation_component_path := NodePath("Components/Presentation")
 ## Composant partagé qui expose le root des pieds et projette l'ombre sur le vrai sol.
@@ -50,6 +52,10 @@ func health_component() -> EnemyHealthComponent:
 	return get_node_or_null(health_component_path) as EnemyHealthComponent
 
 
+func attack_component() -> EnemyAttackComponent:
+	return get_node_or_null(attack_component_path) as EnemyAttackComponent
+
+
 func presentation_component() -> EnemyPresentationComponent:
 	return get_node_or_null(presentation_component_path) as EnemyPresentationComponent
 
@@ -77,6 +83,8 @@ func validation_errors() -> PackedStringArray:
 		errors.append("Components/Patrol doit consommer le profil de la racine.")
 	if health_component() == null or health_component().profile != profile:
 		errors.append("Components/Health doit consommer le profil de la racine.")
+	if attack_component() == null or not attack_component().validation_errors().is_empty():
+		errors.append("Components/Attack et ses correspondances sont obligatoires.")
 	if presentation_component() == null:
 		errors.append("Components/Presentation est obligatoire.")
 	if grounding_component() == null or not grounding_component().validation_errors().is_empty():
@@ -96,6 +104,9 @@ func _on_health_damaged(_amount: float) -> void:
 	var patrol := patrol_component()
 	if patrol != null:
 		patrol.set_movement_enabled(false)
+	var attack := attack_component()
+	if attack != null:
+		attack.cancel_attack()
 	var presentation := presentation_component()
 	if presentation != null:
 		presentation.play_hit()

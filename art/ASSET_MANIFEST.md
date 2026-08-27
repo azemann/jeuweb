@@ -81,6 +81,9 @@ sera affinée frame par frame.
 |---|---|---|---|
 | `characters/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-v001.png` | ImageGen intégré, concepts DA-06/DA-07, marche Teal comme référence biomécanique, normalisation déterministe | cycle de marche 8 poses du premier aspirateur-scaphandre | `vacuum_trooper_frames.tres` → `Presentation/BodySprite` |
 | `characters/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-v001.png` | ImageGen intégré puis reconstruction déterministe des débordements source et normalisation | quatre poses d'impact/récupération et quatre poses de mort avec éjection du pilote | animations non bouclées `hit` et `death` dans `vacuum_trooper_frames.tres` |
+| `characters/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-4x2-256-v001.png` | ImageGen intégré, passe alpha réelle et normalisation déterministe | télégraphe complet en huit phases de l'attaque toxique | `vacuum_trooper_attack_frames.tres` → `Components/Attack/AttackSprite` |
+| `weapons/projectiles/toxic_pressure/toxic-pressure-projectile-4x1-96-v001.png` | ImageGen intégré puis normalisation 4 × 1 | projectile lent évitable de pression toxique | `toxic_pressure_frames.tres` → `ToxicPressure2D/Visual` |
+| `effects/toxic_pressure/toxic-pressure-impact-3x2-192x160-v001.png` | ImageGen intégré puis normalisation 3 × 2 | confirmation visuelle d'impact toxique | `toxic_pressure_impact_frames.tres` → `ToxicPressureImpact2D/Visuals` |
 
 Lot approuvé le 2026-08-27. Atlas 1024 × 384, cellules 256 × 192, root
 `[128, 180]`, huit poses de 160 ms. SHA-256 :
@@ -90,6 +93,12 @@ Source, prompt, profil, manifeste, provenance et QA sous `pipeline/assets/`.
 Lot impact/mort approuvé le 2026-08-27. Atlas 1024 × 384, cellules 256 ×
 192, root `[128, 180]`. SHA-256 :
 `54b6342c11b1c3354c316d685b74fd0f56eeae44de3cb489b91b5d493f934ed2`.
+
+Lot attaque toxique approuvé le 2026-08-27. Atlas d'attaque 1024 × 384,
+cellules 256 × 192, root `[128, 180]`, SHA-256 :
+`f6a2a0fbc7ef375c4c507218f4d8a7e63520541a2bb7ec977c55d8b81ee8a1c3`.
+Projectile 384 × 64, impact 576 × 320. Profils, recettes, manifestes,
+provenance et QA sous `pipeline/assets/`.
 
 ## Imports historiques non actifs
 

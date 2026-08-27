@@ -38,12 +38,12 @@ def main() -> None:
     validate_atlas(ROOT / report["impact"]["atlas"], (576, 320), (192, 160), 6, 3)
     assert len(report["projectile"]["durations_ms"]) == 4
     assert len(report["impact"]["durations_ms"]) == 6
-    assert profile["status"] == "candidate"
+    assert profile["status"] == "published"
     assert profile["projectile"]["runtimeCell"] == report["projectile"]["runtime_cell"]
     assert profile["projectile"]["durationsMs"] == report["projectile"]["durations_ms"]
     assert profile["impact"]["runtimeCell"] == report["impact"]["runtime_cell"]
     assert profile["impact"]["durationsMs"] == report["impact"]["durations_ms"]
-    assert manifest["status"] == "candidate"
+    assert manifest["status"] == "published"
     assert manifest["statuses"] == report["statuses"]
     for asset in manifest["assets"]:
         assert sha256(ROOT / asset["path"]) == asset["sha256"]

@@ -1,6 +1,6 @@
 {
   "schema": "jeuweb.enemy-projectile-impact-qa.v1",
-  "status": "candidate",
+  "status": "published",
   "sources": {
     "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/toxic_pressure_v001/toxic-pressure-projectile-sheet-candidate-v001.png": "67497cb7ea01151b9a9dbc5a1a44c3a9a553534fa5f34f61bca980fe51ae66f6",
     "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/toxic_pressure_v001/toxic-pressure-impact-sheet-candidate-v001.png": "b21d59514206da7c52c65518d1c4d98a77bddd365abbdd68b764c1cf4236576e"
@@ -232,10 +232,10 @@
     "preview": "pipeline/assets/working/enemies/vacuum_trooper/toxic-pressure-impact-v001-preview.webp"
   },
   "statuses": {
-    "visual": "candidate",
-    "temporal": "candidate",
+    "visual": "passed",
+    "temporal": "passed",
     "technical": "passed",
-    "gameplay": "unmapped"
+    "gameplay": "integrated"
   },
   "known_limits": [
     "Vitesse, collision et dégâts restent à définir dans ProjectileData.",

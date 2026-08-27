@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "profileId": "toxic-pressure-v001",
-  "status": "candidate",
+  "status": "published",
   "renderRepresentation": "raster-2d",
   "gameplaySpace": "2d-canvas",
   "projectile": {

@@ -2,7 +2,8 @@
   "schemaVersion": "1.0.0",
   "lotId": "toxic-pressure-v001",
   "generatedAt": "2026-08-27",
-  "approval": "Candidate technique en attente de validation visuelle et temporelle du propriétaire du projet.",
+  "approvedAt": "2026-08-27",
+  "approval": "Validation visuelle et temporelle explicite du propriétaire du projet.",
   "tool": {
     "provider": "OpenAI",
     "surface": "Codex built-in imagegen",

@@ -1,6 +1,6 @@
 {
   "schema": "jeuweb.enemy-animation-qa.v1",
-  "status": "candidate",
+  "status": "published",
   "source": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/attack_v001/vacuum-trooper-toxic-attack-sheet-transparent-candidate-v001.png",
   "source_sha256": "fa9ee236d7a4dae4f0af4d5ad9852ffd5f85099599228a01b8fe0cc4ae3db0f7",
   "source_dimensions": [
@@ -262,10 +262,10 @@
     }
   ],
   "statuses": {
-    "visual": "candidate",
-    "temporal": "candidate",
+    "visual": "passed",
+    "temporal": "passed",
     "technical": "passed",
-    "gameplay": "unmapped"
+    "gameplay": "integrated"
   },
   "known_limits": [
     "La grille source possède des moitiés de pixel et utilise des limites explicites.",

@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy_character_2d.gd" id="1_enemy"]
 [ext_resource type="Resource" path="res://characters/enemies/data/vacuum_trooper_profile.tres" id="2_profile"]
 [ext_resource type="Script" path="res://characters/enemies/components/enemy_patrol_component.gd" id="3_patrol"]
 [ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="4_health"]
 [ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="5_presentation"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="6_attack"]
 [ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_frames.tres" id="6_frames"]
+[ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_attack_frames.tres" id="7_attack_frames"]
+[ext_resource type="PackedScene" path="res://weapons/projectiles/toxic_pressure_2d.tscn" id="9_projectile"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_grounding_component.tscn" id="7_grounding"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_slope_presentation_component.tscn" id="8_slope"]
 
@@ -32,6 +35,10 @@ profile = ExtResource("2_profile")
 script = ExtResource("4_health")
 profile = ExtResource("2_profile")
 
+[node name="Attack" type="Node" parent="Components"]
+script = ExtResource("6_attack")
+projectile_scene = ExtResource("9_projectile")
+
 [node name="Presentation" type="Node" parent="Components"]
 script = ExtResource("5_presentation")
 
@@ -54,3 +61,15 @@ scale = Vector2(0.55, 0.55)
 sprite_frames = ExtResource("6_frames")
 animation = &"walk"
 autoplay = "walk"
+
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual"]
+unique_name_in_owner = true
+position = Vector2(0, -46.2)
+scale = Vector2(0.55, 0.55)
+sprite_frames = ExtResource("7_attack_frames")
+animation = &"toxic_attack"
+visible = false
+
+[node name="AttackOrigin" type="Marker2D" parent="Presentation/SlopeVisual"]
+position = Vector2(70, -58)
+gizmo_extents = 18.0
