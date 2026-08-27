@@ -23,6 +23,7 @@ var _respawning := false
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	add_to_group(&"mission_actor_spawners")
 	var host := map_host()
 	if host == null:
 		push_error("MissionActorSpawner2D exige un MissionMapHost2D.")
@@ -37,12 +38,12 @@ func map_host() -> MissionMapHost2D:
 	return get_node_or_null(map_host_path) as MissionMapHost2D
 
 
-func spawn_player(map: MissionMapRoot2D) -> PlayerCharacter2D:
+func spawn_player(map: MissionMapRoot2D, requested_spawn_id: StringName = player_spawn_id) -> PlayerCharacter2D:
 	if player_scene == null or map == null or map.actors_root() == null:
 		return null
-	var spawn := map.find_spawn(player_spawn_id)
+	var spawn := map.find_spawn(requested_spawn_id)
 	if spawn == null:
-		push_error("Spawn joueur introuvable : %s" % player_spawn_id)
+		push_error("Spawn joueur introuvable : %s" % requested_spawn_id)
 		return null
 	var player := player_scene.instantiate() as PlayerCharacter2D
 	if player == null:
@@ -74,11 +75,16 @@ func _on_player_died(player: PlayerCharacter2D) -> void:
 	var host := map_host()
 	var map := host.current_map if host != null else null
 	if map != null:
-		var previous_spawn := player_spawn_id
-		player_spawn_id = respawn_spawn_id
-		spawn_player(map)
-		player_spawn_id = previous_spawn
+		spawn_player(map, respawn_spawn_id)
 	_respawning = false
+
+
+func set_respawn_spawn(spawn_id: StringName) -> bool:
+	var host := map_host()
+	if host == null or host.current_map == null or host.current_map.find_spawn(spawn_id) == null:
+		return false
+	respawn_spawn_id = spawn_id
+	return true
 
 
 func _on_map_loaded(map: MissionMapRoot2D) -> void:

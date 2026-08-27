@@ -48,6 +48,7 @@ script = ExtResource("6_actor_spawner")
 map_host_path = NodePath("../MapHost")
 player_scene = ExtResource("7_player")
 player_spawn_id = &"player_start"
+respawn_spawn_id = &"player_start"
 
 [node name="EnemySpawner" type="Node" parent="MissionViewportContainer/MissionViewport"]
 unique_name_in_owner = true

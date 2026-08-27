@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://maps/system/mission_checkpoint_2d.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="CheckpointShape"]
+size = Vector2(110, 170)
+
+[node name="MissionCheckpoint2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitoring = true
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CheckpointShape")
+
+[node name="Marker" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.698039, 0.827451, 0.039216, 0.28)
+polygon = PackedVector2Array(-55, -85, 55, -85, 55, 85, -55, 85)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
