@@ -865,3 +865,16 @@
   `docs/PROJECT_STATE.md`, sans modification gameplay ;
 - prochaine action recommandée : traiter séparément l'ancienne mission
   prototype après audit complet de ses références.
+
+## 2026-08-27 — Extensibilité des Ground Kits explicitée
+
+- confirmé que `GroundKitCatalog.pieces` est un tableau auteur extensible de
+  `PackedScene`, résolu par `piece_id` stable et sans limite de quantité ;
+- corrigé la mémoire et le guide auteur afin que les quatre pièces actuelles
+  décrivent un état publié, jamais un périmètre figé ;
+- documenté l'ajout futur d'une définition, d'une scène canonique puis de sa
+  correspondance dans le catalogue depuis l'Inspector ;
+- précisé que les prochains biomes peuvent posséder leurs propres catalogues et
+  que les tests doivent valider les invariants des entrées sans figer leur
+  nombre ;
+- aucune scène, Resource gameplay ou logique runtime n'a été modifiée.

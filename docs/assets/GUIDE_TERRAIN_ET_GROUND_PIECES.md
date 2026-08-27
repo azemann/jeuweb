@@ -89,7 +89,7 @@ Chaque image publiée sera utilisée par une Resource puis par une scène Godot
 glissable. Le PNG publié est également l'aperçu canonique de cette scène : une
 vignette séparée est interdite afin d'éviter deux représentations divergentes.
 
-Première pièce intégrée :
+Exemple de pièce intégrée :
 
 ```text
 art/terrain/pieces/toxic_coast/natural/natural-ledge-medium-v001.png
@@ -153,6 +153,24 @@ L'instance dans la map choisira son mode depuis l'Inspector :
 - `Carvable` : contribution au terrain raster et cratères façon Worms ;
 - `Breakable` : objet entier possédant une vie et une variante détruite.
 
+## Catalogue extensible pour les futurs niveaux
+
+`GroundKitCatalog.tres` est la bibliothèque auteur des scènes disponibles pour
+un biome ou une famille visuelle. Son tableau `pieces` est volontairement
+extensible dans l'Inspector : les quatre entrées publiées aujourd'hui ne
+constituent ni une limite ni une liste définitive.
+
+Pour enrichir un kit, l'auteur publie une nouvelle `GroundPieceDefinition`,
+l'associe à une scène canonique `GroundPiece2D`, puis ajoute cette `PackedScene`
+au tableau `pieces` du catalogue concerné. Son `piece_id` stable permet aux
+outils et validations de la retrouver. Les scènes maîtresses des futurs niveaux
+peuvent ensuite glisser et configurer ces pièces sans dépendre de la carte Côte
+toxique actuelle.
+
+Un nouveau biome peut posséder son propre `GroundKitCatalog.tres`. Aucun test ne
+doit figer le nombre total de pièces ; les contrats vérifient plutôt que chaque
+entrée est instanciable, canonique, identifiée de façon unique et valide.
+
 ## Où modifier quoi ?
 
 | Besoin | Emplacement ou autorité |
@@ -184,10 +202,11 @@ Aujourd'hui :
   des matières répétées ;
 - `PermanentGroundStyle.tres` et `DestructibleTerrainProfile.tres` réutilisent
   les mêmes matières Côte toxique ;
-- les futurs PNG de pièces isolées et les scènes glissables n'existent pas
-  encore au-delà de la première corniche moyenne ;
+- quatre pièces Côte toxique sont publiées aujourd'hui : corniche naturelle,
+  bloc bunker, passerelle industrielle et pont-tuyau ; cette liste est un état
+  courant appelé à s'enrichir pour l'édition des futurs niveaux ;
 - `GroundPieceDefinition`, `GroundPiece2D`, les trois modes et le catalogue
-  Côte toxique sont implémentés ;
+  extensible Côte toxique sont implémentés ;
 - `Gameplay/GroundPieces/LandingNaturalLedge` valide le workflow dans la map ;
 - les anciens chemins de matières et `GroundModule2D` restent temporairement
   actifs pour une migration sans régression.
@@ -200,6 +219,7 @@ Aujourd'hui :
 | Source haute définition isolée | source du pipeline |
 | Bitmap livré au jeu | fichier publié sous `art/` |
 | Définition d'une pièce | `GroundPieceDefinition.tres` |
+| Liste des pièces disponibles dans un kit | tableau `pieces` de `GroundKitCatalog.tres` |
 | Mode de destruction | instance dans la scène maîtresse |
 | Placement et transformation | scène maîtresse de la map |
 | Matière creusée pendant la partie | `DestructibleTerrain2D` |

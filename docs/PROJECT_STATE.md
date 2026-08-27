@@ -34,8 +34,10 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   visuel texturé et la collision ;
 - scène canonique `GroundPiece2D` glissable avec modes Permanent, Carvable et
   Breakable visibles dans l'Inspector ;
-- premier catalogue Côte toxique et corniche illustrée intégrée en mode
-  Carvable sous `Gameplay/GroundPieces` ;
+- catalogue Côte toxique extensible pour l'édition des niveaux, avec quatre
+  scènes Ground Pieces publiées aujourd'hui et résolues par `piece_id` stable ;
+- corniche illustrée intégrée en mode Carvable sous
+  `Gameplay/GroundPieces` ;
 - pièces Carvable librement transformables dans l'éditeur ; couleur, masque et
   collisions suivent rotation, miroir et échelle non uniforme ;
 - seconde corniche auteur restaurée à −35° dans Côte toxique ;
@@ -107,6 +109,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - matière runtime : masque alpha de `DestructibleTerrain2D` ;
 - apparence du terrain : `DestructibleTerrainProfile.tres` ;
 - définition visuelle et géométrique d'une pièce : `GroundPieceDefinition.tres` ;
+- liste extensible des pièces proposées aux auteurs de niveaux : tableau
+  `pieces` de `GroundKitCatalog.tres` ; le nombre actuel d'entrées n'est pas un
+  contrat et augmentera avec les futurs kits et niveaux ;
 - mode et placement d'une pièce : son instance `GroundPiece2D` dans la scène
   maîtresse, y compris son Transform complet ; état creusé :
   `DestructibleTerrain2D` ;
@@ -186,10 +191,11 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   temporelle reste provisoire ; les futures animations doivent être affinées
   frame par frame sans changer le root publié ;
 - les quatre `TileMapLayer` de Côte toxique sont prêts mais sans TileSet ;
-- le kit Ground Pieces Côte toxique contient quatre pièces publiées : corniche
-  naturelle, bloc bunker, passerelle industrielle et pont-tuyau ; le bassin
-  acide, le baril explosif et la caisse sont publiés comme scènes glissables
-  séparées du catalogue de terrain ;
+- le catalogue Côte toxique publie actuellement quatre pièces réutilisables :
+  corniche naturelle, bloc bunker, passerelle industrielle et pont-tuyau ; ce
+  recensement décrit uniquement l'état présent et doit s'enrichir pour
+  l'édition des futurs niveaux ; le bassin acide, le baril explosif et la caisse
+  restent des scènes glissables séparées du catalogue de terrain ;
 - les premiers modules de sol permanent réutilisent encore les textures
   génériques du terrain ; le pont et la fonderie n'ont pas encore leurs styles
   ou scènes d'architecture spécifiques ;
