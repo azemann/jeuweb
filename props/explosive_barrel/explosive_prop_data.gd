@@ -39,6 +39,7 @@ func is_valid() -> bool:
 		and collision_size.x > 0.0
 		and collision_size.y > 0.0
 		and explosion_scene != null
+		and explosion_scene.can_instantiate()
 		and explosion_data != null
 		and explosion_data.is_valid()
 	)

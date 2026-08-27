@@ -54,7 +54,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - cratères locaux sans reconstruction du bitmap complet ;
 - scène canonique `Explosion2D` orchestrée par `AnimationPlayer` ;
 - `ExplosionData` éditable pour terrain, combat, timing et palette ;
-- impact d'explosion relié au terrain et contrat de dégâts découplé par signal ;
+- impact d'explosion relié au terrain, dégâts radiaux autonomes par
+  `apply_damage` et événement `target_damaged` après acceptation ;
 - joueur canonique contrôlable avec CharacterBody2D ;
 - entrées unifiées clavier, souris, manette et téléphone via l'Input Map ;
 - visée libre à la souris et au stick droit, sans casser la visée arcade ;
@@ -70,6 +71,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   réglé dans `field_round.tres`, façon Worms ;
 - `WeaponData`, `ProjectileData`, projectile Area2D rapide, flash de bouche et
   impact orchestré par AnimationPlayer ;
+- correspondance d'explosion optionnelle dans `ProjectileData`, permettant à
+  une future munition de choisir scène et style au point d'impact sans modifier
+  la balle de campagne actuelle ;
 - spawner de mission découplant le joueur du conteneur `Actors/Projectiles` ;
 - caméra de mission unique avec look-ahead, limites et progression irréversible
   vers la droite ;
@@ -125,7 +129,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - définition d'un bassin dangereux : sa `HazardData.tres` ; placement final :
   instance de sa scène dans la map ;
 - définition du baril explosif : `toxic_explosive_barrel.tres` ; état runtime :
-  son `ExplosiveProp2D` ; explosion : `ExplosionData` injectée ;
+  son `ExplosiveProp2D` ; origine de détonation : `ExplosionOrigin` dans sa
+  scène ; style : `ExplosionData` injectée ;
 - définition et modes d'ouverture de la caisse : `military_supply_crate.tres` ;
   état fermé/ouvert : instance `SupplyCrate2D` ; futur contenu : système de loot
   séparé, encore absent ;
@@ -201,9 +206,8 @@ catalogues.
 - le premier canon n'a encore ni audio, ni recul du corps, ni secousse caméra ;
 - la munition de campagne utilise un petit impact dédié, pas l'explosion lourde
   canonique réservée aux obus et éléments explosifs ;
-- `Explosion2D` émet encore une demande de dégâts sans l'appliquer directement ;
-  le baril explosif branche cette demande vers `apply_damage`, mais une
-  explosion instanciée seule exige toujours une correspondance explicite ;
+- l'impulsion radiale est publiée avec `target_damaged`, mais les acteurs ne
+  possèdent pas encore de contrat commun pour la consommer physiquement ;
 - les quatre poses de locomotion v001 sont intégrées mais leur continuité
   temporelle reste provisoire ; les futures animations doivent être affinées
   frame par frame sans changer le root publié ;

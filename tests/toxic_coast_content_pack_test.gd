@@ -44,9 +44,21 @@ func _run() -> void:
 	hazard.queue_free()
 
 	var barrel := (load(BARREL_SCENE) as PackedScene).instantiate() as ExplosiveProp2D
+	barrel.position = Vector2(310.0, 220.0)
+	barrel.rotation = deg_to_rad(31.0)
+	barrel.scale = Vector2(-1.4, 0.65)
 	root.add_child(barrel)
 	_check(barrel.data != null and barrel.data.is_valid(), "Le baril doit posséder une ExplosivePropData valide.")
-	barrel.queue_free()
+	var explosion_origin := barrel.get_node_or_null("ExplosionOrigin") as Marker2D
+	_check(explosion_origin != null, "Le baril doit exposer ExplosionOrigin dans sa scène canonique.")
+	var expected_origin := explosion_origin.global_position if explosion_origin != null else Vector2.ZERO
+	_check(barrel.apply_damage(barrel.data.maximum_health), "Un dégât létal doit déclencher le baril.")
+	var spawned_explosion := root.get_node_or_null("Explosion2D") as Explosion2D
+	_check(spawned_explosion != null, "Le baril doit instancier sa scène d'explosion configurée.")
+	if spawned_explosion != null:
+		_check(spawned_explosion.global_position.is_equal_approx(expected_origin), "L'explosion doit naître au socket transformé par rotation, miroir et échelle non uniforme.")
+		_check(spawned_explosion.global_scale.is_equal_approx(Vector2.ONE), "Le Transform du baril ne doit pas remplacer le rayon autoritaire d'ExplosionData.")
+		spawned_explosion.queue_free()
 
 	var crate := (load(CRATE_SCENE) as PackedScene).instantiate() as SupplyCrate2D
 	root.add_child(crate)

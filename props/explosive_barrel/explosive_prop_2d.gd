@@ -15,6 +15,7 @@ signal exploded
 
 @onready var presentation: Sprite2D = %Presentation
 @onready var collision_shape: CollisionShape2D = %CollisionShape
+@onready var explosion_origin: Marker2D = %ExplosionOrigin
 
 var _health := 0.0
 var _exploded := false
@@ -43,23 +44,11 @@ func _detonate() -> void:
 		var explosion := data.explosion_scene.instantiate() as Explosion2D
 		if explosion != null:
 			explosion.data = data.explosion_data
-			explosion.damage_requested.connect(_on_explosion_damage_requested)
 			parent.add_child(explosion)
-			explosion.global_position = global_position + data.collision_offset
+			explosion.global_position = explosion_origin.global_position
 			explosion.detonate()
 	exploded.emit()
 	queue_free()
-
-
-func _on_explosion_damage_requested(target: Node2D, damage: float, _impulse: Vector2) -> void:
-	var receiver: Node = target
-	for _depth in 4:
-		if receiver == null:
-			return
-		if receiver.has_method(&"apply_damage"):
-			receiver.call(&"apply_damage", damage)
-			return
-		receiver = receiver.get_parent()
 
 
 func _sync_from_data() -> void:
@@ -77,4 +66,9 @@ func _sync_from_data() -> void:
 func _get_configuration_warnings() -> PackedStringArray:
 	if data == null:
 		return PackedStringArray(["ExplosivePropData est obligatoire."])
-	return PackedStringArray() if data.is_valid() else PackedStringArray(["ExplosivePropData est incomplète."])
+	var warnings := PackedStringArray()
+	if not data.is_valid():
+		warnings.append("ExplosivePropData est incomplète.")
+	if get_node_or_null("ExplosionOrigin") is not Marker2D:
+		warnings.append("ExplosionOrigin est obligatoire pour placer la détonation.")
+	return warnings

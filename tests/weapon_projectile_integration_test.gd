@@ -18,6 +18,7 @@ func _run() -> void:
 	var projectile_data := load("res://weapons/projectiles/data/field_round.tres") as ProjectileData
 	_check(weapon_data != null and weapon_data.is_valid(), "Le canon doit consommer une WeaponData valide.")
 	_check(projectile_data != null and projectile_data.is_valid(), "La munition doit consommer une ProjectileData valide.")
+	await _check_optional_explosion_binding(projectile_data)
 
 	var screen_scene := load("res://screens/prototype/prototype_mission_screen.tscn") as PackedScene
 	var screen := screen_scene.instantiate()
@@ -112,3 +113,33 @@ func _run() -> void:
 	else:
 		print("WEAPON_PROJECTILE_INTEGRATION_TEST: FAIL (%d)" % _failures.size())
 		quit(1)
+
+
+func _check_optional_explosion_binding(base_data: ProjectileData) -> void:
+	var incomplete_data := base_data.duplicate(true) as ProjectileData
+	incomplete_data.explosion_scene = load("res://effects/explosions/explosion_2d.tscn") as PackedScene
+	incomplete_data.explosion_data = null
+	_check(not incomplete_data.is_valid(), "ProjectileData doit refuser une scène d'explosion sans ExplosionData.")
+
+	var explosive_data := base_data.duplicate(true) as ProjectileData
+	explosive_data.projectile_id = &"explosive_contract_probe"
+	explosive_data.damage = 0.0
+	explosive_data.affects_destructible_terrain = false
+	explosive_data.explosion_scene = load("res://effects/explosions/explosion_2d.tscn") as PackedScene
+	explosive_data.explosion_data = load("res://effects/explosions/data/field_shell_explosion.tres") as ExplosionData
+	_check(explosive_data.has_explosion() and explosive_data.is_valid(), "ProjectileData doit accepter une correspondance d'explosion optionnelle valide.")
+
+	var projectile := (load("res://weapons/projectiles/field_round_2d.tscn") as PackedScene).instantiate() as Projectile2D
+	projectile.data = explosive_data
+	projectile.position = Vector2(420.0, 260.0)
+	projectile.rotation = deg_to_rad(-18.0)
+	root.add_child(projectile)
+	var expected_position := projectile.global_position
+	projectile.call(&"_resolve_impact", null)
+	var explosion := root.get_node_or_null("Explosion2D") as Explosion2D
+	_check(explosion != null, "Une munition explosive doit instancier Explosion2D à l'impact.")
+	if explosion != null:
+		_check(explosion.data == explosive_data.explosion_data, "La munition doit injecter son style ExplosionData.")
+		_check(explosion.global_position.is_equal_approx(expected_position), "L'explosion d'une munition doit naître au point d'impact mondial.")
+		explosion.queue_free()
+	await process_frame

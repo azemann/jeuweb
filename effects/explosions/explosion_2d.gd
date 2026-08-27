@@ -4,7 +4,7 @@ extends Node2D
 
 signal detonated(origin: Vector2, data: ExplosionData)
 signal terrain_carved(terrain: DestructibleTerrain2D, affected_chunks: int)
-signal damage_requested(target: Node2D, damage: float, impulse: Vector2)
+signal target_damaged(target: Node2D, damage: float, impulse: Vector2)
 signal finished
 
 @export_category("Definition")
@@ -64,7 +64,7 @@ func apply_impact_now() -> void:
 		return
 	_impact_applied = true
 	_apply_terrain_impact()
-	_request_damage()
+	_apply_radial_damage()
 
 
 func editor_preview_impact() -> void:
@@ -105,10 +105,10 @@ func _terrain_targets() -> Array[DestructibleTerrain2D]:
 	return targets
 
 
-func _request_damage() -> void:
-	if damage_area == null:
+func _apply_radial_damage() -> void:
+	if Engine.is_editor_hint() or damage_area == null:
 		return
-	var emitted: Dictionary = {}
+	var damaged_receivers: Dictionary = {}
 	var candidates: Array[Node2D] = []
 	for body in damage_area.get_overlapping_bodies():
 		if body is Node2D:
@@ -116,12 +116,26 @@ func _request_damage() -> void:
 	for area in damage_area.get_overlapping_areas():
 		if area is Node2D:
 			candidates.append(area)
-	for target in candidates:
-		if emitted.has(target.get_instance_id()):
+	for candidate in candidates:
+		var target := _damage_receiver(candidate) as Node2D
+		if target == null or damaged_receivers.has(target.get_instance_id()):
 			continue
-		emitted[target.get_instance_id()] = true
+		damaged_receivers[target.get_instance_id()] = true
 		var direction := global_position.direction_to(target.global_position)
-		damage_requested.emit(target, data.damage, direction * data.impulse)
+		var accepted: Variant = target.call(&"apply_damage", data.damage)
+		if accepted is bool and accepted:
+			target_damaged.emit(target, data.damage, direction * data.impulse)
+
+
+func _damage_receiver(candidate: Node) -> Node:
+	var receiver := candidate
+	for _depth in 4:
+		if receiver == null:
+			break
+		if receiver.has_method(&"apply_damage"):
+			return receiver
+		receiver = receiver.get_parent()
+	return null
 
 
 func _refresh_from_data() -> void:

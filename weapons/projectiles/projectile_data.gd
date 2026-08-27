@@ -22,6 +22,12 @@ extends Resource
 ## Scène visuelle instanciée au point d'impact ; elle ne décide pas elle-même des dégâts du projectile.
 @export var impact_scene: PackedScene
 
+@export_category("Explosion optionnelle")
+## Scène canonique instanciée au point de collision pour une munition explosive ; laisser vide avec Explosion Data pour un impact direct.
+@export var explosion_scene: PackedScene
+## Style, dégâts radiaux, terrain et temporalité injectés dans Explosion Scene ; les deux champs d'explosion sont assignés ou vides ensemble.
+@export var explosion_data: ExplosionData
+
 @export_category("Terrain Carvable")
 ## Autorise ce projectile à retirer localement la matière du DestructibleTerrain2D.
 @export var affects_destructible_terrain := false
@@ -46,7 +52,23 @@ func is_valid() -> bool:
 		and speed > 0.0
 		and lifetime > 0.0
 		and damage >= 0.0
+		and _explosion_binding_is_valid()
 		and (not affects_destructible_terrain or terrain_radius > 0.0)
 		and tracer_length > 0.0
 		and tracer_width > 0.0
+	)
+
+
+func has_explosion() -> bool:
+	return explosion_scene != null and explosion_data != null
+
+
+func _explosion_binding_is_valid() -> bool:
+	if explosion_scene == null and explosion_data == null:
+		return true
+	return (
+		explosion_scene != null
+		and explosion_scene.can_instantiate()
+		and explosion_data != null
+		and explosion_data.is_valid()
 	)

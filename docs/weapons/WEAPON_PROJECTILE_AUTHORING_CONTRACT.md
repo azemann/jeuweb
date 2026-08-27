@@ -3,7 +3,8 @@
 ## Autorités
 
 - `WeaponData` possède identité, scène de projectile, cadence et mode auto ;
-- `ProjectileData` possède vitesse, durée de vie, dégâts, rayon de creusement et représentation ;
+- `ProjectileData` possède vitesse, durée de vie, dégâts, rayon de creusement,
+  représentation et correspondance d'explosion optionnelle ;
 - `PlayerAimComponent` possède la direction ;
 - `Marker2D Muzzle` possède l'origine finale du tir dans la scène joueur ;
 - `PlayerWeaponComponent` possède uniquement cooldown et demande runtime ;
@@ -49,10 +50,25 @@ le `DestructibleTerrain2D` du groupe natif et retire un disque de matière à sa
 position. Ce creusement ne touche que les surfaces `Carvable` déjà composées
 dans le masque global. Les pièces `Permanent` et `Breakable` restent autonomes.
 
+Une munition explosive assigne ensemble `Explosion Scene` et `Explosion Data`
+dans sa `ProjectileData`. Au point de collision mondial, `Projectile2D` injecte
+la Resource, place la scène sans hériter de son échelle, puis appelle
+`detonate()`. L'explosion remplace alors les dégâts directs et le petit cratère
+du projectile afin de ne jamais appliquer deux autorités de dégâts ou de
+terrain au même impact. `Impact Scene` peut rester assignée comme feedback
+visuel de contact indépendant.
+
+Une arme choisit indirectement son style explosif par sa scène de projectile :
+
+```text
+WeaponData → ProjectileData → ExplosionData → Explosion2D
+```
+
 ## Contrat auteur
 
 - changer cadence ou projectile dans `WeaponData`, jamais dans le composant ;
-- changer vitesse, dégâts, durée, couleurs ou rayon de cratère dans `ProjectileData` ;
+- changer vitesse, dégâts, durée, couleurs, rayon de cratère ou explosion
+  optionnelle dans `ProjectileData` ;
 - déplacer le Muzzle dans la scène joueur avec le canon ;
 - régler les timings de flash et d'impact dans leurs AnimationPlayer ;
 - conserver `Actors/Projectiles` dans toute scène maîtresse de mission.
@@ -65,3 +81,6 @@ verticale, déplacement indépendant, collision avec un obstacle World et tir à
 bout portant bloqué entre `AimPivot` et `Muzzle`.
 `projectile_carvable_integration_test.gd` vérifie qu'un impact rend le centre
 du cratère traversable sans retirer la matière située hors de son petit rayon.
+Le contrat vérifie aussi qu'une `ProjectileData` explosive instancie
+`Explosion2D` au point d'impact avec la Resource choisie, sans modifier la
+munition de campagne actuelle.

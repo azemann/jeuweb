@@ -84,10 +84,13 @@ func _resolve_impact(target: Node) -> void:
 	if _resolved:
 		return
 	_resolved = true
-	if target != null and target.has_method(&"apply_damage"):
-		target.call(&"apply_damage", data.damage)
+	if data.has_explosion():
+		_spawn_explosion()
+	else:
+		if target != null and target.has_method(&"apply_damage"):
+			target.call(&"apply_damage", data.damage)
+		_apply_terrain_impact()
 	impacted.emit(target, data.damage)
-	_apply_terrain_impact()
 	_spawn_impact()
 	queue_free()
 
@@ -113,6 +116,19 @@ func _spawn_impact() -> void:
 	get_parent().add_child(impact)
 	impact.global_position = global_position
 	impact.rotation = rotation
+
+
+func _spawn_explosion() -> void:
+	if not data.has_explosion() or get_parent() == null:
+		return
+	var explosion := data.explosion_scene.instantiate() as Explosion2D
+	if explosion == null:
+		return
+	explosion.data = data.explosion_data
+	get_parent().add_child(explosion)
+	explosion.global_position = global_position
+	explosion.global_rotation = global_rotation
+	explosion.detonate()
 
 
 func _damage_receiver(source: Node) -> Node:

@@ -20,3 +20,8 @@ centered = false
 unique_name_in_owner = true
 position = Vector2(0, -106)
 shape = SubResource("SolidShape")
+
+[node name="ExplosionOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -106)
+gizmo_extents = 36.0

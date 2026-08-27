@@ -908,3 +908,23 @@
   la mémoire du projet ;
 - prochaine action recommandée : corriger séparément le contrat runtime fragile
   des dégâts d'explosion.
+
+## 2026-08-27 — Explosion autonome et origine auteur
+
+- fait de `Explosion2D` l'exécuteur autonome des dégâts radiaux : elle résout
+  `apply_damage`, déduplique Body et Hurtbox par Damage Receiver, puis émet
+  `target_damaged` uniquement après acceptation ;
+- supprimé la correspondance privée du baril vers l'ancien signal
+  `damage_requested` ;
+- ajouté `ExplosionOrigin` comme `Marker2D` visible dans la scène canonique du
+  baril et utilisé sa position mondiale comme autorité de détonation ;
+- ajouté à `ProjectileData` une correspondance optionnelle scène + Resource ;
+  une munition explosive délègue dégâts et terrain à l'explosion instanciée au
+  point d'impact, tandis que les projectiles directs restent inchangés ;
+- conservé `ExplosionData` comme autorité du style et du rayon, afin que
+  rotation, miroir ou échelle du baril déplacent le socket sans modifier
+  implicitement la puissance ;
+- étendu les contrats pour vérifier une explosion autonome, une seule
+  application malgré Body + Hurtbox et le socket transformé ;
+- limite volontaire : l'impulsion est annoncée mais aucun contrat physique
+  commun aux acteurs ne la consomme encore.
