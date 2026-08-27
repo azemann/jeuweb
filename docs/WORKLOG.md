@@ -1013,3 +1013,28 @@
 - aucune source du megapack n'est encore publiée ni utilisée par le runtime.
 - correction de design : l'éjection du pilote appartient à
   `vacuum_trooper`, jamais à `vacuum_boss` ; le boss aura un lifecycle séparé.
+
+## 2026-08-27 — Boucle de victoire Côte toxique
+
+- conservé la scène maîtresse comme autorité des objectifs : les rencontres
+  activées choisissent `required_for_completion` dans l'Inspector et
+  `Gameplay/Exits/MissionEnd` possède la sortie ;
+- ajouté `MissionRunController` comme Node d'orchestration visible dans l'écran
+  prototype ; il suit les ennemis par les signaux du spawner et de Health sans
+  recopier les identifiants auteur ;
+- empêché qu'une rencontre pas encore apparue soit confondue avec une rencontre
+  éliminée, puis garanti que `mission_won` n'est émis qu'une fois ;
+- affiché le panneau « Mission accomplie » lorsque le joueur atteint la sortie
+  après avoir éliminé les deux Vacuum Troopers obligatoires ;
+- intégré les checkpoints du pont et de la fonderie et rangé le baril placé sous
+  `Gameplay/Interactions`, sans modifier son Transform auteur ;
+- documenté le contrat auteur de victoire, complété le glossaire des cinq
+  classes manquantes et restauré les infobulles Inspector exigées par le
+  validateur transversal ;
+- ajouté `mission_run_contract_test.gd` et étendu `map_contract_test.gd` pour
+  protéger objectifs, sortie, checkpoints, baril et résultat visible ;
+- validation réelle : les 24 contrats headless et le démarrage complet du
+  projet avec arrêt après 240 frames passent ;
+- limites volontaires : checkpoints sans feedback, résultat sans score ni
+  enchaînement de mission ; prochaine action recommandée : équilibrer le tir
+  toxique puis ajouter le feedback des checkpoints.

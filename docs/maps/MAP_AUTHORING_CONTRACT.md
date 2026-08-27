@@ -53,6 +53,21 @@ MissionMapRoot2D
 La racine doit retourner zéro erreur avec `validation_errors()`. Chaque
 `spawn_id` et chaque `encounter_id` est stable et unique dans la carte.
 
+## Objectifs et sortie de mission
+
+La scène maîtresse possède la définition auteur de la victoire : chaque
+`MapEncounterMarker2D` activé choisit dans l'Inspector s'il est
+`Required For Completion`, et le `Marker2D` sous `Gameplay/Exits` possède la
+position finale à atteindre. Une rencontre désactivée ne bloque jamais la
+sortie.
+
+Le `MissionRunController` visible dans la scène d'écran observe les signaux du
+spawner et des composants Health. Il possède uniquement l'état runtime des
+rencontres restantes ; il ne maintient aucune liste parallèle d'identifiants.
+La victoire exige simultanément l'élimination de toutes les rencontres auteur
+obligatoires et la présence du joueur dans le rayon de sortie réglable depuis
+l'Inspector.
+
 ## Segments de progression
 
 Chaque enfant direct de `Gameplay/Segments` est un `MapSegment2D`. Les segments

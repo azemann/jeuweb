@@ -14,6 +14,7 @@ signal player_respawned(player: PlayerCharacter2D, spawn: MapSpawnPoint2D)
 @export var player_spawn_id: StringName = &"player_start"
 ## Point de reprise autoritaire tant qu'aucun checkpoint de progression n'est activé.
 @export var respawn_spawn_id: StringName = &"player_start"
+## Délai en secondes entre la mort du joueur et son remplacement dans Actors.
 @export_range(0.0, 5.0, 0.05) var respawn_delay := 0.8
 
 var current_player: PlayerCharacter2D

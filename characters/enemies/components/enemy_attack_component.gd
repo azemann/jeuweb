@@ -9,14 +9,21 @@ signal attack_finished
 @export_category("Authority")
 ## Projectile scene et paramètres de cadence sont éditables depuis cette instance.
 @export var projectile_scene: PackedScene
+## Délai minimal en secondes entre deux séquences d'attaque complètes.
 @export_range(0.1, 10.0, 0.05) var attack_cooldown := 2.4
+## Distance maximale entre l'ennemi et le joueur pour commencer une attaque.
 @export_range(32.0, 1200.0, 8.0) var attack_range := 360.0
 
 @export_category("Correspondence")
+## Sprite de locomotion masqué pendant la séquence d'attaque.
 @export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Presentation/SlopeVisual/BodySprite")
+## SpriteFrames dédié qui porte les phases temporelles de l'attaque.
 @export_node_path("AnimatedSprite2D") var attack_sprite_path := NodePath("../../Presentation/SlopeVisual/AttackSprite")
+## Socket auteur depuis lequel le projectile toxique est émis.
 @export_node_path("Marker2D") var attack_origin_path := NodePath("../../Presentation/SlopeVisual/AttackOrigin")
+## Composant de patrouille suspendu pendant l'attaque puis réactivé à sa fin.
 @export_node_path("EnemyPatrolComponent") var patrol_component_path := NodePath("../Patrol")
+## Branche runtime recevant le projectile sans le rendre enfant de l'ennemi.
 @export_node_path("Node2D") var projectile_root_path := NodePath("../../../Projectiles")
 
 var _sprite: AnimatedSprite2D

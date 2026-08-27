@@ -7,6 +7,7 @@ signal activated(spawn_id: StringName)
 @export_category("Checkpoint")
 ## Identifiant du MapSpawnPoint2D utilisé par le respawn.
 @export var spawn_id: StringName
+## Empêche les activations répétées après le premier passage valide du joueur.
 @export var one_shot := true
 
 var _activated := false

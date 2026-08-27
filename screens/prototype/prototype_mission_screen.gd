@@ -7,9 +7,18 @@ signal back_requested
 func _ready() -> void:
 	%DesignReferencePanel.visible = false
 	%BackButton.pressed.connect(back_requested.emit)
+	var run := %MissionRunController
+	if not run.mission_won.is_connected(_on_mission_won):
+		run.mission_won.connect(_on_mission_won)
 	%ActorSpawner.player_spawned.connect(_on_player_spawned)
 	if %ActorSpawner.current_player != null:
 		_on_player_spawned(%ActorSpawner.current_player, null)
+	%BackButton.grab_focus()
+
+
+func _on_mission_won() -> void:
+	%ResultPanel.visible = true
+	%ResultLabel.text = "MISSION ACCOMPLIE\nCÔTE TOXIQUE SÉCURISÉE"
 	%BackButton.grab_focus()
 
 

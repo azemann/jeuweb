@@ -113,6 +113,11 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - `MissionActorSpawner2D` recrée le joueur après sa mort avec délai configurable
   et `respawn_spawn_id`, tandis que `PlayerHealthComponent.reset_health()` reste
   l'autorité unique des PV réinitialisés ;
+- deux `MissionCheckpoint2D` visibles sous `Gameplay/Interactions` font évoluer
+  le spawn de reprise vers le pont puis la fonderie ;
+- `MissionRunController` suit les rencontres auteur obligatoires, verrouille la
+  sortie jusqu'à leur élimination puis affiche le résultat de victoire lorsque
+  le joueur atteint `MissionEnd` ;
 - `ActorStateMachineComponent` est maintenant présente sur le joueur et les
   ennemis avec les états communs `IDLE`, `RUN`, `ATTACK`, `SHOOT`, `JUMP`,
   `FALL`, `HURT`, `DEAD` et
@@ -153,6 +158,12 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   `PlayerHealthProfile.tres` ;
 - placement du joueur : `MapSpawnPoint2D` ; correspondance d'instanciation :
   `MissionActorSpawner2D` ;
+- progression du respawn : `MissionCheckpoint2D` placé dans la scène maîtresse
+  et son `spawn_id` correspondant ; état courant : `respawn_spawn_id` du
+  `MissionActorSpawner2D` ;
+- objectifs de victoire : `enabled` et `required_for_completion` des
+  `MapEncounterMarker2D`, plus le `Marker2D` de sortie dans la scène maîtresse ;
+  état runtime : `MissionRunController` visible dans l'écran de mission ;
 - définition du canon : `primary_field_cannon.tres` ; définition de sa munition :
   `field_round.tres` ; cadence runtime : `PlayerWeaponComponent` ;
 - origine du tir : `Presentation/AimPivot/Muzzle` ; correspondance vers la map :
@@ -207,13 +218,12 @@ catalogues.
 
 ## Limites connues
 
-- vitesse, portée, dégâts, collision et cadence du projectile toxique n'ont pas
-  encore d'autorité runtime : ils appartiendront à `ProjectileData` et au futur
-  composant d'attaque, jamais aux bitmaps ;
-- le respawn revient actuellement au spawn configuré (`player_start` par défaut)
-  ; la progression automatique vers un checkpoint reste à ajouter ;
-- le projectile et les six poses d'impact illustrés v001 sont techniquement
-  validés dans le pipeline mais attendent la revue visuelle avant publication ;
+- vitesse, portée, dégâts et collision du projectile toxique sont portés par sa
+  `ProjectileData`, tandis que la cadence et la portée de déclenchement restent
+  réglées sur `EnemyAttackComponent` ; leur équilibrage gameplay reste à faire ;
+- les checkpoints n'ont encore aucun feedback visuel ou sonore au passage ;
+- l'écran de victoire propose uniquement le retour au menu : score, temps,
+  récompenses et enchaînement vers une mission suivante restent absents ;
 - la patrouille ne tremble plus : ses origines 700/840 sont fixées avant
   `_ready()` et ses demi-tours ne peuvent plus alterner chaque frame ;
 - les rencontres Brute et Siphoner restent dessinées mais désactivées dans
@@ -248,8 +258,8 @@ catalogues.
 
 ## Prochaine tranche recommandée
 
-Ajouter les tests runtime de la séquence d'attaque et régler l'équilibrage du
-projectile toxique. Décider ensuite si le pilote éjecté
+Régler l'équilibrage du projectile toxique et ajouter un feedback visible aux
+checkpoints. Décider ensuite si le pilote éjecté
 reste un pur gag visuel ou devient un acteur gameplay. Toute future scène
 d'acteur et toute future pièce non Carvable devront suivre le contrat
 transversal pieds/surface/ombre désormais validé automatiquement.
@@ -267,6 +277,7 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_input_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_asset_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_camera_progression_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_run_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/permanent_ground_module_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/weapon_projectile_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/class_glossary_contract_test.gd
@@ -277,6 +288,6 @@ python3 pipeline/assets/tools/validate_vacuum_trooper_attack_candidate.py
 python3 pipeline/assets/tools/validate_toxic_pressure_candidates.py
 ```
 
-Dernière validation complète : 2026-08-27, les 23 contrats headless passent.
+Dernière validation complète : 2026-08-27, les 24 contrats headless passent.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames
 d'atterrissage : marche, impact, éjection et épave suivent la pente.

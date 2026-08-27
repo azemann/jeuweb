@@ -15,6 +15,8 @@ extends Marker2D
 @export_range(64.0, 1600.0, 16.0) var activation_distance := 640.0
 ## Permet de neutraliser cette rencontre depuis l'Inspector sans effacer son placement.
 @export var enabled := true
+## Exige l'élimination de cette rencontre avant d'autoriser la sortie de mission.
+@export var required_for_completion := true
 
 
 func _get_configuration_warnings() -> PackedStringArray:

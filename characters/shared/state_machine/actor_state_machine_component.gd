@@ -17,6 +17,7 @@ enum State {
 }
 
 @export_category("State")
+## État appliqué lorsque le composant entre dans l'arbre de scène.
 @export var initial_state := State.IDLE
 
 var current_state: State = State.IDLE

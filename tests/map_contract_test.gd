@@ -70,6 +70,13 @@ func _run() -> void:
 			if ground_module != null:
 				_check(ground_module.fill_polygon().polygon == ground_module.collision_polygon().polygon, "Visuel et collision doivent partager le même outline autoritaire.")
 		_check(map.get_node_or_null("DestructibleTerrain") is DestructibleTerrain2D, "La carte doit consommer ses zones via DestructibleTerrain2D.")
+		var bridge_checkpoint := map.get_node_or_null("Gameplay/Interactions/BridgeCheckpoint") as MissionCheckpoint2D
+		var foundry_checkpoint := map.get_node_or_null("Gameplay/Interactions/FoundryCheckpoint") as MissionCheckpoint2D
+		_check(bridge_checkpoint != null and bridge_checkpoint.spawn_id == &"checkpoint_bridge", "Le checkpoint du pont doit correspondre à son spawn auteur.")
+		_check(foundry_checkpoint != null and foundry_checkpoint.spawn_id == &"checkpoint_foundry", "Le checkpoint de la fonderie doit correspondre à son spawn auteur.")
+		_check(map.get_node_or_null("Gameplay/Exits/MissionEnd") is Marker2D, "La sortie auteur MissionEnd est obligatoire.")
+		var barrel := map.get_node_or_null("Gameplay/Interactions/ToxicExplosiveBarrel2D") as ExplosiveProp2D
+		_check(barrel != null and barrel.data != null and barrel.data.is_valid(), "Le baril placé dans Côte toxique doit conserver sa définition valide.")
 		_check(map.get_node_or_null("Actors/Projectiles") is Node2D, "La branche Actors doit exposer Projectiles.")
 		var preview_actors := map.get_node_or_null("Actors/PreviewActors") as Node2D
 		var toxic_pool_preview := map.get_node_or_null("Gameplay/Hazards/ToxicPool/Preview") as Polygon2D

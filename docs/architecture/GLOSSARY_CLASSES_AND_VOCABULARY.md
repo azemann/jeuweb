@@ -132,6 +132,8 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `MapEncounterMarker2D` | Marker2D | Place une demande auteur d'ennemis dans la progression. |
 | `MissionActorSpawner2D` | Node | Instancie le joueur au spawn demandé dans la map chargée. |
 | `MissionEnemySpawner2D` | Node | Traduit les Encounter Markers via l'Enemy Catalog et instancie les ennemis. |
+| `MissionCheckpoint2D` | Area2D | Traduit le passage du joueur en changement de spawn de reprise. |
+| `MissionRunController` | Node | Suit les rencontres obligatoires et autorise la victoire à la sortie auteur. |
 | `RunAndGunCameraProfile` | Resource | Règle anticipation, verrou horizontal, cadrage vertical et lissage. |
 | `MissionCameraRig2D` | Camera2D | Suit le joueur et respecte la progression ainsi que les limites de la map. |
 
@@ -150,6 +152,7 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `PlayerPresentationComponent` | Node | Traduit le mouvement en animation et orientation visuelle. |
 | `ActorGroundingComponent` | Node2D | Expose le root des pieds et projette une ombre sur le vrai sol. |
 | `ActorSlopePresentationComponent` | Node | Incline uniquement la présentation selon la pente mesurée sous les appuis. |
+| `ActorStateMachineComponent` | Node | Possède l'état commun et valide les transitions runtime d'un acteur. |
 
 ### Ennemis
 
@@ -161,6 +164,7 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `EnemyCharacter2D` | CharacterBody2D | Racine physique composée et API de dégâts d'un ennemi. |
 | `EnemyPatrolComponent` | Node | Possède direction, vélocité et bornes de patrouille. |
 | `EnemyHealthComponent` | Node | Possède les PV runtime et la fenêtre d'invulnérabilité. |
+| `EnemyAttackComponent` | Node | Détecte la cible, orchestre l'attaque et demande son projectile. |
 | `EnemyPresentationComponent` | Node | Joue la marche et retourne le sprite selon la direction. |
 
 ### Armes, projectiles et effets
@@ -171,6 +175,7 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `ProjectileData` | Resource | Décrit vol, dégâts, terrain, impact et présentation d'une munition. |
 | `Projectile2D` | Area2D | Déplace une occurrence, résout le premier obstacle et applique l'impact. |
 | `ProjectileImpact2D` | Node2D | Joue puis libère la présentation d'impact. |
+| `ToxicPressureImpact2D` | Node2D | Joue puis libère l'impact animé propre au projectile toxique. |
 | `MissionProjectileSpawner2D` | Node | Place les projectiles dans la branche runtime de la mission. |
 | `ExplosionData` | Resource | Décrit rayons, dégâts, impulsion, durée et palette d'une explosion. |
 | `Explosion2D` | Node2D | Orchestre l'impact avec `AnimationPlayer` et signale les cibles. |

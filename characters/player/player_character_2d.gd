@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export_node_path("PlayerAimComponent") var aim_component_path := NodePath("Components/Aim")
 ## Composant autoritaire pour les PV runtime et les signaux de dégâts ou de mort.
 @export_node_path("PlayerHealthComponent") var health_component_path := NodePath("Components/Health")
+## Machine d'états commune qui expose l'état gameplay courant du joueur.
 @export_node_path("ActorStateMachineComponent") var state_machine_path := NodePath("Components/StateMachine")
 ## Composant qui consomme la WeaponData, cadence les tirs et émet les demandes de projectile.
 @export_node_path("PlayerWeaponComponent") var weapon_component_path := NodePath("Components/Weapon")

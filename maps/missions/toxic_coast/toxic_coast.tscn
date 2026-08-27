@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" path="res://terrain/permanent_ground/ground_module_2d.tscn" id="12_ground_module"]
 [ext_resource type="Resource" path="res://terrain/permanent_ground/styles/toxic_coast_permanent_ground.tres" id="13_ground_style"]
 [ext_resource type="PackedScene" uid="uid://brwtvo216t85b" path="res://terrain/kits/toxic_coast/pieces/natural_ledge_medium.tscn" id="14_natural_ledge"]
+[ext_resource type="PackedScene" path="res://props/explosive_barrel/toxic_explosive_barrel_2d.tscn" id="15_tts76"]
+[ext_resource type="PackedScene" path="res://maps/system/mission_checkpoint_2d.tscn" id="16_checkpoint"]
 
 [sub_resource type="RectangleShape2D" id="Shape_destructible"]
 size = Vector2(560, 150)
@@ -289,6 +291,18 @@ polygon = PackedVector2Array(-105, -22, 105, -22, 105, 22, -105, 22)
 shape = SubResource("Shape_hazard")
 
 [node name="Interactions" type="Node2D" parent="Gameplay" unique_id=107503451]
+
+[node name="BridgeCheckpoint" parent="Gameplay/Interactions" instance=ExtResource("16_checkpoint")]
+position = Vector2(1110, 475)
+spawn_id = &"checkpoint_bridge"
+
+[node name="FoundryCheckpoint" parent="Gameplay/Interactions" instance=ExtResource("16_checkpoint")]
+position = Vector2(2600, 455)
+spawn_id = &"checkpoint_foundry"
+
+[node name="ToxicExplosiveBarrel2D" parent="Gameplay/Interactions" unique_id=1253088483 instance=ExtResource("15_tts76")]
+position = Vector2(1398, 120)
+scale = Vector2(0.28175193, 0.28175193)
 
 [node name="CameraZones" type="Node2D" parent="Gameplay" unique_id=1012134323]
 
