@@ -179,14 +179,17 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - le premier canon n'a encore ni audio, ni recul du corps, ni secousse caméra ;
 - la munition de campagne utilise un petit impact dédié, pas l'explosion lourde
   canonique réservée aux obus et éléments explosifs ;
-- l'explosion émet des dégâts mais la correspondance vers Health n'est pas
-  encore branchée ;
+- `Explosion2D` émet encore une demande de dégâts sans l'appliquer directement ;
+  le baril explosif branche cette demande vers `apply_damage`, mais une
+  explosion instanciée seule exige toujours une correspondance explicite ;
 - les quatre poses de locomotion v001 sont intégrées mais leur continuité
   temporelle reste provisoire ; les futures animations doivent être affinées
   frame par frame sans changer le root publié ;
 - les quatre `TileMapLayer` de Côte toxique sont prêts mais sans TileSet ;
-- le kit Ground Pieces ne contient encore qu'une corniche naturelle moyenne ;
-  blocs militaires, passerelles, tuyaux et dangers restent à produire ;
+- le kit Ground Pieces Côte toxique contient quatre pièces publiées : corniche
+  naturelle, bloc bunker, passerelle industrielle et pont-tuyau ; le bassin
+  acide, le baril explosif et la caisse sont publiés comme scènes glissables
+  séparées du catalogue de terrain ;
 - les premiers modules de sol permanent réutilisent encore les textures
   génériques du terrain ; le pont et la fonderie n'ont pas encore leurs styles
   ou scènes d'architecture spécifiques ;

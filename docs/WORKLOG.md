@@ -851,3 +851,17 @@
 - exécuté les 22 contrats headless du projet : tous passent ;
 - prochaine action recommandée : corriger les contradictions internes de
   `docs/PROJECT_STATE.md` sans modifier le gameplay.
+
+## 2026-08-27 — Réconciliation de l'état publié
+
+- vérifié `toxic_coast_ground_kit.tres` : le catalogue contient quatre pièces,
+  soit la corniche, le bloc bunker, la passerelle et le pont-tuyau ;
+- distingué les trois contenus glissables hors catalogue de terrain : bassin
+  acide, baril explosif et caisse militaire ;
+- vérifié le contrat runtime de l'explosion : `Explosion2D` émet
+  `damage_requested`, tandis que `ExplosiveProp2D` assure déjà la
+  correspondance vers `apply_damage` pour les explosions de barils ;
+- corrigé uniquement les deux formulations contradictoires de
+  `docs/PROJECT_STATE.md`, sans modification gameplay ;
+- prochaine action recommandée : traiter séparément l'ancienne mission
+  prototype après audit complet de ses références.
