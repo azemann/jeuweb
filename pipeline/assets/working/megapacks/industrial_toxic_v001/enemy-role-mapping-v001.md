@@ -24,10 +24,12 @@ les cartes et tests.
 
 ## Lifecycle futur du pilote
 
-`vacuum_boss` expose un événement d'éjection à la fin de `death`. Le système
+`vacuum_trooper` expose un événement d'éjection à la fin de `death`. Le système
 instancie alors `vacuum_pilot_saboteur` dans `Actors`, avec son propre profil,
 sa propre Hurtbox et son comportement. L'animation actuelle d'éjection reste
-une présentation visuelle tant que cette scène n'est pas publiée.
+une présentation visuelle tant que cette scène n'est pas publiée. Le
+`vacuum_boss` possède un lifecycle séparé et ne doit pas être déduit de cette
+éjection.
 
 ## Autorité et validation
 

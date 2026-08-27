@@ -993,3 +993,5 @@
 - conservé `vacuum_trooper`, `vacuum_brute` et `vacuum_siphoner` comme identifiants
   legacy jusqu'à la normalisation et l'intégration des nouvelles scènes ;
 - aucune source du megapack n'est encore publiée ni utilisée par le runtime.
+- correction de design : l'éjection du pilote appartient à
+  `vacuum_trooper`, jamais à `vacuum_boss` ; le boss aura un lifecycle séparé.
