@@ -3,6 +3,7 @@ class_name MissionActorSpawner2D
 extends Node
 
 signal player_spawned(player: PlayerCharacter2D, spawn: MapSpawnPoint2D)
+signal player_respawned(player: PlayerCharacter2D, spawn: MapSpawnPoint2D)
 
 @export_category("Correspondence")
 ## Hôte de map dont le chargement déclenche l'apparition des acteurs de mission.
@@ -11,8 +12,12 @@ signal player_spawned(player: PlayerCharacter2D, spawn: MapSpawnPoint2D)
 @export var player_scene: PackedScene
 ## Identifiant du MapSpawnPoint2D utilisé pour la position et l'orientation initiales.
 @export var player_spawn_id: StringName = &"player_start"
+## Point de reprise autoritaire tant qu'aucun checkpoint de progression n'est activé.
+@export var respawn_spawn_id: StringName = &"player_start"
+@export_range(0.0, 5.0, 0.05) var respawn_delay := 0.8
 
 var current_player: PlayerCharacter2D
+var _respawning := false
 
 
 func _ready() -> void:
@@ -50,8 +55,30 @@ func spawn_player(map: MissionMapRoot2D) -> PlayerCharacter2D:
 	if aim != null:
 		aim.set_facing(-1.0 if spawn.facing == "left" else 1.0)
 	current_player = player
+	var health := player.health_component()
+	if health != null and not health.died.is_connected(_on_player_died):
+		health.died.connect(_on_player_died.bind(player))
 	player_spawned.emit(player, spawn)
+	if _respawning:
+		player_respawned.emit(player, spawn)
 	return player
+
+
+func _on_player_died(player: PlayerCharacter2D) -> void:
+	if _respawning or player != current_player:
+		return
+	_respawning = true
+	await get_tree().create_timer(respawn_delay).timeout
+	if is_instance_valid(player):
+		player.queue_free()
+	var host := map_host()
+	var map := host.current_map if host != null else null
+	if map != null:
+		var previous_spawn := player_spawn_id
+		player_spawn_id = respawn_spawn_id
+		spawn_player(map)
+		player_spawn_id = previous_spawn
+	_respawning = false
 
 
 func _on_map_loaded(map: MissionMapRoot2D) -> void:
@@ -66,4 +93,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Assigner la scène canonique du joueur.")
 	if str(player_spawn_id).is_empty():
 		warnings.append("Player Spawn ID est obligatoire.")
+	if str(respawn_spawn_id).is_empty():
+		warnings.append("Respawn Spawn ID est obligatoire.")
 	return warnings

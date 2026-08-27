@@ -40,3 +40,11 @@ func heal(amount: float) -> void:
 		return
 	current_health = minf(profile.maximum_health, current_health + amount)
 	health_changed.emit(current_health, profile.maximum_health)
+
+
+func reset_health() -> void:
+	if profile == null or not profile.is_valid():
+		return
+	_invulnerability_remaining = 0.0
+	current_health = profile.maximum_health
+	health_changed.emit(current_health, profile.maximum_health)

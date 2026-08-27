@@ -110,6 +110,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - caisse militaire glissable avec états fermé/ouvert, vide pour cette première
   version, ouvrable au tir ou par `player_interact` (`F` / manette Y) selon son
   `SupplyCrateData` ;
+- `MissionActorSpawner2D` recrée le joueur après sa mort avec délai configurable
+  et `respawn_spawn_id`, tandis que `PlayerHealthComponent.reset_health()` reste
+  l'autorité unique des PV réinitialisés ;
 
 ## Autorités actuelles
 
@@ -203,6 +206,8 @@ catalogues.
 - vitesse, portée, dégâts, collision et cadence du projectile toxique n'ont pas
   encore d'autorité runtime : ils appartiendront à `ProjectileData` et au futur
   composant d'attaque, jamais aux bitmaps ;
+- le respawn revient actuellement au spawn configuré (`player_start` par défaut)
+  ; la progression automatique vers un checkpoint reste à ajouter ;
 - le projectile et les six poses d'impact illustrés v001 sont techniquement
   validés dans le pipeline mais attendent la revue visuelle avant publication ;
 - la patrouille ne tremble plus : ses origines 700/840 sont fixées avant

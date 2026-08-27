@@ -968,3 +968,16 @@
   miroir vertical du pivot côté gauche, sans modifier `Muzzle`, la collision ou
   la trajectoire du projectile ;
 - `PLAYER_CONTRACT_TEST` et `ENEMY_CONTRACT_TEST` passent après correction.
+
+## 2026-08-27 — Première boucle de mort et respawn
+
+- ajouté `PlayerHealthComponent.reset_health()` comme commande unique de remise
+  à zéro des PV ;
+- relié `MissionActorSpawner2D` au signal `died` du joueur, avec délai
+  configurable et remplacement de l'acteur dans `Actors` ;
+- exposé `respawn_spawn_id` dans l'Inspector, initialisé sur `player_start` pour
+  la première tranche ;
+- validations `PLAYER_CONTRACT_TEST`, `MAP_CONTRACT_TEST` et démarrage headless
+  de la mission passés ;
+- limite connue : aucun déclencheur de checkpoint ne met encore à jour
+  `respawn_spawn_id` automatiquement.
