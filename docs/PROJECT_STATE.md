@@ -86,6 +86,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - impacts et mort du Vacuum Trooper publiés sur huit frames 256 × 192 au même
   root que la marche ; `hit` suspend puis rend la patrouille, `death` ouvre la
   coque, éjecte le pilote et diffère la suppression jusqu'à sa dernière pose ;
+- attaque toxique candidate en huit phases, projectile lent en quatre frames et
+  impact en six frames techniquement validés dans le pipeline, mais encore hors
+  de `art/` et sans correspondance gameplay avant revue humaine ;
 - scène canonique `EnemyCharacter2D` composée de Patrol, Health et Presentation,
   profil et catalogue Resources éditables dans l'Inspector ;
 - `MissionEnemySpawner2D` traduit le marqueur auteur `VacuumPatrol` en deux
@@ -156,6 +159,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - identité, marche, impacts et mort publiés du Vacuum Trooper : atlas sous
   `art/`, sources, profils d'animation et QA des lots dédiés sous
   `pipeline/assets/` ;
+- attaque, projectile et impact toxiques candidats du Vacuum Trooper : sources,
+  profils, recettes, QA et revues sous `pipeline/assets/` ;
 - réglages de l'ennemi : `vacuum_trooper_profile.tres` ; correspondance du
   marqueur vers la scène : `enemy_catalog.tres` ; placement et formation :
   `MapEncounterMarker2D` dans la scène maîtresse ;
@@ -195,6 +200,12 @@ catalogues.
 
 ## Limites connues
 
+- l'attaque toxique candidate conserve le root publié, mais sa longue trompe
+  impose un personnage légèrement plus petit que dans la marche ; la revue
+  visuelle et temporelle doit trancher avant publication ;
+- vitesse, portée, dégâts, collision et cadence du projectile toxique n'ont pas
+  encore d'autorité runtime : ils appartiendront à `ProjectileData` et au futur
+  composant d'attaque, jamais aux bitmaps ;
 - le projectile et les six poses d'impact illustrés v001 sont techniquement
   validés dans le pipeline mais attendent la revue visuelle avant publication ;
 - la patrouille ne tremble plus : ses origines 700/840 sont fixées avant
@@ -231,8 +242,9 @@ catalogues.
 
 ## Prochaine tranche recommandée
 
-Ajouter un composant d'attaque séparé au Vacuum Trooper, avec anticipation,
-hitbox et récupération visibles dans Godot. Décider ensuite si le pilote éjecté
+Valider puis publier le lot visuel d'attaque toxique, et ajouter un composant
+d'attaque séparé au Vacuum Trooper avec anticipation, socket de tir, projectile
+évitable et récupération visibles dans Godot. Décider ensuite si le pilote éjecté
 reste un pur gag visuel ou devient un acteur gameplay. Toute future scène
 d'acteur et toute future pièce non Carvable devront suivre le contrat
 transversal pieds/surface/ombre désormais validé automatiquement.
@@ -256,6 +268,8 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/project_state_catalog_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --quit-after 240
 python3 pipeline/assets/tools/validate_vacuum_trooper_hit_death_candidate.py
+python3 pipeline/assets/tools/validate_vacuum_trooper_attack_candidate.py
+python3 pipeline/assets/tools/validate_toxic_pressure_candidates.py
 ```
 
 Dernière validation complète : 2026-08-27, les 23 contrats headless passent.

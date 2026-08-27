@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "toxic-pressure-v001",
+  "status": "candidate",
+  "assets": [
+    {
+      "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/toxic_pressure_v001/toxic-pressure-projectile-sheet-candidate-v001.png",
+      "role": "imagegen-projectile-source-sheet",
+      "status": "candidate-source",
+      "sha256": "67497cb7ea01151b9a9dbc5a1a44c3a9a553534fa5f34f61bca980fe51ae66f6"
+    },
+    {
+      "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/toxic_pressure_v001/toxic-pressure-impact-sheet-candidate-v001.png",
+      "role": "imagegen-impact-source-sheet",
+      "status": "candidate-source",
+      "sha256": "b21d59514206da7c52c65518d1c4d98a77bddd365abbdd68b764c1cf4236576e"
+    },
+    {
+      "path": "pipeline/assets/exports/enemies/vacuum_trooper/toxic-pressure-projectile-4x1-96-candidate-v001.png",
+      "role": "normalized-projectile-runtime-export",
+      "status": "candidate",
+      "sha256": "21c17fd1d155387e5a873f31cc4377ece24684587e8889bb7929630435696461"
+    },
+    {
+      "path": "pipeline/assets/exports/enemies/vacuum_trooper/toxic-pressure-impact-3x2-192x160-candidate-v001.png",
+      "role": "normalized-impact-runtime-export",
+      "status": "candidate",
+      "sha256": "4fc77bca6e31b2f8d5d8ce7ec323e7b292fc777802e15114ed4c3c3185d4b21b"
+    }
+  ],
+  "profile": "pipeline/assets/profiles/toxic_pressure_profile_v001.json",
+  "recipe": "pipeline/assets/recipes/toxic_pressure_v001.md",
+  "qa": "pipeline/assets/working/enemies/vacuum_trooper/toxic-pressure-lot-v001-qa.json",
+  "statuses": {
+    "visual": "candidate",
+    "temporal": "candidate",
+    "technical": "passed",
+    "gameplay": "unmapped"
+  },
+  "knownLimits": [
+    "Vitesse, collision et dégâts restent sous l'autorité de la future ProjectileData.",
+    "L'impact doit être revu sur fond clair et sombre avant publication."
+  ]
+}

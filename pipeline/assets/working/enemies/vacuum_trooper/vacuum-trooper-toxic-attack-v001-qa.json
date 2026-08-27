@@ -1,0 +1,275 @@
+{
+  "schema": "jeuweb.enemy-animation-qa.v1",
+  "status": "candidate",
+  "source": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/attack_v001/vacuum-trooper-toxic-attack-sheet-transparent-candidate-v001.png",
+  "source_sha256": "fa9ee236d7a4dae4f0af4d5ad9852ffd5f85099599228a01b8fe0cc4ae3db0f7",
+  "source_dimensions": [
+    1774,
+    887
+  ],
+  "source_grid_edges": {
+    "x": [
+      0,
+      444,
+      887,
+      1331,
+      1774
+    ],
+    "y": [
+      0,
+      444,
+      887
+    ]
+  },
+  "frame_count": 8,
+  "common_scale": 0.954545,
+  "canonical_canvas": [
+    512,
+    384
+  ],
+  "canonical_root": [
+    256,
+    360
+  ],
+  "runtime_frame": [
+    256,
+    192
+  ],
+  "runtime_root": [
+    128,
+    180
+  ],
+  "atlas": "pipeline/assets/exports/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-4x2-256-candidate-v001.png",
+  "atlas_sha256": "f6a2a0fbc7ef375c4c507218f4d8a7e63520541a2bb7ec977c55d8b81ee8a1c3",
+  "review": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-v001-review.png",
+  "preview": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-v001-preview.webp",
+  "frames": [
+    {
+      "index": 0,
+      "phase": "detect",
+      "duration_ms": 160,
+      "source_bbox": [
+        68,
+        143,
+        412,
+        399
+      ],
+      "source_root": [
+        190,
+        395
+      ],
+      "canonical_position": [
+        140,
+        119
+      ],
+      "canonical_size": [
+        328,
+        244
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 1,
+      "phase": "windup",
+      "duration_ms": 180,
+      "source_bbox": [
+        41,
+        122,
+        416,
+        398
+      ],
+      "source_root": [
+        180,
+        394
+      ],
+      "canonical_position": [
+        123,
+        100
+      ],
+      "canonical_size": [
+        358,
+        263
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 2,
+      "phase": "charge",
+      "duration_ms": 220,
+      "source_bbox": [
+        33,
+        170,
+        363,
+        399
+      ],
+      "source_root": [
+        180,
+        395
+      ],
+      "canonical_position": [
+        116,
+        145
+      ],
+      "canonical_size": [
+        315,
+        219
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 3,
+      "phase": "release",
+      "duration_ms": 90,
+      "source_bbox": [
+        20,
+        166,
+        411,
+        399
+      ],
+      "source_root": [
+        175,
+        395
+      ],
+      "canonical_position": [
+        108,
+        141
+      ],
+      "canonical_size": [
+        373,
+        222
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 4,
+      "phase": "active",
+      "duration_ms": 100,
+      "source_bbox": [
+        39,
+        71,
+        444,
+        327
+      ],
+      "source_root": [
+        180,
+        323
+      ],
+      "canonical_position": [
+        121,
+        119
+      ],
+      "canonical_size": [
+        387,
+        244
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 5,
+      "phase": "recoil",
+      "duration_ms": 110,
+      "source_bbox": [
+        45,
+        71,
+        387,
+        329
+      ],
+      "source_root": [
+        175,
+        325
+      ],
+      "canonical_position": [
+        132,
+        118
+      ],
+      "canonical_size": [
+        326,
+        246
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 6,
+      "phase": "recover",
+      "duration_ms": 160,
+      "source_bbox": [
+        29,
+        69,
+        385,
+        327
+      ],
+      "source_root": [
+        175,
+        323
+      ],
+      "canonical_position": [
+        117,
+        118
+      ],
+      "canonical_size": [
+        340,
+        246
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 7,
+      "phase": "ready",
+      "duration_ms": 180,
+      "source_bbox": [
+        30,
+        70,
+        347,
+        327
+      ],
+      "source_root": [
+        175,
+        323
+      ],
+      "canonical_position": [
+        118,
+        118
+      ],
+      "canonical_size": [
+        303,
+        245
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    }
+  ],
+  "statuses": {
+    "visual": "candidate",
+    "temporal": "candidate",
+    "technical": "passed",
+    "gameplay": "unmapped"
+  },
+  "known_limits": [
+    "La grille source possède des moitiés de pixel et utilise des limites explicites.",
+    "Trois bandes alpha et un fragment étranger franchissant une cellule sont retirés avant normalisation.",
+    "La longue trompe impose une échelle commune plus petite que la marche ; revue humaine obligatoire."
+  ]
+}

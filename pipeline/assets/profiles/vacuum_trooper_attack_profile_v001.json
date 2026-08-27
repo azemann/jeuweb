@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "vacuum-trooper-toxic-attack-v001",
+  "status": "candidate",
+  "renderRepresentation": "raster-2d",
+  "gameplaySpace": "2d-canvas",
+  "animationRepresentation": "sprite-frames",
+  "engineOwnsMovement": true,
+  "canonicalDirection": "right",
+  "canonicalCanvas": [512, 384],
+  "canonicalRoot": [256, 360],
+  "runtimeFrame": [256, 192],
+  "runtimeRoot": [128, 180],
+  "animations": {
+    "toxic_attack": {
+      "grid": [4, 2],
+      "frameCount": 8,
+      "loop": false,
+      "durationsMs": [160, 180, 220, 90, 100, 110, 160, 180],
+      "phases": ["detect", "windup", "charge", "release", "active", "recoil", "recover", "ready"],
+      "releaseFrame": 3
+    }
+  }
+}

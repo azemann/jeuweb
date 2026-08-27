@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "vacuum-trooper-toxic-attack-v001",
+  "generatedAt": "2026-08-27",
+  "approval": "Candidate technique en attente de validation visuelle et temporelle du propriétaire du projet.",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "references": [
+    {
+      "reference": "existing Vacuum Trooper walk, hit/death and concept images in the project",
+      "role": "identity, proportions, palette and animation continuity",
+      "rightsStatus": "project-owned or local project reference"
+    }
+  ],
+  "sources": [
+    {
+      "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/attack_v001/vacuum-trooper-toxic-attack-sheet-candidate-v001.png",
+      "sha256": "b3ebdf4aba88202c85a6641cf9ce05a6b7b8b02c6ea18d5875aa8cc1c43c7982",
+      "status": "retained-rejected-source",
+      "note": "The generated checkerboard was baked into RGB pixels."
+    },
+    {
+      "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/attack_v001/vacuum-trooper-toxic-attack-sheet-transparent-candidate-v001.png",
+      "sha256": "fa9ee236d7a4dae4f0af4d5ad9852ffd5f85099599228a01b8fe0cc4ae3db0f7",
+      "status": "candidate-source",
+      "promptRecord": "Edit pass: remove only the baked checkerboard and recover true alpha while preserving the eight poses and every character detail."
+    }
+  ],
+  "promptRecord": "Strict 4x2 transparent attack sheet for the existing right-facing Vacuum Trooper: detect, wind-up, toxic charge, release, active green pressure shot, recoil, recovery and ready. Stable feet/root, unchanged brass/olive/magenta/purple identity, readable trunk action, no text, border or scenery.",
+  "transformations": [
+    "explicit uneven-cell extraction",
+    "removal of four foreign cross-cell alpha fragments",
+    "common-scale normalization around the published ground root",
+    "256x192 runtime frame derivation",
+    "4x2 candidate atlas assembly"
+  ]
+}

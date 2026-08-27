@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "toxic-pressure-v001",
+  "status": "candidate",
+  "renderRepresentation": "raster-2d",
+  "gameplaySpace": "2d-canvas",
+  "projectile": {
+    "grid": [4, 1],
+    "frameCount": 4,
+    "runtimeCell": [96, 64],
+    "pivot": [48, 32],
+    "loop": true,
+    "durationsMs": [90, 70, 90, 70]
+  },
+  "impact": {
+    "grid": [3, 2],
+    "frameCount": 6,
+    "runtimeCell": [192, 160],
+    "pivot": [96, 80],
+    "loop": false,
+    "durationsMs": [45, 55, 75, 85, 110, 140]
+  }
+}

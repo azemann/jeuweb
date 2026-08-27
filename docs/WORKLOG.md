@@ -928,3 +928,20 @@
   application malgré Body + Hurtbox et le socket transformé ;
 - limite volontaire : l'impulsion est annoncée mais aucun contrat physique
   commun aux acteurs ne la consomme encore.
+
+## 2026-08-27 — Lot candidat de l'attaque toxique du Vacuum Trooper
+
+- généré avec ImageGen intégré une attaque complète en huit phases : détection,
+  anticipation, charge, relâchement, phase active, recul, récupération et prêt ;
+- généré séparément un projectile lent de pression toxique en quatre frames et
+  son impact en six frames, tous deux sur alpha réel ;
+- conservé la première planche d'attaque au faux damier comme source rejetée,
+  puis archivé la passe corrigée RGBA sans écraser la provenance ;
+- normalisé l'attaque sur le root ennemi publié `[128, 180]`, nettoyé quatre
+  fragments intercellules et produit revues statiques et aperçus animés ;
+- ajouté profils, manifestes, provenance, recettes et validateurs déterministes
+  pour les deux lots ; validations techniques passées ;
+- maintenu les sorties hors de `art/` et sans référence Godot : statuts visuel
+  et temporel encore `candidate`, gameplay `unmapped` ;
+- point de décision avant publication : accepter ou régénérer l'échelle plus
+  petite imposée par la longue trompe de l'attaque.
