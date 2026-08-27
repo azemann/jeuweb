@@ -56,6 +56,20 @@ func _physics_process(delta: float) -> void:
 
 	_body.move_and_slide()
 	var grounded_after_move := _body.is_on_floor()
+	_update_state(grounded_after_move)
 	if grounded_after_move != _was_grounded:
 		_was_grounded = grounded_after_move
 		grounded_changed.emit(grounded_after_move)
+
+
+func _update_state(grounded: bool) -> void:
+	var player := get_parent().get_parent() as PlayerCharacter2D
+	var state := player.state_machine() if player != null else null
+	if state == null or state.is_in(ActorStateMachineComponent.State.HURT) or state.is_in(ActorStateMachineComponent.State.DEAD):
+		return
+	if not grounded:
+		state.transition(ActorStateMachineComponent.State.JUMP if _body.velocity.y < 0.0 else ActorStateMachineComponent.State.FALL)
+	elif absf(_body.velocity.x) > 1.0:
+		state.transition(ActorStateMachineComponent.State.RUN)
+	else:
+		state.transition(ActorStateMachineComponent.State.IDLE)

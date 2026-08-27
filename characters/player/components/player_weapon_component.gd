@@ -64,6 +64,9 @@ func fire_once() -> bool:
 	var clearance_position := _clearance_origin.global_position if _clearance_origin != null else _player.global_position
 	projectile_requested.emit(weapon.projectile_scene, _muzzle.global_transform, direction, _player, clearance_position)
 	fired.emit(direction)
+	var state := _player.state_machine()
+	if state != null and not state.is_in(ActorStateMachineComponent.State.DEAD):
+		state.transition(ActorStateMachineComponent.State.SHOOT)
 	return true
 
 

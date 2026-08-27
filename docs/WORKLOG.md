@@ -992,6 +992,14 @@
   sa scène canonique, même si son comportement complet arrive plus tard ;
 - `PLAYER_CONTRACT_TEST` et `ENEMY_CONTRACT_TEST` passent.
 
+## 2026-08-27 — Transitions FSM du joueur
+
+- étendu la FSM commune avec `SHOOT`, `JUMP` et `FALL` ;
+- relié le mouvement aux transitions `IDLE/RUN/JUMP/FALL` ;
+- relié le tir à `SHOOT`, en conservant les états `HURT` et `DEAD` prioritaires ;
+- les transitions restent dans les composants de mouvement et d'arme, donc
+  réutilisables par les futurs acteurs et placeholders.
+
 ## 2026-08-27 — Nomenclature des ennemis du megapack
 
 - inventorié le megapack industriel toxique : quatre silhouettes ennemies,

@@ -114,7 +114,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   et `respawn_spawn_id`, tandis que `PlayerHealthComponent.reset_health()` reste
   l'autorité unique des PV réinitialisés ;
 - `ActorStateMachineComponent` est maintenant présente sur le joueur et les
-  ennemis avec les états communs `IDLE`, `RUN`, `ATTACK`, `HURT`, `DEAD` et
+  ennemis avec les états communs `IDLE`, `RUN`, `ATTACK`, `SHOOT`, `JUMP`,
+  `FALL`, `HURT`, `DEAD` et
   `RESPAWN` ; les placeholders futurs devront reprendre cette brique ;
 
 ## Autorités actuelles
