@@ -981,3 +981,15 @@
   de la mission passés ;
 - limite connue : aucun déclencheur de checkpoint ne met encore à jour
   `respawn_spawn_id` automatiquement.
+
+## 2026-08-27 — Nomenclature des ennemis du megapack
+
+- inventorié le megapack industriel toxique : quatre silhouettes ennemies,
+  neuf props, neuf terrains, quatre pickups et quatre familles d'armes ;
+- confirmé le mapping gameplay demandé : Siphoner → `Grunt`, Scout Drone →
+  `Flying enemy`, Brute → `Boss`, Hatchling Saboteur → pilote éjecté ;
+- enregistré cette table dans
+  `pipeline/assets/working/megapacks/industrial_toxic_v001/enemy-role-mapping-v001.md` ;
+- conservé `vacuum_trooper`, `vacuum_brute` et `vacuum_siphoner` comme identifiants
+  legacy jusqu'à la normalisation et l'intégration des nouvelles scènes ;
+- aucune source du megapack n'est encore publiée ni utilisée par le runtime.
