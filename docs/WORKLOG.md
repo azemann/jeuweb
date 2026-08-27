@@ -982,6 +982,16 @@
 - limite connue : aucun déclencheur de checkpoint ne met encore à jour
   `respawn_spawn_id` automatiquement.
 
+## 2026-08-27 — FSM commune joueur et ennemis
+
+- ajouté `ActorStateMachineComponent` comme composant réutilisable avec les
+  états `IDLE`, `RUN`, `ATTACK`, `HURT`, `DEAD` et `RESPAWN` ;
+- branché la FSM au joueur canonique en plus du Vacuum Trooper ; les dégâts et
+  la mort du joueur passent désormais par des transitions signal-driven ;
+- règle rétroactive : tout placeholder du megapack devra recevoir cette FSM dès
+  sa scène canonique, même si son comportement complet arrive plus tard ;
+- `PLAYER_CONTRACT_TEST` et `ENEMY_CONTRACT_TEST` passent.
+
 ## 2026-08-27 — Nomenclature des ennemis du megapack
 
 - inventorié le megapack industriel toxique : quatre silhouettes ennemies,

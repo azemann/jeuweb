@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export_node_path("PlayerAimComponent") var aim_component_path := NodePath("Components/Aim")
 ## Composant autoritaire pour les PV runtime et les signaux de dégâts ou de mort.
 @export_node_path("PlayerHealthComponent") var health_component_path := NodePath("Components/Health")
+@export_node_path("ActorStateMachineComponent") var state_machine_path := NodePath("Components/StateMachine")
 ## Composant qui consomme la WeaponData, cadence les tirs et émet les demandes de projectile.
 @export_node_path("PlayerWeaponComponent") var weapon_component_path := NodePath("Components/Weapon")
 ## Composant traduisant le mouvement runtime en animations et orientation visuelle.
@@ -25,6 +26,10 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		add_to_group(&"players")
 		add_to_group(&"damageable_actors")
+		var health := health_component()
+		if health != null:
+			health.damaged.connect(_on_health_damaged)
+			health.died.connect(_on_health_died)
 
 
 func movement_component() -> PlayerMovementComponent:
@@ -37,6 +42,10 @@ func aim_component() -> PlayerAimComponent:
 
 func health_component() -> PlayerHealthComponent:
 	return get_node_or_null(health_component_path) as PlayerHealthComponent
+
+
+func state_machine() -> ActorStateMachineComponent:
+	return get_node_or_null(state_machine_path) as ActorStateMachineComponent
 
 
 func weapon_component() -> PlayerWeaponComponent:
@@ -68,6 +77,8 @@ func validation_errors() -> PackedStringArray:
 		errors.append("Components/Aim et son profil sont obligatoires.")
 	if health_component() == null or health_component().profile == null:
 		errors.append("Components/Health et son profil sont obligatoires.")
+	if state_machine() == null:
+		errors.append("Components/StateMachine est obligatoire.")
 	if weapon_component() == null or weapon_component().weapon == null:
 		errors.append("Components/Weapon et sa WeaponData sont obligatoires.")
 	if presentation_component() == null:
@@ -85,3 +96,15 @@ func validation_errors() -> PackedStringArray:
 
 func _get_configuration_warnings() -> PackedStringArray:
 	return validation_errors()
+
+
+func _on_health_damaged(_amount: float) -> void:
+	var state := state_machine()
+	if state != null:
+		state.transition(ActorStateMachineComponent.State.HURT)
+
+
+func _on_health_died() -> void:
+	var state := state_machine()
+	if state != null:
+		state.transition(ActorStateMachineComponent.State.DEAD)

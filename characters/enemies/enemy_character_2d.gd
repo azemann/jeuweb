@@ -13,6 +13,8 @@ extends CharacterBody2D
 @export_node_path("EnemyHealthComponent") var health_component_path := NodePath("Components/Health")
 ## Composant qui télégraphie et exécute l'attaque data-driven de l'archétype.
 @export_node_path("EnemyAttackComponent") var attack_component_path := NodePath("Components/Attack")
+## FSM commune exposant les états de l'ennemi aux composants et aux outils de mission.
+@export_node_path("ActorStateMachineComponent") var state_machine_path := NodePath("Components/StateMachine")
 ## Composant traduisant la patrouille en animation et orientation.
 @export_node_path("EnemyPresentationComponent") var presentation_component_path := NodePath("Components/Presentation")
 ## Composant partagé qui expose le root des pieds et projette l'ombre sur le vrai sol.
@@ -56,6 +58,10 @@ func attack_component() -> EnemyAttackComponent:
 	return get_node_or_null(attack_component_path) as EnemyAttackComponent
 
 
+func state_machine() -> ActorStateMachineComponent:
+	return get_node_or_null(state_machine_path) as ActorStateMachineComponent
+
+
 func presentation_component() -> EnemyPresentationComponent:
 	return get_node_or_null(presentation_component_path) as EnemyPresentationComponent
 
@@ -85,6 +91,8 @@ func validation_errors() -> PackedStringArray:
 		errors.append("Components/Health doit consommer le profil de la racine.")
 	if attack_component() == null or not attack_component().validation_errors().is_empty():
 		errors.append("Components/Attack et ses correspondances sont obligatoires.")
+	if state_machine() == null:
+		errors.append("Components/StateMachine est obligatoire.")
 	if presentation_component() == null:
 		errors.append("Components/Presentation est obligatoire.")
 	if grounding_component() == null or not grounding_component().validation_errors().is_empty():
@@ -107,6 +115,9 @@ func _on_health_damaged(_amount: float) -> void:
 	var attack := attack_component()
 	if attack != null:
 		attack.cancel_attack()
+	var state := state_machine()
+	if state != null:
+		state.transition(ActorStateMachineComponent.State.HURT)
 	var presentation := presentation_component()
 	if presentation != null:
 		presentation.play_hit()
@@ -118,10 +129,16 @@ func _on_hit_animation_finished() -> void:
 	var patrol := patrol_component()
 	if patrol != null:
 		patrol.set_movement_enabled(true)
+	var state := state_machine()
+	if state != null:
+		state.transition(ActorStateMachineComponent.State.RUN)
 
 
 func _on_health_died() -> void:
 	_dying = true
+	var state := state_machine()
+	if state != null:
+		state.transition(ActorStateMachineComponent.State.DEAD)
 	remove_from_group(&"damageable_actors")
 	collision_layer = 0
 	var patrol := patrol_component()

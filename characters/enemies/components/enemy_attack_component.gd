@@ -62,6 +62,9 @@ func _start_attack() -> void:
 	_cooldown_remaining = attack_cooldown
 	if _patrol != null:
 		_patrol.set_movement_enabled(false)
+	var state := _actor as EnemyCharacter2D
+	if state != null and state.state_machine() != null:
+		state.state_machine().transition(ActorStateMachineComponent.State.ATTACK)
 	_sync_origin()
 	_sprite.play(&"toxic_attack")
 	_walk_sprite.visible = false
@@ -81,6 +84,9 @@ func cancel_attack() -> void:
 		_walk_sprite.visible = true
 	if _patrol != null:
 		_patrol.set_movement_enabled(true)
+	var state := _actor as EnemyCharacter2D
+	if state != null and state.state_machine() != null:
+		state.state_machine().transition(ActorStateMachineComponent.State.RUN)
 
 
 func _on_frame_changed() -> void:

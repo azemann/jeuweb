@@ -8,6 +8,7 @@
 [ext_resource type="Resource" path="res://characters/player/data/classic_aim.tres" id="6_aim_profile"]
 [ext_resource type="Resource" path="res://characters/player/data/standard_health.tres" id="7_health_profile"]
 [ext_resource type="Script" uid="uid://brjgvvb8j4sha" path="res://characters/player/components/player_presentation_component.gd" id="8_presentation"]
+[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="15_state"]
 [ext_resource type="SpriteFrames" uid="uid://g7pa74c5wmkc" path="res://characters/player/data/player_visual_frames.tres" id="9_frames"]
 [ext_resource type="Texture2D" uid="uid://ctty4cank8sva" path="res://art/weapons/player/player-primary-cannon-v001.png" id="10_weapon"]
 [ext_resource type="Script" uid="uid://cuahbbpo6g04e" path="res://characters/player/components/player_weapon_component.gd" id="11_weapon_component"]
@@ -186,6 +187,9 @@ profile = ExtResource("6_aim_profile")
 [node name="Health" type="Node" parent="Components" unique_id=1589982985]
 script = ExtResource("4_health")
 profile = ExtResource("7_health_profile")
+
+[node name="StateMachine" type="Node" parent="Components"]
+script = ExtResource("15_state")
 
 [node name="Weapon" type="Node" parent="Components" unique_id=124057853]
 script = ExtResource("11_weapon_component")

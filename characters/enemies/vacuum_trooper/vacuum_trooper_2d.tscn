@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="4_health"]
 [ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="5_presentation"]
 [ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="6_attack"]
+[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="10_state"]
 [ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_frames.tres" id="6_frames"]
 [ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_attack_frames.tres" id="7_attack_frames"]
 [ext_resource type="PackedScene" path="res://weapons/projectiles/toxic_pressure_2d.tscn" id="9_projectile"]
@@ -38,6 +39,10 @@ profile = ExtResource("2_profile")
 [node name="Attack" type="Node" parent="Components"]
 script = ExtResource("6_attack")
 projectile_scene = ExtResource("9_projectile")
+
+[node name="StateMachine" type="Node" parent="Components"]
+script = ExtResource("10_state")
+initial_state = 1
 
 [node name="Presentation" type="Node" parent="Components"]
 script = ExtResource("5_presentation")
