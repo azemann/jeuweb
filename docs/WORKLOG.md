@@ -959,3 +959,12 @@
 - validations Godot `FOUNDATION_SMOKE_TEST`, `ENEMY_CONTRACT_TEST` et
   `ASSET_PIPELINE_CONTRACT_TEST` passées ;
 - point de restauration publié : `72e8c5e` (candidats), intégration en cours.
+
+## 2026-08-27 — Correction du pivot arme joueur gauche/droite
+
+- identifié que `AimPivot.rotation = aim_direction.angle()` retournait aussi
+  visuellement l'arme lorsque le joueur visait à gauche ;
+- conservé la rotation complète nécessaire à la direction du tir et ajouté un
+  miroir vertical du pivot côté gauche, sans modifier `Muzzle`, la collision ou
+  la trajectoire du projectile ;
+- `PLAYER_CONTRACT_TEST` et `ENEMY_CONTRACT_TEST` passent après correction.

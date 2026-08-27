@@ -86,6 +86,7 @@ func set_facing(value: float) -> void:
 	facing = requested
 	if _body_sprite != null:
 		_body_sprite.flip_h = facing < 0.0
+	_apply_weapon_orientation()
 	facing_changed.emit(facing)
 
 
@@ -103,3 +104,12 @@ func set_aim_direction(value: Vector2) -> void:
 func _apply_direction() -> void:
 	if _aim_pivot != null:
 		_aim_pivot.rotation = aim_direction.angle()
+	_apply_weapon_orientation()
+
+
+## Une rotation de PI pour viser à gauche inverse aussi le haut/bas de l'arme.
+## Le miroir vertical du pivot conserve donc le canon et le Muzzle à l'endroit.
+func _apply_weapon_orientation() -> void:
+	if _aim_pivot == null:
+		return
+	_aim_pivot.scale = Vector2(1.0, -1.0 if facing < 0.0 else 1.0)
