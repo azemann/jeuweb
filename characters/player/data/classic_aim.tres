@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="PlayerAimProfile" format=3 uid="uid://ba4j4um0oh1to"]
+
+[ext_resource type="Script" uid="uid://dmaftjeoi1xcy" path="res://characters/player/data/player_aim_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")

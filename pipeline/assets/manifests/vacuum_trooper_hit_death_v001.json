@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "vacuum-trooper-hit-death-v001",
+  "status": "published",
+  "approvedAt": "2026-08-27",
+  "assets": [
+    {
+      "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/vacuum-trooper-hit-death-sheet-candidate-v001.png",
+      "role": "imagegen-source-sheet",
+      "status": "approved-source",
+      "sha256": "336b73c59be18335a713aa9a331662f8a4774b8d64ff6020b7d7e5109c5ecde1"
+    },
+    {
+      "path": "pipeline/assets/exports/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-candidate-v001.png",
+      "role": "normalized-runtime-export",
+      "status": "approved"
+    },
+    {
+      "path": "art/characters/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-v001.png",
+      "role": "published-runtime-atlas",
+      "status": "integrated",
+      "sha256": "54b6342c11b1c3354c316d685b74fd0f56eeae44de3cb489b91b5d493f934ed2"
+    }
+  ],
+  "profile": "pipeline/assets/profiles/vacuum_trooper_hit_death_profile_v001.json",
+  "recipe": "pipeline/assets/recipes/vacuum_trooper_hit_death_v001.md",
+  "qa": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-hit-death-v001-qa.json",
+  "runtimeReview": {
+    "path": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-hit-death-v001-runtime-review.png",
+    "sha256": "f75cbfd74c9dea0792ade49d2fd243f2e0b3cd1f567c8d82d4c165bb8baadc9d",
+    "renderer": "Godot 4.7.1 OpenGL Compatibility"
+  },
+  "statuses": {
+    "visual": "passed",
+    "temporal": "passed",
+    "technical": "passed",
+    "gameplay": "integrated"
+  },
+  "knownLimits": [
+    "La source 2079 px impose quatre colonnes de largeurs 520, 520, 520 et 519 px.",
+    "Deux effets franchissent la séparation horizontale et sont reconstruits uniquement depuis les pixels source.",
+    "Le pilote éjecté reste inclus dans les frames raster ; il ne constitue pas encore un acteur gameplay séparé."
+  ]
+}

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/toxic_coast/military/military-bunker-block-medium-v001.png" id="2"]
+[ext_resource type="Resource" path="res://terrain/kits/toxic_coast/breakables/industrial_ground_breakable.tres" id="3"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"military_bunker_block_medium"
+display_name = "Côte toxique — bloc bunker moyen"
+category = 1
+tags = PackedStringArray("military", "bunker", "platform", "toxic_coast")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 64)
+collision_source = 1
+authored_outline = PackedVector2Array(-350, -20, 350, -20, 350, 220, -350, 220)
+walk_surface_point_count = 2
+recommended_mode = 0
+breakable_profile = ExtResource("3")

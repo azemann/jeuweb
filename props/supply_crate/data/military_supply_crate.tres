@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SupplyCrateData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://props/supply_crate/supply_crate_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/military-supply-crate-closed-v001.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/military-supply-crate-open-v001.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+crate_id = &"military_supply_crate"
+display_name = "Côte toxique — caisse de ravitaillement militaire"
+closed_texture = ExtResource("2")
+open_texture = ExtResource("3")
+pivot_px = Vector2(192, 304)
+opening_mode = 2
+maximum_health = 1.0
+interaction_action = &"player_interact"
+interaction_radius = 92.0
+collision_size = Vector2(300, 150)
+collision_offset = Vector2(0, -76)
+keep_collision_when_open = true

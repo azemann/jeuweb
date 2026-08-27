@@ -1,0 +1,143 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://g7pa74c5wmkc"]
+
+[ext_resource type="Texture2D" uid="uid://wsmqfnxdaj53" path="res://art/characters/player/player-body-key-poses-v001.png" id="1_atlas"]
+
+[sub_resource type="AtlasTexture" id="Frame_aim_up"]
+atlas = ExtResource("1_atlas")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_crouch"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_fall"]
+atlas = ExtResource("1_atlas")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_hurt"]
+atlas = ExtResource("1_atlas")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_idle"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_jump_apex"]
+atlas = ExtResource("1_atlas")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_jump_rise"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_landing"]
+atlas = ExtResource("1_atlas")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_walk_contact"]
+atlas = ExtResource("1_atlas")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_walk_passing"]
+atlas = ExtResource("1_atlas")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_run_extension"]
+atlas = ExtResource("1_atlas")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_recoil"]
+atlas = ExtResource("1_atlas")
+region = Rect2(384, 384, 192, 192)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_aim_up")
+}],
+"loop": 0,
+"name": &"aim_up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_crouch")
+}],
+"loop": 0,
+"name": &"crouch",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_fall")
+}],
+"loop": 0,
+"name": &"fall",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_hurt")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_idle")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_jump_apex")
+}],
+"loop": 0,
+"name": &"jump_apex",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_jump_rise")
+}],
+"loop": 0,
+"name": &"jump_rise",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_landing")
+}],
+"loop": 0,
+"name": &"landing",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_idle")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_walk_contact")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_walk_passing")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_run_extension")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_recoil")
+}],
+"loop": 0,
+"name": &"recoil",
+"speed": 1.0
+}]

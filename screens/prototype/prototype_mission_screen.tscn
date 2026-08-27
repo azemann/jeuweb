@@ -1,0 +1,159 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://screens/prototype/prototype_mission_screen.gd" id="1_script"]
+[ext_resource type="Script" path="res://maps/system/mission_map_host_2d.gd" id="2_map_host"]
+[ext_resource type="Texture2D" path="res://art/concepts/da-03-environment-destruction.png" id="3_reference"]
+[ext_resource type="Theme" path="res://ui/themes/game_ui_theme.tres" id="4_theme"]
+[ext_resource type="Resource" path="res://maps/definitions/toxic_coast.tres" id="5_map_definition"]
+[ext_resource type="Script" path="res://maps/system/mission_actor_spawner_2d.gd" id="6_actor_spawner"]
+[ext_resource type="PackedScene" path="res://characters/player/player_character_2d.tscn" id="7_player"]
+[ext_resource type="Script" path="res://camera/mission_camera_rig_2d.gd" id="8_camera_rig"]
+[ext_resource type="Resource" path="res://camera/profiles/arcade_forward_camera.tres" id="9_camera_profile"]
+[ext_resource type="Script" path="res://weapons/mission_projectile_spawner_2d.gd" id="10_projectile_spawner"]
+[ext_resource type="PackedScene" path="res://ui/mobile/mobile_controls.tscn" id="11_mobile_controls"]
+[ext_resource type="Script" path="res://maps/system/mission_enemy_spawner_2d.gd" id="12_enemy_spawner"]
+[ext_resource type="Resource" path="res://characters/enemies/data/enemy_catalog.tres" id="13_enemy_catalog"]
+
+[node name="PrototypeMissionScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_theme")
+script = ExtResource("1_script")
+
+[node name="MissionViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="MissionViewport" type="SubViewport" parent="MissionViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="MapHost" type="Node2D" parent="MissionViewportContainer/MissionViewport"]
+script = ExtResource("2_map_host")
+definition = ExtResource("5_map_definition")
+
+[node name="ActorSpawner" type="Node" parent="MissionViewportContainer/MissionViewport"]
+unique_name_in_owner = true
+script = ExtResource("6_actor_spawner")
+map_host_path = NodePath("../MapHost")
+player_scene = ExtResource("7_player")
+player_spawn_id = &"player_start"
+
+[node name="EnemySpawner" type="Node" parent="MissionViewportContainer/MissionViewport"]
+unique_name_in_owner = true
+script = ExtResource("12_enemy_spawner")
+map_host_path = NodePath("../MapHost")
+actor_spawner_path = NodePath("../ActorSpawner")
+catalog = ExtResource("13_enemy_catalog")
+
+[node name="ProjectileSpawner" type="Node" parent="MissionViewportContainer/MissionViewport"]
+unique_name_in_owner = true
+script = ExtResource("10_projectile_spawner")
+map_host_path = NodePath("../MapHost")
+actor_spawner_path = NodePath("../ActorSpawner")
+
+[node name="MissionCameraRig" type="Node2D" parent="MissionViewportContainer/MissionViewport"]
+unique_name_in_owner = true
+script = ExtResource("8_camera_rig")
+profile = ExtResource("9_camera_profile")
+map_host_path = NodePath("../MapHost")
+actor_spawner_path = NodePath("../ActorSpawner")
+
+[node name="Camera2D" type="Camera2D" parent="MissionViewportContainer/MissionViewport/MissionCameraRig"]
+unique_name_in_owner = true
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+priority = 10
+
+[node name="HUD" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="HUDLayout" type="HBoxContainer" parent="HUD"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HealthPanel" type="PanelContainer" parent="HUD/HUDLayout"]
+custom_minimum_size = Vector2(360, 70)
+layout_mode = 2
+
+[node name="HealthStack" type="VBoxContainer" parent="HUD/HUDLayout/HealthPanel"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="HUD/HUDLayout/HealthPanel/HealthStack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "INTÉGRITÉ"
+
+[node name="Health" type="ProgressBar" parent="HUD/HUDLayout/HealthPanel/HealthStack"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 20)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="Spacer" type="Control" parent="HUD/HUDLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MissionLabel" type="Label" parent="HUD/HUDLayout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
+text = "MISSION 00 — LABORATOIRE VISUEL"
+vertical_alignment = 1
+
+[node name="ControlsLabel" type="Label" parent="HUD/HUDLayout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.960784, 0.603922, 1)
+text = "CLAVIER · SOURIS · MANETTE · TACTILE"
+vertical_alignment = 1
+
+[node name="MobileControls" parent="." instance=ExtResource("11_mobile_controls")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -78.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "RETOUR"
+
+[node name="DesignReferencePanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 112.0
+offset_right = 514.0
+offset_bottom = 388.0
+
+[node name="ReferenceTexture" type="TextureRect" parent="DesignReferencePanel"]
+layout_mode = 2
+texture = ExtResource("3_reference")
+expand_mode = 1
+stretch_mode = 5

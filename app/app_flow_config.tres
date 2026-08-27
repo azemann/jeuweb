@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AppFlowConfig" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://app/app_flow_config.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://screens/boot/boot_flow.tscn" id="2_boot"]
+[ext_resource type="PackedScene" path="res://screens/start/start_flow.tscn" id="3_start"]
+[ext_resource type="PackedScene" path="res://screens/gallery/art_direction_gallery.tscn" id="4_gallery"]
+[ext_resource type="PackedScene" path="res://screens/prototype/prototype_mission_screen.tscn" id="5_mission"]
+
+[resource]
+script = ExtResource("1_script")
+boot_screen = ExtResource("2_boot")
+start_screen = ExtResource("3_start")
+gallery_screen = ExtResource("4_gallery")
+prototype_mission_screen = ExtResource("5_mission")
+fade_duration = 0.2
+fade_color = Color(0.0666667, 0.0784314, 0.113725, 1)
+

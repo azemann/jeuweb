@@ -1,0 +1,22 @@
+# Godot generated state
+.godot/
+*.translation
+
+# Python generated state
+__pycache__/
+*.py[cod]
+
+# Local Codex collaboration state
+.agents/
+.codex/
+
+# Exports and local captures
+builds/
+exports/
+captures/
+*.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*~

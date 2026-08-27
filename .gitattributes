@@ -1,0 +1,11 @@
+# Keep Godot text resources and scripts stable across operating systems.
+* text=auto eol=lf
+
+# Binary art and audio must never be line-ending normalized.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.wav binary
+*.ogg binary
+*.mp3 binary

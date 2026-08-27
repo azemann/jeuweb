@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "vacuum-trooper-walk-v001",
+  "generatedAt": "2026-08-27",
+  "approvedAt": "2026-08-27",
+  "approval": "Validation visuelle et temporelle explicite du propriétaire du projet.",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "references": [
+    {
+      "reference": "art/concepts/da-06-enemies-vacuum-divers.png",
+      "role": "enemy-shell identity",
+      "rightsStatus": "project-owned"
+    },
+    {
+      "reference": "art/concepts/da-07-enemy-pilot-lifecycle.png",
+      "role": "alien-pilot identity",
+      "rightsStatus": "project-owned"
+    },
+    {
+      "reference": "/home/evan/Dev/arene/assets/2d/characters/teal/animations/walk/",
+      "role": "motion phases and cadence only",
+      "rightsStatus": "local project reference"
+    },
+    {
+      "reference": "/home/evan/Dev/Dev-github/my-space/contrats/ANIMATION_CONTRACT_V1.md",
+      "role": "animation contract",
+      "rightsStatus": "local reusable research"
+    }
+  ],
+  "source": {
+    "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/vacuum-trooper-walk-sheet-candidate-v001.png",
+    "sha256": "db489e24387f5b5a3a9b94ff2f075cd6359d7892f294c2a6f5b8322ea6ee063a",
+    "prompt": "Create one exact 8-pose walk-cycle spritesheet for the project-owned Vacuum Trooper shown in the two concept references. Compact four-legged vacuum-diver machine, worn brass and olive shell, small purple alien pilot, short flexible trunk, pink porthole and magenta tank, facing right. Use the Teal fighter montage only as a biomechanical and timing reference. Strict 4 x 2 reading order: contact A, compression A, passing A, rise A, contact B, compression B, passing B, rise B. Keep identity, camera, scale and ground root stable; alternate all four legs, add a subtle shell bob and delayed trunk follow-through. True transparent background, clean separated cells, no text, no labels, no painted grid, no shadows, no effects."
+  },
+  "transformations": [
+    "strict 4x2 cell extraction",
+    "alpha-threshold bounds with safety padding",
+    "common-scale normalization",
+    "fixed ground-root alignment",
+    "256x192 runtime frame derivation",
+    "4x2 atlas assembly"
+  ],
+  "publishedOutput": {
+    "path": "art/characters/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-v001.png",
+    "sha256": "d885176606cb70d76e98df81044c3a6683afaac370d1a4c0bb14c5086b19a9e3"
+  }
+}

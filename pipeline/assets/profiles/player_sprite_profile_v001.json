@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "jeuweb-player-sprite-production-profile",
+  "status": "integrated",
+  "representation": {
+    "renderRepresentation": "raster-2d",
+    "gameplaySpace": "2d-canvas",
+    "animationRepresentation": ["sprite-frames", "transform-tracks"],
+    "engineOwnsMovement": true,
+    "sourceAssetFormats": ["png-rgba-8", "json"],
+    "runtimeAssetFormats": ["png-frames", "png-atlas", "godot-spriteframes"]
+  },
+  "canonicalSpace": {
+    "canvasSize": [384, 384],
+    "root": [192, 360],
+    "groundLine": 360,
+    "minimumMargin": 22,
+    "background": "transparent",
+    "dataStatus": "estimated"
+  },
+  "runtimeSpace": {
+    "frameSize": [192, 192],
+    "root": [96, 180],
+    "scale": 0.5
+  },
+  "separation": {
+    "weaponSeparateFromBody": true,
+    "weaponSocketRequired": true,
+    "sockets": ["weapon_pivot", "muzzle", "ground", "center"],
+    "combatVolumesOwnedByGodot": true,
+    "movementOwnedByGodot": true
+  },
+  "atlas": {
+    "columns": 4,
+    "rows": 3,
+    "allowRotation": false,
+    "trim": false,
+    "preserveSourceOffset": true,
+    "padding": 0
+  },
+  "validationStatuses": ["visual", "temporal", "technical", "gameplay"]
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "toxic-coast-ground-kit-v001",
+  "status": "integrated",
+  "assets": [
+    {
+      "path": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/natural-ledge-medium-source-v001.png",
+      "role": "opaque-rejected-source",
+      "status": "rejected",
+      "sha256": "3cde3005152f56bb93465f27e491681696fe6fd50e7fb19da49deed23e812984"
+    },
+    {
+      "path": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/natural-ledge-medium-source-v002.png",
+      "role": "transparent-source",
+      "status": "validated",
+      "sha256": "de0440c85d45a2134685ff5708d5883bce66b4c6bc92a03560a35ed4ab43d26e"
+    },
+    {
+      "path": "pipeline/assets/exports/terrain_kits/toxic_coast/natural/natural-ledge-medium-768x384-v001.png",
+      "role": "normalized-runtime-candidate",
+      "status": "validated",
+      "sha256": "607940a9670b9121b4158f807749c89545ad513428a9f93e08f9d1aff1f7ed57"
+    },
+    {
+      "path": "art/terrain/pieces/toxic_coast/natural/natural-ledge-medium-v001.png",
+      "role": "godot-runtime-ground-piece",
+      "status": "integrated",
+      "sha256": "607940a9670b9121b4158f807749c89545ad513428a9f93e08f9d1aff1f7ed57"
+    }
+  ],
+  "profile": "pipeline/assets/profiles/toxic_coast_ground_piece_profile_v001.json",
+  "recipe": "pipeline/assets/recipes/toxic_coast_ground_kit_v001.md",
+  "provenance": "pipeline/assets/provenance/toxic_coast_ground_kit_v001.json",
+  "qa": "pipeline/assets/working/terrain_kits/toxic_coast/natural-ledge-medium-v001-qa.json",
+  "integrationAllowed": true,
+  "nextGate": "expand the approved toxic coast kit"
+}

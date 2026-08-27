@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GroundKitCatalog" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_kit_catalog.gd" id="1_catalog"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/natural_ledge_medium.tscn" id="2_ledge"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/military_bunker_block_medium.tscn" id="3_bunker"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/industrial_catwalk_medium.tscn" id="4_catwalk"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/toxic_pipe_bridge_medium.tscn" id="5_pipe"]
+
+[resource]
+script = ExtResource("1_catalog")
+kit_id = &"toxic_coast"
+display_name = "Côte toxique — Ground Pieces"
+pieces = Array[PackedScene]([ExtResource("2_ledge"), ExtResource("3_bunker"), ExtResource("4_catwalk"), ExtResource("5_pipe")])

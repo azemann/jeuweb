@@ -1,0 +1,206 @@
+{
+  "schema": "jeuweb.toxic-coast-content-pack.v1",
+  "status": "published",
+  "authority": {
+    "source": "pipeline/assets/sources",
+    "runtime": "art",
+    "gameplay": "Godot .tres",
+    "assembly": "Godot .tscn"
+  },
+  "assets": [
+    {
+      "asset_id": "military_bunker_block_medium",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/military/military-bunker-block-medium-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/toxic_coast/military/military-bunker-block-medium-768x384-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/military/military-bunker-block-medium-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        32,
+        40
+      ],
+      "content_size": [
+        704,
+        219
+      ],
+      "alpha_bbox": [
+        32,
+        40,
+        736,
+        259
+      ],
+      "source_sha256": "9e9aeae4eb259b2e5bfd0b58ec966d7752be25e232ffe229ca6464a60c4b08fc",
+      "export_sha256": "fc80db0524417eaf7ac5f641b8252c46ec63f61225e62ae4f051fa911443177f",
+      "published_sha256": "fc80db0524417eaf7ac5f641b8252c46ec63f61225e62ae4f051fa911443177f"
+    },
+    {
+      "asset_id": "industrial_catwalk_medium",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/metal/industrial-catwalk-medium-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/toxic_coast/metal/industrial-catwalk-medium-768x384-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/metal/industrial-catwalk-medium-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        32,
+        40
+      ],
+      "content_size": [
+        704,
+        177
+      ],
+      "alpha_bbox": [
+        32,
+        40,
+        736,
+        217
+      ],
+      "source_sha256": "b7bd9b5184e01ae1952227b8dc61c1bca30281a1fbf8ba962e31c08e15605adc",
+      "export_sha256": "782ae5bc6f7d56900c67831c60cca0526e43036f9b56635e7bb70732eeae317e",
+      "published_sha256": "782ae5bc6f7d56900c67831c60cca0526e43036f9b56635e7bb70732eeae317e"
+    },
+    {
+      "asset_id": "toxic_pipe_bridge_medium",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/pipes/toxic-pipe-bridge-medium-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/toxic_coast/pipes/toxic-pipe-bridge-medium-768x384-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/pipes/toxic-pipe-bridge-medium-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        32,
+        40
+      ],
+      "content_size": [
+        704,
+        195
+      ],
+      "alpha_bbox": [
+        32,
+        40,
+        736,
+        235
+      ],
+      "source_sha256": "93ede832e8e9a568f1c15b871976dbc9ae0beaa9c392eb4efc71e2b5560b2a67",
+      "export_sha256": "cadcf81dea9cec713a138945b5f9e2a0ab3756fdf42ee8f859d51a3ff6b833b8",
+      "published_sha256": "cadcf81dea9cec713a138945b5f9e2a0ab3756fdf42ee8f859d51a3ff6b833b8"
+    },
+    {
+      "asset_id": "toxic_acid_sump_medium",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/hazards/toxic-acid-sump-medium-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/toxic_coast/hazards/toxic-acid-sump-medium-768x384-v001.png",
+      "published": "art/terrain/hazards/toxic_coast/toxic-acid-sump-medium-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        32,
+        198
+      ],
+      "content_size": [
+        704,
+        170
+      ],
+      "alpha_bbox": [
+        32,
+        198,
+        736,
+        368
+      ],
+      "source_sha256": "0104c9d505818944470a50b990a6f85cc2fa70e874517281f835dd5ef43e0db1",
+      "export_sha256": "ba3f2e1374ff4b4bc52cf4e792da4bbefa24020247589c029fe7366963f0dc78",
+      "published_sha256": "ba3f2e1374ff4b4bc52cf4e792da4bbefa24020247589c029fe7366963f0dc78"
+    },
+    {
+      "asset_id": "toxic_explosive_barrel",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/objects/explosive-barrel-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/toxic_coast/objects/explosive-barrel-256x320-v001.png",
+      "published": "art/props/toxic_coast/explosive-barrel-v001.png",
+      "canvas": [
+        256,
+        320
+      ],
+      "content_position": [
+        42,
+        16
+      ],
+      "content_size": [
+        172,
+        288
+      ],
+      "alpha_bbox": [
+        42,
+        16,
+        214,
+        304
+      ],
+      "source_sha256": "daf9b2a45bf15c8c1e92e85f4c8c1f2f27202b6aa4000f2eb200a2fb37e04344",
+      "export_sha256": "6a23de2e64c597527d0c677bbcc88a84442daff192055a6a4f8188a36f11e54b",
+      "published_sha256": "6a23de2e64c597527d0c677bbcc88a84442daff192055a6a4f8188a36f11e54b"
+    },
+    {
+      "asset_id": "military_supply_crate_closed",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/objects/military-supply-crate-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/toxic_coast/objects/military-supply-crate-closed-384x320-v001.png",
+      "published": "art/props/toxic_coast/military-supply-crate-closed-v001.png",
+      "canvas": [
+        384,
+        320
+      ],
+      "content_position": [
+        16,
+        149
+      ],
+      "content_size": [
+        352,
+        155
+      ],
+      "alpha_bbox": [
+        16,
+        149,
+        368,
+        304
+      ],
+      "source_sha256": "0161448320dad8c723b7a4101ba2c748da2ebf3cb1bed5500f7bb8fbb51596e1",
+      "export_sha256": "2e5c82146e8716dee13e7060d60d7571dd5e48e4795f4df91d7902a721b8d858",
+      "published_sha256": "2e5c82146e8716dee13e7060d60d7571dd5e48e4795f4df91d7902a721b8d858"
+    },
+    {
+      "asset_id": "military_supply_crate_open",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/objects/military-supply-crate-open-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/toxic_coast/objects/military-supply-crate-open-384x320-v001.png",
+      "published": "art/props/toxic_coast/military-supply-crate-open-v001.png",
+      "canvas": [
+        384,
+        320
+      ],
+      "content_position": [
+        16,
+        82
+      ],
+      "content_size": [
+        352,
+        222
+      ],
+      "alpha_bbox": [
+        16,
+        82,
+        368,
+        304
+      ],
+      "source_sha256": "c3bad9ea91dc06068b5de7e2a4c9bac2b9c64de3d393fe3d6a308df4c9b0843f",
+      "export_sha256": "cecdc131b43e9aa2d145c1ad2aa0a038d6f6de2b67d953066b2f87e36cd715c1",
+      "published_sha256": "cecdc131b43e9aa2d145c1ad2aa0a038d6f6de2b67d953066b2f87e36cd715c1"
+    }
+  ],
+  "validation": {
+    "technical": "passed",
+    "alpha": "passed",
+    "consumer_import": "passed"
+  }
+}

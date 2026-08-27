@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "toxic-coast-ground-piece-v001",
+  "renderRepresentation": "raster-2d",
+  "canvas": [768, 384],
+  "safeArea": [704, 304],
+  "pivot": [384, 64],
+  "alphaFloor": 16,
+  "collisionDefault": {
+    "source": "alpha",
+    "threshold": 0.5,
+    "simplification": 2.0
+  },
+  "publicationRule": "candidate exports stay outside res://art until human approval"
+}

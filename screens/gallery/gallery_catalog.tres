@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="GalleryCatalog" format=3 uid="uid://c3cxn28fmgifu"]
+
+[ext_resource type="Script" uid="uid://cyfxir0lgj3cy" path="res://screens/gallery/gallery_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://dk3h20atshlne" path="res://screens/gallery/gallery_entry.gd" id="2_entry"]
+[ext_resource type="Texture2D" uid="uid://bb2ctnqwieopb" path="res://art/concepts/da-01-master-board.png" id="3_master"]
+[ext_resource type="Texture2D" uid="uid://ic82bt8rsug0" path="res://art/concepts/da-02-characters.png" id="4_characters"]
+[ext_resource type="Texture2D" uid="uid://cy7ocolydomkl" path="res://art/concepts/da-03-environment-destruction.png" id="5_environment"]
+[ext_resource type="Texture2D" uid="uid://c2kdj5d2j4ley" path="res://art/concepts/da-04-weapons-vfx.png" id="6_vfx"]
+[ext_resource type="Texture2D" uid="uid://cynu0p1sgwhm5" path="res://art/concepts/da-05-ui-flow.png" id="7_ui"]
+[ext_resource type="Texture2D" uid="uid://b1rhm8x7lncye" path="res://art/concepts/da-06-enemies-vacuum-divers.png" id="8_enemies"]
+[ext_resource type="Texture2D" uid="uid://dr7qrdwgybamb" path="res://art/concepts/da-07-enemy-pilot-lifecycle.png" id="9_pilots"]
+
+[sub_resource type="Resource" id="GalleryEntry_master"]
+script = ExtResource("2_entry")
+display_name = "DIRECTION MAÎTRESSE"
+board_texture = ExtResource("3_master")
+
+[sub_resource type="Resource" id="GalleryEntry_characters"]
+script = ExtResource("2_entry")
+display_name = "PERSONNAGES ET POSES"
+category = &"characters"
+board_texture = ExtResource("4_characters")
+
+[sub_resource type="Resource" id="GalleryEntry_environment"]
+script = ExtResource("2_entry")
+display_name = "DÉCORS ET DESTRUCTION"
+category = &"environment"
+board_texture = ExtResource("5_environment")
+
+[sub_resource type="Resource" id="GalleryEntry_vfx"]
+script = ExtResource("2_entry")
+display_name = "ARMES ET EFFETS"
+category = &"combat"
+board_texture = ExtResource("6_vfx")
+
+[sub_resource type="Resource" id="GalleryEntry_ui"]
+script = ExtResource("2_entry")
+display_name = "BOOT, START ET HUD"
+category = &"interface"
+board_texture = ExtResource("7_ui")
+
+[sub_resource type="Resource" id="GalleryEntry_enemies"]
+script = ExtResource("2_entry")
+display_name = "ASPIRATEURS-SCAPHANDRES"
+category = &"enemies"
+board_texture = ExtResource("8_enemies")
+
+[sub_resource type="Resource" id="GalleryEntry_pilots"]
+script = ExtResource("2_entry")
+display_name = "COQUES ET PILOTES"
+category = &"enemies"
+board_texture = ExtResource("9_pilots")
+
+[resource]
+script = ExtResource("1_catalog")
+entries = Array[ExtResource("2_entry")]([SubResource("GalleryEntry_master"), SubResource("GalleryEntry_characters"), SubResource("GalleryEntry_environment"), SubResource("GalleryEntry_vfx"), SubResource("GalleryEntry_ui"), SubResource("GalleryEntry_enemies"), SubResource("GalleryEntry_pilots")])

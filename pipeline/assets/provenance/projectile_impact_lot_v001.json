@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "projectile-impact-lot-v001",
+  "status": "candidate",
+  "generatedAt": "2026-08-26",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "promptRecord": "pipeline/assets/recipes/projectile_impact_lot_v001.md",
+  "references": [
+    {
+      "reference": "art/concepts/da-04-weapons-vfx.png",
+      "rightsStatus": "project-asset"
+    },
+    {
+      "reference": "art/weapons/player/player-primary-cannon-v001.png",
+      "rightsStatus": "project-asset"
+    }
+  ],
+  "transformations": [
+    "thresholded alpha bounding-box extraction for the projectile",
+    "fixed 384x192 transparent projectile canvas",
+    "3x2 impact cell extraction",
+    "removal and remapping of alpha values at or below 16/255",
+    "fixed 256x256 impact cells and atlas assembly"
+  ],
+  "validation": {
+    "technical": "passed",
+    "visual": "pending",
+    "humanApproval": "pending",
+    "consumerImport": "not-run"
+  },
+  "rejectedAttempt": {
+    "reason": "Image edit produced a baked checkerboard and opaque RGB output",
+    "retainedInProject": false
+  }
+}

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://props/explosive_barrel/explosive_prop_2d.gd" id="1"]
+[ext_resource type="Resource" path="res://props/explosive_barrel/data/toxic_explosive_barrel.tres" id="2"]
+
+[sub_resource type="RectangleShape2D" id="SolidShape"]
+size = Vector2(94, 210)
+
+[node name="ToxicExplosiveBarrel2D" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1")
+data = ExtResource("2")
+
+[node name="Presentation" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+centered = false
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -106)
+shape = SubResource("SolidShape")

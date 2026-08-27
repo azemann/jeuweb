@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ExplosionData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://effects/explosions/explosion_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+terrain_radius = 68.0
+damage_radius = 94.0
+damage = 50.0
+impulse = 820.0
+duration = 0.42
+flash_color = Color(1, 0.952941, 0.639216, 1)
+fire_color = Color(1, 0.407843, 0.121569, 1)
+smoke_color = Color(0.345098, 0.176471, 0.388235, 1)
+

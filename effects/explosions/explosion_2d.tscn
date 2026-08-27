@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://effects/explosions/explosion_2d.gd" id="1_script"]
+[ext_resource type="Resource" path="res://effects/explosions/data/field_shell_explosion.tres" id="2_data"]
+
+[sub_resource type="CircleShape2D" id="Shape_damage"]
+radius = 94.0
+
+[sub_resource type="Animation" id="Animation_reset"]
+resource_name = "RESET"
+length = 0.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0.05, 0.05)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:modulate")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 0)]}
+
+[sub_resource type="Animation" id="Animation_detonate"]
+resource_name = "detonate"
+length = 0.42
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/interp = 2
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.09, 0.28, 0.42), "transitions": PackedFloat32Array(0.35, 0.6, 1, 1), "update": 0, "values": [Vector2(0.05, 0.05), Vector2(1.15, 1.15), Vector2(1.55, 1.55), Vector2(1.9, 1.9)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:modulate")
+tracks/1/interp = 1
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.04, 0.28, 0.42), "transitions": PackedFloat32Array(1, 1, 1, 1), "update": 0, "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0.72), Color(1, 1, 1, 0)]}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/keys = {"times": PackedFloat32Array(0.045, 0.42), "transitions": PackedFloat32Array(1, 1), "values": [{"method": &"_animation_impact", "args": []}, {"method": &"_animation_finished", "args": []}]}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_explosion"]
+_data = {&"RESET": SubResource("Animation_reset"), &"detonate": SubResource("Animation_detonate")}
+
+[node name="Explosion2D" type="Node2D"]
+script = ExtResource("1_script")
+data = ExtResource("2_data")
+
+[node name="DamageArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+monitoring = true
+collision_layer = 0
+collision_mask = 6
+
+[node name="DamageShape" type="CollisionShape2D" parent="DamageArea"]
+unique_name_in_owner = true
+shape = SubResource("Shape_damage")
+
+[node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.05, 0.05)
+
+[node name="Smoke" type="Polygon2D" parent="Visuals"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-76, 7, -61, -41, -22, -69, 23, -64, 63, -39, 79, 4, 61, 46, 22, 72, -26, 68, -64, 42)
+color = Color(1, 1, 1, 0.72)
+
+[node name="Fireball" type="Polygon2D" parent="Visuals"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-51, 2, -37, -31, -8, -51, 27, -42, 51, -10, 42, 24, 13, 49, -21, 42, -47, 23)
+
+[node name="Flash" type="Polygon2D" parent="Visuals"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-31, 0, -17, -12, -12, -29, 1, -16, 18, -25, 17, -8, 34, 1, 17, 11, 22, 29, 3, 18, -12, 31, -14, 13)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {&"": SubResource("AnimationLibrary_explosion")}
+

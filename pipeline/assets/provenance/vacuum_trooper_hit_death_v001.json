@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "vacuum-trooper-hit-death-v001",
+  "generatedAt": "2026-08-27",
+  "approvedAt": "2026-08-27",
+  "approval": "Validation visuelle et temporelle explicite du propriétaire du projet.",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "references": [
+    {
+      "reference": "three existing project references supplied during generation",
+      "role": "Vacuum Trooper identity, pilot identity and animation continuity",
+      "rightsStatus": "project-owned or local project reference"
+    }
+  ],
+  "source": {
+    "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/vacuum-trooper-hit-death-sheet-candidate-v001.png",
+    "sha256": "336b73c59be18335a713aa9a331662f8a4774b8d64ff6020b7d7e5109c5ecde1",
+    "promptRecord": "Summary supplied by the project owner: strict 4x2 sheet, true transparent background, stable ground root, facing right, four hit/recovery poses, four comic non-gory death poses with shell opening and pilot ejection, faithful to three existing references. A second pass replaced the false checkerboard with true alpha."
+  },
+  "transformations": [
+    "explicit uneven-column extraction",
+    "source-pixel reconstruction across the horizontal row boundary for frames 5 and 6",
+    "common-scale normalization around the published ground root",
+    "256x192 runtime frame derivation",
+    "4x2 candidate atlas assembly"
+  ],
+  "publishedOutput": {
+    "path": "art/characters/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-v001.png",
+    "sha256": "54b6342c11b1c3354c316d685b74fd0f56eeae44de3cb489b91b5d493f934ed2"
+  }
+}

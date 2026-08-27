@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "toxic-coast-content-pack-v001",
+  "date": "2026-08-27",
+  "provider": "OpenAI",
+  "surface": "Codex built-in imagegen",
+  "sources": "pipeline/assets/sources/terrain_kits/toxic_coast",
+  "derivedAsset": {
+    "id": "military_supply_crate_open",
+    "editTarget": "objects/military-supply-crate-source-v001.png",
+    "output": "objects/military-supply-crate-open-source-v001.png",
+    "passes": ["precise-object-edit", "background-extraction"]
+  },
+  "deterministicProcessing": "pipeline/assets/tools/process_toxic_coast_content_pack.py",
+  "publishedRoot": "art/",
+  "godotAuthority": "Resources and scenes listed in the manifest"
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "player-lot-v001",
+  "status": "integrated",
+  "generatedAt": "2026-08-25",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "pipeline": {
+    "workspace": "jeuweb",
+    "profile": "pipeline/assets/profiles/player_sprite_profile_v001.json",
+    "manifest": "pipeline/assets/manifests/player_lot_v001.json"
+  },
+  "promptRecord": "pipeline/assets/recipes/player_lot_v001.md",
+  "references": [
+    {"reference": "art/concepts/da-01-master-board.png", "rightsStatus": "user-provided"},
+    {"reference": "art/concepts/da-02-characters.png", "rightsStatus": "user-provided"}
+  ],
+  "assets": [
+    {
+      "path": "pipeline/assets/sources/imagegen/player/player-body-action-sheet-v001.png",
+      "role": "body-key-pose-source-sheet",
+      "status": "validated",
+      "sha256": "b2a32939e052ac65a23c5d3a1e21d610883bf1e498a9aaeab99cd4e8789b6d1d"
+    },
+    {
+      "path": "pipeline/assets/sources/imagegen/player/player-primary-cannon-v001.png",
+      "role": "modular-weapon-source",
+      "status": "validated",
+      "sha256": "390c9a608ab46df975e85d09086c64269db3799cabfc331be3823f3e92add592"
+    },
+    {
+      "path": "art/characters/player/player-body-key-poses-v001.png",
+      "role": "godot-player-body-atlas",
+      "status": "integrated",
+      "sha256": "190fcb4f77045d6f953532853e91ce8067a659a75edb23cc0794b974148d0e59"
+    },
+    {
+      "path": "art/weapons/player/player-primary-cannon-v001.png",
+      "role": "godot-player-weapon-texture",
+      "status": "integrated",
+      "sha256": "c81f79349e04788ba123d9ce6bca4bf5bcc23299aca97fcfd2fd673f5cde42f9"
+    }
+  ],
+  "transformations": [
+    "alpha-component detection",
+    "common-scale fixed-root normalization",
+    "192x192 runtime candidate derivation",
+    "4x3 atlas assembly",
+    "dark-background review sheet"
+  ],
+  "validation": {
+    "technical": "passed",
+    "visual": "passed",
+    "humanApproval": "passed",
+    "consumerImport": "passed",
+    "approvedBy": "project-owner",
+    "approvedAt": "2026-08-25T21:41:14+02:00"
+  },
+  "knownLimits": [
+    "ImageGen does not guarantee stable temporal animation.",
+    "Root and sockets are estimated.",
+    "Temporal continuity of the four locomotion key poses remains provisional."
+  ]
+}

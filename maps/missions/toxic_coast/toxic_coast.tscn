@@ -1,0 +1,340 @@
+[gd_scene format=3 uid="uid://b865vtb5x2qqx"]
+
+[ext_resource type="Script" uid="uid://bmtxwgxvmrdp" path="res://maps/system/mission_map_root_2d.gd" id="1_root_script"]
+[ext_resource type="Resource" uid="uid://hsd16nysf45v" path="res://maps/definitions/toxic_coast.tres" id="2_definition"]
+[ext_resource type="Texture2D" uid="uid://3eo37hyw8n6l" path="res://art/maps/toxic_coast/toxic-coast-far-background-v001.png" id="3_backdrop"]
+[ext_resource type="Script" uid="uid://rmerydia6msy" path="res://maps/system/map_spawn_point_2d.gd" id="4_spawn_script"]
+[ext_resource type="Script" uid="uid://bccwmi3di78j7" path="res://maps/system/map_encounter_marker_2d.gd" id="5_encounter_script"]
+[ext_resource type="Script" uid="uid://uxox27fmgq13" path="res://terrain/destructible_terrain_2d.gd" id="6_terrain_script"]
+[ext_resource type="Resource" path="res://terrain/profiles/toxic_coast_terrain.tres" id="7_terrain_profile"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/industrial_catwalk_medium.tscn" id="8_3l3u1"]
+[ext_resource type="Texture2D" uid="uid://bxpne8h6r4i1b" path="res://art/maps/toxic_coast/toxic-coast-midground-v001.png" id="8_midground"]
+[ext_resource type="Texture2D" uid="uid://d2gqkqa8a1wn5" path="res://art/maps/toxic_coast/toxic-coast-foreground-v002.png" id="9_foreground"]
+[ext_resource type="PackedScene" path="res://effects/explosions/explosion_2d.tscn" id="10_explosion"]
+[ext_resource type="Script" uid="uid://bgj80g6y0wgjg" path="res://maps/system/map_segment_2d.gd" id="11_segment_script"]
+[ext_resource type="PackedScene" path="res://terrain/permanent_ground/ground_module_2d.tscn" id="12_ground_module"]
+[ext_resource type="Resource" path="res://terrain/permanent_ground/styles/toxic_coast_permanent_ground.tres" id="13_ground_style"]
+[ext_resource type="PackedScene" uid="uid://brwtvo216t85b" path="res://terrain/kits/toxic_coast/pieces/natural_ledge_medium.tscn" id="14_natural_ledge"]
+
+[sub_resource type="RectangleShape2D" id="Shape_destructible"]
+size = Vector2(560, 150)
+
+[sub_resource type="RectangleShape2D" id="Shape_bridge_destructible"]
+size = Vector2(640, 170)
+
+[sub_resource type="RectangleShape2D" id="Shape_foundry_destructible"]
+size = Vector2(720, 190)
+
+[sub_resource type="RectangleShape2D" id="Shape_hazard"]
+size = Vector2(210, 44)
+
+[node name="ToxicCoast" type="Node2D" unique_id=480839183]
+script = ExtResource("1_root_script")
+definition = ExtResource("2_definition")
+camera_bounds = Rect2(0, 0, 3840, 720)
+
+[node name="Visual" type="Node2D" parent="." unique_id=773321062]
+
+[node name="FarBackgroundParallax" type="Parallax2D" parent="Visual" unique_id=191551655]
+z_index = -20
+scroll_scale = Vector2(0.12, 0.9)
+repeat_size = Vector2(1920, 0)
+
+[node name="FarBackground" type="Sprite2D" parent="Visual/FarBackgroundParallax" unique_id=1863342813]
+position = Vector2(960, 360)
+scale = Vector2(0.9375, 0.9375)
+texture = ExtResource("3_backdrop")
+
+[node name="MidgroundParallax" type="Parallax2D" parent="Visual" unique_id=1475897110]
+z_index = -10
+scroll_scale = Vector2(0.35, 0.82)
+repeat_size = Vector2(1920, 0)
+
+[node name="IndustrialJungle" type="Sprite2D" parent="Visual/MidgroundParallax" unique_id=916036647]
+position = Vector2(960, 360)
+scale = Vector2(0.9375, 0.9375)
+texture = ExtResource("8_midground")
+
+[node name="Atmosphere" type="Polygon2D" parent="Visual" unique_id=2089680179]
+color = Color(0.0235294, 0.027451, 0.0392157, 0.12)
+polygon = PackedVector2Array(0, 0, 3840, 0, 3840, 720, 0, 720)
+
+[node name="TileLayers" type="Node2D" parent="Visual" unique_id=156390835]
+
+[node name="TerrainBase" type="TileMapLayer" parent="Visual/TileLayers" unique_id=2060926498]
+
+[node name="Architecture" type="TileMapLayer" parent="Visual/TileLayers" unique_id=297647662]
+
+[node name="Decoration" type="TileMapLayer" parent="Visual/TileLayers" unique_id=1740915548]
+
+[node name="Foreground" type="TileMapLayer" parent="Visual" unique_id=1387159576]
+z_index = 20
+
+[node name="ForegroundParallax" type="Parallax2D" parent="Visual" unique_id=1045525736]
+z_index = 30
+scroll_scale = Vector2(1.12, 1)
+repeat_size = Vector2(1920, 0)
+
+[node name="EdgeFraming" type="Sprite2D" parent="Visual/ForegroundParallax" unique_id=214598344]
+position = Vector2(960, 360)
+scale = Vector2(0.9375, 0.9375)
+texture = ExtResource("9_foreground")
+
+[node name="Gameplay" type="Node2D" parent="." unique_id=555858551]
+
+[node name="Segments" type="Node2D" parent="Gameplay" unique_id=1481894125]
+
+[node name="LandingZone" type="Node2D" parent="Gameplay/Segments" unique_id=1495391709]
+script = ExtResource("11_segment_script")
+segment_id = &"landing_zone"
+display_name = "Zone de débarquement"
+gameplay_intent = "Présenter déplacement, tir et première coque-aspirateur dans un espace lisible."
+
+[node name="AcidBridge" type="Node2D" parent="Gameplay/Segments" unique_id=34476205]
+position = Vector2(1280, 0)
+script = ExtResource("11_segment_script")
+segment_id = &"acid_bridge"
+display_name = "Pont acide"
+sequence_index = 1
+role = 1
+gameplay_intent = "Escalader avec une fosse toxique, un sol destructible plus large et une attaque en colonne."
+editor_color = Color(0.7, 0.83, 0.04, 0.76)
+
+[node name="VacuumFoundry" type="Node2D" parent="Gameplay/Segments" unique_id=1133717910]
+position = Vector2(2560, 0)
+script = ExtResource("11_segment_script")
+segment_id = &"vacuum_foundry"
+display_name = "Fonderie aspirante"
+sequence_index = 2
+role = 2
+gameplay_intent = "Conclure la mission par une arène plus dense devant la fonderie et sa porte d'extraction."
+editor_color = Color(0.88, 0.41, 0.05, 0.82)
+
+[node name="GroundPieces" type="Node2D" parent="Gameplay" unique_id=598706509]
+
+[node name="LandingNaturalLedge" parent="Gameplay/GroundPieces" unique_id=303387194 instance=ExtResource("14_natural_ledge")]
+position = Vector2(920, 574)
+show_walk_geometry_preview = null
+
+[node name="NaturalLedgeMedium" parent="Gameplay/GroundPieces" unique_id=1746824714 instance=ExtResource("14_natural_ledge")]
+position = Vector2(797.0001, 319)
+rotation = -0.61086524
+ground_mode = 2
+show_walk_geometry_preview = null
+
+[node name="NaturalLedgeMedium2" parent="Gameplay/GroundPieces" unique_id=363765765 instance=ExtResource("14_natural_ledge")]
+position = Vector2(1449, 128)
+show_walk_geometry_preview = null
+
+[node name="IndustrialCatwalkMedium" parent="Gameplay/GroundPieces" unique_id=1416760354 instance=ExtResource("8_3l3u1")]
+position = Vector2(2204, 284)
+ground_mode = 1
+
+[node name="SpawnPoints" type="Node2D" parent="Gameplay" unique_id=248120249]
+
+[node name="PlayerStart" type="Marker2D" parent="Gameplay/SpawnPoints" unique_id=1877526515]
+position = Vector2(220, 495)
+gizmo_extents = 42.0
+script = ExtResource("4_spawn_script")
+spawn_id = &"player_start"
+
+[node name="CheckpointBridge" type="Marker2D" parent="Gameplay/SpawnPoints" unique_id=1625567238]
+position = Vector2(1110, 475)
+gizmo_extents = 38.0
+script = ExtResource("4_spawn_script")
+spawn_id = &"checkpoint_bridge"
+kind = 1
+
+[node name="CheckpointFoundry" type="Marker2D" parent="Gameplay/SpawnPoints" unique_id=2127339353]
+position = Vector2(2600, 455)
+gizmo_extents = 38.0
+script = ExtResource("4_spawn_script")
+spawn_id = &"checkpoint_foundry"
+kind = 1
+
+[node name="EnemySpawns" type="Node2D" parent="Gameplay" unique_id=636885030]
+
+[node name="VacuumPatrol" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=120673704]
+position = Vector2(670, 301)
+gizmo_extents = 44.0
+script = ExtResource("5_encounter_script")
+encounter_id = &"vacuum_patrol_01"
+count = 2
+activation_distance = 620.0
+
+[node name="VacuumBruteGate" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=498996969]
+position = Vector2(1450, 450)
+gizmo_extents = 60.0
+script = ExtResource("5_encounter_script")
+encounter_id = &"vacuum_brute_gate"
+enemy_archetype = "vacuum_brute"
+activation_distance = 720.0
+enabled = false
+
+[node name="VacuumBridgeColumn" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=145651692]
+position = Vector2(2140, 455)
+gizmo_extents = 52.0
+script = ExtResource("5_encounter_script")
+encounter_id = &"vacuum_bridge_column"
+enemy_archetype = "vacuum_siphoner"
+count = 3
+activation_distance = 760.0
+enabled = false
+
+[node name="VacuumFoundryGuard" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=1205623005]
+position = Vector2(3180, 430)
+gizmo_extents = 64.0
+script = ExtResource("5_encounter_script")
+encounter_id = &"vacuum_foundry_guard"
+enemy_archetype = "vacuum_brute"
+count = 2
+activation_distance = 800.0
+enabled = false
+
+[node name="Encounters" type="Node2D" parent="Gameplay" unique_id=603695318]
+
+[node name="DestructibleZones" type="Node2D" parent="Gameplay" unique_id=1639015338]
+
+[node name="CentralSoil" type="Area2D" parent="Gameplay/DestructibleZones" unique_id=558447026]
+position = Vector2(920, 625)
+collision_layer = 0
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="Preview" type="Polygon2D" parent="Gameplay/DestructibleZones/CentralSoil" unique_id=1299739222]
+visible = false
+color = Color(0.698039, 0.827451, 0.039216, 0.16)
+polygon = PackedVector2Array(-280, -75, 280, -75, 280, 75, -280, 75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/DestructibleZones/CentralSoil" unique_id=545273938]
+shape = SubResource("Shape_destructible")
+debug_color = Color(0.698039, 0.827451, 0.039216, 0.22)
+
+[node name="BridgeSoil" type="Area2D" parent="Gameplay/DestructibleZones" unique_id=1204534482]
+position = Vector2(2040, 615)
+collision_layer = 0
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="Preview" type="Polygon2D" parent="Gameplay/DestructibleZones/BridgeSoil" unique_id=933520579]
+visible = false
+color = Color(0.698039, 0.827451, 0.039216, 0.16)
+polygon = PackedVector2Array(-320, -85, 320, -85, 320, 85, -320, 85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/DestructibleZones/BridgeSoil" unique_id=320692782]
+shape = SubResource("Shape_bridge_destructible")
+debug_color = Color(0.698039, 0.827451, 0.039216, 0.22)
+
+[node name="FoundrySoil" type="Area2D" parent="Gameplay/DestructibleZones" unique_id=1267146227]
+position = Vector2(3080, 605)
+collision_layer = 0
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="Preview" type="Polygon2D" parent="Gameplay/DestructibleZones/FoundrySoil" unique_id=1391057192]
+visible = false
+color = Color(0.882353, 0.407843, 0.0470588, 0.16)
+polygon = PackedVector2Array(-360, -95, 360, -95, 360, 95, -360, 95)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/DestructibleZones/FoundrySoil" unique_id=1202000848]
+shape = SubResource("Shape_foundry_destructible")
+debug_color = Color(0.882353, 0.407843, 0.0470588, 0.22)
+
+[node name="IndestructibleGeometry" type="Node2D" parent="Gameplay" unique_id=1247265102]
+
+[node name="LandingBedrock" parent="Gameplay/IndestructibleGeometry" unique_id=467378887 instance=ExtResource("12_ground_module")]
+style = ExtResource("13_ground_style")
+outline = PackedVector2Array(0, 555, 210, 540, 420, 570, 640, 550, 640, 720, 0, 720)
+surface_path = PackedVector2Array(0, 555, 210, 540, 420, 570, 640, 550)
+
+[node name="BridgeAnchor" parent="Gameplay/IndestructibleGeometry" unique_id=828246669 instance=ExtResource("12_ground_module")]
+style = ExtResource("13_ground_style")
+outline = PackedVector2Array(1200, 550, 1300, 550, 1540, 505, 1720, 525, 1720, 720, 1200, 720)
+surface_path = PackedVector2Array(1200, 550, 1300, 550, 1540, 505, 1720, 525)
+
+[node name="FoundryApproach" parent="Gameplay/IndestructibleGeometry" unique_id=1924801848 instance=ExtResource("12_ground_module")]
+style = ExtResource("13_ground_style")
+outline = PackedVector2Array(2360, 530, 2480, 515, 2600, 540, 2720, 520, 2720, 720, 2360, 720)
+surface_path = PackedVector2Array(2360, 530, 2480, 515, 2600, 540, 2720, 520)
+
+[node name="FoundryExitBedrock" parent="Gameplay/IndestructibleGeometry" unique_id=355212901 instance=ExtResource("12_ground_module")]
+style = ExtResource("13_ground_style")
+outline = PackedVector2Array(3440, 520, 3580, 500, 3720, 525, 3840, 510, 3840, 720, 3440, 720)
+surface_path = PackedVector2Array(3440, 520, 3580, 500, 3720, 525, 3840, 510)
+
+[node name="Hazards" type="Node2D" parent="Gameplay" unique_id=83961869]
+
+[node name="ToxicPool" type="Area2D" parent="Gameplay/Hazards" unique_id=489940318]
+position = Vector2(1160, 575)
+collision_layer = 8
+collision_mask = 2
+
+[node name="Preview" type="Polygon2D" parent="Gameplay/Hazards/ToxicPool" unique_id=1018366588 groups=["map_authoring_preview"]]
+color = Color(0.698039, 0.827451, 0.039216, 0.48)
+polygon = PackedVector2Array(-105, -22, 105, -22, 105, 22, -105, 22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Hazards/ToxicPool" unique_id=1438803378]
+shape = SubResource("Shape_hazard")
+
+[node name="FoundryRunoff" type="Area2D" parent="Gameplay/Hazards" unique_id=776108597]
+position = Vector2(2540, 570)
+collision_layer = 8
+collision_mask = 2
+
+[node name="Preview" type="Polygon2D" parent="Gameplay/Hazards/FoundryRunoff" unique_id=758543435 groups=["map_authoring_preview"]]
+color = Color(0.698039, 0.827451, 0.039216, 0.48)
+polygon = PackedVector2Array(-105, -22, 105, -22, 105, 22, -105, 22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Hazards/FoundryRunoff" unique_id=1497535708]
+shape = SubResource("Shape_hazard")
+
+[node name="Interactions" type="Node2D" parent="Gameplay" unique_id=107503451]
+
+[node name="CameraZones" type="Node2D" parent="Gameplay" unique_id=1012134323]
+
+[node name="BaseCameraBounds" type="ReferenceRect" parent="Gameplay/CameraZones" unique_id=277776339]
+offset_right = 3840.0
+offset_bottom = 720.0
+border_color = Color(0.941176, 0.12549, 0.552941, 0.72)
+border_width = 2.0
+
+[node name="Exits" type="Node2D" parent="Gameplay" unique_id=268938147]
+
+[node name="MissionEnd" type="Marker2D" parent="Gameplay/Exits" unique_id=908755626]
+position = Vector2(3710, 450)
+gizmo_extents = 48.0
+
+[node name="DestructibleTerrain" type="Node2D" parent="." unique_id=33034504]
+z_index = 8
+script = ExtResource("6_terrain_script")
+profile = ExtResource("7_terrain_profile")
+
+[node name="Actors" type="Node2D" parent="." unique_id=690651369]
+y_sort_enabled = true
+
+[node name="Projectiles" type="Node2D" parent="Actors" unique_id=1374294612]
+
+[node name="Effects" type="Node2D" parent="Actors" unique_id=972140155]
+
+[node name="TerrainDemoExplosion" parent="Actors/Effects" unique_id=768243986 instance=ExtResource("10_explosion")]
+position = Vector2(920, 625)
+terrain_path = NodePath("../../../DestructibleTerrain")
+
+[node name="PreviewActors" type="Node2D" parent="Actors" unique_id=1074664614 groups=["map_authoring_preview"]]
+
+[node name="VacuumTrooperSilhouette" type="Polygon2D" parent="Actors/PreviewActors" unique_id=34505178]
+color = Color(0.698039, 0.827451, 0.039216, 0.92)
+polygon = PackedVector2Array(724, 525, 728, 476, 751, 450, 802, 450, 833, 478, 846, 525)
+
+[node name="VacuumBruteSilhouette" type="Polygon2D" parent="Actors/PreviewActors" unique_id=1090463909]
+color = Color(0.882353, 0.407843, 0.0470588, 0.94)
+polygon = PackedVector2Array(1378, 516, 1388, 445, 1422, 410, 1493, 410, 1535, 450, 1548, 516)
+
+[node name="PreviewCamera" type="Camera2D" parent="." unique_id=1110909260]
+position = Vector2(640, 360)
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 3840
+limit_bottom = 720
+position_smoothing_enabled = true

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://bg0diswue1b6x"]
+
+[ext_resource type="Script" uid="uid://byrgd63isx8aj" path="res://weapons/projectiles/projectile_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://weapons/projectiles/projectile_impact_2d.tscn" id="2_impact"]
+
+[resource]
+script = ExtResource("1_script")
+projectile_id = &"field_round"
+display_name = "Munition de campagne"
+speed = 1350.0
+lifetime = 1.45
+damage = 18.0
+impulse = 220.0
+impact_scene = ExtResource("2_impact")
+affects_destructible_terrain = true
+terrain_radius = 12.0
+tracer_color = Color(0.945098, 0.960784, 0.603922, 1)
+tracer_length = 34.0
+tracer_width = 8.0

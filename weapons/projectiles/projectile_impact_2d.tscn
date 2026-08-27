@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://weapons/projectiles/projectile_impact_2d.gd" id="1_script"]
+
+[sub_resource type="Animation" id="Animation_reset"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0.25, 0.25)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:modulate")
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 1)]}
+
+[sub_resource type="Animation" id="Animation_impact"]
+resource_name = "impact"
+length = 0.18
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/interp = 2
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.055, 0.18), "transitions": PackedFloat32Array(0.35, 0.7, 1), "update": 0, "values": [Vector2(0.25, 0.25), Vector2(1.15, 1.15), Vector2(1.65, 1.65)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:modulate")
+tracks/1/interp = 1
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.07, 0.18), "transitions": PackedFloat32Array(1, 1, 1), "update": 0, "values": [Color(1, 1, 1, 1), Color(1, 0.78, 0.2, 0.88), Color(1, 0.3, 0.05, 0)]}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/keys = {"times": PackedFloat32Array(0.18), "transitions": PackedFloat32Array(1), "values": [{"method": &"finish", "args": []}]}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_impact"]
+_data = {&"RESET": SubResource("Animation_reset"), &"impact": SubResource("Animation_impact")}
+
+[node name="ProjectileImpact2D" type="Node2D"]
+z_index = 45
+script = ExtResource("1_script")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Flash" type="Polygon2D" parent="Visuals"]
+color = Color(1, 0.843137, 0.188235, 1)
+polygon = PackedVector2Array(-18, 0, -7, -5, -5, -16, 1, -7, 11, -13, 9, -4, 20, 1, 8, 5, 12, 15, 1, 8, -6, 17, -7, 6)
+
+[node name="SparkUp" type="Line2D" parent="Visuals"]
+points = PackedVector2Array(0, 0, 15, -13)
+width = 3.0
+default_color = Color(0.945098, 0.960784, 0.603922, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="SparkDown" type="Line2D" parent="Visuals"]
+points = PackedVector2Array(0, 0, 14, 12)
+width = 2.0
+default_color = Color(1, 0.313726, 0.0470588, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {&"": SubResource("AnimationLibrary_impact")}
+autoplay = &"impact"

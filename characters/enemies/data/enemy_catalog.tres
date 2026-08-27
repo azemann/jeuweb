@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyCatalog" format=3 uid="uid://c1ghyerjpuy1j"]
+
+[ext_resource type="Script" uid="uid://cnhv15cbh7hk5" path="res://characters/enemies/enemy_catalog.gd" id="1_catalog"]
+[ext_resource type="Resource" path="res://characters/enemies/data/vacuum_trooper_binding.tres" id="2_trooper"]
+[ext_resource type="Script" uid="uid://0uuwp5utiucs" path="res://characters/enemies/enemy_scene_binding.gd" id="3_binding"]
+
+[resource]
+script = ExtResource("1_catalog")
+bindings = Array[ExtResource("3_binding")]([ExtResource("2_trooper")])

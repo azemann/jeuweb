@@ -1,0 +1,263 @@
+{
+  "schema": "jeuweb.enemy-animation-qa.v1",
+  "status": "approved",
+  "source": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/vacuum-trooper-walk-sheet-candidate-v001.png",
+  "source_grid": [
+    4,
+    2
+  ],
+  "source_cell": [
+    384,
+    512
+  ],
+  "frame_count": 8,
+  "common_scale": 1.166667,
+  "canonical_canvas": [
+    512,
+    384
+  ],
+  "canonical_root": [
+    256,
+    360
+  ],
+  "runtime_frame": [
+    256,
+    192
+  ],
+  "runtime_root": [
+    128,
+    180
+  ],
+  "atlas": "pipeline/assets/exports/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-candidate-v001.png",
+  "review": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-walk-v001-review.png",
+  "preview": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-walk-v001-preview.webp",
+  "frames": [
+    {
+      "index": 0,
+      "phase": "contact_a",
+      "duration_ms": 160,
+      "source_bbox": [
+        26,
+        198,
+        378,
+        469
+      ],
+      "canonical_position": [
+        62,
+        40
+      ],
+      "canonical_size": [
+        411,
+        316
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 1,
+      "phase": "compression_a",
+      "duration_ms": 160,
+      "source_bbox": [
+        15,
+        230,
+        383,
+        463
+      ],
+      "canonical_position": [
+        50,
+        84
+      ],
+      "canonical_size": [
+        429,
+        272
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 2,
+      "phase": "passing_a",
+      "duration_ms": 160,
+      "source_bbox": [
+        18,
+        203,
+        382,
+        464
+      ],
+      "canonical_position": [
+        53,
+        52
+      ],
+      "canonical_size": [
+        425,
+        304
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 3,
+      "phase": "rise_a",
+      "duration_ms": 160,
+      "source_bbox": [
+        29,
+        176,
+        372,
+        464
+      ],
+      "canonical_position": [
+        66,
+        20
+      ],
+      "canonical_size": [
+        400,
+        336
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 4,
+      "phase": "contact_b",
+      "duration_ms": 160,
+      "source_bbox": [
+        15,
+        106,
+        384,
+        376
+      ],
+      "canonical_position": [
+        50,
+        41
+      ],
+      "canonical_size": [
+        430,
+        315
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 5,
+      "phase": "compression_b",
+      "duration_ms": 160,
+      "source_bbox": [
+        25,
+        147,
+        384,
+        374
+      ],
+      "canonical_position": [
+        61,
+        91
+      ],
+      "canonical_size": [
+        419,
+        265
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 6,
+      "phase": "passing_b",
+      "duration_ms": 160,
+      "source_bbox": [
+        38,
+        109,
+        384,
+        375
+      ],
+      "canonical_position": [
+        76,
+        46
+      ],
+      "canonical_size": [
+        404,
+        310
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    },
+    {
+      "index": 7,
+      "phase": "rise_b",
+      "duration_ms": 160,
+      "source_bbox": [
+        36,
+        106,
+        377,
+        374
+      ],
+      "canonical_position": [
+        74,
+        43
+      ],
+      "canonical_size": [
+        398,
+        313
+      ],
+      "canonical_root": [
+        256,
+        360
+      ],
+      "runtime_root": [
+        128,
+        180
+      ]
+    }
+  ],
+  "statuses": {
+      "visual": "passed",
+      "temporal": "passed",
+      "technical": "passed",
+      "gameplay": "integrated"
+  },
+  "known_limits": [
+    "Le root est dérivé de la ligne de sol alpha, sans landmark auteur.",
+    "Idle réutilise la première pose de marche.",
+    "Les poses d'attaque, d'impact et de mort appartiendront à des lots ultérieurs."
+  ]
+}

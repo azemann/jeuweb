@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundBreakableProfile" format=3 uid="uid://cnfxhafb3si4r"]
+
+[ext_resource type="Script" uid="uid://sem5todg7r8" path="res://terrain/ground_pieces/ground_breakable_profile.gd" id="1_profile"]
+
+[resource]
+resource_name = "Corniche naturelle — résistance cassable"
+script = ExtResource("1_profile")
+maximum_health = 149.0
+remove_after_break = true

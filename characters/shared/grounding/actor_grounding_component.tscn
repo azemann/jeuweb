@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://characters/shared/grounding/actor_grounding_component.gd" id="1_grounding"]
+
+[node name="Grounding" type="Node2D"]
+script = ExtResource("1_grounding")
+
+[node name="GroundAnchor" type="Marker2D" parent="."]
+unique_name_in_owner = true
+gizmo_extents = 12.0
+
+[node name="GroundProbe" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+enabled = true
+position = Vector2(0, -8)
+target_position = Vector2(0, 320)
+collision_mask = 1
+collide_with_areas = false
+
+[node name="LeftFootProbe" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+enabled = true
+position = Vector2(-17, -8)
+target_position = Vector2(0, 320)
+collision_mask = 1
+collide_with_areas = false
+
+[node name="RightFootProbe" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+enabled = true
+position = Vector2(17, -8)
+target_position = Vector2(0, 320)
+collision_mask = 1
+collide_with_areas = false
+
+[node name="GroundShadow" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+z_index = -10
+show_behind_parent = true
+color = Color(0.015, 0.02, 0.03, 0.46)

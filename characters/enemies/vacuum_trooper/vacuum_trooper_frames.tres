@@ -1,0 +1,142 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://wda6dsgxcr7f"]
+
+[ext_resource type="Texture2D" uid="uid://dib2ugswj56wv" path="res://art/characters/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-v001.png" id="1_atlas"]
+[ext_resource type="Texture2D" uid="uid://dbr26s34i07wp" path="res://art/characters/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-v001.png" id="2_hit_death"]
+
+[sub_resource type="AtlasTexture" id="HitDeath_04"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(0, 192, 256, 192)
+
+[sub_resource type="AtlasTexture" id="HitDeath_05"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(256, 192, 256, 192)
+
+[sub_resource type="AtlasTexture" id="HitDeath_06"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(512, 192, 256, 192)
+
+[sub_resource type="AtlasTexture" id="HitDeath_07"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(768, 192, 256, 192)
+
+[sub_resource type="AtlasTexture" id="HitDeath_00"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(0, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="HitDeath_01"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(256, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="HitDeath_02"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(512, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="HitDeath_03"]
+atlas = ExtResource("2_hit_death")
+region = Rect2(768, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_00"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_01"]
+atlas = ExtResource("1_atlas")
+region = Rect2(256, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_02"]
+atlas = ExtResource("1_atlas")
+region = Rect2(512, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_03"]
+atlas = ExtResource("1_atlas")
+region = Rect2(768, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_04"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 192, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_05"]
+atlas = ExtResource("1_atlas")
+region = Rect2(256, 192, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_06"]
+atlas = ExtResource("1_atlas")
+region = Rect2(512, 192, 256, 192)
+
+[sub_resource type="AtlasTexture" id="Frame_07"]
+atlas = ExtResource("1_atlas")
+region = Rect2(768, 192, 256, 192)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.2,
+"texture": SubResource("HitDeath_04")
+}, {
+"duration": 1.6,
+"texture": SubResource("HitDeath_05")
+}, {
+"duration": 2.2,
+"texture": SubResource("HitDeath_06")
+}, {
+"duration": 6.0,
+"texture": SubResource("HitDeath_07")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 0.9,
+"texture": SubResource("HitDeath_00")
+}, {
+"duration": 0.8,
+"texture": SubResource("HitDeath_01")
+}, {
+"duration": 1.3,
+"texture": SubResource("HitDeath_02")
+}, {
+"duration": 1.6,
+"texture": SubResource("HitDeath_03")
+}],
+"loop": 0,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_00")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame_00")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_01")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_02")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_03")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_04")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_05")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_06")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame_07")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 6.25
+}]

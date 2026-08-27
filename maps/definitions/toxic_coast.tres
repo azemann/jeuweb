@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MissionMapDefinition" format=3 uid="uid://hsd16nysf45v"]
+
+[ext_resource type="Script" uid="uid://8hws5l7xoa36" path="res://maps/system/mission_map_definition.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cy7ocolydomkl" path="res://art/concepts/da-03-environment-destruction.png" id="2_preview"]
+
+[resource]
+script = ExtResource("1_script")
+map_id = &"toxic_coast"
+display_name = "Côte toxique"
+scene_path = "res://maps/missions/toxic_coast/toxic_coast.tscn"
+preview_texture = ExtResource("2_preview")
+world_size = Vector2i(3840, 720)

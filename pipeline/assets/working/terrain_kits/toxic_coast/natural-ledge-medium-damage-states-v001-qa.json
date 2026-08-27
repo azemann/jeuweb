@@ -1,0 +1,80 @@
+{
+  "schema": "jeuweb.ground-piece-damage-states-qa.v1",
+  "piece_id": "natural_ledge_medium",
+  "status": "integrated",
+  "canvas": [
+    768,
+    384
+  ],
+  "pivot_px": [
+    384,
+    64
+  ],
+  "states": [
+    {
+      "state": "damaged",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-damaged-source-v001.png",
+      "output": "pipeline/assets/exports/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-damaged-768x384-v001.png",
+      "source_background_rgb": [
+        0,
+        0,
+        0
+      ],
+      "source_bbox": [
+        73,
+        94,
+        1707,
+        588
+      ],
+      "content_size": [
+        704,
+        213
+      ],
+      "content_position": [
+        32,
+        40
+      ],
+      "pivot_px": [
+        384,
+        64
+      ],
+      "source_sha256": "f9586dd6c5ffcb7cf80b750a2d81d68efba023d56aa7f4ed382f2ffc07ce1cc8",
+      "export_sha256": "70115197fa23bb6a71d3ea6ec3b18d09962a767b5b6f7b26a2968e86248203d5"
+    },
+    {
+      "state": "destroyed",
+      "source": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-destroyed-source-v001.png",
+      "output": "pipeline/assets/exports/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-destroyed-768x384-v001.png",
+      "source_background_rgb": [
+        254,
+        254,
+        254
+      ],
+      "source_bbox": [
+        33,
+        137,
+        1738,
+        671
+      ],
+      "content_size": [
+        704,
+        220
+      ],
+      "content_position": [
+        32,
+        40
+      ],
+      "pivot_px": [
+        384,
+        64
+      ],
+      "source_sha256": "3ed31947dd0248cfd280673fab06a9f91aaf347f16c6119fc26eca24cc0befaf",
+      "export_sha256": "d3706063ef3e708cd379c25c955732961c2312e68b5a55e1ca900f69e033aead"
+    }
+  ],
+  "validation": {
+    "technical": "passed",
+    "human_approval": "passed",
+    "consumer_import": "passed"
+  }
+}

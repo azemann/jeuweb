@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "vacuum-trooper-hit-death-v001",
+  "status": "published",
+  "renderRepresentation": "raster-2d",
+  "gameplaySpace": "2d-canvas",
+  "animationRepresentation": "sprite-frames",
+  "engineOwnsMovement": true,
+  "canonicalDirection": "right",
+  "canonicalCanvas": [512, 384],
+  "canonicalRoot": [256, 360],
+  "runtimeFrame": [256, 192],
+  "runtimeRoot": [128, 180],
+  "animations": {
+    "hit": {
+      "gridRow": 0,
+      "frameCount": 4,
+      "loop": false,
+      "durationsMs": [90, 80, 130, 160],
+      "phases": ["hit_start", "hit_impact", "hit_crumple", "hit_recover"]
+    },
+    "death": {
+      "gridRow": 1,
+      "frameCount": 4,
+      "loop": false,
+      "durationsMs": [120, 160, 220, 600],
+      "phases": ["death_damage", "death_hatch_open", "death_pilot_eject", "death_wreck"]
+    }
+  }
+}

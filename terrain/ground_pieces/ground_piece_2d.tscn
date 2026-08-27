@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_2d.gd" id="1_piece"]
+[ext_resource type="Script" path="res://terrain/ground_pieces/components/ground_breakable_component.gd" id="2_breakable"]
+
+[node name="GroundPiece2D" type="Node2D"]
+script = ExtResource("1_piece")
+
+[node name="Presentation" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+centered = false
+
+[node name="PermanentBody" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+collision_mask = 0
+
+[node name="Collision" type="CollisionPolygon2D" parent="PermanentBody"]
+unique_name_in_owner = true
+
+[node name="DestructibleStamp" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="BreakableComponent" type="Node" parent="."]
+unique_name_in_owner = true
+process_mode = 4
+script = ExtResource("2_breakable")
+
+[node name="EditorPreview" type="Node2D" parent="."]
+unique_name_in_owner = true

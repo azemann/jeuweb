@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="DestructibleTerrainProfile" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://terrain/destructible_terrain_profile.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/terrain/toxic_coast/toxic-soil-shallow-v001.png" id="2_shallow"]
+[ext_resource type="Texture2D" path="res://art/terrain/toxic_coast/toxic-soil-main-v001.png" id="3_main"]
+[ext_resource type="Texture2D" path="res://art/terrain/toxic_coast/toxic-soil-deep-v001.png" id="4_deep"]
+[ext_resource type="Texture2D" path="res://art/terrain/toxic_coast/toxic-surface-intact-v001.png" id="5_intact"]
+[ext_resource type="Texture2D" path="res://art/terrain/toxic_coast/toxic-surface-fresh-v001.png" id="6_fresh"]
+
+[resource]
+script = ExtResource("1_script")
+world_size = Vector2i(3840, 720)
+chunk_size = 128
+collision_simplification = 2.0
+minimum_polygon_area = 12.0
+shallow_texture = ExtResource("2_shallow")
+main_texture = ExtResource("3_main")
+deep_texture = ExtResource("4_deep")
+intact_surface_texture = ExtResource("5_intact")
+fresh_cut_surface_texture = ExtResource("6_fresh")
+surface_depth = 20
+edge_thickness = 3
+seed = 1701

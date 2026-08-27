@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "natural-ledge-damage-states-v001",
+  "status": "integrated",
+  "generatedAt": "2026-08-26",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "editTarget": "art/terrain/pieces/toxic_coast/natural/natural-ledge-medium-v001.png",
+  "promptRecord": "pipeline/assets/recipes/natural_ledge_damage_states_v001.md",
+  "attempts": [
+    {
+      "state": "damaged",
+      "status": "candidate",
+      "backgroundDelivered": "opaque black RGB"
+    },
+    {
+      "state": "destroyed",
+      "status": "candidate",
+      "backgroundDelivered": "opaque white RGB"
+    },
+    {
+      "state": "destroyed-background-extraction",
+      "status": "rejected-not-retained",
+      "reason": "the edit redrew the asset and introduced an opaque brown-green glow instead of native alpha"
+    }
+  ],
+  "transformations": [
+    "edge-connected RGB background extraction",
+    "background-color decontamination on semi-transparent edge pixels",
+    "alpha-aware crop",
+    "fit inside 704x304 safe area",
+    "place on fixed 768x384 canvas at canonical pivot"
+  ],
+  "validation": {
+    "technical": "pending",
+    "humanApproval": "passed",
+    "consumerImport": "passed"
+  }
+}

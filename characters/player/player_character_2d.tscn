@@ -1,0 +1,249 @@
+[gd_scene format=3 uid="uid://02bgpoxqhcep"]
+
+[ext_resource type="Script" uid="uid://dga6fgqwdg43l" path="res://characters/player/player_character_2d.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://dxfr6e217j5de" path="res://characters/player/components/player_movement_component.gd" id="2_movement"]
+[ext_resource type="Script" uid="uid://wamqqj6kwu7d" path="res://characters/player/components/player_aim_component.gd" id="3_aim"]
+[ext_resource type="Script" uid="uid://b8a6xuio2u1re" path="res://characters/player/components/player_health_component.gd" id="4_health"]
+[ext_resource type="Resource" path="res://characters/player/data/arcade_movement.tres" id="5_movement_profile"]
+[ext_resource type="Resource" path="res://characters/player/data/classic_aim.tres" id="6_aim_profile"]
+[ext_resource type="Resource" path="res://characters/player/data/standard_health.tres" id="7_health_profile"]
+[ext_resource type="Script" uid="uid://brjgvvb8j4sha" path="res://characters/player/components/player_presentation_component.gd" id="8_presentation"]
+[ext_resource type="SpriteFrames" uid="uid://g7pa74c5wmkc" path="res://characters/player/data/player_visual_frames.tres" id="9_frames"]
+[ext_resource type="Texture2D" uid="uid://ctty4cank8sva" path="res://art/weapons/player/player-primary-cannon-v001.png" id="10_weapon"]
+[ext_resource type="Script" uid="uid://cuahbbpo6g04e" path="res://characters/player/components/player_weapon_component.gd" id="11_weapon_component"]
+[ext_resource type="Resource" path="res://weapons/data/primary_field_cannon.tres" id="12_weapon_data"]
+[ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_grounding_component.tscn" id="13_grounding"]
+[ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_slope_presentation_component.tscn" id="14_slope"]
+
+[sub_resource type="CapsuleShape2D" id="Shape_player"]
+radius = 17.0
+height = 62.0
+
+[sub_resource type="Animation" id="Animation_weapon_reset"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Muzzle/MuzzleFlash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.35, 0.35)]
+}
+
+[sub_resource type="Animation" id="Animation_weapon_fire"]
+resource_name = "fire"
+length = 0.09
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Muzzle/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.09),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Muzzle/MuzzleFlash:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.09),
+"transitions": PackedFloat32Array(0.4, 0.7, 1),
+"update": 0,
+"values": [Vector2(0.35, 0.35), Vector2(1.25, 1.25), Vector2(0.2, 0.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Muzzle/MuzzleFlash:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.09),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.62, 0.08, 0.9), Color(1, 0.2, 0.03, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_weapon"]
+_data = {
+&"RESET": SubResource("Animation_weapon_reset"),
+&"fire": SubResource("Animation_weapon_fire")
+}
+
+[sub_resource type="Animation" id="Animation_reset"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Presentation:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Presentation:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Presentation:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1.5), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Presentation:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.015, 0.985), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_player"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"idle": SubResource("Animation_idle")
+}
+
+[node name="PlayerCharacter2D" type="CharacterBody2D" unique_id=171543039]
+collision_layer = 2
+floor_snap_length = 8.0
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=119687597]
+position = Vector2(0, -31)
+shape = SubResource("Shape_player")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=362222666]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1909207969]
+position = Vector2(0, -31)
+shape = SubResource("Shape_player")
+
+[node name="Components" type="Node2D" parent="." unique_id=2118938557]
+
+[node name="Movement" type="Node" parent="Components" unique_id=733888702]
+script = ExtResource("2_movement")
+profile = ExtResource("5_movement_profile")
+
+[node name="Aim" type="Node" parent="Components" unique_id=119973774]
+script = ExtResource("3_aim")
+profile = ExtResource("6_aim_profile")
+
+[node name="Health" type="Node" parent="Components" unique_id=1589982985]
+script = ExtResource("4_health")
+profile = ExtResource("7_health_profile")
+
+[node name="Weapon" type="Node" parent="Components" unique_id=124057853]
+script = ExtResource("11_weapon_component")
+weapon = ExtResource("12_weapon_data")
+
+[node name="FireCooldown" type="Timer" parent="Components/Weapon" unique_id=171226594]
+one_shot = true
+
+[node name="Presentation" type="Node" parent="Components" unique_id=1819554244]
+script = ExtResource("8_presentation")
+
+[node name="Grounding" parent="Components" instance=ExtResource("13_grounding")]
+shadow_size = Vector2(52, 14)
+foot_probe_span = 30.0
+
+[node name="SlopePresentation" parent="Components" instance=ExtResource("14_slope")]
+maximum_visual_tilt_degrees = 42.0
+
+[node name="Presentation" type="Node2D" parent="." unique_id=1471238269]
+
+[node name="SlopeVisual" type="Node2D" parent="Presentation"]
+unique_name_in_owner = true
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual" unique_id=533794118]
+unique_name_in_owner = true
+position = Vector2(0, -46.2)
+scale = Vector2(0.55, 0.55)
+sprite_frames = ExtResource("9_frames")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="AimPivot" type="Node2D" parent="Presentation" unique_id=146500639]
+unique_name_in_owner = true
+position = Vector2(4, -51)
+
+[node name="WeaponSprite" type="Sprite2D" parent="Presentation/AimPivot" unique_id=1141611301]
+unique_name_in_owner = true
+position = Vector2(-7.84, -29)
+scale = Vector2(0.18078123, 0.20052086)
+texture = ExtResource("10_weapon")
+centered = false
+metadata/source_muzzle_px = Vector2(728, 192)
+
+[node name="Muzzle" type="Marker2D" parent="Presentation/AimPivot" unique_id=1207443434]
+unique_name_in_owner = true
+position = Vector2(123.7687, 9.5)
+
+[node name="MuzzleFlash" type="Polygon2D" parent="Presentation/AimPivot/Muzzle" unique_id=307610682]
+visible = false
+z_index = 3
+scale = Vector2(0.35, 0.35)
+color = Color(1, 0.752941, 0.0862745, 1)
+polygon = PackedVector2Array(0, -4, 10, -8, 8, -2, 24, 0, 8, 3, 11, 9, 0, 5)
+
+[node name="WeaponFeedback" type="AnimationPlayer" parent="Presentation/AimPivot" unique_id=633599116]
+libraries/ = SubResource("AnimationLibrary_weapon")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1378485150]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_player")
+autoplay = &"idle"

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "toxic-coast-ground-kit-v001",
+  "status": "integrated",
+  "generatedAt": "2026-08-26",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "promptRecord": "pipeline/assets/recipes/toxic_coast_ground_kit_v001.md",
+  "references": [
+    {
+      "reference": "art/concepts/da-03-environment-destruction.png",
+      "role": "style-reference",
+      "rightsStatus": "project-asset"
+    }
+  ],
+  "attempts": [
+    {
+      "path": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/natural-ledge-medium-source-v001.png",
+      "status": "rejected",
+      "reason": "checkerboard baked into opaque RGB output"
+    },
+    {
+      "path": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/natural-ledge-medium-source-v002.png",
+      "status": "validated",
+      "reason": "targeted background extraction produced native alpha"
+    }
+  ],
+  "transformations": [
+    "remove alpha values at or below 16/255",
+    "crop thresholded alpha bounds",
+    "fit inside 704x304 safe area",
+    "place on fixed 768x384 transparent canvas",
+    "record fixed surface pivot at 384x64"
+  ],
+  "validation": {
+    "technical": "passed",
+    "visual": "passed",
+    "humanApproval": "passed",
+    "consumerImport": "passed"
+  }
+}

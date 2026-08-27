@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemySceneBinding" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://characters/enemies/enemy_scene_binding.gd" id="1_binding"]
+[ext_resource type="PackedScene" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_2d.tscn" id="2_scene"]
+
+[resource]
+script = ExtResource("1_binding")
+archetype_id = &"vacuum_trooper"
+scene = ExtResource("2_scene")

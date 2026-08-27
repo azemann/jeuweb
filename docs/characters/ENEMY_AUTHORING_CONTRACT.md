@@ -1,0 +1,82 @@
+# Contrat auteur des ennemis
+
+Un ennemi est une scène canonique composée. Son identité et ses réglages sont
+des Resources ; son placement et l'intention de rencontre restent dans la scène
+maîtresse de la carte.
+
+## Autorités
+
+- placement, quantité, espacement et seuil d'activation :
+  `MapEncounterMarker2D` dans la scène maîtresse ;
+- correspondance `enemy_archetype` → scène : `EnemyCatalog.tres` ;
+- PV, locomotion et amplitude de patrouille : `EnemyArchetypeProfile.tres` ;
+- vie courante : `EnemyHealthComponent` ;
+- vélocité et retournements de patrouille : `EnemyPatrolComponent` ;
+- animation et orientation visuelle : `EnemyPresentationComponent` ;
+- collision et composition : scène canonique de l'ennemi ;
+- bitmap livré : `art/`, avec source, recette et QA sous `pipeline/assets/`.
+
+Une valeur de gameplay n'est jamais recopiée dans le spawner ou le script de
+présentation.
+
+## Arbre canonique
+
+```text
+EnemyCharacter2D (CharacterBody2D)
+├── CollisionShape2D
+├── Components
+│   ├── Patrol
+│   ├── Health
+│   ├── Presentation
+│   └── Grounding
+│       ├── GroundAnchor
+│       ├── GroundProbe
+│       ├── LeftFootProbe
+│       ├── RightFootProbe
+│       └── GroundShadow
+│   └── SlopePresentation
+└── Presentation
+    └── SlopeVisual
+        └── BodySprite (AnimatedSprite2D)
+```
+
+## Workflow auteur
+
+1. régler l'archétype dans sa Resource sous `characters/enemies/data/` ;
+2. assembler ou prévisualiser sa scène canonique dans Godot ;
+3. enregistrer sa correspondance dans `enemy_catalog.tres` ;
+4. placer un `MapEncounterMarker2D` sous `Gameplay/EnemySpawns` ;
+5. choisir archétype, nombre, espacement et distance d'activation dans
+   l'Inspector ;
+6. résoudre les avertissements et exécuter `enemy_contract_test.gd`.
+
+Le Transform du marqueur est souverain pour la formation. Les acteurs générés
+appartiennent à la branche `Actors` de la map ; aucune scène runtime ne référence
+le pipeline.
+
+## Contrat runtime
+
+- `MissionEnemySpawner2D` observe la progression du joueur et déclenche chaque
+  `encounter_id` une seule fois ;
+- le catalogue résout l'archétype sans chemin codé en dur dans la carte ;
+- chaque instance reçoit son origine de patrouille depuis sa position générée ;
+- Patrol possède la vélocité ; Health possède les PV ; Presentation ne modifie
+  aucun état gameplay ;
+- Grounding est le composant transversal chargé du root des pieds et de l'ombre
+  projetée sur le vrai collider World ;
+- `EnemyCharacter2D.apply_damage()` transmet uniquement l'intention à Health ;
+- un dégât accepté suspend Patrol et déclenche `hit` dans Presentation ; la
+  marche reprend uniquement au signal de fin d'animation ;
+- à zéro PV, la coque quitte la couche cible mais conserve sa collision World,
+  Patrol ne fournit plus de mouvement horizontal et Presentation joue `death` ;
+- `EnemyCharacter2D` retire l'instance au signal de fin de `death`, jamais au
+  signal `died` lui-même ; attaque et récompense seront ajoutées comme
+  composants distincts.
+
+## Contrat de validation
+
+`enemy_contract_test.gd` protège le profil, le catalogue, les animations
+`walk`, `hit` et `death`, leurs cadences et boucles, l'arbre canonique, la
+réception des dégâts, la suspension/reprise de Patrol, la suppression différée,
+la correspondance du marqueur `VacuumPatrol` et l'apparition de deux ennemis
+dans les 1280 premiers pixels.

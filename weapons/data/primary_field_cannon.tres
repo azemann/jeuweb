@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://weapons/weapon_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://weapons/projectiles/field_round_2d.tscn" id="2_projectile"]
+
+[resource]
+script = ExtResource("1_script")
+weapon_id = &"primary_field_cannon"
+display_name = "Canon de campagne"
+projectile_scene = ExtResource("2_projectile")
+fire_interval = 0.14
+automatic = true
+fire_animation = &"fire"

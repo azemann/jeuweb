@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "vacuum-trooper-walk-v001",
+  "status": "published",
+  "approvedAt": "2026-08-27",
+  "assets": [
+    {
+      "path": "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/vacuum-trooper-walk-sheet-candidate-v001.png",
+      "role": "imagegen-source-sheet",
+      "status": "approved-source",
+      "sha256": "db489e24387f5b5a3a9b94ff2f075cd6359d7892f294c2a6f5b8322ea6ee063a"
+    },
+    {
+      "path": "pipeline/assets/exports/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-candidate-v001.png",
+      "role": "normalized-runtime-export",
+      "status": "approved"
+    },
+    {
+      "path": "art/characters/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-v001.png",
+      "role": "published-runtime-atlas",
+      "status": "integrated",
+      "sha256": "d885176606cb70d76e98df81044c3a6683afaac370d1a4c0bb14c5086b19a9e3"
+    }
+  ],
+  "profile": "pipeline/assets/profiles/vacuum_trooper_animation_profile_v001.json",
+  "recipe": "pipeline/assets/recipes/vacuum_trooper_walk_v001.md",
+  "qa": "pipeline/assets/working/enemies/vacuum_trooper/vacuum-trooper-walk-v001-qa.json",
+  "statuses": {
+    "visual": "passed",
+    "temporal": "passed",
+    "technical": "passed",
+    "gameplay": "integrated"
+  },
+  "knownLimits": [
+    "Idle réutilise encore la première pose de marche.",
+    "Aucune pose d'attaque, d'impact ou de mort n'est publiée dans ce lot."
+  ]
+}

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HazardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/hazards/hazard_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/hazards/toxic_coast/toxic-acid-sump-medium-v001.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+hazard_id = &"toxic_acid_sump_medium"
+display_name = "Côte toxique — bassin acide moyen"
+texture = ExtResource("2")
+pivot_px = Vector2(384, 368)
+damage_per_tick = 20.0
+tick_interval = 0.75
+damage_zone_size = Vector2(540, 72)
+damage_zone_offset = Vector2(0, -92)

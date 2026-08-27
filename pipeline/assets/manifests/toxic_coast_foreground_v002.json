@@ -1,0 +1,14 @@
+{
+  "lot_id": "toxic_coast_foreground_v002",
+  "status": "integrated",
+  "authority": "pipeline/assets/sources/imagegen/toxic_coast",
+  "source": "pipeline/assets/sources/imagegen/toxic_coast/toxic-coast-foreground-readable-v002.png",
+  "rejected_candidate": "pipeline/assets/sources/imagegen/toxic_coast/toxic-coast-foreground-readable-v002-opaque-candidate.png",
+  "export": "pipeline/assets/exports/maps/toxic_coast/toxic-coast-foreground-v002.png",
+  "intended_runtime_path": "art/maps/toxic_coast/toxic-coast-foreground-v002.png",
+  "dimensions": [2048, 768],
+  "required_alpha": true,
+  "alpha_valid": true,
+  "integration_allowed": true,
+  "sha256": "89b4873c5bff5cfa8be9b15a56256c38031d18e2c50dfbc8e24885b45a3814b3"
+}

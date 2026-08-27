@@ -1,0 +1,341 @@
+{
+  "schema": "jeuweb.player-asset-qa.v1",
+  "status": "candidate",
+  "body": {
+    "source": "pipeline/assets/sources/imagegen/player/player-body-action-sheet-v001.png",
+    "component_count": 12,
+    "common_scale": 0.949721,
+    "canonical_canvas": [
+      384,
+      384
+    ],
+    "canonical_root": [
+      192,
+      360
+    ],
+    "canonical_content_baseline": 356,
+    "runtime_frame": [
+      192,
+      192
+    ],
+    "runtime_root": [
+      96,
+      180
+    ],
+    "atlas": "pipeline/assets/exports/player/player-body-atlas-4x3-192-v001.png",
+    "frames": [
+      {
+        "index": 0,
+        "name": "idle",
+        "source_bbox": [
+          74,
+          12,
+          226,
+          333
+        ],
+        "canonical_position": [
+          85,
+          40
+        ],
+        "canonical_size": [
+          215,
+          316
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 1,
+        "name": "walk_contact",
+        "source_bbox": [
+          422,
+          11,
+          239,
+          335
+        ],
+        "canonical_position": [
+          79,
+          38
+        ],
+        "canonical_size": [
+          227,
+          318
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 2,
+        "name": "walk_passing",
+        "source_bbox": [
+          802,
+          12,
+          238,
+          337
+        ],
+        "canonical_position": [
+          79,
+          36
+        ],
+        "canonical_size": [
+          226,
+          320
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 3,
+        "name": "run_extension",
+        "source_bbox": [
+          1130,
+          23,
+          288,
+          326
+        ],
+        "canonical_position": [
+          55,
+          46
+        ],
+        "canonical_size": [
+          274,
+          310
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 4,
+        "name": "jump_rise",
+        "source_bbox": [
+          72,
+          353,
+          245,
+          347
+        ],
+        "canonical_position": [
+          76,
+          26
+        ],
+        "canonical_size": [
+          233,
+          330
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 5,
+        "name": "jump_apex",
+        "source_bbox": [
+          420,
+          342,
+          246,
+          291
+        ],
+        "canonical_position": [
+          75,
+          80
+        ],
+        "canonical_size": [
+          234,
+          276
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 6,
+        "name": "fall",
+        "source_bbox": [
+          788,
+          373,
+          255,
+          338
+        ],
+        "canonical_position": [
+          71,
+          35
+        ],
+        "canonical_size": [
+          242,
+          321
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 7,
+        "name": "landing",
+        "source_bbox": [
+          1160,
+          440,
+          257,
+          266
+        ],
+        "canonical_position": [
+          70,
+          103
+        ],
+        "canonical_size": [
+          244,
+          253
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 8,
+        "name": "crouch",
+        "source_bbox": [
+          71,
+          813,
+          228,
+          239
+        ],
+        "canonical_position": [
+          84,
+          129
+        ],
+        "canonical_size": [
+          217,
+          227
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 9,
+        "name": "aim_up",
+        "source_bbox": [
+          407,
+          698,
+          276,
+          358
+        ],
+        "canonical_position": [
+          61,
+          16
+        ],
+        "canonical_size": [
+          262,
+          340
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 10,
+        "name": "recoil",
+        "source_bbox": [
+          778,
+          731,
+          274,
+          324
+        ],
+        "canonical_position": [
+          62,
+          48
+        ],
+        "canonical_size": [
+          260,
+          308
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      },
+      {
+        "index": 11,
+        "name": "hurt",
+        "source_bbox": [
+          1158,
+          759,
+          245,
+          290
+        ],
+        "canonical_position": [
+          76,
+          81
+        ],
+        "canonical_size": [
+          233,
+          275
+        ],
+        "root_px": [
+          192,
+          360
+        ],
+        "data_status": "estimated"
+      }
+    ]
+  },
+  "weapon": {
+    "source": "pipeline/assets/sources/imagegen/player/player-primary-cannon-v001.png",
+    "source_bbox": [
+      40,
+      88,
+      1717,
+      807
+    ],
+    "canvas": [
+      768,
+      384
+    ],
+    "content_position": [
+      24,
+      41
+    ],
+    "content_size": [
+      704,
+      302
+    ],
+    "pivot_px": [
+      112,
+      192
+    ],
+    "muzzle_px": [
+      728,
+      192
+    ],
+    "data_status": "estimated",
+    "output": "pipeline/assets/exports/player/player-primary-cannon-768-v001.png"
+  },
+  "known_limits": [
+    "ImageGen sheet poses are key-pose candidates, not a temporally validated animation.",
+    "Root is estimated from the visible bottom because the source sheet has no authored landmarks.",
+    "Weapon pivot and muzzle sockets require human review in the player scene."
+  ]
+}

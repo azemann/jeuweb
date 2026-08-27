@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://terrain/permanent_ground/ground_module_2d.gd" id="1_script"]
+
+[node name="GroundModule2D" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Fill" type="Polygon2D" parent="."]
+z_index = -2
+
+[node name="Surface" type="Line2D" parent="."]
+z_index = -1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="Body" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="Collision" type="CollisionPolygon2D" parent="Body"]

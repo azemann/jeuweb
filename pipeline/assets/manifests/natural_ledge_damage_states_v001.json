@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "natural-ledge-damage-states-v001",
+  "status": "integrated",
+  "assets": [
+    {
+      "path": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-damaged-source-v001.png",
+      "role": "imagegen-damaged-source",
+      "status": "validated",
+      "sha256": "f9586dd6c5ffcb7cf80b750a2d81d68efba023d56aa7f4ed382f2ffc07ce1cc8"
+    },
+    {
+      "path": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-destroyed-source-v001.png",
+      "role": "imagegen-destroyed-source",
+      "status": "validated",
+      "sha256": "3ed31947dd0248cfd280673fab06a9f91aaf347f16c6119fc26eca24cc0befaf"
+    },
+    {
+      "path": "pipeline/assets/exports/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-damaged-768x384-v001.png",
+      "role": "normalized-damaged-candidate",
+      "status": "validated",
+      "sha256": "70115197fa23bb6a71d3ea6ec3b18d09962a767b5b6f7b26a2968e86248203d5"
+    },
+    {
+      "path": "pipeline/assets/exports/terrain_kits/toxic_coast/natural/damage_states/natural-ledge-medium-destroyed-768x384-v001.png",
+      "role": "normalized-destroyed-candidate",
+      "status": "validated",
+      "sha256": "d3706063ef3e708cd379c25c955732961c2312e68b5a55e1ca900f69e033aead"
+    },
+    {
+      "path": "art/terrain/pieces/toxic_coast/natural/damage_states/natural-ledge-medium-damaged-v001.png",
+      "role": "godot-runtime-damaged-texture",
+      "status": "integrated",
+      "sha256": "70115197fa23bb6a71d3ea6ec3b18d09962a767b5b6f7b26a2968e86248203d5"
+    },
+    {
+      "path": "art/terrain/pieces/toxic_coast/natural/damage_states/natural-ledge-medium-destroyed-v001.png",
+      "role": "godot-runtime-destroyed-texture",
+      "status": "integrated",
+      "sha256": "d3706063ef3e708cd379c25c955732961c2312e68b5a55e1ca900f69e033aead"
+    }
+  ],
+  "recipe": "pipeline/assets/recipes/natural_ledge_damage_states_v001.md",
+  "provenance": "pipeline/assets/provenance/natural_ledge_damage_states_v001.json",
+  "qa": "pipeline/assets/working/terrain_kits/toxic_coast/natural-ledge-medium-damage-states-v001-qa.json",
+  "integrationAllowed": true,
+  "nextGate": "author damage states for the next Ground Piece family"
+}

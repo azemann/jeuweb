@@ -1,0 +1,142 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://ui/mobile/mobile_controls.gd" id="1_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape_button"]
+radius = 52.0
+
+[sub_resource type="StyleBoxFlat" id="StyleButton"]
+bg_color = Color(0.0470588, 0.0588235, 0.0784314, 0.72)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.945098, 0.960784, 0.603922, 0.9)
+corner_radius_top_left = 52
+corner_radius_top_right = 52
+corner_radius_bottom_right = 52
+corner_radius_bottom_left = 52
+
+[node name="MobileControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="LeftVisual" type="PanelContainer" parent="."]
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleButton")
+
+[node name="Label" type="Label" parent="LeftVisual"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 34
+text = "←"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightVisual" type="PanelContainer" parent="."]
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleButton")
+
+[node name="Label" type="Label" parent="RightVisual"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 34
+text = "→"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpVisual" type="PanelContainer" parent="."]
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleButton")
+
+[node name="Label" type="Label" parent="UpVisual"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 34
+text = "↑"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DownVisual" type="PanelContainer" parent="."]
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleButton")
+
+[node name="Label" type="Label" parent="DownVisual"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 34
+text = "↓"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JumpVisual" type="PanelContainer" parent="."]
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleButton")
+
+[node name="Label" type="Label" parent="JumpVisual"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "SAUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FireVisual" type="PanelContainer" parent="."]
+offset_right = 104.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleButton")
+
+[node name="Label" type="Label" parent="FireVisual"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "TIR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Left" type="TouchScreenButton" parent="."]
+visibility_mode = 0
+shape = SubResource("CircleShape_button")
+action = &"player_move_left"
+
+[node name="Right" type="TouchScreenButton" parent="."]
+visibility_mode = 0
+shape = SubResource("CircleShape_button")
+action = &"player_move_right"
+
+[node name="Up" type="TouchScreenButton" parent="."]
+visibility_mode = 0
+shape = SubResource("CircleShape_button")
+action = &"player_aim_up"
+
+[node name="Down" type="TouchScreenButton" parent="."]
+visibility_mode = 0
+shape = SubResource("CircleShape_button")
+action = &"player_aim_down"
+
+[node name="Jump" type="TouchScreenButton" parent="."]
+visibility_mode = 0
+shape = SubResource("CircleShape_button")
+action = &"player_jump"
+
+[node name="Fire" type="TouchScreenButton" parent="."]
+visibility_mode = 0
+shape = SubResource("CircleShape_button")
+action = &"player_fire"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PlayerMovementProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://characters/player/data/player_movement_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+maximum_speed = 285.0
+ground_acceleration = 1900.0
+ground_deceleration = 2400.0
+air_control = 0.72
+jump_speed = 570.0
+gravity = 1750.0
+maximum_fall_speed = 980.0
+coyote_time = 0.1
+jump_buffer_time = 0.12
+

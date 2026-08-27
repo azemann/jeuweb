@@ -1,0 +1,170 @@
+{
+  "schema": "jeuweb.projectile-impact-asset-qa.v1",
+  "status": "candidate",
+  "projectile": {
+    "source": "pipeline/assets/sources/imagegen/weapons/field-round-source-v001.png",
+    "output": "pipeline/assets/exports/weapons/field-round-384x192-v001.png",
+    "source_bbox": [
+      493,
+      205,
+      1519,
+      448
+    ],
+    "canvas": [
+      384,
+      192
+    ],
+    "content_position": [
+      16,
+      54
+    ],
+    "content_size": [
+      352,
+      83
+    ],
+    "pivot_px": [
+      192,
+      96
+    ],
+    "direction": "right"
+  },
+  "impact": {
+    "source": "pipeline/assets/sources/imagegen/weapons/field-round-impact-sheet-source-v001.png",
+    "output": "pipeline/assets/exports/weapons/field-round-impact-3x2-256-v001.png",
+    "layout": [
+      3,
+      2
+    ],
+    "runtime_cell": [
+      256,
+      256
+    ],
+    "pivot_px": [
+      128,
+      128
+    ],
+    "alpha_floor_removed": 16,
+    "frames": [
+      {
+        "source_bbox_after_cleanup": [
+          171,
+          173,
+          350,
+          357
+        ],
+        "runtime_bbox": [
+          86,
+          87,
+          175,
+          177
+        ],
+        "edge_alpha_max": 0,
+        "index": 0,
+        "column": 0,
+        "row": 0
+      },
+      {
+        "source_bbox_after_cleanup": [
+          124,
+          103,
+          390,
+          414
+        ],
+        "runtime_bbox": [
+          62,
+          52,
+          195,
+          207
+        ],
+        "edge_alpha_max": 0,
+        "index": 1,
+        "column": 1,
+        "row": 0
+      },
+      {
+        "source_bbox_after_cleanup": [
+          13,
+          43,
+          444,
+          465
+        ],
+        "runtime_bbox": [
+          6,
+          21,
+          222,
+          232
+        ],
+        "edge_alpha_max": 0,
+        "index": 2,
+        "column": 2,
+        "row": 0
+      },
+      {
+        "source_bbox_after_cleanup": [
+          117,
+          64,
+          419,
+          406
+        ],
+        "runtime_bbox": [
+          58,
+          32,
+          209,
+          203
+        ],
+        "edge_alpha_max": 0,
+        "index": 3,
+        "column": 0,
+        "row": 1
+      },
+      {
+        "source_bbox_after_cleanup": [
+          140,
+          129,
+          353,
+          375
+        ],
+        "runtime_bbox": [
+          70,
+          64,
+          177,
+          188
+        ],
+        "edge_alpha_max": 0,
+        "index": 4,
+        "column": 1,
+        "row": 1
+      },
+      {
+        "source_bbox_after_cleanup": [
+          183,
+          190,
+          295,
+          324
+        ],
+        "runtime_bbox": [
+          92,
+          95,
+          147,
+          162
+        ],
+        "edge_alpha_max": 0,
+        "index": 5,
+        "column": 2,
+        "row": 1
+      }
+    ]
+  },
+  "source_sha256": {
+    "pipeline/assets/sources/imagegen/weapons/field-round-source-v001.png": "b0731f2513171f759c501b8f0b2326127f05e9e2d31d5e4b5f1e55b3ae0d4b3b",
+    "pipeline/assets/sources/imagegen/weapons/field-round-impact-sheet-source-v001.png": "75a9ceaa838043a61faea9668642e704a35c9841ca3d2a5f73f0390b07c17930"
+  },
+  "known_limits": [
+    "La continuit\u00e9 des six poses d'impact doit encore \u00eatre approuv\u00e9e visuellement.",
+    "Le pivot et l'\u00e9chelle runtime restent \u00e0 valider dans la sc\u00e8ne Projectile2D."
+  ],
+  "export_sha256": {
+    "pipeline/assets/exports/weapons/field-round-384x192-v001.png": "0b5a8814905e6e8710667d9c52e34372b7fee63655e49112d7bd23f290d6b2cd",
+    "pipeline/assets/exports/weapons/field-round-impact-3x2-256-v001.png": "6e25618ecc70bb78fae1f9295fea9d2fdc05e5b3a27f9a80106a056493fb4e9c"
+  }
+}

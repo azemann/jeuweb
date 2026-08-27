@@ -1,0 +1,134 @@
+extends SceneTree
+
+var _failures: Array[String] = []
+
+
+func _initialize() -> void:
+	call_deferred(&"_run")
+
+
+func _check(condition: bool, message: String) -> void:
+	if not condition:
+		_failures.append(message)
+		push_error(message)
+
+
+func _run() -> void:
+	var profile := load("res://characters/enemies/data/vacuum_trooper_profile.tres") as EnemyArchetypeProfile
+	_check(profile != null and profile.is_valid(), "Le profil Vacuum Trooper doit être valide.")
+	_check(profile.archetype_id == &"vacuum_trooper", "L'identité d'archétype doit rester stable.")
+
+	var catalog := load("res://characters/enemies/data/enemy_catalog.tres") as EnemyCatalog
+	_check(catalog != null and catalog.validation_errors().is_empty(), "Le catalogue ennemi doit être valide.")
+	_check(catalog.find_scene(&"vacuum_trooper") != null, "Le catalogue doit résoudre Vacuum Trooper.")
+
+	var frames := load("res://characters/enemies/vacuum_trooper/vacuum_trooper_frames.tres") as SpriteFrames
+	_check(frames != null and frames.has_animation(&"walk"), "La marche Vacuum Trooper doit être publiée.")
+	if frames != null and frames.has_animation(&"walk"):
+		_check(frames.get_frame_count(&"walk") == 8, "La marche doit contenir huit poses.")
+		_check(is_equal_approx(frames.get_animation_speed(&"walk"), 6.25), "La cadence doit rester à 160 ms par pose.")
+	_check(frames != null and frames.has_animation(&"hit"), "L'impact Vacuum Trooper doit être publié.")
+	_check(frames != null and frames.has_animation(&"death"), "La mort Vacuum Trooper doit être publiée.")
+	if frames != null and frames.has_animation(&"hit") and frames.has_animation(&"death"):
+		_check(frames.get_frame_count(&"hit") == 4 and not frames.get_animation_loop(&"hit"), "L'impact doit contenir quatre poses non bouclées.")
+		_check(frames.get_frame_count(&"death") == 4 and not frames.get_animation_loop(&"death"), "La mort doit contenir quatre poses non bouclées.")
+		var hit_durations := [0.9, 0.8, 1.3, 1.6]
+		var death_durations := [1.2, 1.6, 2.2, 6.0]
+		for index in 4:
+			_check(is_equal_approx(frames.get_frame_duration(&"hit", index), hit_durations[index]), "Le timing relatif d'impact doit rester autoritaire dans SpriteFrames.")
+			_check(is_equal_approx(frames.get_frame_duration(&"death", index), death_durations[index]), "Le timing relatif de mort doit rester autoritaire dans SpriteFrames.")
+
+	var enemy_scene := catalog.find_scene(&"vacuum_trooper") if catalog != null else null
+	var enemy := enemy_scene.instantiate() as EnemyCharacter2D if enemy_scene != null else null
+	_check(enemy != null, "La scène Vacuum Trooper doit produire un EnemyCharacter2D.")
+	if enemy != null:
+		_check(enemy.validation_errors().is_empty(), "L'arbre canonique de l'ennemi doit être valide.")
+		root.add_child(enemy)
+		await process_frame
+		_check(enemy.health_component().current_health == profile.maximum_health, "Health doit initialiser les PV depuis le profil.")
+		_check(enemy.apply_damage(10.0), "Le projectile doit pouvoir transmettre des dégâts à l'ennemi.")
+		_check(enemy.health_component().current_health == profile.maximum_health - 10.0, "Health doit rester l'autorité des PV courants.")
+		enemy.queue_free()
+		await process_frame
+
+	var reaction_enemy := enemy_scene.instantiate() as EnemyCharacter2D if enemy_scene != null else null
+	_check(reaction_enemy != null, "Le scénario de réaction doit être instanciable.")
+	if reaction_enemy != null:
+		root.add_child(reaction_enemy)
+		await process_frame
+		_check(reaction_enemy.apply_damage(10.0), "Un dégât non létal doit être accepté.")
+		_check(reaction_enemy.get_node("Presentation/SlopeVisual/BodySprite").animation == &"hit", "Un dégât accepté doit jouer hit immédiatement.")
+		_check(not reaction_enemy.patrol_component().movement_enabled, "La patrouille doit se suspendre pendant hit.")
+		await create_timer(0.55).timeout
+		_check(reaction_enemy.get_node("Presentation/SlopeVisual/BodySprite").animation == &"walk", "La marche doit reprendre après hit.")
+		_check(reaction_enemy.patrol_component().movement_enabled, "La patrouille doit reprendre après hit.")
+		reaction_enemy.queue_free()
+		await process_frame
+
+	var dying_enemy := enemy_scene.instantiate() as EnemyCharacter2D if enemy_scene != null else null
+	_check(dying_enemy != null, "Le scénario de mort doit être instanciable.")
+	if dying_enemy != null:
+		root.add_child(dying_enemy)
+		await process_frame
+		_check(dying_enemy.apply_damage(profile.maximum_health), "Un dégât létal doit être accepté.")
+		_check(is_instance_valid(dying_enemy) and not dying_enemy.is_queued_for_deletion(), "La mort ne doit plus supprimer l'ennemi immédiatement.")
+		_check(dying_enemy.get_node("Presentation/SlopeVisual/BodySprite").animation == &"death", "Zéro PV doit jouer death.")
+		_check(dying_enemy.collision_layer == 0, "Une coque mourante ne doit plus recevoir de projectiles.")
+		_check(not dying_enemy.patrol_component().movement_enabled, "La patrouille doit rester suspendue pendant death.")
+		await create_timer(1.2).timeout
+		_check(not is_instance_valid(dying_enemy), "L'ennemi doit être supprimé seulement après la dernière pose de mort.")
+
+	var projectile_scene := load("res://weapons/projectiles/field_round_2d.tscn") as PackedScene
+	var target := enemy_scene.instantiate() as EnemyCharacter2D if enemy_scene != null else null
+	var projectile := projectile_scene.instantiate() as Projectile2D if projectile_scene != null else null
+	_check(target != null and projectile != null, "Le scénario projectile vers ennemi doit être instanciable.")
+	if target != null and projectile != null:
+		root.add_child(target)
+		target.global_position = Vector2(180, 100)
+		target.patrol_component().set_physics_process(false)
+		root.add_child(projectile)
+		projectile.global_position = Vector2(0, 73)
+		var health_before_projectile := target.health_component().current_health
+		projectile.launch(Vector2.RIGHT)
+		for _frame in 20:
+			await physics_frame
+		_check(target.health_component().current_health < health_before_projectile, "Un vrai FieldRound2D doit retirer des PV au Vacuum Trooper.")
+		target.queue_free()
+		if is_instance_valid(projectile):
+			projectile.queue_free()
+		await process_frame
+
+	var screen_scene := load("res://screens/prototype/prototype_mission_screen.tscn") as PackedScene
+	var screen := screen_scene.instantiate()
+	root.add_child(screen)
+	await process_frame
+	await physics_frame
+	await physics_frame
+	var viewport := screen.get_node("MissionViewportContainer/MissionViewport")
+	var host := viewport.get_node("MapHost") as MissionMapHost2D
+	var enemy_spawner := viewport.get_node("EnemySpawner") as MissionEnemySpawner2D
+	_check(host.current_map != null, "La mission doit charger Côte toxique.")
+	_check(enemy_spawner.catalog == catalog, "L'écran doit exposer le catalogue ennemi dans l'Inspector.")
+	if host.current_map != null:
+		var marker := host.current_map.get_node("Gameplay/EnemySpawns/VacuumPatrol") as MapEncounterMarker2D
+		_check(marker.count == 2 and marker.global_position.x < 1280.0, "VacuumPatrol doit demander deux ennemis dans le premier écran.")
+		var runtime_enemies := host.current_map.get_node("Actors").find_children("vacuum_patrol_01_*", "EnemyCharacter2D", true, false)
+		_check(runtime_enemies.size() == 2, "VacuumPatrol doit générer exactement deux ennemis.")
+		var actual_origins: Array[float] = []
+		for runtime_enemy in runtime_enemies:
+			_check(runtime_enemy.get_parent() == host.current_map.actors_root(), "Chaque ennemi runtime doit appartenir à Actors.")
+			_check(runtime_enemy.global_position.x < 1280.0, "La première patrouille doit rester dans les 1280 premiers pixels.")
+			actual_origins.append(runtime_enemy.patrol_component().origin_x)
+		actual_origins.sort()
+		var half_formation := (float(marker.count) - 1.0) * marker.formation_spacing * 0.5
+		for index in marker.count:
+			var expected_origin := marker.global_position.x + index * marker.formation_spacing - half_formation
+			_check(is_equal_approx(actual_origins[index], expected_origin), "Patrol doit dériver son origine du marqueur et de son espacement auteur.")
+	screen.free()
+
+	if _failures.is_empty():
+		print("ENEMY_CONTRACT_TEST: PASS")
+		quit(0)
+	else:
+		print("ENEMY_CONTRACT_TEST: FAIL (%d)" % _failures.size())
+		quit(1)

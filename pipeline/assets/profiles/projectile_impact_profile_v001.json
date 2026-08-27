@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "projectile-impact-v001",
+  "renderRepresentation": "raster-2d",
+  "projectile": {
+    "canvas": [384, 192],
+    "pivot": [192, 96],
+    "direction": "right",
+    "runtimeScaleAuthority": "ProjectileData"
+  },
+  "impact": {
+    "layout": [3, 2],
+    "cell": [256, 256],
+    "pivot": [128, 128],
+    "playbackAuthority": "AnimationPlayer"
+  },
+  "publicationRule": "candidate exports stay outside res://art until human approval"
+}

@@ -1,0 +1,125 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://screens/start/start_flow.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/concepts/da-03-environment-destruction.png" id="2_backdrop"]
+[ext_resource type="Theme" path="res://ui/themes/game_ui_theme.tres" id="3_theme"]
+
+[sub_resource type="Animation" id="Animation_reset"]
+resource_name = "RESET"
+length = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SafeArea/Layout:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 1)]}
+
+[sub_resource type="Animation" id="Animation_reveal"]
+resource_name = "reveal"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SafeArea/Layout:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.35), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_start"]
+_data = {&"RESET": SubResource("Animation_reset"), &"reveal": SubResource("Animation_reveal")}
+
+[node name="StartFlow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_backdrop")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0235294, 0.027451, 0.0392157, 0.48)
+mouse_filter = 2
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = 54.0
+offset_right = -72.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layout" type="VBoxContainer" parent="SafeArea"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="EmblemPanel" type="PanelContainer" parent="SafeArea/Layout"]
+custom_minimum_size = Vector2(430, 170)
+layout_mode = 2
+
+[node name="TitleStack" type="VBoxContainer" parent="SafeArea/Layout/EmblemPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="Glyph" type="Label" parent="SafeArea/Layout/EmblemPanel/TitleStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
+theme_override_font_sizes/font_size = 72
+text = "◉"
+horizontal_alignment = 1
+
+[node name="Tagline" type="Label" parent="SafeArea/Layout/EmblemPanel/TitleStack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "RUN & GUN — PROTOTYPE"
+horizontal_alignment = 1
+
+[node name="MissionButton" type="Button" parent="SafeArea/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(430, 64)
+layout_mode = 2
+text = "MISSION PROTOTYPE"
+
+[node name="GalleryButton" type="Button" parent="SafeArea/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(430, 64)
+layout_mode = 2
+text = "GALERIE DA"
+
+[node name="QuitButton" type="Button" parent="SafeArea/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(430, 64)
+layout_mode = 2
+text = "QUITTER"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {&"": SubResource("AnimationLibrary_start")}
+

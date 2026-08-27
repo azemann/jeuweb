@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RunAndGunCameraProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://camera/run_and_gun_camera_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+forward_lookahead = 150.0
+lock_backward_progression = true
+vertical_center_ratio = 0.5
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileId": "vacuum-trooper-animation-v001",
+  "renderRepresentation": "raster-2d",
+  "gameplaySpace": "2d-canvas",
+  "animationRepresentation": "sprite-frames",
+  "engineOwnsMovement": true,
+  "canonicalDirection": "right",
+  "canonicalCanvas": [512, 384],
+  "canonicalRoot": [256, 360],
+  "runtimeFrame": [256, 192],
+  "runtimeRoot": [128, 180],
+  "animations": {
+    "walk": {
+      "grid": [4, 2],
+      "frameCount": 8,
+      "loop": true,
+      "durationsMs": [160, 160, 160, 160, 160, 160, 160, 160],
+      "phases": [
+        "contact_a",
+        "compression_a",
+        "passing_a",
+        "rise_a",
+        "contact_b",
+        "compression_b",
+        "passing_b",
+        "rise_b"
+      ]
+    }
+  }
+}

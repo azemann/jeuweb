@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" format=3 uid="uid://lgb7c4rrqsr"]
+
+[ext_resource type="Script" uid="uid://dvnh6v5cm2f2i" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1_definition"]
+[ext_resource type="Texture2D" uid="uid://5eia0w4lp6em" path="res://art/terrain/pieces/toxic_coast/natural/natural-ledge-medium-v001.png" id="2_texture"]
+[ext_resource type="Texture2D" uid="uid://duev2ridlek4k" path="res://art/terrain/pieces/toxic_coast/natural/damage_states/natural-ledge-medium-damaged-v001.png" id="4_damaged"]
+[ext_resource type="Texture2D" uid="uid://jok0xjjqr21a" path="res://art/terrain/pieces/toxic_coast/natural/damage_states/natural-ledge-medium-destroyed-v001.png" id="5_destroyed"]
+[ext_resource type="Resource" uid="uid://cnfxhafb3si4r" path="res://terrain/kits/toxic_coast/breakables/natural_ledge_breakable.tres" id="6_breakable"]
+
+[resource]
+script = ExtResource("1_definition")
+piece_id = &"natural_ledge_medium"
+display_name = "Côte toxique — corniche naturelle moyenne"
+tags = PackedStringArray("natural", "ledge", "toxic_coast")
+texture = ExtResource("2_texture")
+pivot_px = Vector2(384, 64)
+default_z_index = -1
+damaged_texture = ExtResource("4_damaged")
+destroyed_texture = ExtResource("5_destroyed")
+collision_source = 1
+authored_outline = PackedVector2Array(-350, -4, -300, -10, -220, -9, -140, -8, -60, -7, 30, -8, 110, -7, 190, -9, 270, -8, 330, -4, 350, 6, 342, 44, 310, 72, 250, 88, 200, 112, 140, 120, 90, 160, 15, 183, -45, 152, -105, 132, -175, 135, -235, 115, -290, 94, -330, 62, -350, 25)
+walk_surface_point_count = 11
+breakable_profile = ExtResource("6_breakable")

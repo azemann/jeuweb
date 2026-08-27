@@ -1,0 +1,46 @@
+{
+  "schema": "jeuweb.ground-piece-asset-qa.v1",
+  "piece_id": "natural_ledge_medium",
+  "status": "integrated",
+  "source": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/natural-ledge-medium-source-v002.png",
+  "rejected_source": "pipeline/assets/sources/terrain_kits/toxic_coast/natural/natural-ledge-medium-source-v001.png",
+  "output": "pipeline/assets/exports/terrain_kits/toxic_coast/natural/natural-ledge-medium-768x384-v001.png",
+  "source_bbox": [
+    42,
+    282,
+    1631,
+    750
+  ],
+  "canvas": [
+    768,
+    384
+  ],
+  "content_position": [
+    32,
+    40
+  ],
+  "content_size": [
+    704,
+    207
+  ],
+  "pivot_px": [
+    384,
+    64
+  ],
+  "alpha_floor_removed": 16,
+  "alpha_bbox": [
+    32,
+    40,
+    736,
+    247
+  ],
+  "source_sha256": "de0440c85d45a2134685ff5708d5883bce66b4c6bc92a03560a35ed4ab43d26e",
+  "rejected_source_sha256": "3cde3005152f56bb93465f27e491681696fe6fd50e7fb19da49deed23e812984",
+  "export_sha256": "607940a9670b9121b4158f807749c89545ad513428a9f93e08f9d1aff1f7ed57",
+  "validation": {
+    "technical": "passed",
+    "visual": "passed",
+    "human_approval": "passed",
+    "consumer_import": "passed"
+  }
+}
