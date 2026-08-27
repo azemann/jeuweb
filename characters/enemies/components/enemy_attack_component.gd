@@ -119,9 +119,9 @@ func _on_animation_finished() -> void:
 	_attacking = false
 	if _patrol != null:
 		_patrol.set_movement_enabled(true)
-	_sprite.play(&"walk")
 	_sprite.visible = false
 	_walk_sprite.visible = true
+	_walk_sprite.play(&"walk")
 	attack_finished.emit()
 
 

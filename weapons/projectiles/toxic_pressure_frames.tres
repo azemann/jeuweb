@@ -1,19 +1,39 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://wr87gip5c0wm"]
 
-[ext_resource type="Texture2D" path="res://art/weapons/projectiles/toxic_pressure/toxic-pressure-projectile-4x1-96-v001.png" id="1_texture"]
+[ext_resource type="Texture2D" uid="uid://dos6o57gxcppw" path="res://art/weapons/projectiles/toxic_pressure/toxic-pressure-projectile-4x1-96-v001.png" id="1_texture"]
 
 [sub_resource type="AtlasTexture" id="Projectile_00"]
 atlas = ExtResource("1_texture")
 region = Rect2(0, 0, 96, 64)
+
 [sub_resource type="AtlasTexture" id="Projectile_01"]
 atlas = ExtResource("1_texture")
 region = Rect2(96, 0, 96, 64)
+
 [sub_resource type="AtlasTexture" id="Projectile_02"]
 atlas = ExtResource("1_texture")
 region = Rect2(192, 0, 96, 64)
+
 [sub_resource type="AtlasTexture" id="Projectile_03"]
 atlas = ExtResource("1_texture")
 region = Rect2(288, 0, 96, 64)
 
 [resource]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("Projectile_00")}, {"duration": 1.0, "texture": SubResource("Projectile_01")}, {"duration": 1.0, "texture": SubResource("Projectile_02")}, {"duration": 1.0, "texture": SubResource("Projectile_03")}], "loop": 1, "name": &"flight", "speed": 10.0}]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Projectile_00")
+}, {
+"duration": 1.0,
+"texture": SubResource("Projectile_01")
+}, {
+"duration": 1.0,
+"texture": SubResource("Projectile_02")
+}, {
+"duration": 1.0,
+"texture": SubResource("Projectile_03")
+}],
+"loop": 1,
+"name": &"flight",
+"speed": 10.0
+}]

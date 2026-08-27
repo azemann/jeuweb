@@ -1,25 +1,53 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://timm2uw8llqx"]
 
-[ext_resource type="Texture2D" path="res://art/effects/toxic_pressure/toxic-pressure-impact-3x2-192x160-v001.png" id="1_texture"]
+[ext_resource type="Texture2D" uid="uid://ckwbxeuc0kmra" path="res://art/effects/toxic_pressure/toxic-pressure-impact-3x2-192x160-v001.png" id="1_texture"]
 
 [sub_resource type="AtlasTexture" id="Impact_00"]
 atlas = ExtResource("1_texture")
 region = Rect2(0, 0, 192, 160)
+
 [sub_resource type="AtlasTexture" id="Impact_01"]
 atlas = ExtResource("1_texture")
 region = Rect2(192, 0, 192, 160)
+
 [sub_resource type="AtlasTexture" id="Impact_02"]
 atlas = ExtResource("1_texture")
 region = Rect2(384, 0, 192, 160)
+
 [sub_resource type="AtlasTexture" id="Impact_03"]
 atlas = ExtResource("1_texture")
 region = Rect2(0, 160, 192, 160)
+
 [sub_resource type="AtlasTexture" id="Impact_04"]
 atlas = ExtResource("1_texture")
 region = Rect2(192, 160, 192, 160)
+
 [sub_resource type="AtlasTexture" id="Impact_05"]
 atlas = ExtResource("1_texture")
 region = Rect2(384, 160, 192, 160)
 
 [resource]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("Impact_00")}, {"duration": 1.0, "texture": SubResource("Impact_01")}, {"duration": 1.0, "texture": SubResource("Impact_02")}, {"duration": 1.0, "texture": SubResource("Impact_03")}, {"duration": 1.0, "texture": SubResource("Impact_04")}, {"duration": 1.0, "texture": SubResource("Impact_05")}], "loop": 0, "name": &"impact", "speed": 10.0}]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Impact_00")
+}, {
+"duration": 1.0,
+"texture": SubResource("Impact_01")
+}, {
+"duration": 1.0,
+"texture": SubResource("Impact_02")
+}, {
+"duration": 1.0,
+"texture": SubResource("Impact_03")
+}, {
+"duration": 1.0,
+"texture": SubResource("Impact_04")
+}, {
+"duration": 1.0,
+"texture": SubResource("Impact_05")
+}],
+"loop": 0,
+"name": &"impact",
+"speed": 10.0
+}]
