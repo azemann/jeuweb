@@ -878,3 +878,19 @@
   que les tests doivent valider les invariants des entrées sans figer leur
   nombre ;
 - aucune scène, Resource gameplay ou logique runtime n'a été modifiée.
+
+## 2026-08-27 — Retrait de l'ancienne mission autonome
+
+- vérifié que le runtime actif ouvre `PrototypeMissionScreen`, lequel charge
+  `toxic_coast.tres` par `MissionMapHost2D` ;
+- confirmé que `levels/prototype/prototype_mission.tscn` n'était référencée que
+  par un ancien contrôle de fondation et une spécification historique ;
+- supprimé cette scène parallèle désormais récupérable dans l'historique Git ;
+- remplacé sa vérification dans `foundation_smoke_test.gd` par le chargement de
+  la scène maîtresse canonique `toxic_coast.tscn` ;
+- conservé `PrototypeMissionScreen`, qui reste l'écran applicatif actif et ne
+  constitue pas une seconde architecture de carte ;
+- marqué la spécification de fondation comme historique sans réécrire les
+  décisions qu'elle documentait ;
+- prochaine action recommandée : ajouter une validation ciblée entre l'état
+  documenté et les catalogues publiés.

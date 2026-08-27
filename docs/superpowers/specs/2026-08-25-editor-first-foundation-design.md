@@ -4,6 +4,13 @@ Date : 2026-08-25
 Moteur cible : Godot 4.7.1  
 Portée : première tranche visible et navigable dans l’éditeur, sans gameplay de combat définitif
 
+> Statut historique : cette spécification décrit la fondation du 25 août 2026.
+> La scène autonome `levels/prototype/prototype_mission.tscn` qu'elle proposait
+> a depuis été retirée. L'écran actif `PrototypeMissionScreen` consomme désormais
+> une `MissionMapDefinition` et la scène maîtresse canonique Côte toxique via
+> `MissionMapHost2D`. Les mentions de `PrototypeMission.tscn` ci-dessous sont
+> conservées uniquement comme trace de la conception initiale.
+
 ## Résultat attendu
 
 Créer un projet Godot ouvrable directement depuis `project.godot`. Son lancement présente un court Boot Flow, puis un Start Flow donnant accès à une galerie des sept planches de direction artistique et à une mission prototype mise en scène. Cette tranche rend le projet compréhensible depuis le `SceneTree` et prépare les futurs systèmes sans les simuler prématurément.

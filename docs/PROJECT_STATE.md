@@ -24,6 +24,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - Boot Flow, Start Flow et navigation locale sans Autoload ;
 - galerie des sept planches de direction artistique ;
 - écran de mission prototype avec HUD ;
+- cet écran consomme la carte canonique par `MissionMapDefinition` et
+  `MissionMapHost2D` ; l'ancienne scène autonome `levels/prototype` a été
+  retirée ;
 - système de cartes par `MissionMapDefinition`, `MissionMapCatalog`,
   `MissionMapRoot2D` et `MissionMapHost2D` ;
 - première carte canonique `toxic_coast`, dimensions 3840 × 720 ;

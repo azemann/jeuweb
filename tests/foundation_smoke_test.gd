@@ -20,7 +20,7 @@ func _run() -> void:
 		"res://screens/start/start_flow.tscn",
 		"res://screens/gallery/art_direction_gallery.tscn",
 		"res://screens/prototype/prototype_mission_screen.tscn",
-		"res://levels/prototype/prototype_mission.tscn",
+		"res://maps/missions/toxic_coast/toxic_coast.tscn",
 	]
 	for path in scene_paths:
 		_check(load(path) is PackedScene, "Scène illisible : %s" % path)
@@ -45,12 +45,6 @@ func _run() -> void:
 	_check(_scene_has_signal("res://screens/start/start_flow.tscn", &"open_mission_requested"), "StartFlow doit émettre open_mission_requested.")
 	_check(_scene_has_signal("res://screens/gallery/art_direction_gallery.tscn", &"back_requested"), "La galerie doit émettre back_requested.")
 	_check(_scene_has_signal("res://screens/prototype/prototype_mission_screen.tscn", &"back_requested"), "La mission doit émettre back_requested.")
-
-	var mission := (load("res://levels/prototype/prototype_mission.tscn") as PackedScene).instantiate()
-	_check(mission.get_node_or_null("World/PlayerSpawn") is Marker2D, "PlayerSpawn absent.")
-	_check(mission.get_node_or_null("World/EnemySpawns/VacuumTrooperSpawn") is Marker2D, "VacuumTrooperSpawn absent.")
-	_check(mission.get_node_or_null("World/EnemySpawns/VacuumBruteSpawn") is Marker2D, "VacuumBruteSpawn absent.")
-	mission.free()
 
 	var main := (load("res://app/main.tscn") as PackedScene).instantiate()
 	root.add_child(main)
