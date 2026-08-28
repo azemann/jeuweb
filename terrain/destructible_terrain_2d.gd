@@ -6,6 +6,8 @@ const GroundPiece2DType = preload("res://terrain/ground_pieces/ground_piece_2d.g
 
 signal terrain_generated(solid_pixels: int, chunk_count: int)
 signal terrain_carved(center: Vector2, radius: float, affected_chunks: int)
+## Émis après la synchronisation différée des collisions dérivées du masque.
+signal collision_chunks_rebuilt(chunk_count: int)
 
 @export_category("Authority")
 ## Profil de rendu et de performance ; la géométrie initiale vient des zones auteur.
@@ -47,8 +49,14 @@ var authored_color_image: Image
 var display_texture: ImageTexture
 var collision_bitmap: BitMap
 var collision_bitmap_build_count := 0
+## Nombre de flushs physiques différés depuis la dernière génération complète.
+var collision_flush_count := 0
+## Nombre cumulé de chunks reconstruits par les flushs différés.
+var collision_chunk_rebuild_count := 0
 var _chunk_bodies: Dictionary = {}
 var _texture_images: Dictionary = {}
+var _dirty_chunks: Dictionary = {}
+var _dirty_flush_scheduled := false
 
 
 func _ready() -> void:
@@ -106,6 +114,10 @@ func generate_from_authored_zones() -> void:
 	collision_bitmap = BitMap.new()
 	collision_bitmap.create_from_image_alpha(mask_image, 0.5)
 	collision_bitmap_build_count += 1
+	_dirty_chunks.clear()
+	_dirty_flush_scheduled = false
+	collision_flush_count = 0
+	collision_chunk_rebuild_count = 0
 	_rebuild_display_image()
 	_rebuild_all_chunks()
 	queue_redraw()
@@ -144,10 +156,19 @@ func carve_circle(world_center: Vector2, radius: float) -> int:
 				fresh_cut_image.set_pixel(x, y, Color.WHITE)
 	var changed_rect := Rect2i(min_x, min_y, max_x - min_x + 1, max_y - min_y + 1)
 	_rebuild_display_image(changed_rect)
-	var affected := _rebuild_chunks_in_rect(changed_rect)
+	var affected := _queue_chunks_in_rect(changed_rect)
 	queue_redraw()
 	terrain_carved.emit(world_center, radius, affected)
 	return affected
+
+
+## Nombre de chunks uniques attendant la prochaine synchronisation physique.
+func pending_collision_chunk_count() -> int:
+	return _dirty_chunks.size()
+
+
+func has_pending_collision_rebuild() -> bool:
+	return _dirty_flush_scheduled
 
 
 func is_solid_at(world_position: Vector2) -> bool:
@@ -373,16 +394,42 @@ func _rebuild_all_chunks() -> void:
 			_rebuild_chunk(Vector2i(chunk_x, chunk_y))
 
 
-func _rebuild_chunks_in_rect(pixel_rect: Rect2i) -> int:
+func _queue_chunks_in_rect(pixel_rect: Rect2i) -> int:
 	var first := Vector2i(pixel_rect.position.x / profile.chunk_size, pixel_rect.position.y / profile.chunk_size)
 	var last_pixel := pixel_rect.end - Vector2i.ONE
 	var last := Vector2i(last_pixel.x / profile.chunk_size, last_pixel.y / profile.chunk_size)
 	var count := 0
 	for chunk_y in range(first.y, last.y + 1):
 		for chunk_x in range(first.x, last.x + 1):
-			_rebuild_chunk(Vector2i(chunk_x, chunk_y))
+			_dirty_chunks[Vector2i(chunk_x, chunk_y)] = true
 			count += 1
+	_schedule_dirty_chunk_flush()
 	return count
+
+
+func _schedule_dirty_chunk_flush() -> void:
+	if _dirty_flush_scheduled or _dirty_chunks.is_empty():
+		return
+	_dirty_flush_scheduled = true
+	call_deferred(&"_flush_dirty_chunks")
+
+
+func _flush_dirty_chunks() -> void:
+	_dirty_flush_scheduled = false
+	if _dirty_chunks.is_empty() or collision_bitmap == null or profile == null:
+		return
+	var coordinates: Array[Vector2i] = []
+	for coordinate: Vector2i in _dirty_chunks:
+		coordinates.append(coordinate)
+	_dirty_chunks.clear()
+	coordinates.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+		return a.y < b.y or (a.y == b.y and a.x < b.x)
+	)
+	for coordinate in coordinates:
+		_rebuild_chunk(coordinate)
+	collision_flush_count += 1
+	collision_chunk_rebuild_count += coordinates.size()
+	collision_chunks_rebuilt.emit(coordinates.size())
 
 
 func _rebuild_chunk(coordinates: Vector2i) -> void:

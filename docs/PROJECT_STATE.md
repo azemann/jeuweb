@@ -57,7 +57,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   destructible global, avec cratères continus entre leurs raccords ;
 - style de sol permanent partagé et réglable par Resource dans l'Inspector ;
 - masque alpha et collisions par chunks de 128 px ;
-- cratères locaux sans reconstruction du bitmap complet ;
+- cratères locaux sans reconstruction du bitmap complet ; masque et rendu sont
+  immédiats, tandis que les chunks physiques sales sont dédupliqués puis
+  reconstruits par un unique flush différé après la requête physique ;
 - scène canonique `Explosion2D` orchestrée par `AnimationPlayer` ;
 - `ExplosionData` éditable pour terrain, combat, timing et palette ;
 - impact d'explosion relié au terrain, dégâts radiaux autonomes par
@@ -251,8 +253,8 @@ catalogues.
 - caches Godot, états locaux Codex, captures, exports et journaux exclus par
   `.gitignore` ;
 - état animation contrôlé par le validateur raster v002 et son contrat headless
-  dédié ; la suite globale actuelle de 26 contrats est verte après migration de
-  l'arborescence auteur et prise en compte de `LandingCadence2`.
+  dédié ; la suite globale actuelle de 27 contrats est verte, dont un impact
+  terrain déclenché depuis une vraie callback `body_entered`.
 
 ## Limites connues
 
@@ -302,11 +304,11 @@ catalogues.
 
 ## Prochaine tranche recommandée
 
-Jouer la cadence actuelle de quinze apparitions et décider si
+Sécuriser les références de tireur conservées par les projectiles lorsqu'un
+acteur est libéré, puis jouer la cadence actuelle de quinze apparitions et décider si
 `LandingCadence2` constitue une vraie seconde rencontre ou seulement un essai de
 placement. Ajuster ensuite ses seuils et offsets depuis l'Inspector/Resources,
-puis reprendre la stabilisation runtime du terrain destructible et des
-références de projectiles avant le Set Piece du Boss.
+avant le Set Piece du Boss.
 
 
 ## Validations à exécuter
@@ -315,6 +317,7 @@ références de projectiles avant le Set Piece du Boss.
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/foundation_smoke_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/map_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/destructible_terrain_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/destructible_terrain_deferred_rebuild_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/explosion_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/asset_pipeline_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_contract_test.gd
@@ -336,8 +339,8 @@ python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
 python3 pipeline/assets/tools/validate_enemy_animation_roster_v002.py
 ```
 
-Dernière validation complète : 2026-08-28, les 26 contrats headless passent
-après la migration des branches auteur/runtime et des scènes de personnages.
+Dernière validation complète : 2026-08-28, les 27 contrats headless passent
+après la reconstruction différée du terrain destructible.
 `LandingCadence2` est valide, non bloquante et comprise dynamiquement dans le
 contrat de cadence.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames

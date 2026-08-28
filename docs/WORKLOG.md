@@ -1189,3 +1189,32 @@
   leurs seuils se chevauchent probablement ; prochaine action recommandée :
   revue jouée des quinze apparitions, puis stabilisation différée des collisions
   destructibles et des références de tireur libérées.
+
+## 2026-08-28 — Reconstruction physique différée du terrain destructible
+
+- confirmé dans le journal Godot 660 répétitions d'une seule erreur : un impact
+  projectile reconstruisait les `StaticBody2D` et `CollisionPolygon2D` pendant
+  le traitement physique de `body_entered` ;
+- conservé comme autorités les zones et Ground Pieces auteur, puis le masque et
+  `BitMap` runtime ; seule leur représentation physique dérivée change de
+  temporalité ;
+- séparé dans `DestructibleTerrain2D` la modification immédiate du masque/rendu
+  et la reconstruction différée des collisions via `call_deferred` ;
+- ajouté une file dictionnaire de coordonnées sales : plusieurs impacts sur le
+  même chunk dans une frame produisent un seul rebuild, trié de manière
+  déterministe ;
+- exposé le nombre de chunks en attente, le nombre de flushs et le signal
+  `collision_chunks_rebuilt` afin que le comportement soit inspectable et
+  testable sans devenir une seconde autorité gameplay ;
+- cette correction appartient au terrain global : toute future zone et toute
+  future `GroundPiece2D` en mode `Carvable` en bénéficient automatiquement ;
+- ajouté `destructible_terrain_deferred_rebuild_test.gd`, qui déclenche deux
+  cratères depuis une vraie callback physique `body_entered`, vérifie zéro
+  rebuild synchrone, un seul flush et un rebuild unique par chunk ;
+- renforcé les tests terrain, projectile et stamp de Ground Piece pour vérifier
+  masque immédiat, file différée et héritage par les futures pièces ;
+- validation réelle : nouveau test physique PASS, tests terrain/explosion/
+  projectile/Ground Piece PASS, puis suite globale de 27 contrats headless PASS
+  et `git diff --check` propre ;
+- limite restante : la référence `shooter` d'un projectile doit encore être
+  protégée par `is_instance_valid()` lorsque son acteur est libéré.

@@ -111,6 +111,9 @@ func _run() -> void:
 	terrain.carve_circle(Vector2(640, 560), 12.0)
 	_check(not terrain.is_solid_at(Vector2(636, 560)), "Le cratère doit traverser le stamp gauche.")
 	_check(not terrain.is_solid_at(Vector2(644, 560)), "Le cratère doit traverser le stamp droit.")
+	_check(terrain.has_pending_collision_rebuild(), "Toute future pièce Carvable doit utiliser la file physique commune du terrain.")
+	await process_frame
+	_check(terrain.collision_flush_count == 1, "Les stamps de Ground Pieces doivent être synchronisés par un unique flush différé.")
 	_check(
 		not left.is_permanent_collision_active() and not right.is_permanent_collision_active(),
 		"Les stamps ne doivent pas conserver de collisions locales."

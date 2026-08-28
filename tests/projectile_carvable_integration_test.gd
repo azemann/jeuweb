@@ -40,6 +40,9 @@ func _run() -> void:
 	_check(observations.carves == 1, "La munition doit demander exactement un creusement au terrain touché.")
 	_check(not terrain.is_solid_at(impact_position), "Le centre de l'impact doit devenir traversable façon Worms.")
 	_check(terrain.is_solid_at(impact_position + Vector2(18, 0)), "Une balle ne doit retirer qu'un petit disque local.")
+	_check(terrain.has_pending_collision_rebuild(), "L'impact doit différer la reconstruction des CollisionPolygon2D.")
+	await process_frame
+	_check(terrain.collision_flush_count == 1, "L'impact projectile doit produire un unique flush physique différé.")
 
 	map.free()
 	_finish()

@@ -22,7 +22,7 @@ pendant la migration des anciens volumes et `GroundModule2D`.
 - les `TileMapLayer` possèdent le décor répétitif lorsqu'un TileSet existe ;
 - les marqueurs Godot possèdent placement et activation ; les Resources
   `EncounterData → WaveData → EnemySpawnPatternData` possèdent la cadence ;
-- le futur masque raster possédera uniquement la matière destructible runtime.
+- le masque raster possède uniquement la matière destructible runtime ;
 - chaque `GroundModule2D.outline` possède simultanément la forme visuelle et
   physique de son morceau de sol permanent ;
 - `PermanentGroundStyle.tres` possède ses matières, couleurs et largeur de
@@ -121,6 +121,26 @@ La destruction n'est jamais implicite. La `MissionMapDefinition` choisit :
 
 Les limites, sorties, supports critiques et volumes de caméra ne dépendent
 jamais d'une matière destructible.
+
+### Synchronisation runtime du terrain destructible
+
+`DestructibleTerrain2D` sépare obligatoirement deux temporalités :
+
+```text
+Impact
+├── masque, bitmap et rendu modifiés immédiatement
+└── coordonnées de chunks ajoutées à une file dédupliquée
+        ↓ call_deferred
+   collisions reconstruites après la requête physique
+```
+
+`carve_circle()` ne crée, ne retire et ne reparente jamais un Node physique dans
+la callback d'impact. Plusieurs tirs touchant le même chunk pendant une frame
+produisent un seul rebuild. Cette règle appartient au terrain global : toute
+nouvelle zone auteur et toute nouvelle `GroundPiece2D` en mode `Carvable` en
+bénéficient automatiquement, sans script ni option supplémentaire sur la
+pièce. Le masque reste l'autorité immédiate de `is_solid_at()` ; les colliders
+en sont une représentation dérivée synchronisée juste après la frame physique.
 
 ## Sol permanent sans TileSet
 

@@ -30,7 +30,12 @@ func _run() -> void:
 		var after := terrain.collision_bitmap.get_true_bit_count()
 		_check(not terrain.is_solid_at(Vector2(920, 625)), "Le centre du cratère doit devenir de l'air.")
 		_check(after < before, "Un cratère doit retirer de la matière.")
-		_check(affected >= 1 and affected <= 4, "Un petit cratère doit reconstruire entre un et quatre chunks.")
+		_check(affected >= 1 and affected <= 4, "Un petit cratère doit salir entre un et quatre chunks.")
+		_check(terrain.has_pending_collision_rebuild(), "Le creusement doit planifier la collision sans la reconstruire dans l'appel courant.")
+		_check(terrain.collision_flush_count == 0, "La collision ne doit pas être modifiée synchroniquement par carve_circle().")
+		await process_frame
+		_check(not terrain.has_pending_collision_rebuild() and terrain.pending_collision_chunk_count() == 0, "Le flush différé doit vider tous les chunks sales.")
+		_check(terrain.collision_flush_count == 1 and terrain.collision_chunk_rebuild_count == affected, "Un cratère doit produire un seul flush contenant chaque chunk affecté une fois.")
 		_check(terrain.collision_bitmap_build_count == 1, "Une explosion locale ne doit pas reconstruire le bitmap complet.")
 	map.free()
 
