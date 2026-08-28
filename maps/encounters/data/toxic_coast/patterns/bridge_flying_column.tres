@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemySpawnPatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://maps/encounters/enemy_spawn_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_id = &"flying_column"
+enemy_archetype = &"vacuum_flying"
+formation = 3
+count = 2
+spacing = Vector2(90, 100)
+local_offset = Vector2(0, -150)
+spawn_interval = 0.3

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemySpawnPatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://maps/encounters/enemy_spawn_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_id = &"foundry_guard_line"
+enemy_archetype = &"vacuum_grunt"
+count = 2
+spacing = Vector2(190, 0)
+spawn_interval = 0.2

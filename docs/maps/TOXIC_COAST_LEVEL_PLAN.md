@@ -5,9 +5,9 @@ La scène maîtresse `toxic_coast.tscn` est l'autorité du placement. La Resourc
 
 | Segment | Intervalle | Rôle | Repères de gameplay |
 |---|---:|---|---|
-| `landing_zone` | 0–1280 | Introduction | spawn joueur, patrouille, premier cratère, bassin toxique |
-| `acid_bridge` | 1280–2560 | Escalade | brute, colonne de siphonneurs, pont destructible |
-| `vacuum_foundry` | 2560–3840 | Climax | checkpoint, garde lourde, ruissellement, sortie de mission |
+| `landing_zone` | 0–1280 | Introduction | Pressure : 2 Troopers ; Release : 1 Grunt ; premier Combat Gate |
+| `acid_bridge` | 1280–2560 | Escalade | 2 Grunts ; 2 Flying temporisés ; Pincer de 2 Grunts ; Gauntlet Gate |
+| `vacuum_foundry` | 2560–3840 | Climax | Pressure : 2 Grunts ; Payoff : Boss ; porte de sortie |
 
 ## Correspondances Godot
 
@@ -18,6 +18,10 @@ La scène maîtresse `toxic_coast.tscn` est l'autorité du placement. La Resourc
 - structure permanente : `StaticBody2D/CollisionPolygon2D` ;
 - profondeur visuelle : trois `Parallax2D` répétés tous les 1920 px ;
 - validation : `MissionMapRoot2D.validation_errors()` et `map_contract_test.gd`.
+- cadence : `EncounterData → WaveData → EnemySpawnPatternData` sous
+  `maps/encounters/data/toxic_coast/` ;
+- frontières de progression : trois `MissionCombatGate2D` sous
+  `Gameplay/Encounters`.
 
 ## Limite visuelle assumée
 

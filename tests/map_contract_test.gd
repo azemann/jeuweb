@@ -38,12 +38,15 @@ func _run() -> void:
 		_check(map.find_spawn(&"player_start") != null, "Le spawn joueur initial est obligatoire.")
 		_check(map.find_spawn(&"checkpoint_bridge") != null, "Le checkpoint du pont est obligatoire.")
 		_check(map.find_spawn(&"checkpoint_foundry") != null, "Le checkpoint de la fonderie est obligatoire.")
-		var grunt_marker := map.get_node_or_null("Gameplay/EnemySpawns/VacuumGruntGate") as MapEncounterMarker2D
-		var flying_marker := map.get_node_or_null("Gameplay/EnemySpawns/VacuumFlyingColumn") as MapEncounterMarker2D
-		var boss_marker := map.get_node_or_null("Gameplay/EnemySpawns/VacuumFoundryBoss") as MapEncounterMarker2D
-		_check(grunt_marker != null and grunt_marker.enabled and grunt_marker.enemy_archetype == "vacuum_grunt", "Le Grunt doit posséder une rencontre auteur active.")
-		_check(flying_marker != null and flying_marker.enabled and flying_marker.enemy_archetype == "vacuum_flying", "Le Drone doit posséder une rencontre auteur active.")
-		_check(boss_marker != null and boss_marker.enabled and boss_marker.enemy_archetype == "vacuum_boss", "Le Boss doit posséder une rencontre auteur active.")
+		var landing_marker := map.get_node_or_null("Gameplay/EnemySpawns/LandingCadence") as MapEncounterMarker2D
+		var bridge_marker := map.get_node_or_null("Gameplay/EnemySpawns/BridgeGauntlet") as MapEncounterMarker2D
+		var boss_marker := map.get_node_or_null("Gameplay/EnemySpawns/FoundryBossGate") as MapEncounterMarker2D
+		_check(landing_marker != null and landing_marker.enabled and landing_marker.encounter_data.authored_enemy_count() == 3, "Le débarquement doit exposer sa cadence auteur de trois ennemis.")
+		_check(bridge_marker != null and bridge_marker.enabled and bridge_marker.encounter_data.encounter_kind == EncounterData.EncounterKind.GAUNTLET and bridge_marker.encounter_data.authored_enemy_count() == 6, "Le pont doit exposer son Gauntlet auteur de six ennemis.")
+		_check(boss_marker != null and boss_marker.enabled and boss_marker.encounter_data.encounter_kind == EncounterData.EncounterKind.COMBAT_GATE and boss_marker.encounter_data.authored_enemy_count() == 3, "La fonderie doit exposer son Combat Gate auteur et son Boss.")
+		for gate_name in ["LandingCombatGate", "BridgeCombatGate", "FoundryCombatGate"]:
+			var gate := map.get_node_or_null("Gameplay/Encounters/%s" % gate_name) as MissionCombatGate2D
+			_check(gate != null and gate.validation_errors().is_empty() and gate.starts_closed, "%s doit bloquer physiquement son segment jusqu'à résolution." % gate_name)
 		_check(map.camera_bounds == Rect2(0, 0, 3840, 720), "Les limites caméra doivent couvrir le niveau complet.")
 		var segments := map.authored_segments()
 		_check(segments.size() == 3, "Côte toxique doit exposer trois segments auteurs.")

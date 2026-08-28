@@ -6,8 +6,9 @@ maîtresse de la carte.
 
 ## Autorités
 
-- placement, quantité, espacement et seuil d'activation :
-  `MapEncounterMarker2D` dans la scène maîtresse ;
+- placement final et seuil d'activation : `MapEncounterMarker2D` dans la scène
+  maîtresse ; quantité, formation et rythme : `EnemySpawnPatternData`,
+  `WaveData` et `EncounterData` ;
 - correspondance `enemy_archetype` → scène : `EnemyCatalog.tres` ;
 - PV, mode de locomotion, vitesse, amplitude de patrouille et vol ondulant :
   `EnemyArchetypeProfile.tres` ;
@@ -52,9 +53,10 @@ EnemyCharacter2D (CharacterBody2D)
 1. régler l'archétype dans sa Resource sous `characters/enemies/data/` ;
 2. assembler ou prévisualiser sa scène canonique dans Godot ;
 3. enregistrer sa correspondance dans `enemy_catalog.tres` ;
-4. placer un `MapEncounterMarker2D` sous `Gameplay/EnemySpawns` ;
-5. choisir archétype, nombre, espacement et distance d'activation dans
-   l'Inspector ;
+4. référencer l'archétype depuis un `EnemySpawnPatternData`, puis le composer
+   dans une `WaveData` et un `EncounterData` ;
+5. placer un `MapEncounterMarker2D` sous `Gameplay/EnemySpawns`, lui assigner
+   la rencontre et régler seulement son placement et sa distance d'activation ;
 6. résoudre les avertissements et exécuter `enemy_contract_test.gd`.
 
 Le Transform du marqueur est souverain pour la formation. Les acteurs générés
@@ -63,8 +65,9 @@ le pipeline.
 
 ## Contrat runtime
 
-- `MissionEnemySpawner2D` observe la progression du joueur et déclenche chaque
-  `encounter_id` une seule fois ;
+- `MissionEncounterController` observe la progression et déroule chaque
+  `encounter_id` une seule fois ; `MissionEnemySpawner2D` instancie seulement
+  les scènes demandées par les Spawn Patterns ;
 - le catalogue résout l'archétype sans chemin codé en dur dans la carte ;
 - chaque instance reçoit son origine de patrouille depuis sa position générée ;
 - Patrol possède la vélocité ; Health possède les PV ; Presentation ne modifie
@@ -90,6 +93,7 @@ le pipeline.
 volant, les quatre poses `walk`, `attack`, `hit`, `death` de chaque rôle,
 l'arbre canonique, les dégâts, la suppression différée et l'éjection réelle du
 Saboteur. `map_contract_test.gd` protège les marqueurs auteur et
-`mission_run_contract_test.gd` la victoire après les sept ennemis obligatoires.
+`mission_run_contract_test.gd` la victoire après les douze apparitions de la
+cadence obligatoire.
 Le validateur Python du roster vérifie 64 poses, dimensions, alpha et identité
 binaire entre exports pipeline et copies runtime.

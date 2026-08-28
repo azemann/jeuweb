@@ -4,7 +4,7 @@ Ce document est l'autorité des noms architecturaux employés dans le projet.
 Il doit permettre de comprendre le rôle d'une classe, d'une scène ou d'une
 Resource sans interpréter librement son suffixe.
 
-Le catalogue correspond à l'état du projet au 27 août 2026. Toute nouvelle
+Le catalogue correspond à l'état du projet au 28 août 2026. Toute nouvelle
 `class_name` doit être ajoutée ici dans le même changement.
 
 ## Règle de lecture d'un nom
@@ -103,6 +103,35 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | Invulnérabilité post-impact | Fenêtre empêchant plusieurs dégâts involontaires issus du même événement. |
 | Archétype ennemi | Identifiant de contenu résolu par `EnemyCatalog` vers une scène canonique. |
 | Encounter Marker | Intention de rencontre placée dans la map, pas un ennemi déjà instancié. |
+| Enemy cadence | Moment, position et rythme auxquels une rencontre injecte ses ennemis. |
+| Enemy archetype | Famille comportementale d'ennemi résolue par `EnemyCatalog`. |
+| Grunt | Ennemi terrestre basique qui établit la pression de référence. |
+| Elite | Variante plus dangereuse d'un archétype ; vocabulaire réservé, non publiée actuellement. |
+| Turret | Ennemi fixe ; vocabulaire réservé, non publié actuellement. |
+| Spawner enemy | Ennemi capable de produire d'autres ennemis ; distinct de `MissionEnemySpawner2D`. |
+| Flying enemy | Archétype aérien dont le profil choisit la locomotion volante. |
+| Mini-boss / Mid-boss | Boss intermédiaire servant d'escalade avant le climax. |
+| Boss phase | Phase comportementale d'un Boss ; future Resource, absente du runtime actuel. |
+| Spawn Pattern | Motif géométrique et temporel d'apparition d'un même archétype. |
+| Wave | Ensemble ordonné de Spawn Patterns associé à un beat de combat. |
+| Encounter | Séquence auteur de vagues déclenchée à un point de progression. |
+| Combat rhythm | Alternance intentionnelle `pressure → release → escalation → payoff`. |
+| Pressure | Beat qui augmente la charge active imposée au joueur. |
+| Release | Beat court de respiration et de récupération relative. |
+| Escalation | Beat qui combine ou intensifie les menaces déjà apprises. |
+| Payoff | Résolution spectaculaire ou défi culminant préparé par la cadence. |
+| Combat gate | Rencontre dont l'achèvement conditionne la progression ou la sortie. |
+| Kill room | Arène fermée jusqu'à élimination ; type décrit par `EncounterData`, verrou spatial futur. |
+| Gauntlet | Succession intensive de vagues pouvant se chevaucher dans le temps. |
+| Set piece | Séquence spécialement mise en scène ; type décrit, orchestration audiovisuelle future. |
+| Scrolling section | Portion de carte dont la caméra participe à la contrainte de progression. |
+| Auto-scroll | Défilement autonome de caméra ; non implémenté actuellement. |
+| Forced scroll | Défilement que le joueur doit suivre ; non implémenté actuellement. |
+| Vertical scrolling | Progression dont l'axe principal devient vertical ; non implémentée actuellement. |
+| Arena section | Segment temporairement traité comme arène ; verrou spatial futur. |
+| Moving platform | Plateforme mobile ; famille gameplay non publiée actuellement. |
+| Breakable wall | Mur discret destructible, spécialisé depuis le contrat `Breakable`. |
+| Secret route | Passage alternatif caché ; intention de niveau non publiée actuellement. |
 
 ## Catalogue des classes
 
@@ -130,6 +159,11 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `MapSegment2D` | Node2D | Décrit un morceau ordonné du rythme et de l'espace de la mission. |
 | `MapSpawnPoint2D` | Marker2D | Positionne un départ, checkpoint ou point d'entrée identifié. |
 | `MapEncounterMarker2D` | Marker2D | Place une demande auteur d'ennemis dans la progression. |
+| `EnemySpawnPatternData` | Resource | Décrit archétype, formation, offsets et intervalle d'apparition d'un motif. |
+| `WaveData` | Resource | Ordonne les motifs d'une vague et porte son beat et sa condition d'avancement. |
+| `EncounterData` | Resource | Compose les vagues, leur intention et leur effet sur la sortie de mission. |
+| `MissionEncounterController` | Node | Déclenche les marqueurs et exécute leur cadence Resource au runtime. |
+| `MissionCombatGate2D` | Node2D | Bloque physiquement un passage puis l'ouvre à la fin de sa rencontre. |
 | `MissionActorSpawner2D` | Node | Instancie le joueur au spawn demandé dans la map chargée. |
 | `MissionEnemySpawner2D` | Node | Traduit les Encounter Markers via l'Enemy Catalog et instancie les ennemis. |
 | `MissionCheckpoint2D` | Area2D | Traduit le passage du joueur en changement de spawn de reprise. |

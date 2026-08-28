@@ -10,15 +10,14 @@ signal encounter_cleared(encounter_id: StringName)
 @export_node_path("MissionMapHost2D") var map_host_path := NodePath("../MapHost")
 ## Spawner qui expose l'instance courante du joueur pour tester la sortie.
 @export_node_path("MissionActorSpawner2D") var actor_spawner_path := NodePath("../ActorSpawner")
-## Spawner dont les signaux associent les ennemis runtime aux rencontres auteur.
-@export_node_path("MissionEnemySpawner2D") var enemy_spawner_path := NodePath("../EnemySpawner")
+## Contrôleur dont les signaux publient début, fin et population des rencontres.
+@export_node_path("MissionEncounterController") var encounter_controller_path := NodePath("../EncounterController")
 ## Chemin vers la sortie, relatif à la racine de la scène maîtresse chargée.
 @export_node_path("Marker2D") var exit_path := NodePath("Gameplay/Exits/MissionEnd")
 ## Distance maximale entre le joueur et le Marker2D de sortie pour gagner.
 @export_range(16.0, 160.0, 4.0) var exit_radius := 72.0
 
 var _required_encounters: Dictionary = {}
-var _remaining_enemies: Dictionary = {}
 var _cleared_encounters: Dictionary = {}
 var _won := false
 
@@ -29,9 +28,9 @@ func _ready() -> void:
 	var host := map_host()
 	if host != null and not host.map_loaded.is_connected(_on_map_loaded):
 		host.map_loaded.connect(_on_map_loaded)
-	var spawner := get_node_or_null(enemy_spawner_path) as MissionEnemySpawner2D
-	if spawner != null and not spawner.encounter_spawned.is_connected(_on_encounter_spawned):
-		spawner.encounter_spawned.connect(_on_encounter_spawned)
+	var encounters := encounter_controller()
+	if encounters != null and not encounters.encounter_completed.is_connected(_on_encounter_completed):
+		encounters.encounter_completed.connect(_on_encounter_completed)
 	if host != null and host.current_map != null:
 		_on_map_loaded(host.current_map)
 
@@ -62,7 +61,8 @@ func required_encounter_ids() -> Array[StringName]:
 
 
 func remaining_enemy_count(encounter_id: StringName) -> int:
-	return int(_remaining_enemies.get(encounter_id, 0))
+	var encounters := encounter_controller()
+	return encounters.active_enemy_count(encounter_id) if encounters != null else 0
 
 
 func all_required_encounters_cleared() -> bool:
@@ -74,7 +74,6 @@ func all_required_encounters_cleared() -> bool:
 
 func _on_map_loaded(map: MissionMapRoot2D) -> void:
 	_required_encounters.clear()
-	_remaining_enemies.clear()
 	_cleared_encounters.clear()
 	_won = false
 	var root := map.get_node_or_null("Gameplay/EnemySpawns")
@@ -82,28 +81,19 @@ func _on_map_loaded(map: MissionMapRoot2D) -> void:
 		return
 	for child in root.get_children():
 		var marker := child as MapEncounterMarker2D
-		if marker != null and marker.enabled and marker.required_for_completion:
+		if marker != null and marker.enabled and marker.encounter_data != null and marker.encounter_data.blocks_mission_exit:
 			_required_encounters[marker.encounter_id] = true
 
 
-func _on_encounter_spawned(encounter_id: StringName, enemies: Array[EnemyCharacter2D]) -> void:
-	if not _required_encounters.has(encounter_id) or enemies.is_empty():
+func _on_encounter_completed(encounter_id: StringName) -> void:
+	if not _required_encounters.has(encounter_id):
 		return
-	for enemy in enemies:
-		var health := enemy.health_component()
-		if health != null and not health.died.is_connected(_on_enemy_died.bind(encounter_id, enemy)):
-			health.died.connect(_on_enemy_died.bind(encounter_id, enemy))
-	_remaining_enemies[encounter_id] = enemies.size()
+	_cleared_encounters[encounter_id] = true
+	encounter_cleared.emit(encounter_id)
 
 
-func _on_enemy_died(encounter_id: StringName, _enemy: EnemyCharacter2D) -> void:
-	if not _remaining_enemies.has(encounter_id):
-		return
-	_remaining_enemies[encounter_id] = maxi(0, int(_remaining_enemies[encounter_id]) - 1)
-	if _remaining_enemies[encounter_id] == 0:
-		_remaining_enemies.erase(encounter_id)
-		_cleared_encounters[encounter_id] = true
-		encounter_cleared.emit(encounter_id)
+func encounter_controller() -> MissionEncounterController:
+	return get_node_or_null(encounter_controller_path) as MissionEncounterController
 
 
 func _resolve_exit(map: MissionMapRoot2D) -> Marker2D:
@@ -116,8 +106,8 @@ func validation_errors() -> PackedStringArray:
 		errors.append("MissionMapHost2D obligatoire.")
 	if get_node_or_null(actor_spawner_path) == null:
 		errors.append("MissionActorSpawner2D obligatoire.")
-	if get_node_or_null(enemy_spawner_path) == null:
-		errors.append("MissionEnemySpawner2D obligatoire.")
+	if encounter_controller() == null:
+		errors.append("MissionEncounterController obligatoire.")
 	if exit_path.is_empty():
 		errors.append("Le chemin relatif vers la sortie est obligatoire.")
 	return errors

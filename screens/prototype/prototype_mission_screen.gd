@@ -10,6 +10,13 @@ func _ready() -> void:
 	var run := %MissionRunController
 	if not run.mission_won.is_connected(_on_mission_won):
 		run.mission_won.connect(_on_mission_won)
+	var encounters := %EncounterController as MissionEncounterController
+	if not encounters.encounter_started.is_connected(_on_encounter_started):
+		encounters.encounter_started.connect(_on_encounter_started)
+	if not encounters.wave_started.is_connected(_on_wave_started):
+		encounters.wave_started.connect(_on_wave_started)
+	if not encounters.encounter_completed.is_connected(_on_encounter_completed):
+		encounters.encounter_completed.connect(_on_encounter_completed)
 	%ActorSpawner.player_spawned.connect(_on_player_spawned)
 	if %ActorSpawner.current_player != null:
 		_on_player_spawned(%ActorSpawner.current_player, null)
@@ -20,6 +27,20 @@ func _on_mission_won() -> void:
 	%ResultPanel.visible = true
 	%ResultLabel.text = "MISSION ACCOMPLIE\nCÔTE TOXIQUE SÉCURISÉE"
 	%BackButton.grab_focus()
+
+
+func _on_encounter_started(_encounter_id: StringName, data: EncounterData) -> void:
+	%EncounterLabel.text = "RENCONTRE · %s" % str(data.cadence_id).replace("_", " ").to_upper()
+	%CadenceLabel.text = "PRÉPARATION"
+
+
+func _on_wave_started(_encounter_id: StringName, wave_index: int, wave: WaveData) -> void:
+	var beat_names := ["PRESSION", "RESPIRATION", "ESCALADE", "PAYOFF"]
+	%CadenceLabel.text = "%s · VAGUE %d" % [beat_names[wave.combat_beat], wave_index + 1]
+
+
+func _on_encounter_completed(_encounter_id: StringName) -> void:
+	%CadenceLabel.text = "ZONE SÉCURISÉE"
 
 
 func _unhandled_input(event: InputEvent) -> void:

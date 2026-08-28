@@ -20,7 +20,8 @@ pendant la migration des anciens volumes et `GroundModule2D`.
 - la scène maîtresse possède le placement final ;
 - les `MapSegment2D` possèdent le découpage, l'ordre et l'intention des séquences ;
 - les `TileMapLayer` possèdent le décor répétitif lorsqu'un TileSet existe ;
-- les marqueurs Godot possèdent les rôles de gameplay ;
+- les marqueurs Godot possèdent placement et activation ; les Resources
+  `EncounterData → WaveData → EnemySpawnPatternData` possèdent la cadence ;
 - le futur masque raster possédera uniquement la matière destructible runtime.
 - chaque `GroundModule2D.outline` possède simultanément la forme visuelle et
   physique de son morceau de sol permanent ;
@@ -56,17 +57,20 @@ La racine doit retourner zéro erreur avec `validation_errors()`. Chaque
 ## Objectifs et sortie de mission
 
 La scène maîtresse possède la définition auteur de la victoire : chaque
-`MapEncounterMarker2D` activé choisit dans l'Inspector s'il est
-`Required For Completion`, et le `Marker2D` sous `Gameplay/Exits` possède la
-position finale à atteindre. Une rencontre désactivée ne bloque jamais la
-sortie.
+`MapEncounterMarker2D` activé référence une `EncounterData` dont
+`Blocks Mission Exit` choisit si elle conditionne la sortie. Le `Marker2D` sous
+`Gameplay/Exits` possède la position finale à atteindre. Une rencontre
+désactivée ne bloque jamais la sortie.
 
-Le `MissionRunController` visible dans la scène d'écran observe les signaux du
-spawner et des composants Health. Il possède uniquement l'état runtime des
+Le `MissionRunController` visible dans la scène d'écran observe le signal de fin
+du `MissionEncounterController`. Il possède uniquement l'état runtime des
 rencontres restantes ; il ne maintient aucune liste parallèle d'identifiants.
 La victoire exige simultanément l'élimination de toutes les rencontres auteur
 obligatoires et la présence du joueur dans le rayon de sortie réglable depuis
 l'Inspector.
+
+Le contrat exhaustif des vagues, motifs et beats se trouve dans
+`docs/maps/ENCOUNTER_AUTHORING_CONTRACT.md`.
 
 ## Segments de progression
 

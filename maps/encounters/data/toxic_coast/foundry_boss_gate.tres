@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://maps/encounters/encounter_data.gd" id="1"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/foundry_pressure.tres" id="2"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/foundry_payoff.tres" id="3"]
+[ext_resource type="Script" path="res://maps/encounters/wave_data.gd" id="4"]
+
+[resource]
+script = ExtResource("1")
+cadence_id = &"toxic_coast_foundry_boss_gate"
+encounter_kind = 1
+waves = Array[ExtResource("4")]([ExtResource("2"), ExtResource("3")])
+completion_delay = 0.6

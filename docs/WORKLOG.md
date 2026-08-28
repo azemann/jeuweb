@@ -1069,3 +1069,39 @@
 - limite volontaire : le Boss utilise encore le projectile toxique commun ;
   prochaine action recommandée : équilibrer la rencontre jouée puis produire
   son projectile lourd dédié.
+
+## 2026-08-28 — Enemy cadence Resource-first et Combat Gates
+
+- remplacé les marqueurs plats `archétype + quantité` par la chaîne auteur
+  `EnemySpawnPatternData → WaveData → EncounterData → MapEncounterMarker2D` ;
+- publié six formations génériques (`Centered Line`, directions latérales,
+  `Vertical Stack`, `Pincer`, offsets libres), les intervalles d'apparition,
+  les respirations et les transitions `When Cleared` / `After Delay` ;
+- ajouté les beats `Pressure`, `Release`, `Escalation`, `Payoff` et les types
+  `Standard`, `Combat Gate`, `Kill Room`, `Gauntlet`, `Set Piece`, `Arena` dans
+  des Resources visibles et validées dans l'Inspector ;
+- séparé `MissionEncounterController`, autorité de l'état des vagues, de
+  `MissionEnemySpawner2D`, désormais limité à la traduction catalogue et à
+  l'instanciation ; `MissionRunController` ne consomme plus que les fins de
+  rencontres obligatoires ;
+- composé Côte toxique en trois rencontres, sept vagues et douze apparitions :
+  Landing Pressure/Release, Bridge Pressure/double Escalation avec chevauchement
+  temporel, Foundry Pressure/Payoff Boss ;
+- ajouté trois `MissionCombatGate2D` sous `Gameplay/Encounters` : leur collision
+  World empêche réellement de court-circuiter un segment, puis leur visuel et
+  leur collision disparaissent à la fin de la cadence correspondante ;
+- ajouté l'aperçu coloré des formations sur chaque Marker dans l'éditeur et un
+  feedback HUD indiquant rencontre, beat et numéro de vague actifs ;
+- ajouté `ENCOUNTER_AUTHORING_CONTRACT.md`, étendu contrats carte/ennemi,
+  glossaire, plan Côte toxique et validations récursives de la scène maîtresse ;
+- ajouté `encounter_cadence_contract_test.gd` : il protège Resources, catalogue,
+  géométrie Pincer/Vertical Stack, ordre des sept vagues, chevauchement réel du
+  Gauntlet, total de douze ennemis, HUD et ouverture des barrières ;
+- remplacé les coroutines de temporisation par un automate de cadence piloté
+  par les frames après avoir détecté une reprise asynchrone lors de la
+  destruction anticipée de l'écran ; quitter ou recharger une map est propre ;
+- validation réelle : les 25 contrats headless passent sans erreur, ainsi que
+  le démarrage complet du projet avec arrêt après 240 frames ;
+- limite volontaire : Kill Room/Arena n'ont pas encore leur verrou caméra et
+  Set Piece n'orchestre pas encore audio/VFX ; prochaine action recommandée :
+  construire les phases et le projectile lourd du Boss comme premier Set Piece.

@@ -140,19 +140,21 @@ func _run() -> void:
 	_check(host.current_map != null, "La mission doit charger Côte toxique.")
 	_check(enemy_spawner.catalog == catalog, "L'écran doit exposer le catalogue ennemi dans l'Inspector.")
 	if host.current_map != null:
-		var marker := host.current_map.get_node("Gameplay/EnemySpawns/VacuumPatrol") as MapEncounterMarker2D
-		_check(marker.count == 2 and marker.global_position.x < 1280.0, "VacuumPatrol doit demander deux ennemis dans le premier écran.")
-		var runtime_enemies := host.current_map.get_node("Actors").find_children("vacuum_patrol_01_*", "EnemyCharacter2D", true, false)
-		_check(runtime_enemies.size() == 2, "VacuumPatrol doit générer exactement deux ennemis.")
+		var marker := host.current_map.get_node("Gameplay/EnemySpawns/LandingCadence") as MapEncounterMarker2D
+		var first_pattern := marker.encounter_data.waves[0].spawn_patterns[0]
+		_check(first_pattern.spawn_count() == 2 and marker.global_position.x < 1280.0, "La première pression doit demander deux Troopers dans le premier écran.")
+		await create_timer(0.35).timeout
+		var runtime_enemies := host.current_map.get_node("Actors").find_children("landing_cadence_*", "EnemyCharacter2D", true, false)
+		_check(runtime_enemies.size() == 2, "La première pression doit générer exactement deux Troopers avant la vague Release.")
 		var actual_origins: Array[float] = []
 		for runtime_enemy in runtime_enemies:
 			_check(runtime_enemy.get_parent() == host.current_map.actors_root(), "Chaque ennemi runtime doit appartenir à Actors.")
 			_check(runtime_enemy.global_position.x < 1280.0, "La première patrouille doit rester dans les 1280 premiers pixels.")
 			actual_origins.append(runtime_enemy.patrol_component().origin_x)
 		actual_origins.sort()
-		var half_formation := (float(marker.count) - 1.0) * marker.formation_spacing * 0.5
-		for index in marker.count:
-			var expected_origin := marker.global_position.x + index * marker.formation_spacing - half_formation
+		var offsets := first_pattern.authored_offsets()
+		for index in offsets.size():
+			var expected_origin := marker.global_position.x + offsets[index].x
 			_check(is_equal_approx(actual_origins[index], expected_origin), "Patrol doit dériver son origine du marqueur et de son espacement auteur.")
 	screen.free()
 

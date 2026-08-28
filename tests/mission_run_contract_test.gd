@@ -29,21 +29,22 @@ func _run() -> void:
 	var viewport := screen.get_node("MissionViewportContainer/MissionViewport") as SubViewport
 	var host := viewport.get_node("MapHost") as MissionMapHost2D
 	var actor_spawner := viewport.get_node("ActorSpawner") as MissionActorSpawner2D
+	var encounter_controller := viewport.get_node("EncounterController") as MissionEncounterController
 	var controller := viewport.get_node("MissionRunController") as MissionRunController
 	_check(host != null and host.current_map != null, "La scène maîtresse doit être chargée pour la mission.")
 	_check(actor_spawner != null and actor_spawner.current_player != null, "Le joueur doit être présent dans la mission.")
+	_check(encounter_controller != null and encounter_controller.validation_errors().is_empty(), "MissionEncounterController doit exposer ses correspondances dans le SceneTree.")
 	_check(controller != null and controller.validation_errors().is_empty(), "MissionRunController doit exposer des correspondances valides dans le SceneTree.")
-	if host == null or host.current_map == null or actor_spawner == null or actor_spawner.current_player == null or controller == null:
+	if host == null or host.current_map == null or actor_spawner == null or actor_spawner.current_player == null or encounter_controller == null or controller == null:
 		screen.queue_free()
 		_finish()
 		return
 
 	_check(controller.exit_path == NodePath("Gameplay/Exits/MissionEnd"), "Le chemin de sortie doit être relatif à la scène maîtresse.")
 	var required_encounters := controller.required_encounter_ids()
-	var expected_encounters := [&"vacuum_flying_column", &"vacuum_foundry_boss", &"vacuum_grunt_gate", &"vacuum_patrol_01"]
-	_check(required_encounters.size() == expected_encounters.size() and required_encounters.all(func(encounter_id): return expected_encounters.has(encounter_id)), "Les quatre rencontres actives doivent bloquer la sortie : %s" % str(required_encounters))
+	var expected_encounters := [&"bridge_gauntlet", &"foundry_boss_gate", &"landing_cadence"]
+	_check(required_encounters.size() == expected_encounters.size() and required_encounters.all(func(encounter_id): return expected_encounters.has(encounter_id)), "Les trois rencontres rythmées doivent bloquer la sortie : %s" % str(required_encounters))
 	_check(not controller.all_required_encounters_cleared(), "Une rencontre non apparue ne doit jamais être considérée comme éliminée.")
-	_check(controller.remaining_enemy_count(&"vacuum_patrol_01") == 2, "Le contrôleur doit suivre les deux Troopers instanciés.")
 
 	controller.mission_won.connect(_on_mission_won)
 	var exit := host.current_map.get_node("Gameplay/Exits/MissionEnd") as Marker2D
@@ -52,21 +53,21 @@ func _run() -> void:
 	await physics_frame
 	_check(_mission_won_count == 0, "Atteindre la sortie avant d'éliminer la rencontre ne doit pas terminer la mission.")
 
-	var enemies: Array[EnemyCharacter2D] = []
-	for child in host.current_map.actors_root().get_children():
-		if child is EnemyCharacter2D:
-			enemies.append(child)
-	_check(enemies.size() == 7, "Les quatre rencontres obligatoires doivent produire sept EnemyCharacter2D.")
-	for enemy in enemies:
-		var health := enemy.health_component()
-		_check(health != null, "Chaque ennemi obligatoire doit exposer Health.")
-		if health != null:
-			health.apply_damage(health.current_health)
-
-	await process_frame
-	await physics_frame
-	_check(controller.remaining_enemy_count(&"vacuum_patrol_01") == 0, "Le compteur Trooper doit atteindre zéro après les deux morts.")
+	var killed := 0
+	for _frame in 900:
+		for child in host.current_map.actors_root().get_children():
+			var enemy := child as EnemyCharacter2D
+			if enemy != null and enemy.health_component() != null and enemy.health_component().current_health > 0.0:
+				enemy.health_component().apply_damage(enemy.health_component().current_health)
+				killed += 1
+		await physics_frame
+		if controller.all_required_encounters_cleared():
+			break
+	_check(killed >= 12, "Le run doit réellement traverser les douze apparitions de la cadence auteur.")
 	_check(controller.all_required_encounters_cleared(), "La rencontre doit être marquée éliminée après sa dernière mort.")
+	actor_spawner.current_player.global_position = exit.global_position
+	await physics_frame
+	await physics_frame
 	_check(_mission_won_count == 1, "La sortie doit émettre mission_won exactement une fois après l'objectif.")
 	_check(screen.get_node("ResultPanel").visible, "Le résultat de victoire doit être visible dans l'écran de mission.")
 	await physics_frame

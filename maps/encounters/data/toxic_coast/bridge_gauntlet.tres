@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://maps/encounters/encounter_data.gd" id="1"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/bridge_pressure.tres" id="2"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/bridge_escalation_air.tres" id="3"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/bridge_escalation_pincer.tres" id="4"]
+[ext_resource type="Script" path="res://maps/encounters/wave_data.gd" id="5"]
+
+[resource]
+script = ExtResource("1")
+cadence_id = &"toxic_coast_bridge_gauntlet"
+encounter_kind = 3
+waves = Array[ExtResource("5")]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
+completion_delay = 0.4

@@ -100,8 +100,18 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   mort via son composant `Ejection` visible dans le SceneTree ;
 - scène canonique `EnemyCharacter2D` composée de Patrol, Health et Presentation,
   profil et catalogue Resources éditables dans l'Inspector ;
-- `MissionEnemySpawner2D` traduit quatre marqueurs auteurs en sept ennemis
-  obligatoires : deux Troopers, deux Grunts, deux Drones et un Boss ;
+- chaîne de cadence Resource-first publiée : `EnemySpawnPatternData` décrit une
+  formation, `WaveData` son beat et sa transition, `EncounterData` compose les
+  vagues, puis `MapEncounterMarker2D` possède uniquement placement et activation ;
+- `MissionEncounterController` déroule trois rencontres, sept vagues et douze
+  apparitions principales sur Côte toxique ; le spawner ne fait plus que
+  traduire chaque archétype en scène canonique ;
+- courbe jouable : pression puis respiration au débarquement, Gauntlet avec
+  escalade terrestre/aérienne au pont, pression puis payoff Boss à la fonderie ;
+- trois `MissionCombatGate2D` visibles sous `Gameplay/Encounters` bloquent
+  physiquement chaque frontière et s'ouvrent à la résolution correspondante ;
+- le HUD annonce rencontre, beat et numéro de vague actifs ; les formations
+  possèdent aussi un aperçu coloré dans l'éditeur ;
 - joueur et ennemis partagent `ActorGroundingComponent`, avec GroundAnchor,
   GroundProbe et ombre projetée sur le vrai collider World ;
 - deux sondes d'appui mesurent chaque pente et `SlopePresentation` incline le
@@ -170,9 +180,12 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - progression du respawn : `MissionCheckpoint2D` placé dans la scène maîtresse
   et son `spawn_id` correspondant ; état courant : `respawn_spawn_id` du
   `MissionActorSpawner2D` ;
-- objectifs de victoire : `enabled` et `required_for_completion` des
-  `MapEncounterMarker2D`, plus le `Marker2D` de sortie dans la scène maîtresse ;
-  état runtime : `MissionRunController` visible dans l'écran de mission ;
+- objectifs de victoire : `enabled` du `MapEncounterMarker2D` et
+  `blocks_mission_exit` de son `EncounterData`, plus le `Marker2D` de sortie ;
+  état runtime : `MissionEncounterController`, puis `MissionRunController` ;
+- cadence : `EnemySpawnPatternData → WaveData → EncounterData` sous
+  `maps/encounters/data/` ; placement : Marker de la scène maîtresse ; état des
+  populations et vagues : `MissionEncounterController` ;
 - définition du canon : `primary_field_cannon.tres` ; définition de sa munition :
   `field_round.tres` ; cadence runtime : `PlayerWeaponComponent` ;
 - origine du tir : `Presentation/AimPivot/Muzzle` ; correspondance vers la map :
@@ -226,8 +239,7 @@ catalogues.
 - dépôt distant de référence : `https://github.com/azemann/jeuweb.git` ;
 - caches Godot, états locaux Codex, captures, exports et journaux exclus par
   `.gitignore` ;
-- point de restauration initial contrôlé par les 22 contrats headless du
-  projet avant publication.
+- état courant contrôlé par les 25 contrats headless du projet.
 
 ## Limites connues
 
@@ -244,6 +256,8 @@ catalogues.
 - les pilotes éjectés sont des acteurs hostiles autonomes mais ne comptent pas
   parmi les objectifs obligatoires de la mission ; aucune règle de récompense
   n'est encore définie ;
+- les types `Kill Room`, `Arena` et `Set Piece` sont nommés et configurables,
+  mais leurs verrous caméra et orchestrations audiovisuelles restent à publier ;
 - le premier canon n'a encore ni audio, ni recul du corps, ni secousse caméra ;
 - la munition de campagne utilise un petit impact dédié, pas l'explosion lourde
   canonique réservée aux obus et éléments explosifs ;
@@ -272,10 +286,9 @@ catalogues.
 
 ## Prochaine tranche recommandée
 
-Jouer et équilibrer la rencontre complète à sept ennemis, puis produire le
-projectile lourd propre au Boss et ajouter un feedback visible aux checkpoints.
-Toute future scène d'acteur et toute future pièce non Carvable devront suivre
-le contrat transversal pieds/surface/ombre désormais validé automatiquement.
+Jouer et équilibrer sur périphériques réels la cadence complète de douze
+apparitions. La prochaine tranche ludique recommandée est un vrai Set Piece de
+Boss : projectile lourd propre, phases data-driven et verrou caméra Arena.
 
 
 ## Validations à exécuter
@@ -291,6 +304,7 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_asset_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_camera_progression_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_run_contract_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/encounter_cadence_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/permanent_ground_module_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/weapon_projectile_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/class_glossary_contract_test.gd
@@ -302,6 +316,6 @@ python3 pipeline/assets/tools/validate_toxic_pressure_candidates.py
 python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
 ```
 
-Dernière validation complète : 2026-08-28, les 24 contrats headless passent.
+Dernière validation complète : 2026-08-28, les 25 contrats headless passent.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames
 d'atterrissage : marche, impact, éjection et épave suivent la pente.

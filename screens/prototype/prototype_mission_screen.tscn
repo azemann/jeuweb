@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://maps/system/mission_enemy_spawner_2d.gd" id="12_enemy_spawner"]
 [ext_resource type="Resource" path="res://characters/enemies/data/enemy_catalog.tres" id="13_enemy_catalog"]
 [ext_resource type="Script" path="res://maps/system/mission_run_controller.gd" id="15_run"]
+[ext_resource type="Script" path="res://maps/system/mission_encounter_controller.gd" id="16_encounter_controller"]
 
 [node name="PrototypeMissionScreen" type="Control"]
 layout_mode = 3
@@ -55,8 +56,14 @@ respawn_spawn_id = &"player_start"
 unique_name_in_owner = true
 script = ExtResource("12_enemy_spawner")
 map_host_path = NodePath("../MapHost")
-actor_spawner_path = NodePath("../ActorSpawner")
 catalog = ExtResource("13_enemy_catalog")
+
+[node name="EncounterController" type="Node" parent="MissionViewportContainer/MissionViewport"]
+unique_name_in_owner = true
+script = ExtResource("16_encounter_controller")
+map_host_path = NodePath("../MapHost")
+actor_spawner_path = NodePath("../ActorSpawner")
+enemy_spawner_path = NodePath("../EnemySpawner")
 
 [node name="ProjectileSpawner" type="Node" parent="MissionViewportContainer/MissionViewport"]
 unique_name_in_owner = true
@@ -82,7 +89,7 @@ unique_name_in_owner = true
 script = ExtResource("15_run")
 map_host_path = NodePath("../MapHost")
 actor_spawner_path = NodePath("../ActorSpawner")
-enemy_spawner_path = NodePath("../EnemySpawner")
+encounter_controller_path = NodePath("../EncounterController")
 
 [node name="HUD" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -126,6 +133,26 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
 text = "MISSION 00 — LABORATOIRE VISUEL"
 vertical_alignment = 1
+
+[node name="CadenceStack" type="VBoxContainer" parent="HUD/HUDLayout"]
+layout_mode = 2
+alignment = 1
+
+[node name="EncounterLabel" type="Label" parent="HUD/HUDLayout/CadenceStack"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
+theme_override_font_sizes/font_size = 12
+text = "RENCONTRE · EN ATTENTE"
+horizontal_alignment = 1
+
+[node name="CadenceLabel" type="Label" parent="HUD/HUDLayout/CadenceStack"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.839216, 0.121569, 1)
+theme_override_font_sizes/font_size = 15
+text = "EXPLORATION"
+horizontal_alignment = 1
 
 [node name="ControlsLabel" type="Label" parent="HUD/HUDLayout"]
 layout_mode = 2

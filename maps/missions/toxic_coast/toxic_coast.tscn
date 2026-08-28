@@ -17,6 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://brwtvo216t85b" path="res://terrain/kits/toxic_coast/pieces/natural_ledge_medium.tscn" id="14_natural_ledge"]
 [ext_resource type="PackedScene" path="res://props/explosive_barrel/toxic_explosive_barrel_2d.tscn" id="15_tts76"]
 [ext_resource type="PackedScene" path="res://maps/system/mission_checkpoint_2d.tscn" id="16_checkpoint"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/landing_cadence.tres" id="17_landing_cadence"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/bridge_gauntlet.tres" id="18_bridge_gauntlet"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/foundry_boss_gate.tres" id="19_foundry_gate"]
+[ext_resource type="PackedScene" path="res://maps/encounters/mission_combat_gate_2d.tscn" id="20_combat_gate"]
 
 [sub_resource type="RectangleShape2D" id="Shape_destructible"]
 size = Vector2(560, 150)
@@ -156,41 +160,43 @@ kind = 1
 
 [node name="EnemySpawns" type="Node2D" parent="Gameplay" unique_id=636885030]
 
-[node name="VacuumPatrol" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=120673704]
-position = Vector2(670, 301)
+[node name="LandingCadence" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=120673704]
+position = Vector2(720, 450)
 gizmo_extents = 44.0
 script = ExtResource("5_encounter_script")
-encounter_id = &"vacuum_patrol_01"
-count = 2
+encounter_id = &"landing_cadence"
+encounter_data = ExtResource("17_landing_cadence")
 activation_distance = 620.0
 
-[node name="VacuumGruntGate" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=498996969]
-position = Vector2(1450, 450)
+[node name="BridgeGauntlet" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=498996969]
+position = Vector2(1920, 430)
 gizmo_extents = 60.0
 script = ExtResource("5_encounter_script")
-encounter_id = &"vacuum_grunt_gate"
-enemy_archetype = "vacuum_grunt"
-count = 2
-activation_distance = 720.0
+encounter_id = &"bridge_gauntlet"
+encounter_data = ExtResource("18_bridge_gauntlet")
+activation_distance = 640.0
 
-[node name="VacuumFlyingColumn" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=145651692]
-position = Vector2(2140, 300)
-gizmo_extents = 52.0
-script = ExtResource("5_encounter_script")
-encounter_id = &"vacuum_flying_column"
-enemy_archetype = "vacuum_flying"
-count = 2
-activation_distance = 760.0
-
-[node name="VacuumFoundryBoss" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=1205623005]
+[node name="FoundryBossGate" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=1205623005]
 position = Vector2(3180, 430)
 gizmo_extents = 64.0
 script = ExtResource("5_encounter_script")
-encounter_id = &"vacuum_foundry_boss"
-enemy_archetype = "vacuum_boss"
-activation_distance = 800.0
+encounter_id = &"foundry_boss_gate"
+encounter_data = ExtResource("19_foundry_gate")
+activation_distance = 680.0
 
 [node name="Encounters" type="Node2D" parent="Gameplay" unique_id=603695318]
+
+[node name="LandingCombatGate" parent="Gameplay/Encounters" instance=ExtResource("20_combat_gate")]
+position = Vector2(1240, 360)
+encounter_id = &"landing_cadence"
+
+[node name="BridgeCombatGate" parent="Gameplay/Encounters" instance=ExtResource("20_combat_gate")]
+position = Vector2(2520, 360)
+encounter_id = &"bridge_gauntlet"
+
+[node name="FoundryCombatGate" parent="Gameplay/Encounters" instance=ExtResource("20_combat_gate")]
+position = Vector2(3710, 360)
+encounter_id = &"foundry_boss_gate"
 
 [node name="DestructibleZones" type="Node2D" parent="Gameplay" unique_id=1639015338]
 
