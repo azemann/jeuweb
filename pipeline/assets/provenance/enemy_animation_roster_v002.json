@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "enemy-animation-roster-v002",
+  "generator": "OpenAI ImageGen integrated in Codex",
+  "generationMode": "identity-preserving edit/derivation",
+  "identityReferences": [
+    "pipeline/assets/sources/imagegen/enemies/vacuum_trooper/vacuum-trooper-walk-sheet-candidate-v001.png",
+    "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/enemies/vacuum-siphoner-source-v001.png",
+    "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/enemies/vacuum-scout-drone-source-v001.png",
+    "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/enemies/vacuum-brute-source-v001.png",
+    "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/enemies/alien-hatchling-saboteur-source-v001.png"
+  ],
+  "candidateRoots": [
+    "pipeline/assets/sources/imagegen/enemies/vacuum_trooper_v002/",
+    "pipeline/assets/sources/imagegen/enemies/industrial_toxic_v002/"
+  ],
+  "transformation": "cyan alpha extraction, proportional four-cell split, detached edge-fragment rejection, common per-action scale, authored-root placement, atlas composition",
+  "processor": "pipeline/assets/tools/process_enemy_animation_roster_v002.py",
+  "publicationTargets": [
+    "art/characters/enemies/vacuum_trooper/",
+    "art/enemies/industrial_toxic/"
+  ]
+}

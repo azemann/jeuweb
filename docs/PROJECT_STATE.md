@@ -89,9 +89,10 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - attaque toxique publiée en huit phases, projectile lent en quatre frames et
   impact en six frames ; la correspondance gameplay est portée par
   `Components/Attack` et `ProjectileData` ;
-- roster industriel toxique publié avec quatre scènes canoniques : Grunt
-  Siphoner terrestre, Drone volant, Boss lourd et pilote Saboteur ; chaque rôle
-  possède quatre poses distinctes de déplacement, attaque, impact et mort ;
+- bestiaire ennemi v002 publié pour les cinq scènes canoniques : Vacuum Trooper,
+  Grunt Siphoner, Drone volant, Boss lourd et pilote Saboteur ; les quatre rôles
+  industriels possèdent quatre poses biomécaniques par action et le Trooper
+  conserve huit poses de marche et d'attaque, soit 88 poses sur sept atlas ;
 - la patrouille comprend désormais un mode volant réglable par profil ; le
   Drone oscille verticalement sans dupliquer les règles dans sa scène ;
 - l'attaque ennemie choisit projectile ou contact depuis son composant : le
@@ -242,7 +243,9 @@ catalogues.
 - dépôt distant de référence : `https://github.com/azemann/jeuweb.git` ;
 - caches Godot, états locaux Codex, captures, exports et journaux exclus par
   `.gitignore` ;
-- état courant contrôlé par les 25 contrats headless du projet.
+- état animation contrôlé par le validateur raster v002 et un 26e contrat
+  headless dédié ; la suite globale de 25 contrats était verte avant les
+  modifications parallèles actuelles de la carte.
 
 ## Limites connues
 
@@ -266,9 +269,10 @@ catalogues.
   canonique réservée aux obus et éléments explosifs ;
 - l'impulsion radiale est publiée avec `target_damaged`, mais les acteurs ne
   possèdent pas encore de contrat commun pour la consommer physiquement ;
-- les quatre poses de locomotion v001 sont intégrées mais leur continuité
-  temporelle reste provisoire ; les futures animations doivent être affinées
-  frame par frame sans changer le root publié ;
+- les poses v002 sont découpées proprement et structurées en phases lisibles ;
+  la continuité jouée à taille réelle doit encore être revue après restauration
+  d'une correspondance valide entre marqueurs Landing et Combat Gates dans la
+  carte en cours d'édition ;
 - les quatre `TileMapLayer` de Côte toxique sont prêts mais sans TileSet ;
 - le catalogue Côte toxique publie actuellement quatre pièces réutilisables :
   corniche naturelle, bloc bunker, passerelle industrielle et pont-tuyau ; ce
@@ -289,9 +293,10 @@ catalogues.
 
 ## Prochaine tranche recommandée
 
-Jouer et équilibrer sur périphériques réels la cadence complète de douze
-apparitions. La prochaine tranche ludique recommandée est un vrai Set Piece de
-Boss : projectile lourd propre, phases data-driven et verrou caméra Arena.
+Résoudre l'invalidité actuelle des marqueurs Landing/Combat Gates sans perdre
+les Transforms auteur en cours, relancer les contrats complets, puis jouer la
+cadence de douze apparitions avec les 88 poses v002. Ensuite seulement, produire
+le Set Piece du Boss : projectile lourd, phases data-driven et verrou Arena.
 
 
 ## Validations à exécuter
@@ -312,13 +317,19 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/weapon_projectile_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/class_glossary_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/project_state_catalog_contract_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/enemy_animation_roster_v002_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --quit-after 240
 python3 pipeline/assets/tools/validate_vacuum_trooper_hit_death_candidate.py
 python3 pipeline/assets/tools/validate_vacuum_trooper_attack_candidate.py
 python3 pipeline/assets/tools/validate_toxic_pressure_candidates.py
 python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
+python3 pipeline/assets/tools/validate_enemy_animation_roster_v002.py
 ```
 
-Dernière validation complète : 2026-08-28, les 25 contrats headless passent.
+Dernière validation complète avant l'édition parallèle de la carte : 2026-08-28,
+les 25 contrats headless passent. Validation actuelle de la tranche animation :
+import Godot, validateur pipeline et contrat dédié passent ; le contrat ennemi
+global s'arrête ensuite sur la rencontre bloquante `landing_cadence2`, sans
+Combat Gate correspondant dans `toxic_coast.tscn` en cours d'édition.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames
 d'atterrissage : marche, impact, éjection et épave suivent la pente.

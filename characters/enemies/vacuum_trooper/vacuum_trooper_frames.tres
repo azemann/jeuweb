@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://wda6dsgxcr7f"]
 
-[ext_resource type="Texture2D" uid="uid://dib2ugswj56wv" path="res://art/characters/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-v001.png" id="1_atlas"]
-[ext_resource type="Texture2D" uid="uid://dbr26s34i07wp" path="res://art/characters/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-v001.png" id="2_hit_death"]
+[ext_resource type="Texture2D" uid="uid://csok1vsmv5564" path="res://art/characters/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-v002.png" id="1_atlas"]
+[ext_resource type="Texture2D" uid="uid://coispe75auwjn" path="res://art/characters/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-v002.png" id="2_hit_death"]
 
 [sub_resource type="AtlasTexture" id="HitDeath_04"]
 atlas = ExtResource("2_hit_death")

@@ -113,6 +113,26 @@ Lot approuvé le 2026-08-27 : 64 poses sur alpha réel. Les quatre sources,
 prompts, atlas candidats, revues, aperçus, manifeste, provenance et QA sont
 conservés sous `pipeline/assets/`.
 
+## Ennemis — bestiaire animé v002
+
+| Fichier | Création | Intention | Intégration |
+|---|---|---|---|
+| `characters/enemies/vacuum_trooper/vacuum-trooper-walk-4x2-256-v002.png` | édition ImageGen depuis l'identité Trooper, deux bandes de quatre phases, normalisation 256 × 192 | marche complète à huit poses avec appuis alternés | `vacuum_trooper_frames.tres` |
+| `characters/enemies/vacuum_trooper/vacuum-trooper-toxic-attack-4x2-256-v002.png` | édition ImageGen, anticipation/charge/actif/récupération sur huit poses | attaque toxique sans fragment intercellule | `vacuum_trooper_attack_frames.tres` |
+| `characters/enemies/vacuum_trooper/vacuum-trooper-hit-death-4x2-256-v002.png` | édition ImageGen, quatre impacts et quatre morts | réaction non létale puis effondrement irréversible | `vacuum_trooper_frames.tres` |
+| `enemies/industrial_toxic/vacuum-grunt-animation-4x4-v002.png` | quatre bandes ImageGen séparées puis pipeline déterministe | appuis, attaque toxique, hit et mort du Siphoner | `vacuum_grunt_frames.tres` |
+| `enemies/industrial_toxic/vacuum-flying-animation-4x4-v002.png` | quatre bandes ImageGen ; mouvement/hit régénérés pour conserver deux turbines et deux dérives | vol, tir, stabilisation et crash cohérents | `vacuum_flying_frames.tres` |
+| `enemies/industrial_toxic/vacuum-boss-animation-4x4-v002.png` | quatre bandes ImageGen ; attaque régénérée avec rayon court non coupé | marche lourde, télégraphe/beam, hit et effondrement du Boss | `vacuum_boss_frames.tres` |
+| `enemies/industrial_toxic/vacuum-pilot-saboteur-animation-4x4-v002.png` | quatre bandes ImageGen séparées | sprint, armement/lunge, hit et burnout du Saboteur | `vacuum_pilot_saboteur_frames.tres` |
+
+Lot approuvé le 2026-08-28 : cinq archétypes, 88 poses et sept atlas. Les
+v001 restent versionnés mais ne sont plus référencés par les `SpriteFrames`.
+Sources, prompt set final, trois générations rejetées, recette, provenance,
+manifeste, revues, aperçus et QA : lot `enemy-animation-roster-v002` sous
+`pipeline/assets/`. Validation :
+`ENEMY_ANIMATION_ROSTER_V002_VALIDATION: PASS` et
+`ENEMY_ANIMATION_ROSTER_V002_TEST: PASS`.
+
 ## Imports historiques non actifs
 
 Les fichiers `soil-*.png` et `surface-*.png` sans préfixe `toxic-` proviennent

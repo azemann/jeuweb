@@ -44,6 +44,8 @@ func _run() -> void:
 			if roster_frames != null:
 				for animation in [&"walk", &"attack", &"hit", &"death"]:
 					_check(roster_frames.sprite_frames.has_animation(animation) and roster_frames.sprite_frames.get_frame_count(animation) == 4, "%s/%s doit publier quatre poses." % [archetype_id, animation])
+					var roster_texture := roster_frames.sprite_frames.get_frame_texture(animation, 0) as AtlasTexture
+					_check(roster_texture != null and roster_texture.atlas.resource_path.ends_with("-v002.png"), "%s/%s doit consommer l'atlas ennemi v002 publié." % [archetype_id, animation])
 			roster_enemy.free()
 
 	var frames := load("res://characters/enemies/vacuum_trooper/vacuum_trooper_frames.tres") as SpriteFrames
@@ -51,6 +53,8 @@ func _run() -> void:
 	if frames != null and frames.has_animation(&"walk"):
 		_check(frames.get_frame_count(&"walk") == 8, "La marche doit contenir huit poses.")
 		_check(is_equal_approx(frames.get_animation_speed(&"walk"), 6.25), "La cadence doit rester à 160 ms par pose.")
+		var walk_texture := frames.get_frame_texture(&"walk", 0) as AtlasTexture
+		_check(walk_texture != null and walk_texture.atlas.resource_path.ends_with("-v002.png"), "La marche Vacuum Trooper doit consommer l'atlas v002 publié.")
 	_check(frames != null and frames.has_animation(&"hit"), "L'impact Vacuum Trooper doit être publié.")
 	_check(frames != null and frames.has_animation(&"death"), "La mort Vacuum Trooper doit être publiée.")
 	if frames != null and frames.has_animation(&"hit") and frames.has_animation(&"death"):
@@ -61,6 +65,14 @@ func _run() -> void:
 		for index in 4:
 			_check(is_equal_approx(frames.get_frame_duration(&"hit", index), hit_durations[index]), "Le timing relatif d'impact doit rester autoritaire dans SpriteFrames.")
 			_check(is_equal_approx(frames.get_frame_duration(&"death", index), death_durations[index]), "Le timing relatif de mort doit rester autoritaire dans SpriteFrames.")
+		var hit_texture := frames.get_frame_texture(&"hit", 0) as AtlasTexture
+		_check(hit_texture != null and hit_texture.atlas.resource_path.ends_with("-v002.png"), "Les réactions Vacuum Trooper doivent consommer l'atlas v002 publié.")
+
+	var attack_frames := load("res://characters/enemies/vacuum_trooper/vacuum_trooper_attack_frames.tres") as SpriteFrames
+	_check(attack_frames != null and attack_frames.has_animation(&"toxic_attack") and attack_frames.get_frame_count(&"toxic_attack") == 8, "L'attaque Vacuum Trooper doit conserver ses huit poses.")
+	if attack_frames != null and attack_frames.has_animation(&"toxic_attack"):
+		var attack_texture := attack_frames.get_frame_texture(&"toxic_attack", 0) as AtlasTexture
+		_check(attack_texture != null and attack_texture.atlas.resource_path.ends_with("-v002.png"), "L'attaque Vacuum Trooper doit consommer l'atlas v002 publié.")
 
 	var enemy_scene := catalog.find_scene(&"vacuum_trooper") if catalog != null else null
 	var enemy := enemy_scene.instantiate() as EnemyCharacter2D if enemy_scene != null else null

@@ -1122,3 +1122,35 @@
   silhouette visible, et avec la barre atteignant zéro pendant le run complet.
 - validation réelle : les 25 contrats headless et le démarrage complet pendant
   240 frames passent après le correctif.
+
+## 2026-08-28 — Reprise exhaustive des 88 poses ennemies v002
+
+- audité les cinq archétypes consommables de la mission et refusé les grilles
+  v001 dont les cases illustraient une action sans former une vraie séquence ;
+- utilisé ImageGen en édition/dérivation depuis les cinq identités sources et
+  produit une bande séparée par action : locomotion, attaque, impact et mort ;
+  le Trooper conserve huit poses de marche et huit d'attaque, soit 88 poses au
+  total pour le bestiaire ;
+- rejeté puis régénéré le mouvement et le hit du Drone parce qu'une turbine
+  disparaissait, ainsi que l'attaque du Boss dont le rayon touchait la frontière ;
+- ajouté `process_enemy_animation_roster_v002.py` : extraction cyan, suppression
+  des composants détachés au bord, échelle commune par action, root auteur,
+  sept atlas, cinq revues et cinq aperçus ;
+- détecté avant publication une incompatibilité Trooper 256 × 256 contre les
+  régions Godot 256 × 192, puis corrigé le pipeline à `[256,192]` et root
+  `[128,180]` ;
+- publié sans écraser les v001 et migré les six Resources `SpriteFrames` vers
+  les PNG v002 ; timings et frames actives restent autorités Godot ;
+- ajouté recette, provenance, manifeste, QA, validateur Python et test Godot
+  dédié protégeant les 88 poses, sept atlas, alpha, hashes et dimensions ;
+- validations réelles : processeur PASS, validateur `88 poses / 7 atlas / 5
+  archetypes` PASS, import Godot PASS et
+  `ENEMY_ANIMATION_ROSTER_V002_TEST: PASS` ;
+- le contrat ennemi global charge toutes les animations v002 mais reste bloqué
+  plus loin par les marqueurs Landing d'une modification parallèle de
+  `toxic_coast.tscn` ; au dernier passage, la rencontre bloquante
+  `landing_cadence2` n'avait pas de Combat Gate. Cette carte n'a pas été
+  corrigée ni écrasée dans cette tranche ;
+- prochaine action : rétablir la correspondance valide entre les marqueurs
+  Landing et leurs Combat Gates, relancer les contrats complets puis faire la
+  revue jouée de cadence à taille réelle.

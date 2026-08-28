@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bwi67op676mvh"]
 
-[ext_resource type="Texture2D" path="res://art/enemies/industrial_toxic/vacuum-pilot-saboteur-animation-4x4-v001.png" id="1_lfnh3"]
+[ext_resource type="Texture2D" uid="uid://1na123ymxfg5" path="res://art/enemies/industrial_toxic/vacuum-pilot-saboteur-animation-4x4-v002.png" id="1_lfnh3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rl8m"]
 atlas = ExtResource("1_lfnh3")

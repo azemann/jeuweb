@@ -51,14 +51,24 @@ EnemyCharacter2D (CharacterBody2D)
 
 ## Workflow auteur
 
-1. régler l'archétype dans sa Resource sous `characters/enemies/data/` ;
-2. assembler ou prévisualiser sa scène canonique dans Godot ;
-3. enregistrer sa correspondance dans `enemy_catalog.tres` ;
-4. référencer l'archétype depuis un `EnemySpawnPatternData`, puis le composer
+1. pour une nouvelle animation raster, produire une bande séparée par action,
+   vérifier identité, phases, marges et root, puis publier l'atlas depuis le
+   pipeline ;
+2. assigner l'atlas au `SpriteFrames` de l'ennemi et régler les timings dans
+   l'Inspector Godot ;
+3. régler l'archétype dans sa Resource sous `characters/enemies/data/` ;
+4. assembler ou prévisualiser sa scène canonique dans Godot ;
+5. enregistrer sa correspondance dans `enemy_catalog.tres` ;
+6. référencer l'archétype depuis un `EnemySpawnPatternData`, puis le composer
    dans une `WaveData` et un `EncounterData` ;
-5. placer un `MapEncounterMarker2D` sous `Gameplay/EnemySpawns`, lui assigner
+7. placer un `MapEncounterMarker2D` sous `Gameplay/EnemySpawns`, lui assigner
    la rencontre et régler seulement son placement et sa distance d'activation ;
-6. résoudre les avertissements et exécuter `enemy_contract_test.gd`.
+8. résoudre les avertissements et exécuter les contrats ennemi et animation.
+
+Une action source contient quatre phases explicitement nommées. Le Vacuum
+Trooper conserve deux bandes pour sa marche et son attaque à huit poses. Le
+pipeline applique une échelle commune à l'action et place le contenu sur le
+root auteur ; il ne choisit ni timing ni frame active de gameplay.
 
 Le Transform du marqueur est souverain pour la formation. Les acteurs générés
 appartiennent à la branche `Actors` de la map ; aucune scène runtime ne référence
@@ -93,12 +103,14 @@ le pipeline.
 ## Contrat de validation
 
 `enemy_contract_test.gd` protège profils, catalogue, scènes, modes terrestre et
-volant, les quatre poses `walk`, `attack`, `hit`, `death` de chaque rôle,
+volant, les poses `walk`, `attack`, `hit`, `death` de chaque rôle,
 l'arbre canonique, les dégâts, la suppression différée et l'éjection réelle du
 Saboteur. `map_contract_test.gd` protège les marqueurs auteur et
 `mission_run_contract_test.gd` la victoire après les douze apparitions de la
 cadence obligatoire.
 Le test tire aussi un vrai `FieldRound2D` sur le bord visible supérieur du Boss
 et protège l'autorité unique de sa Hurtbox.
-Le validateur Python du roster vérifie 64 poses, dimensions, alpha et identité
-binaire entre exports pipeline et copies runtime.
+`enemy_animation_roster_v002_test.gd` protège les 88 poses, les sept atlas v002
+et surtout leurs dimensions compatibles avec les régions `SpriteFrames`.
+`validate_enemy_animation_roster_v002.py` vérifie sources, hashes, alpha,
+dimensions et identité binaire entre exports pipeline et copies runtime.

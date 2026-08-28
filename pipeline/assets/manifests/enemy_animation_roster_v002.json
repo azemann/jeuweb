@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "enemy-animation-roster-v002",
+  "displayName": "Enemy Animation Roster v002",
+  "status": "published",
+  "archetypeCount": 5,
+  "poseCount": 88,
+  "atlasCount": 7,
+  "archetypes": [
+    "vacuum_trooper",
+    "vacuum_grunt",
+    "vacuum_flying",
+    "vacuum_boss",
+    "vacuum_pilot_saboteur"
+  ],
+  "recipe": "pipeline/assets/recipes/enemy_animation_roster_v002.md",
+  "provenance": "pipeline/assets/provenance/enemy_animation_roster_v002.json",
+  "qa": "pipeline/assets/working/enemies/animation_roster_v002/enemy-animation-roster-v002-qa.json"
+}
