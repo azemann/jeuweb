@@ -14,9 +14,9 @@ signal terrain_carved(center: Vector2, radius: float, affected_chunks: int)
 		profile = value
 		update_configuration_warnings()
 ## Branche contenant Area2D, CollisionShape2D ou CollisionPolygon2D auteurs.
-@export_node_path("Node2D") var authored_zones_path := NodePath("../Gameplay/DestructibleZones")
+@export_node_path("Node2D") var authored_zones_path := NodePath("../../Gameplay/DestructibleZones")
 ## Branche des pièces glissables. Les instances Carvable sont composées dans le masque global.
-@export_node_path("Node2D") var ground_pieces_path := NodePath("../Gameplay/GroundPieces")
+@export_node_path("Node2D") var ground_pieces_path := NodePath("../../Gameplay/GroundPieces")
 ## Construit automatiquement masque visuel et collisions à l'entrée de la scène runtime.
 @export var generate_on_ready := true
 

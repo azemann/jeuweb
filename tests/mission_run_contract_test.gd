@@ -28,9 +28,9 @@ func _run() -> void:
 
 	var viewport := screen.get_node("MissionViewportContainer/MissionViewport") as SubViewport
 	var host := viewport.get_node("MapHost") as MissionMapHost2D
-	var actor_spawner := viewport.get_node("ActorSpawner") as MissionActorSpawner2D
-	var encounter_controller := viewport.get_node("EncounterController") as MissionEncounterController
-	var controller := viewport.get_node("MissionRunController") as MissionRunController
+	var actor_spawner := viewport.get_node("RuntimeSystems/ActorSpawner") as MissionActorSpawner2D
+	var encounter_controller := viewport.get_node("RuntimeSystems/EncounterController") as MissionEncounterController
+	var controller := viewport.get_node("RuntimeSystems/MissionRunController") as MissionRunController
 	_check(host != null and host.current_map != null, "La scène maîtresse doit être chargée pour la mission.")
 	_check(actor_spawner != null and actor_spawner.current_player != null, "Le joueur doit être présent dans la mission.")
 	_check(encounter_controller != null and encounter_controller.validation_errors().is_empty(), "MissionEncounterController doit exposer ses correspondances dans le SceneTree.")

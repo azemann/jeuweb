@@ -76,12 +76,12 @@ func _check_toxic_coast_muzzle_alignment() -> void:
 	for _frame in 90:
 		await physics_frame
 	var viewport_root := screen.get_node("MissionViewportContainer/MissionViewport")
-	var actor_spawner := viewport_root.get_node("ActorSpawner") as MissionActorSpawner2D
+	var actor_spawner := viewport_root.get_node("RuntimeSystems/ActorSpawner") as MissionActorSpawner2D
 	var map_host := viewport_root.get_node("MapHost") as MissionMapHost2D
 	var player := actor_spawner.current_player
 	var map := map_host.current_map
-	var terrain := map.get_node("DestructibleTerrain") as DestructibleTerrain2D
-	var muzzle := player.get_node("Presentation/AimPivot/Muzzle") as Marker2D
+	var terrain := map.destructible_terrain()
+	var muzzle := player.get_node("Visuals/AimPivot/Muzzle") as Marker2D
 	player.aim_component().set_aim_direction(Vector2.RIGHT)
 	var start := muzzle.global_position
 	var expected_x := -1.0

@@ -32,18 +32,18 @@ CharacterBody2D
 │       ├── LeftFootProbe
 │       ├── RightFootProbe
 │       └── GroundShadow
-│   └── SlopePresentation
-└── Presentation
-    └── SlopeVisual
+│   └── SlopeAlignment
+└── Visuals
+    └── GroundPivot
 ```
 
-`GroundShadow` n'appartient jamais à `Presentation` : une animation, un flip ou
+`GroundShadow` n'appartient jamais à `Visuals` : une animation, un flip ou
 un saut ne déplace pas artificiellement l'ombre. Le probe trouve le sol réel,
 oriente l'ellipse selon sa normale et module taille et opacité selon la hauteur.
 Il suit donc aussi les cratères Carvable sans code particulier.
 
 Les sondes gauche et droite mesurent la tangente réelle sous la largeur des
-appuis. `SlopePresentation` incline uniquement `SlopeVisual` autour du root des
+appuis. `SlopeAlignment` incline uniquement `GroundPivot` autour du root des
 pieds : collisions, arme, visée et logique restent inchangées. Chaque famille
 d'acteur règle dans l'Inspector sa largeur d'appui, son ratio de suivi, son
 angle maximal, sa zone morte et son lissage.
@@ -72,7 +72,7 @@ chaque destruction.
   convexe terminé sur le GroundAnchor ; une large boîte rectangulaire est
   interdite car son coin ferait flotter le root sur les pentes ;
 - l'ombre reste au sol pendant le saut, se réduit et pâlit avec la distance ;
-- aucun ovale d'ombre fixe ne reste sous `Presentation`.
+- aucun ovale d'ombre fixe ne reste sous `Visuals`.
 
 ## Validation
 

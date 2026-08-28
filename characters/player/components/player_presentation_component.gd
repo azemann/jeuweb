@@ -5,7 +5,7 @@ extends Node
 ## Corps physique dont la vitesse et l'état au sol pilotent les animations.
 @export_node_path("CharacterBody2D") var body_path := NodePath("../..")
 ## AnimatedSprite2D recevant les animations et le retournement de présentation.
-@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Presentation/SlopeVisual/BodySprite")
+@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Visuals/GroundPivot/BodySprite")
 
 @export_category("Animation Mapping")
 ## Nom de l'animation jouée lorsque le joueur est immobile au sol.

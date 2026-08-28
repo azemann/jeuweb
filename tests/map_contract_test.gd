@@ -35,17 +35,22 @@ func _run() -> void:
 	_check(map != null, "La scène maîtresse doit produire un MissionMapRoot2D.")
 	if map != null:
 		_check(map.validation_errors().is_empty(), "Contrat de carte invalide : %s" % "; ".join(map.validation_errors()))
+		_check(map.runtime_root() != null and map.actors_root() != null and map.projectiles_root() != null and map.effects_root() != null, "Runtime doit séparer Actors, Projectiles et Effects.")
+		_check(map.actors_root().get_parent() == map.runtime_root() and map.projectiles_root().get_parent() == map.runtime_root(), "Les conteneurs runtime doivent être enfants directs de Runtime.")
+		_check(map.player_spawn_points_root() != null and map.encounter_markers_root() != null and map.combat_gates_root() != null, "Gameplay doit exposer PlayerSpawnPoints, EncounterMarkers et CombatGates.")
+		_check(map.get_node_or_null("Gameplay/SpawnPoints") == null and map.get_node_or_null("Gameplay/EnemySpawns") == null and map.get_node_or_null("Gameplay/Encounters") == null, "Les anciennes branches ambiguës ne doivent plus exister.")
+		_check(map.get_node_or_null("Actors") == null and map.get_node_or_null("DestructibleTerrain") == null, "Les instances runtime ne doivent plus être mélangées aux branches auteur de la racine.")
 		_check(map.find_spawn(&"player_start") != null, "Le spawn joueur initial est obligatoire.")
 		_check(map.find_spawn(&"checkpoint_bridge") != null, "Le checkpoint du pont est obligatoire.")
 		_check(map.find_spawn(&"checkpoint_foundry") != null, "Le checkpoint de la fonderie est obligatoire.")
-		var landing_marker := map.get_node_or_null("Gameplay/EnemySpawns/LandingCadence") as MapEncounterMarker2D
-		var bridge_marker := map.get_node_or_null("Gameplay/EnemySpawns/BridgeGauntlet") as MapEncounterMarker2D
-		var boss_marker := map.get_node_or_null("Gameplay/EnemySpawns/FoundryBossGate") as MapEncounterMarker2D
+		var landing_marker := map.get_node_or_null("Gameplay/EncounterMarkers/LandingCadence") as MapEncounterMarker2D
+		var bridge_marker := map.get_node_or_null("Gameplay/EncounterMarkers/BridgeGauntlet") as MapEncounterMarker2D
+		var boss_marker := map.get_node_or_null("Gameplay/EncounterMarkers/FoundryBossGate") as MapEncounterMarker2D
 		_check(landing_marker != null and landing_marker.enabled and landing_marker.encounter_data.authored_enemy_count() == 3, "Le débarquement doit exposer sa cadence auteur de trois ennemis.")
 		_check(bridge_marker != null and bridge_marker.enabled and bridge_marker.encounter_data.encounter_kind == EncounterData.EncounterKind.GAUNTLET and bridge_marker.encounter_data.authored_enemy_count() == 6, "Le pont doit exposer son Gauntlet auteur de six ennemis.")
 		_check(boss_marker != null and boss_marker.enabled and boss_marker.encounter_data.encounter_kind == EncounterData.EncounterKind.COMBAT_GATE and boss_marker.encounter_data.authored_enemy_count() == 3, "La fonderie doit exposer son Combat Gate auteur et son Boss.")
 		for gate_name in ["LandingCombatGate", "BridgeCombatGate", "FoundryCombatGate"]:
-			var gate := map.get_node_or_null("Gameplay/Encounters/%s" % gate_name) as MissionCombatGate2D
+			var gate := map.get_node_or_null("Gameplay/CombatGates/%s" % gate_name) as MissionCombatGate2D
 			_check(gate != null and gate.validation_errors().is_empty() and gate.starts_closed, "%s doit bloquer physiquement son segment jusqu'à résolution." % gate_name)
 		_check(map.camera_bounds == Rect2(0, 0, 3840, 720), "Les limites caméra doivent couvrir le niveau complet.")
 		var segments := map.authored_segments()
@@ -78,7 +83,7 @@ func _run() -> void:
 			_check(ground_module != null and ground_module.validation_errors().is_empty(), "Chaque module de sol permanent doit être valide.")
 			if ground_module != null:
 				_check(ground_module.fill_polygon().polygon == ground_module.collision_polygon().polygon, "Visuel et collision doivent partager le même outline autoritaire.")
-		_check(map.get_node_or_null("DestructibleTerrain") is DestructibleTerrain2D, "La carte doit consommer ses zones via DestructibleTerrain2D.")
+		_check(map.destructible_terrain() is DestructibleTerrain2D, "La carte doit exposer Runtime/DestructibleTerrain.")
 		var bridge_checkpoint := map.get_node_or_null("Gameplay/Interactions/BridgeCheckpoint") as MissionCheckpoint2D
 		var foundry_checkpoint := map.get_node_or_null("Gameplay/Interactions/FoundryCheckpoint") as MissionCheckpoint2D
 		_check(bridge_checkpoint != null and bridge_checkpoint.spawn_id == &"checkpoint_bridge", "Le checkpoint du pont doit correspondre à son spawn auteur.")
@@ -86,15 +91,16 @@ func _run() -> void:
 		_check(map.get_node_or_null("Gameplay/Exits/MissionEnd") is Marker2D, "La sortie auteur MissionEnd est obligatoire.")
 		var barrel := map.get_node_or_null("Gameplay/Interactions/ToxicExplosiveBarrel2D") as ExplosiveProp2D
 		_check(barrel != null and barrel.data != null and barrel.data.is_valid(), "Le baril placé dans Côte toxique doit conserver sa définition valide.")
-		_check(map.get_node_or_null("Actors/Projectiles") is Node2D, "La branche Actors doit exposer Projectiles.")
-		var preview_actors := map.get_node_or_null("Actors/PreviewActors") as Node2D
+		_check(map.projectiles_root() is Node2D, "La branche Runtime doit exposer Projectiles.")
+		var editor_preview := map.editor_preview_root()
+		var preview_actors := map.get_node_or_null("EditorPreview/EnemySilhouettes") as Node2D
 		var toxic_pool_preview := map.get_node_or_null("Gameplay/Hazards/ToxicPool/Preview") as Polygon2D
 		var runoff_preview := map.get_node_or_null("Gameplay/Hazards/FoundryRunoff/Preview") as Polygon2D
-		_check(preview_actors != null and preview_actors.is_in_group(&"map_authoring_preview"), "Les silhouettes de placement doivent appartenir aux aperçus auteur.")
+		_check(editor_preview != null and editor_preview.is_in_group(&"map_authoring_preview") and preview_actors != null, "Les silhouettes de placement doivent appartenir à EditorPreview.")
 		_check(toxic_pool_preview != null and toxic_pool_preview.is_in_group(&"map_authoring_preview"), "L'aperçu de la fosse toxique doit rester réservé à l'éditeur.")
 		_check(runoff_preview != null and runoff_preview.is_in_group(&"map_authoring_preview"), "L'aperçu du ruissellement doit rester réservé à l'éditeur.")
 		root.add_child(map)
-		_check(not preview_actors.visible, "Les silhouettes auteur doivent être masquées pendant le jeu.")
+		_check(not editor_preview.visible and not preview_actors.is_visible_in_tree(), "EditorPreview et ses silhouettes doivent être masqués pendant le jeu.")
 		_check(not toxic_pool_preview.visible and not runoff_preview.visible, "Les aperçus de danger doivent être masqués pendant le jeu.")
 		var far_parallax := map.get_node_or_null("Visual/FarBackgroundParallax") as Parallax2D
 		var mid_parallax := map.get_node_or_null("Visual/MidgroundParallax") as Parallax2D

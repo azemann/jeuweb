@@ -5,8 +5,8 @@ extends Node
 signal enemy_spawned(encounter_id: StringName, pattern_id: StringName, enemy: EnemyCharacter2D)
 
 @export_category("Correspondence")
-## Hôte dont la scène maîtresse contient la branche Actors recevant les ennemis.
-@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../MapHost")
+## Hôte dont la scène maîtresse contient la branche Runtime/Actors recevant les ennemis.
+@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../../MapHost")
 ## Catalogue Resource traduisant chaque enemy_archetype en PackedScene.
 @export var catalog: EnemyCatalog
 

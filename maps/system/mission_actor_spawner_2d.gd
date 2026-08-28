@@ -7,14 +7,14 @@ signal player_respawned(player: PlayerCharacter2D, spawn: MapSpawnPoint2D)
 
 @export_category("Correspondence")
 ## Hôte de map dont le chargement déclenche l'apparition des acteurs de mission.
-@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../MapHost")
-## Scène canonique du joueur instanciée dans la branche Actors de la map chargée.
+@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../../MapHost")
+## Scène canonique du joueur instanciée dans la branche Runtime/Actors de la map chargée.
 @export var player_scene: PackedScene
 ## Identifiant du MapSpawnPoint2D utilisé pour la position et l'orientation initiales.
 @export var player_spawn_id: StringName = &"player_start"
 ## Point de reprise autoritaire tant qu'aucun checkpoint de progression n'est activé.
 @export var respawn_spawn_id: StringName = &"player_start"
-## Délai en secondes entre la mort du joueur et son remplacement dans Actors.
+## Délai en secondes entre la mort du joueur et son remplacement dans Runtime/Actors.
 @export_range(0.0, 5.0, 0.05) var respawn_delay := 0.8
 
 var current_player: PlayerCharacter2D

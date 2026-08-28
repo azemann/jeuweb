@@ -59,34 +59,34 @@ attack_animation = &"attack"
 script = ExtResource("7")
 initial_state = 1
 
-[node name="Presentation" type="Node" parent="Components"]
+[node name="Animation" type="Node" parent="Components"]
 script = ExtResource("6")
 
 [node name="Grounding" parent="Components" instance=ExtResource("8")]
 shadow_size = Vector2(156, 24)
 foot_probe_span = 126.0
 
-[node name="SlopePresentation" parent="Components" instance=ExtResource("9")]
+[node name="SlopeAlignment" parent="Components" instance=ExtResource("9")]
 maximum_visual_tilt_degrees = 24.0
 
-[node name="Presentation" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
 
-[node name="SlopeVisual" type="Node2D" parent="Presentation"]
+[node name="GroundPivot" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true
 
-[node name="BodySprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual"]
+[node name="BodySprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot"]
 position = Vector2(0, -86.8)
 scale = Vector2(0.62, 0.62)
 sprite_frames = ExtResource("10")
 animation = &"walk"
 autoplay = "walk"
 
-[node name="AttackSprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual"]
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot"]
 position = Vector2(0, -86.8)
 scale = Vector2(0.62, 0.62)
 sprite_frames = ExtResource("10")
 animation = &"attack"
 visible = false
 
-[node name="AttackOrigin" type="Marker2D" parent="Presentation/SlopeVisual"]
+[node name="AttackOrigin" type="Marker2D" parent="Visuals/GroundPivot"]
 position = Vector2(130, -102)

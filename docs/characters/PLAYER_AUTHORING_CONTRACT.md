@@ -33,16 +33,16 @@ PlayerCharacter2D (CharacterBody2D)
 │   ├── Health
 │   ├── Weapon
 │   │   └── FireCooldown
-│   ├── Presentation
+│   ├── Animation
 │   └── Grounding
 │       ├── GroundAnchor
 │       ├── GroundProbe
 │       ├── LeftFootProbe
 │       ├── RightFootProbe
 │       └── GroundShadow
-│   └── SlopePresentation
-├── Presentation
-│   ├── SlopeVisual
+│   └── SlopeAlignment
+├── Visuals
+│   ├── GroundPivot
 │   │   └── BodySprite
 │   └── AimPivot
 │       ├── Muzzle
@@ -58,7 +58,7 @@ PROFILES .tres
       ↓
 COMPONENTS RUNTIME
       ↓
-PRESENTATION + AnimationPlayer
+VISUALS + AnimationPlayer
 ```
 
 La présentation consomme `player_visual_frames.tres` et un canon séparé dans
@@ -80,7 +80,7 @@ continuité temporelle reste une donnée provisoire.
 - `PlayerCharacter2D` expose uniquement la composition et des commandes
   intentionnelles comme `apply_damage()` ;
 - le HUD observe le signal `health_changed` ;
-- Presentation choisit les animations de locomotion selon l'état du
+- Animation choisit les animations de locomotion selon l'état du
   CharacterBody2D ; Aim possède le retournement horizontal et la rotation de
   l'arme.
 - Grounding projette l'ombre sur le collider World réel et conserve le
@@ -89,7 +89,7 @@ continuité temporelle reste une donnée provisoire.
 ## Contrat de validation
 
 `player_contract_test.gd` vérifie scène, profils, composants, Input Map,
-AnimationPlayer, Muzzle, spawn dans `Actors/RuntimePlayer`, collision avec la
+AnimationPlayer, Muzzle, spawn dans `Runtime/Actors/RuntimePlayer`, collision avec la
 carte, déplacement, saut et correspondance Health → HUD.
 `player_input_contract_test.gd` vérifie les correspondances clavier, souris,
 manette et téléphone ainsi que la scène tactile canonique.

@@ -9,8 +9,8 @@ signal enemy_registered(encounter_id: StringName, wave_id: StringName, enemy: En
 signal encounter_completed(encounter_id: StringName)
 
 @export_category("Correspondence")
-## Hôte dont la scène maîtresse porte les Encounter Markers et la branche Actors.
-@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../MapHost")
+## Hôte dont la scène maîtresse porte les Encounter Markers et la branche Runtime.
+@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../../MapHost")
 ## Spawner du joueur utilisé uniquement comme autorité de progression horizontale.
 @export_node_path("MissionActorSpawner2D") var actor_spawner_path := NodePath("../ActorSpawner")
 ## Spawner primitif qui traduit un archétype en scène sans décider de la cadence.
@@ -43,7 +43,7 @@ func _detect_encounters() -> void:
 	var player_spawner := actor_spawner()
 	if host == null or host.current_map == null or player_spawner == null or player_spawner.current_player == null:
 		return
-	var marker_root := host.current_map.get_node_or_null("Gameplay/EnemySpawns")
+	var marker_root := host.current_map.encounter_markers_root()
 	if marker_root == null:
 		return
 	for child in marker_root.get_children():
@@ -209,7 +209,7 @@ func _on_map_loaded(_map: MissionMapRoot2D) -> void:
 
 
 func _set_combat_gate(map: MissionMapRoot2D, encounter_id: StringName, closed: bool) -> void:
-	var gates_root := map.get_node_or_null("Gameplay/Encounters")
+	var gates_root := map.combat_gates_root()
 	if gates_root == null:
 		return
 	for child in gates_root.get_children():

@@ -24,15 +24,15 @@ signal attack_finished
 
 @export_category("Correspondence")
 ## Sprite de locomotion masqué pendant la séquence d'attaque.
-@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Presentation/SlopeVisual/BodySprite")
+@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Visuals/GroundPivot/BodySprite")
 ## SpriteFrames dédié qui porte les phases temporelles de l'attaque.
-@export_node_path("AnimatedSprite2D") var attack_sprite_path := NodePath("../../Presentation/SlopeVisual/AttackSprite")
+@export_node_path("AnimatedSprite2D") var attack_sprite_path := NodePath("../../Visuals/GroundPivot/AttackSprite")
 ## Socket auteur depuis lequel le projectile toxique est émis.
-@export_node_path("Marker2D") var attack_origin_path := NodePath("../../Presentation/SlopeVisual/AttackOrigin")
+@export_node_path("Marker2D") var attack_origin_path := NodePath("../../Visuals/GroundPivot/AttackOrigin")
 ## Composant de patrouille suspendu pendant l'attaque puis réactivé à sa fin.
 @export_node_path("EnemyPatrolComponent") var patrol_component_path := NodePath("../Patrol")
 ## Branche runtime recevant le projectile sans le rendre enfant de l'ennemi.
-@export_node_path("Node2D") var projectile_root_path := NodePath("../../../Projectiles")
+@export_node_path("Node2D") var projectile_root_path := NodePath("../../../../Projectiles")
 
 var _sprite: AnimatedSprite2D
 var _walk_sprite: AnimatedSprite2D
@@ -126,10 +126,11 @@ func _execute_attack() -> void:
 		return
 	var root := get_node_or_null(projectile_root_path) as Node2D
 	if root == null:
-		var actors := get_parent().get_parent().get_parent() as Node
-		root = actors.get_node_or_null("Projectiles") as Node2D if actors != null else null
+		var actors := _actor.get_parent() if _actor != null else null
+		var runtime := actors.get_parent() if actors != null else null
+		root = runtime.get_node_or_null("Projectiles") as Node2D if runtime != null else null
 	if root == null or projectile_scene == null or not projectile_scene.can_instantiate():
-		push_error("EnemyAttackComponent exige Actors/Projectiles et une scène projectile valide.")
+		push_error("EnemyAttackComponent exige Runtime/Projectiles et une scène projectile valide.")
 		return
 	var projectile := projectile_scene.instantiate() as Projectile2D
 	if projectile == null:

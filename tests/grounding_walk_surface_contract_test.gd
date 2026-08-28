@@ -23,12 +23,12 @@ func _run() -> void:
 	var enemy := (load("res://characters/enemies/vacuum_trooper/vacuum_trooper_2d.tscn") as PackedScene).instantiate() as EnemyCharacter2D
 	_check(player.grounding_component() != null, "Le joueur doit exposer Components/Grounding.")
 	_check(enemy.grounding_component() != null, "Chaque ennemi canonique doit exposer Components/Grounding.")
-	_check(player.slope_presentation_component() != null, "Le joueur doit exposer SlopePresentation.")
-	_check(enemy.slope_presentation_component() != null, "Chaque ennemi canonique doit exposer SlopePresentation.")
+	_check(player.slope_presentation_component() != null, "Le joueur doit exposer Components/SlopeAlignment.")
+	_check(enemy.slope_presentation_component() != null, "Chaque ennemi terrestre doit exposer Components/SlopeAlignment.")
 	_check(_has_central_ground_contact(player), "La collision du joueur doit rejoindre GroundAnchor par un contact inférieur central.")
 	_check(_has_central_ground_contact(enemy), "La collision ennemie doit rejoindre GroundAnchor par un contact inférieur central.")
-	_check(player.get_node_or_null("Presentation/Shadow") == null, "Une ombre ne doit plus être attachée à Presentation du joueur.")
-	_check(enemy.get_node_or_null("Presentation/Shadow") == null, "Une ombre ne doit plus être attachée à Presentation de l'ennemi.")
+	_check(player.get_node_or_null("Visuals/Shadow") == null, "Une ombre ne doit pas être attachée aux Visuals du joueur.")
+	_check(enemy.get_node_or_null("Visuals/Shadow") == null, "Une ombre ne doit pas être attachée aux Visuals de l'ennemi.")
 	player.free()
 	enemy.free()
 

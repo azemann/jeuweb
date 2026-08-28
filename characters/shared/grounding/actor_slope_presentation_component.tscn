@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://characters/shared/grounding/actor_slope_presentation_component.gd" id="1_slope"]
 
-[node name="SlopePresentation" type="Node"]
+[node name="SlopeAlignment" type="Node"]
 script = ExtResource("1_slope")

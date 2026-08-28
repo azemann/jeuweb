@@ -25,9 +25,9 @@ func _run() -> void:
 
 	var player := (load("res://characters/player/player_character_2d.tscn") as PackedScene).instantiate() as PlayerCharacter2D
 	_check(player.validation_errors().is_empty(), "Le remplacement visuel ne doit pas casser le contrat joueur.")
-	var body_sprite := player.get_node("Presentation/SlopeVisual/BodySprite") as AnimatedSprite2D
-	var weapon_sprite := player.get_node("Presentation/AimPivot/WeaponSprite") as Sprite2D
-	var muzzle := player.get_node("Presentation/AimPivot/Muzzle") as Marker2D
+	var body_sprite := player.get_node("Visuals/GroundPivot/BodySprite") as AnimatedSprite2D
+	var weapon_sprite := player.get_node("Visuals/AimPivot/WeaponSprite") as Sprite2D
+	var muzzle := player.get_node("Visuals/AimPivot/Muzzle") as Marker2D
 	_check(body_sprite.sprite_frames == frames, "BodySprite doit consommer la Resource SpriteFrames publiée.")
 	_check(weapon_sprite.texture != null and weapon_sprite.texture.get_size() == Vector2(768, 384), "WeaponSprite doit consommer le canon normalisé.")
 	var source_muzzle := weapon_sprite.get_meta(&"source_muzzle_px", Vector2.ZERO) as Vector2

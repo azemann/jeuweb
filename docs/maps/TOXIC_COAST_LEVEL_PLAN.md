@@ -21,7 +21,7 @@ La scène maîtresse `toxic_coast.tscn` est l'autorité du placement. La Resourc
 - cadence : `EncounterData → WaveData → EnemySpawnPatternData` sous
   `maps/encounters/data/toxic_coast/` ;
 - frontières de progression : trois `MissionCombatGate2D` sous
-  `Gameplay/Encounters`.
+  `Gameplay/CombatGates`.
 
 ## Limite visuelle assumée
 

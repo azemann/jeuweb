@@ -25,8 +25,8 @@ Projectile2D (Area2D)
 └── Lifetime (Timer)
 
 Mission
-├── ProjectileSpawner
-└── Map/Actors/Projectiles
+├── RuntimeSystems/ProjectileSpawner
+└── Map/Runtime/Projectiles
 ```
 
 ## Contrat runtime
@@ -71,7 +71,7 @@ WeaponData → ProjectileData → ExplosionData → Explosion2D
   optionnelle dans `ProjectileData` ;
 - déplacer le Muzzle dans la scène joueur avec le canon ;
 - régler les timings de flash et d'impact dans leurs AnimationPlayer ;
-- conserver `Actors/Projectiles` dans toute scène maîtresse de mission.
+- conserver `Runtime/Projectiles` dans toute scène maîtresse de mission.
 
 ## Validation
 

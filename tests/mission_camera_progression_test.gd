@@ -20,12 +20,12 @@ func _run() -> void:
 	await process_frame
 	var viewport := screen.get_node("MissionViewportContainer/MissionViewport")
 	var host := viewport.get_node("MapHost") as MissionMapHost2D
-	var spawner := viewport.get_node("ActorSpawner") as MissionActorSpawner2D
+	var spawner := viewport.get_node("RuntimeSystems/ActorSpawner") as MissionActorSpawner2D
 	var rig := viewport.get_node("MissionCameraRig") as MissionCameraRig2D
 	_check(rig != null and rig.profile != null and rig.profile.is_valid(), "La mission doit exposer un CameraRig profilé.")
 	_check(rig.target == spawner.current_player, "CameraRig doit suivre le joueur instancié.")
 	_check(spawner.current_player.get_node_or_null("PlayerCamera") == null, "Le joueur ne doit plus posséder une caméra concurrente.")
-	_check(not host.current_map.get_node("PreviewCamera").enabled, "PreviewCamera doit être inactive au runtime.")
+	_check(not host.current_map.get_node("EditorPreview/PreviewCamera").enabled, "PreviewCamera doit être inactive au runtime.")
 	_check(host.current_map.get_node("Visual/FarBackgroundParallax") is Parallax2D, "Le fond lointain doit appartenir à une couche de parallaxe.")
 
 	var initial_center := rig.global_position.x
@@ -46,4 +46,3 @@ func _run() -> void:
 	else:
 		print("MISSION_CAMERA_PROGRESSION_TEST: FAIL (%d)" % _failures.size())
 		quit(1)
-

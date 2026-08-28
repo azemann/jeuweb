@@ -38,9 +38,9 @@ MissionMapRoot2D
 ├── Visual
 ├── Gameplay
 │   ├── Segments
-│   ├── SpawnPoints
-│   ├── EnemySpawns
-│   ├── Encounters
+│   ├── PlayerSpawnPoints
+│   ├── EncounterMarkers
+│   ├── CombatGates
 │   ├── GroundPieces
 │   ├── DestructibleZones
 │   ├── IndestructibleGeometry
@@ -48,8 +48,23 @@ MissionMapRoot2D
 │   ├── Interactions
 │   ├── CameraZones
 │   └── Exits
-└── Actors
+├── Runtime
+│   ├── Actors
+│   ├── Projectiles
+│   ├── Effects
+│   └── DestructibleTerrain
+└── EditorPreview
+    ├── EnemySilhouettes
+    ├── ExplosionPreview
+    └── PreviewCamera
 ```
+
+Les noms décrivent leur contenu réel : `EncounterMarkers` déclenche des
+rencontres complètes, tandis que `CombatGates` contient uniquement leurs
+barrières physiques. `Runtime` ne reçoit jamais de placement auteur permanent
+et `EditorPreview` ne contient jamais une autorité gameplay. L'auteur de niveau
+travaille principalement sous `Visual` et `Gameplay`; les contrôleurs peuplent
+`Runtime` pendant la partie.
 
 La racine doit retourner zéro erreur avec `validation_errors()`. Chaque
 `spawn_id` et chaque `encounter_id` est stable et unique dans la carte.

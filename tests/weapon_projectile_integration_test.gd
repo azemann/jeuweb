@@ -26,17 +26,26 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	var viewport_root := screen.get_node("MissionViewportContainer/MissionViewport")
-	var actor_spawner := viewport_root.get_node("ActorSpawner") as MissionActorSpawner2D
-	var projectile_spawner := viewport_root.get_node("ProjectileSpawner") as MissionProjectileSpawner2D
+	var actor_spawner := viewport_root.get_node("RuntimeSystems/ActorSpawner") as MissionActorSpawner2D
+	var projectile_spawner := viewport_root.get_node("RuntimeSystems/ProjectileSpawner") as MissionProjectileSpawner2D
+	var encounter_controller := viewport_root.get_node("RuntimeSystems/EncounterController") as MissionEncounterController
+	encounter_controller.set_physics_process(false)
 	var player := actor_spawner.current_player
+	for actor in actor_spawner.map_host().current_map.actors_root().get_children():
+		if actor is EnemyCharacter2D:
+			actor.queue_free()
+	for projectile in projectile_spawner.projectile_root().get_children():
+		if projectile is Projectile2D:
+			projectile.queue_free()
+	await process_frame
 	_check(player != null, "Le joueur runtime doit être disponible pour tester le tir.")
-	_check(projectile_spawner != null and projectile_spawner.projectile_root() != null, "Le spawner doit résoudre Actors/Projectiles.")
+	_check(projectile_spawner != null and projectile_spawner.projectile_root() != null, "Le spawner doit résoudre Runtime/Projectiles.")
 	if player != null and projectile_spawner != null:
 		for _frame in 90:
 			await physics_frame
 		var weapon := player.weapon_component()
-		var aim_pivot := player.get_node("Presentation/AimPivot") as Node2D
-		var muzzle := player.get_node("Presentation/AimPivot/Muzzle") as Marker2D
+		var aim_pivot := player.get_node("Visuals/AimPivot") as Node2D
+		var muzzle := player.get_node("Visuals/AimPivot/Muzzle") as Marker2D
 		_check(weapon != null and weapon.validation_errors().is_empty(), "Le composant Weapon du joueur doit être valide.")
 		var spawned: Array[Projectile2D] = []
 		projectile_spawner.projectile_spawned.connect(func(projectile: Projectile2D) -> void: spawned.append(projectile))
@@ -59,7 +68,7 @@ func _run() -> void:
 			var projectile := spawned[0]
 			var observations := {"impacts": 0}
 			projectile.impacted.connect(func(_target: Node, _damage: float) -> void: observations.impacts += 1)
-			_check(projectile.get_parent() == projectile_spawner.projectile_root(), "Le projectile doit être indépendant du joueur sous Actors/Projectiles.")
+			_check(projectile.get_parent() == projectile_spawner.projectile_root(), "Le projectile doit être indépendant du joueur sous Runtime/Projectiles.")
 			_check(projectile.global_position.is_equal_approx(muzzle_position), "Le projectile doit naître au Marker2D Muzzle.")
 			_check(projectile.direction.is_equal_approx(Vector2.RIGHT), "Le projectile doit suivre la visée du joueur.")
 			var initial_x := projectile.global_position.x

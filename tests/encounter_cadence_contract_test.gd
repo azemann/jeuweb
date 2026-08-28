@@ -45,14 +45,21 @@ func _run() -> void:
 	var screen := packed.instantiate() as PrototypeMissionScreen
 	root.add_child(screen)
 	var viewport := screen.get_node("MissionViewportContainer/MissionViewport") as SubViewport
-	var controller := viewport.get_node("EncounterController") as MissionEncounterController
+	var controller := viewport.get_node("RuntimeSystems/EncounterController") as MissionEncounterController
 	_controller = controller
 	controller.wave_started.connect(_on_wave_started)
 	controller.enemy_registered.connect(_on_enemy_registered)
 	await process_frame
 	await physics_frame
 	var host := viewport.get_node("MapHost") as MissionMapHost2D
-	var actor_spawner := viewport.get_node("ActorSpawner") as MissionActorSpawner2D
+	var actor_spawner := viewport.get_node("RuntimeSystems/ActorSpawner") as MissionActorSpawner2D
+	var expected_enemy_count := 0
+	var enabled_encounter_ids: Array[StringName] = []
+	for child in host.current_map.encounter_markers_root().get_children():
+		var marker := child as MapEncounterMarker2D
+		if marker != null and marker.enabled and marker.encounter_data != null:
+			expected_enemy_count += marker.encounter_data.authored_enemy_count()
+			enabled_encounter_ids.append(marker.encounter_id)
 	actor_spawner.current_player.global_position = host.current_map.get_node("Gameplay/Exits/MissionEnd").global_position
 	for _frame in 900:
 		for child in host.current_map.actors_root().get_children():
@@ -64,16 +71,21 @@ func _run() -> void:
 			if enemy != null and enemy.health_component() != null and enemy.health_component().current_health > 0.0:
 				enemy.health_component().apply_damage(enemy.health_component().current_health)
 		await physics_frame
-		if controller.is_completed(&"landing_cadence") and controller.is_completed(&"bridge_gauntlet") and controller.is_completed(&"foundry_boss_gate"):
+		var all_completed := true
+		for encounter_id in enabled_encounter_ids:
+			if not controller.is_completed(encounter_id):
+				all_completed = false
+				break
+		if all_completed:
 			break
-	_check(_registered_count == 12, "Le contrôleur doit enregistrer exactement les douze ennemis décrits par les Resources.")
+	_check(_registered_count == expected_enemy_count, "Le contrôleur doit enregistrer exactement les %d ennemis décrits par les Encounter Markers actifs." % expected_enemy_count)
 	_check(_wave_log.get(&"landing_cadence", []) == [&"landing_pressure", &"landing_release"], "Les vagues Landing doivent conserver l'ordre auteur.")
 	_check(_wave_log.get(&"bridge_gauntlet", []) == [&"bridge_pressure", &"bridge_escalation_air", &"bridge_escalation_pincer"], "Le Gauntlet doit conserver ses trois vagues auteur.")
 	_check(_bridge_overlap_count == 2, "After Delay doit lancer le Pincer tandis que les deux ennemis volants sont encore actifs.")
 	_check(_wave_log.get(&"foundry_boss_gate", []) == [&"foundry_pressure", &"foundry_payoff"], "Le Combat Gate doit terminer sur le Boss.")
 	_check(screen.get_node("HUD/HUDLayout/CadenceStack/CadenceLabel").text == "ZONE SÉCURISÉE" or screen.get_node("ResultPanel").visible, "Le HUD doit rendre la cadence et sa résolution visibles au joueur.")
 	_check(screen.get_node("BossHealthPanel").visible and screen.get_node("BossHealthPanel/Stack/BossHealth").value == 0.0, "Le HUD doit rendre les dégâts et la mort du Boss explicitement visibles.")
-	for gate in host.current_map.get_node("Gameplay/Encounters").get_children():
+	for gate in host.current_map.combat_gates_root().get_children():
 		_check(gate is MissionCombatGate2D and not gate.is_closed(), "Chaque Combat Gate doit être ouvert après sa rencontre.")
 		_check(gate.get_node("Barrier").collision_layer == 0 and not gate.get_node("EnergyField").visible, "Une porte ouverte doit réellement retirer collision et champ visuel.")
 	screen.queue_free()

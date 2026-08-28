@@ -5,12 +5,10 @@ extends Node
 signal projectile_spawned(projectile: Projectile2D)
 
 @export_category("Correspondence")
-## Hôte fournissant la map active et sa branche Actors/Projectiles.
-@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../MapHost")
+## Hôte fournissant la map active et sa branche Runtime/Projectiles.
+@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../../MapHost")
 ## Spawner dont le joueur instancié émet les demandes de projectile.
 @export_node_path("MissionActorSpawner2D") var actor_spawner_path := NodePath("../ActorSpawner")
-## Nom de la branche runtime qui reçoit les projectiles afin de garder l'arbre lisible.
-@export var projectile_root_name: StringName = &"Projectiles"
 
 
 func _ready() -> void:
@@ -36,9 +34,9 @@ func actor_spawner() -> MissionActorSpawner2D:
 
 func projectile_root() -> Node2D:
 	var host := map_host()
-	if host == null or host.current_map == null or host.current_map.actors_root() == null:
+	if host == null or host.current_map == null:
 		return null
-	return host.current_map.actors_root().get_node_or_null(NodePath(str(projectile_root_name))) as Node2D
+	return host.current_map.projectiles_root()
 
 
 func _on_player_spawned(player: PlayerCharacter2D, _spawn: MapSpawnPoint2D) -> void:
@@ -56,7 +54,7 @@ func _on_projectile_requested(
 ) -> void:
 	var root := projectile_root()
 	if root == null or projectile_scene == null or not projectile_scene.can_instantiate():
-		push_error("Demande de projectile invalide ou conteneur Actors/Projectiles absent.")
+		push_error("Demande de projectile invalide ou conteneur Runtime/Projectiles absent.")
 		return
 	var projectile := projectile_scene.instantiate() as Projectile2D
 	if projectile == null:
@@ -75,6 +73,4 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Assigner un MissionMapHost2D valide.")
 	if actor_spawner() == null:
 		warnings.append("Assigner un MissionActorSpawner2D valide.")
-	if str(projectile_root_name).is_empty():
-		warnings.append("Projectile Root Name est obligatoire.")
 	return warnings

@@ -35,19 +35,23 @@ EnemyCharacter2D (CharacterBody2D)
 │   ├── Health
 │   ├── Attack
 │   ├── StateMachine
-│   ├── Presentation
+│   ├── Animation
 │   ├── Grounding (ennemis terrestres)
 │       ├── GroundAnchor
 │       ├── GroundProbe
 │       ├── LeftFootProbe
 │       ├── RightFootProbe
 │       └── GroundShadow
-│   ├── SlopePresentation (ennemis terrestres)
+│   ├── SlopeAlignment (ennemis terrestres)
 │   └── Ejection (optionnel)
-└── Presentation
-    └── SlopeVisual
+└── Visuals
+    └── GroundPivot (ennemis terrestres)
         └── BodySprite (AnimatedSprite2D)
 ```
+
+`Components/Animation` est le `EnemyPresentationComponent` qui choisit les
+animations ; `Visuals` contient uniquement les sprites et sockets. Ces noms
+distincts interdisent l'ancienne ambiguïté de deux enfants `Presentation`.
 
 ## Workflow auteur
 
@@ -61,7 +65,7 @@ EnemyCharacter2D (CharacterBody2D)
 5. enregistrer sa correspondance dans `enemy_catalog.tres` ;
 6. référencer l'archétype depuis un `EnemySpawnPatternData`, puis le composer
    dans une `WaveData` et un `EncounterData` ;
-7. placer un `MapEncounterMarker2D` sous `Gameplay/EnemySpawns`, lui assigner
+7. placer un `MapEncounterMarker2D` sous `Gameplay/EncounterMarkers`, lui assigner
    la rencontre et régler seulement son placement et sa distance d'activation ;
 8. résoudre les avertissements et exécuter les contrats ennemi et animation.
 
@@ -84,7 +88,7 @@ le pipeline.
 - Patrol possède la vélocité ; Health possède les PV ; Presentation ne modifie
   aucun état gameplay ;
 - le profil choisit locomotion terrestre ou volante ; un volant omet
-  `Grounding` et `SlopePresentation`, et Patrol applique son oscillation auteur ;
+  `Grounding` et `SlopeAlignment`, et Patrol applique son oscillation auteur ;
 - Attack possède le déclenchement, la frame active et l'effet projectile ou
   contact ; la scène conserve `AttackOrigin` comme socket auteur ;
 - Grounding est le composant transversal chargé du root des pieds et de l'ombre
@@ -92,10 +96,10 @@ le pipeline.
 - `EnemyCharacter2D.apply_damage()` transmet uniquement l'intention à Health ;
 - lorsqu'une Hurtbox étendue existe, elle possède seule la couche de réception
   des projectiles ; le corps conserve uniquement collision World et mouvement ;
-- un dégât accepté suspend Patrol et déclenche `hit` dans Presentation ; la
+- un dégât accepté suspend Patrol et déclenche `hit` dans Animation ; la
   marche reprend uniquement au signal de fin d'animation ;
 - à zéro PV, la coque quitte la couche cible mais conserve sa collision World,
-  Patrol ne fournit plus de mouvement horizontal et Presentation joue `death` ;
+  Patrol ne fournit plus de mouvement horizontal et Animation joue `death` ;
 - `EnemyCharacter2D` retire l'instance au signal de fin de `death`, jamais au
   signal `died` lui-même ; Ejection peut instancier un acteur indépendant dans
   `Actors` avant cette suppression.

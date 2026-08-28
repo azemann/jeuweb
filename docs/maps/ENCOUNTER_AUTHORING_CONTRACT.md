@@ -70,9 +70,9 @@ des Set Pieces restent des tranches séparées.
 2. composer les motifs dans des `WaveData` et nommer leur beat ;
 3. composer les vagues dans une `EncounterData` ;
 4. glisser ou sélectionner cette Resource sur un `MapEncounterMarker2D` sous
-   `Gameplay/EnemySpawns` ;
+   `Gameplay/EncounterMarkers` ;
 5. placer le Marker, régler `Activation Distance` et laisser `Enabled` actif ;
-6. placer un `MissionCombatGate2D` sous `Gameplay/Encounters` avec le même
+6. placer un `MissionCombatGate2D` sous `Gameplay/CombatGates` avec le même
    `encounter_id` lorsque la rencontre bloque la sortie ;
 7. vérifier les avertissements de la carte et exécuter
    `encounter_cadence_contract_test.gd`.
@@ -103,6 +103,10 @@ Landing Cadence
   Pressure   : 2 Troopers
   Release    : 1 Grunt
 
+Landing Cadence 2 (occurrence auteur non bloquante)
+  Pressure   : 2 Troopers
+  Release    : 1 Grunt
+
 Bridge Gauntlet
   Pressure   : 2 Grunts
   Escalation : 2 Flying enemies, progression temporelle
@@ -113,13 +117,16 @@ Foundry Boss Gate
   Payoff     : 1 Boss
 ```
 
-La mission contient donc 12 apparitions principales, sept vagues et la courbe
+La scène actuellement éditée contient donc 15 apparitions, neuf vagues et quatre
+occurrences. `LandingCadence2` réutilise volontairement les deux vagues Landing
+sans bloquer la sortie. Les trois rencontres de progression conservent la courbe
 globale `pressure → release → pressure → escalation → payoff`.
 
 ## Validation
 
 `MissionMapRoot2D.validation_errors()` vérifie présence et validité récursive
-des Resources. `encounter_cadence_contract_test.gd` protège les nombres, beats,
-formations, résolution par `EnemyCatalog`, ordre runtime des sept vagues, total
-de 12 apparitions et feedback HUD. `mission_run_contract_test.gd` tue réellement
-les vagues successives avant d'autoriser la victoire.
+des Resources. `encounter_cadence_contract_test.gd` protège les beats,
+formations, résolution par `EnemyCatalog`, ordre runtime des rencontres de
+progression et égalité entre le contenu de tous les Markers actifs et les
+instances réellement enregistrées. `mission_run_contract_test.gd` tue
+réellement les vagues successives avant d'autoriser la victoire.

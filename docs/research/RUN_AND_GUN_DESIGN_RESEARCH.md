@@ -47,7 +47,7 @@ Input Map
 ```
 
 Le joueur ne connaît ni la carte ni le conteneur runtime des projectiles. La
-scène de mission orchestre leur apparition sous `Actors/Projectiles`.
+scène de mission orchestre leur apparition sous `Runtime/Projectiles`.
 
 ## Références
 

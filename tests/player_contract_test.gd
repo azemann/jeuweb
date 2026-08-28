@@ -24,7 +24,10 @@ func _run() -> void:
 		_check(player.aim_component().profile.is_valid(), "Le panneau de visée doit être valide.")
 		_check(player.health_component().profile.is_valid(), "Le panneau de santé doit être valide.")
 		_check(player.weapon_component().weapon.is_valid(), "Le panneau d'arme doit être valide.")
-		_check(player.get_node_or_null("Presentation/AimPivot/Muzzle") is Marker2D, "La présentation doit exposer un Muzzle.")
+		_check(player.get_node_or_null("Components/Animation") is PlayerPresentationComponent, "Components/Animation doit piloter les animations du joueur.")
+		_check(player.get_node_or_null("Visuals/GroundPivot") is Node2D, "Visuals/GroundPivot doit isoler l'inclinaison visuelle du joueur.")
+		_check(player.get_node_or_null("Presentation") == null and player.get_node_or_null("Components/Presentation") == null, "L'ancien doublon Presentation ne doit plus exister.")
+		_check(player.get_node_or_null("Visuals/AimPivot/Muzzle") is Marker2D, "Visuals doit exposer un Muzzle.")
 		_check(player.get_node_or_null("AnimationPlayer") is AnimationPlayer, "Le timing visuel doit appartenir à AnimationPlayer.")
 		player.free()
 
@@ -37,14 +40,16 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	var host := screen.get_node("MissionViewportContainer/MissionViewport/MapHost") as MissionMapHost2D
-	var spawner := screen.get_node("MissionViewportContainer/MissionViewport/ActorSpawner") as MissionActorSpawner2D
+	var runtime_systems := screen.get_node("MissionViewportContainer/MissionViewport/RuntimeSystems")
+	var spawner := screen.get_node("MissionViewportContainer/MissionViewport/RuntimeSystems/ActorSpawner") as MissionActorSpawner2D
+	_check(runtime_systems != null and runtime_systems.get_child_count() == 5, "RuntimeSystems doit regrouper les cinq services de mission.")
 	_check(host.current_map != null, "L'écran de mission doit charger sa carte.")
 	_check(spawner.current_player != null, "ActorSpawner doit créer le joueur depuis le spawn auteur.")
 	_check(screen.get_node("HUD/HUDLayout/HealthPanel/HealthStack/Health").value == 100.0, "Le HUD doit refléter le HealthComponent du joueur.")
 	if host.current_map != null and spawner.current_player != null:
 		_check(spawner.current_player.get_parent() == host.current_map.actors_root(), "Le joueur runtime doit appartenir à la branche Actors de la carte.")
 		_check(spawner.current_player.name == "RuntimePlayer", "L'instance runtime doit être identifiable dans le SceneTree.")
-		_check(host.current_map.get_node_or_null("Actors/Projectiles") is Node2D, "La carte doit exposer le conteneur runtime des projectiles.")
+		_check(host.current_map.projectiles_root() is Node2D, "La carte doit exposer Runtime/Projectiles.")
 		for _frame in 90:
 			await physics_frame
 		_check(spawner.current_player.is_on_floor(), "Le joueur doit atterrir sur la géométrie de la carte.")

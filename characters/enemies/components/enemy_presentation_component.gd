@@ -6,7 +6,7 @@ signal death_animation_finished
 
 @export_category("Correspondence")
 ## AnimatedSprite2D recevant la marche et le retournement horizontal.
-@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Presentation/SlopeVisual/BodySprite")
+@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Visuals/GroundPivot/BodySprite")
 ## Composant de patrouille dont la vélocité pilote la présentation.
 @export_node_path("EnemyPatrolComponent") var patrol_component_path := NodePath("../Patrol")
 

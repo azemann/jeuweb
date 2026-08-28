@@ -321,7 +321,7 @@ Le contrat transversal détaillé se trouve dans
 ## 33. Les pieds et les ombres dépendent du vrai sol
 
 Toute scène canonique de joueur ou d'ennemi expose un `GroundAnchor`, un probe
-World et une ombre projetée extérieure à sa Presentation. Permanent et
+World et une ombre projetée extérieure à ses `Visuals`. Permanent et
 Breakable utilisent un contour auteur inspectable ; Carvable utilise uniquement
 son masque et ses collisions runtime. Une ellipse attachée au sprite ou une
 collision alpha approximative ne constitue jamais une solution finale.

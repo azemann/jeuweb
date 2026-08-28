@@ -18,11 +18,11 @@ signal fired(direction: Vector2)
 ## Composant fournissant la direction de visée quantifiée au moment du tir.
 @export_node_path("PlayerAimComponent") var aim_component_path := NodePath("../Aim")
 ## Point extérieur du canon où le projectile doit normalement apparaître.
-@export_node_path("Marker2D") var muzzle_path := NodePath("../../Presentation/AimPivot/Muzzle")
+@export_node_path("Marker2D") var muzzle_path := NodePath("../../Visuals/AimPivot/Muzzle")
 ## Origine interne du canon utilisée pour vérifier que le Muzzle n'a pas traversé un mur.
-@export_node_path("Node2D") var clearance_origin_path := NodePath("../../Presentation/AimPivot")
+@export_node_path("Node2D") var clearance_origin_path := NodePath("../../Visuals/AimPivot")
 ## AnimationPlayer chargé du recul et des retours visuels synchronisés avec chaque tir.
-@export_node_path("AnimationPlayer") var feedback_player_path := NodePath("../../Presentation/AimPivot/WeaponFeedback")
+@export_node_path("AnimationPlayer") var feedback_player_path := NodePath("../../Visuals/AimPivot/WeaponFeedback")
 ## Timer natif imposant la cadence décrite par Fire Interval dans la WeaponData.
 @export_node_path("Timer") var cooldown_timer_path := NodePath("FireCooldown")
 

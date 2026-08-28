@@ -8,7 +8,7 @@ extends Node
 ## Grounding partagé qui mesure la tangente entre les appuis gauche et droit.
 @export_node_path("ActorGroundingComponent") var grounding_path := NodePath("../Grounding")
 ## Pivot visuel situé au root des pieds ; seul ce Node s'incline, jamais la collision.
-@export_node_path("Node2D") var slope_visual_path := NodePath("../../Presentation/SlopeVisual")
+@export_node_path("Node2D") var slope_visual_path := NodePath("../../Visuals/GroundPivot")
 
 @export_category("Slope Follow")
 ## Fraction de l'angle physique appliquée à la présentation, de corps droit à suivi intégral.

@@ -12,15 +12,26 @@
 [ext_resource type="Texture2D" uid="uid://d2gqkqa8a1wn5" path="res://art/maps/toxic_coast/toxic-coast-foreground-v002.png" id="9_foreground"]
 [ext_resource type="PackedScene" path="res://effects/explosions/explosion_2d.tscn" id="10_explosion"]
 [ext_resource type="Script" uid="uid://bgj80g6y0wgjg" path="res://maps/system/map_segment_2d.gd" id="11_segment_script"]
+[ext_resource type="Script" uid="uid://bui3dauu447sn" path="res://maps/encounters/encounter_data.gd" id="12_8tt20"]
 [ext_resource type="PackedScene" path="res://terrain/permanent_ground/ground_module_2d.tscn" id="12_ground_module"]
 [ext_resource type="Resource" path="res://terrain/permanent_ground/styles/toxic_coast_permanent_ground.tres" id="13_ground_style"]
+[ext_resource type="Script" uid="uid://dej2py36g0ck4" path="res://maps/encounters/wave_data.gd" id="13_paaja"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/landing_release.tres" id="14_67wnr"]
 [ext_resource type="PackedScene" uid="uid://brwtvo216t85b" path="res://terrain/kits/toxic_coast/pieces/natural_ledge_medium.tscn" id="14_natural_ledge"]
+[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/landing_pressure.tres" id="15_mlto5"]
 [ext_resource type="PackedScene" path="res://props/explosive_barrel/toxic_explosive_barrel_2d.tscn" id="15_tts76"]
 [ext_resource type="PackedScene" path="res://maps/system/mission_checkpoint_2d.tscn" id="16_checkpoint"]
 [ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/landing_cadence.tres" id="17_landing_cadence"]
 [ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/bridge_gauntlet.tres" id="18_bridge_gauntlet"]
 [ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/foundry_boss_gate.tres" id="19_foundry_gate"]
 [ext_resource type="PackedScene" path="res://maps/encounters/mission_combat_gate_2d.tscn" id="20_combat_gate"]
+
+[sub_resource type="Resource" id="Resource_nls3r"]
+script = ExtResource("12_8tt20")
+cadence_id = &"landing_cadence2"
+blocks_mission_exit = false
+waves = Array[ExtResource("13_paaja")]([ExtResource("14_67wnr"), ExtResource("15_mlto5")])
+metadata/_custom_type_script = "uid://bui3dauu447sn"
 
 [sub_resource type="RectangleShape2D" id="Shape_destructible"]
 size = Vector2(560, 150)
@@ -120,63 +131,67 @@ editor_color = Color(0.88, 0.41, 0.05, 0.82)
 
 [node name="LandingNaturalLedge" parent="Gameplay/GroundPieces" unique_id=303387194 instance=ExtResource("14_natural_ledge")]
 position = Vector2(920, 574)
-show_walk_geometry_preview = null
 
 [node name="NaturalLedgeMedium" parent="Gameplay/GroundPieces" unique_id=1746824714 instance=ExtResource("14_natural_ledge")]
 position = Vector2(797.0001, 319)
 rotation = -0.61086524
 ground_mode = 2
-show_walk_geometry_preview = null
 
 [node name="NaturalLedgeMedium2" parent="Gameplay/GroundPieces" unique_id=363765765 instance=ExtResource("14_natural_ledge")]
 position = Vector2(1449, 128)
-show_walk_geometry_preview = null
 
 [node name="IndustrialCatwalkMedium" parent="Gameplay/GroundPieces" unique_id=1416760354 instance=ExtResource("8_3l3u1")]
 position = Vector2(2204, 284)
 ground_mode = 1
 
-[node name="SpawnPoints" type="Node2D" parent="Gameplay" unique_id=248120249]
+[node name="PlayerSpawnPoints" type="Node2D" parent="Gameplay" unique_id=248120249]
 
-[node name="PlayerStart" type="Marker2D" parent="Gameplay/SpawnPoints" unique_id=1877526515]
+[node name="PlayerStart" type="Marker2D" parent="Gameplay/PlayerSpawnPoints" unique_id=1877526515]
 position = Vector2(220, 495)
 gizmo_extents = 42.0
 script = ExtResource("4_spawn_script")
 spawn_id = &"player_start"
 
-[node name="CheckpointBridge" type="Marker2D" parent="Gameplay/SpawnPoints" unique_id=1625567238]
+[node name="CheckpointBridge" type="Marker2D" parent="Gameplay/PlayerSpawnPoints" unique_id=1625567238]
 position = Vector2(1110, 475)
 gizmo_extents = 38.0
 script = ExtResource("4_spawn_script")
 spawn_id = &"checkpoint_bridge"
 kind = 1
 
-[node name="CheckpointFoundry" type="Marker2D" parent="Gameplay/SpawnPoints" unique_id=2127339353]
+[node name="CheckpointFoundry" type="Marker2D" parent="Gameplay/PlayerSpawnPoints" unique_id=2127339353]
 position = Vector2(2600, 455)
 gizmo_extents = 38.0
 script = ExtResource("4_spawn_script")
 spawn_id = &"checkpoint_foundry"
 kind = 1
 
-[node name="EnemySpawns" type="Node2D" parent="Gameplay" unique_id=636885030]
+[node name="EncounterMarkers" type="Node2D" parent="Gameplay" unique_id=636885030]
 
-[node name="LandingCadence" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=120673704]
-position = Vector2(720, 450)
+[node name="LandingCadence" type="Marker2D" parent="Gameplay/EncounterMarkers" unique_id=120673704]
+position = Vector2(644, 282)
 gizmo_extents = 44.0
 script = ExtResource("5_encounter_script")
 encounter_id = &"landing_cadence"
 encounter_data = ExtResource("17_landing_cadence")
 activation_distance = 620.0
 
-[node name="BridgeGauntlet" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=498996969]
-position = Vector2(1920, 430)
+[node name="LandingCadence2" type="Marker2D" parent="Gameplay/EncounterMarkers" unique_id=1348249445]
+position = Vector2(388, 482)
+gizmo_extents = 44.0
+script = ExtResource("5_encounter_script")
+encounter_id = &"landing_cadence2"
+encounter_data = SubResource("Resource_nls3r")
+activation_distance = 620.0
+
+[node name="BridgeGauntlet" type="Marker2D" parent="Gameplay/EncounterMarkers" unique_id=498996969]
+position = Vector2(2113, 57)
 gizmo_extents = 60.0
 script = ExtResource("5_encounter_script")
 encounter_id = &"bridge_gauntlet"
 encounter_data = ExtResource("18_bridge_gauntlet")
-activation_distance = 640.0
 
-[node name="FoundryBossGate" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=1205623005]
+[node name="FoundryBossGate" type="Marker2D" parent="Gameplay/EncounterMarkers" unique_id=1205623005]
 position = Vector2(3180, 430)
 gizmo_extents = 64.0
 script = ExtResource("5_encounter_script")
@@ -184,17 +199,17 @@ encounter_id = &"foundry_boss_gate"
 encounter_data = ExtResource("19_foundry_gate")
 activation_distance = 680.0
 
-[node name="Encounters" type="Node2D" parent="Gameplay" unique_id=603695318]
+[node name="CombatGates" type="Node2D" parent="Gameplay" unique_id=603695318]
 
-[node name="LandingCombatGate" parent="Gameplay/Encounters" instance=ExtResource("20_combat_gate")]
+[node name="LandingCombatGate" parent="Gameplay/CombatGates" unique_id=772779288 instance=ExtResource("20_combat_gate")]
 position = Vector2(1240, 360)
 encounter_id = &"landing_cadence"
 
-[node name="BridgeCombatGate" parent="Gameplay/Encounters" instance=ExtResource("20_combat_gate")]
+[node name="BridgeCombatGate" parent="Gameplay/CombatGates" unique_id=1187174436 instance=ExtResource("20_combat_gate")]
 position = Vector2(2520, 360)
 encounter_id = &"bridge_gauntlet"
 
-[node name="FoundryCombatGate" parent="Gameplay/Encounters" instance=ExtResource("20_combat_gate")]
+[node name="FoundryCombatGate" parent="Gameplay/CombatGates" unique_id=1535366378 instance=ExtResource("20_combat_gate")]
 position = Vector2(3710, 360)
 encounter_id = &"foundry_boss_gate"
 
@@ -207,7 +222,6 @@ collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="Preview" type="Polygon2D" parent="Gameplay/DestructibleZones/CentralSoil" unique_id=1299739222]
-visible = false
 color = Color(0.698039, 0.827451, 0.039216, 0.16)
 polygon = PackedVector2Array(-280, -75, 280, -75, 280, 75, -280, 75)
 
@@ -222,7 +236,6 @@ collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="Preview" type="Polygon2D" parent="Gameplay/DestructibleZones/BridgeSoil" unique_id=933520579]
-visible = false
 color = Color(0.698039, 0.827451, 0.039216, 0.16)
 polygon = PackedVector2Array(-320, -85, 320, -85, 320, 85, -320, 85)
 
@@ -237,7 +250,6 @@ collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="Preview" type="Polygon2D" parent="Gameplay/DestructibleZones/FoundrySoil" unique_id=1391057192]
-visible = false
 color = Color(0.882353, 0.407843, 0.0470588, 0.16)
 polygon = PackedVector2Array(-360, -95, 360, -95, 360, 95, -360, 95)
 
@@ -295,11 +307,11 @@ shape = SubResource("Shape_hazard")
 
 [node name="Interactions" type="Node2D" parent="Gameplay" unique_id=107503451]
 
-[node name="BridgeCheckpoint" parent="Gameplay/Interactions" instance=ExtResource("16_checkpoint")]
+[node name="BridgeCheckpoint" parent="Gameplay/Interactions" unique_id=1863077804 instance=ExtResource("16_checkpoint")]
 position = Vector2(1110, 475)
 spawn_id = &"checkpoint_bridge"
 
-[node name="FoundryCheckpoint" parent="Gameplay/Interactions" instance=ExtResource("16_checkpoint")]
+[node name="FoundryCheckpoint" parent="Gameplay/Interactions" unique_id=1372966111 instance=ExtResource("16_checkpoint")]
 position = Vector2(2600, 455)
 spawn_id = &"checkpoint_foundry"
 
@@ -321,33 +333,37 @@ border_width = 2.0
 position = Vector2(3710, 450)
 gizmo_extents = 48.0
 
-[node name="DestructibleTerrain" type="Node2D" parent="." unique_id=33034504]
+[node name="Runtime" type="Node2D" parent="." unique_id=690651369]
+
+[node name="Actors" type="Node2D" parent="Runtime"]
+y_sort_enabled = true
+
+[node name="Projectiles" type="Node2D" parent="Runtime" unique_id=1374294612]
+
+[node name="Effects" type="Node2D" parent="Runtime" unique_id=972140155]
+
+[node name="DestructibleTerrain" type="Node2D" parent="Runtime" unique_id=33034504]
 z_index = 8
 script = ExtResource("6_terrain_script")
 profile = ExtResource("7_terrain_profile")
 
-[node name="Actors" type="Node2D" parent="." unique_id=690651369]
-y_sort_enabled = true
+[node name="EditorPreview" type="Node2D" parent="." groups=["map_authoring_preview"]]
 
-[node name="Projectiles" type="Node2D" parent="Actors" unique_id=1374294612]
-
-[node name="Effects" type="Node2D" parent="Actors" unique_id=972140155]
-
-[node name="TerrainDemoExplosion" parent="Actors/Effects" unique_id=768243986 instance=ExtResource("10_explosion")]
+[node name="ExplosionPreview" parent="EditorPreview" unique_id=768243986 instance=ExtResource("10_explosion")]
 position = Vector2(920, 625)
-terrain_path = NodePath("../../../DestructibleTerrain")
+terrain_path = NodePath("../../Runtime/DestructibleTerrain")
 
-[node name="PreviewActors" type="Node2D" parent="Actors" unique_id=1074664614 groups=["map_authoring_preview"]]
+[node name="EnemySilhouettes" type="Node2D" parent="EditorPreview" unique_id=1074664614]
 
-[node name="VacuumTrooperSilhouette" type="Polygon2D" parent="Actors/PreviewActors" unique_id=34505178]
+[node name="VacuumTrooperSilhouette" type="Polygon2D" parent="EditorPreview/EnemySilhouettes" unique_id=34505178]
 color = Color(0.698039, 0.827451, 0.039216, 0.92)
 polygon = PackedVector2Array(724, 525, 728, 476, 751, 450, 802, 450, 833, 478, 846, 525)
 
-[node name="VacuumBruteSilhouette" type="Polygon2D" parent="Actors/PreviewActors" unique_id=1090463909]
+[node name="VacuumBruteSilhouette" type="Polygon2D" parent="EditorPreview/EnemySilhouettes" unique_id=1090463909]
 color = Color(0.882353, 0.407843, 0.0470588, 0.94)
 polygon = PackedVector2Array(1378, 516, 1388, 445, 1422, 410, 1493, 410, 1535, 450, 1548, 516)
 
-[node name="PreviewCamera" type="Camera2D" parent="." unique_id=1110909260]
+[node name="PreviewCamera" type="Camera2D" parent="EditorPreview" unique_id=1110909260]
 position = Vector2(640, 360)
 enabled = false
 limit_left = 0

@@ -30,6 +30,12 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - système de cartes par `MissionMapDefinition`, `MissionMapCatalog`,
   `MissionMapRoot2D` et `MissionMapHost2D` ;
 - première carte canonique `toxic_coast`, dimensions 3840 × 720 ;
+- arborescence auteur clarifiée : `Visual` et `Gameplay` portent le contenu
+  placé, `Runtime` sépare Actors/Projectiles/Effects/DestructibleTerrain et
+  `EditorPreview` regroupe uniquement les aides visibles dans l'éditeur ;
+- dans `Gameplay`, `PlayerSpawnPoints`, `EncounterMarkers` et `CombatGates`
+  remplacent les anciens noms ambigus ; l'écran regroupe ses cinq services sous
+  `RuntimeSystems` ;
 - trois segments auteurs visibles : débarquement, pont acide et fonderie ;
 - spawns, rencontres, dangers, sorties et limites caméra visibles ;
 - terrain destructible produit depuis les zones auteur ;
@@ -74,7 +80,7 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - correspondance d'explosion optionnelle dans `ProjectileData`, permettant à
   une future munition de choisir scène et style au point d'impact sans modifier
   la balle de campagne actuelle ;
-- spawner de mission découplant le joueur du conteneur `Actors/Projectiles` ;
+- spawner de mission découplant le joueur du conteneur `Runtime/Projectiles` ;
 - caméra de mission unique avec look-ahead, limites et progression irréversible
   vers la droite ;
 - trois profondeurs de décor avec parallaxe distincte ;
@@ -99,17 +105,18 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   Grunt, le Drone et le Boss tirent, le Saboteur charge puis s'autodétruit ;
 - le Vacuum Trooper éjecte réellement un `vacuum_pilot_saboteur` autonome à sa
   mort via son composant `Ejection` visible dans le SceneTree ;
-- scène canonique `EnemyCharacter2D` composée de Patrol, Health et Presentation,
+- scène canonique `EnemyCharacter2D` composée de Patrol, Health et Animation,
   profil et catalogue Resources éditables dans l'Inspector ;
 - chaîne de cadence Resource-first publiée : `EnemySpawnPatternData` décrit une
   formation, `WaveData` son beat et sa transition, `EncounterData` compose les
   vagues, puis `MapEncounterMarker2D` possède uniquement placement et activation ;
-- `MissionEncounterController` déroule trois rencontres, sept vagues et douze
-  apparitions principales sur Côte toxique ; le spawner ne fait plus que
+- `MissionEncounterController` déroule actuellement quatre occurrences, neuf
+  vagues et quinze apparitions sur Côte toxique, dont `LandingCadence2`
+  non bloquante ajoutée dans la scène auteur ; le spawner ne fait plus que
   traduire chaque archétype en scène canonique ;
 - courbe jouable : pression puis respiration au débarquement, Gauntlet avec
   escalade terrestre/aérienne au pont, pression puis payoff Boss à la fonderie ;
-- trois `MissionCombatGate2D` visibles sous `Gameplay/Encounters` bloquent
+- trois `MissionCombatGate2D` visibles sous `Gameplay/CombatGates` bloquent
   physiquement chaque frontière et s'ouvrent à la résolution correspondante ;
 - le HUD annonce rencontre, beat et numéro de vague actifs ; les formations
   possèdent aussi un aperçu coloré dans l'éditeur ;
@@ -118,7 +125,7 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   une barre de Boss reliée à `EnemyHealthComponent` confirme chaque dégât ;
 - joueur et ennemis partagent `ActorGroundingComponent`, avec GroundAnchor,
   GroundProbe et ombre projetée sur le vrai collider World ;
-- deux sondes d'appui mesurent chaque pente et `SlopePresentation` incline le
+- deux sondes d'appui mesurent chaque pente et `SlopeAlignment` incline le
   sprite autour du root des pieds sans incliner collision, arme ou visée ;
 - les collisions d'acteurs rejoignent GroundAnchor par un point inférieur
   central ; les larges rectangles qui font flotter les pieds sont interdits ;
@@ -192,7 +199,7 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   populations et vagues : `MissionEncounterController` ;
 - définition du canon : `primary_field_cannon.tres` ; définition de sa munition :
   `field_round.tres` ; cadence runtime : `PlayerWeaponComponent` ;
-- origine du tir : `Presentation/AimPivot/Muzzle` ; correspondance vers la map :
+- origine du tir : `Visuals/AimPivot/Muzzle` ; correspondance vers la map :
   `MissionProjectileSpawner2D` ;
 - comportement caméra : `RunAndGunCameraProfile.tres` ; progression runtime :
   `MissionCameraRig2D` ; limites : `MissionMapRoot2D.camera_bounds` ;
@@ -243,9 +250,9 @@ catalogues.
 - dépôt distant de référence : `https://github.com/azemann/jeuweb.git` ;
 - caches Godot, états locaux Codex, captures, exports et journaux exclus par
   `.gitignore` ;
-- état animation contrôlé par le validateur raster v002 et un 26e contrat
-  headless dédié ; la suite globale de 25 contrats était verte avant les
-  modifications parallèles actuelles de la carte.
+- état animation contrôlé par le validateur raster v002 et son contrat headless
+  dédié ; la suite globale actuelle de 26 contrats est verte après migration de
+  l'arborescence auteur et prise en compte de `LandingCadence2`.
 
 ## Limites connues
 
@@ -270,9 +277,11 @@ catalogues.
 - l'impulsion radiale est publiée avec `target_damaged`, mais les acteurs ne
   possèdent pas encore de contrat commun pour la consommer physiquement ;
 - les poses v002 sont découpées proprement et structurées en phases lisibles ;
-  la continuité jouée à taille réelle doit encore être revue après restauration
-  d'une correspondance valide entre marqueurs Landing et Combat Gates dans la
-  carte en cours d'édition ;
+  leur continuité jouée à taille réelle doit encore être revue sur la cadence
+  actuelle de quinze apparitions ;
+- `LandingCadence` et `LandingCadence2` possèdent actuellement de grands seuils
+  d'activation proches du départ : leur démarrage quasi simultané est valide
+  techniquement mais doit être confirmé ou rééquilibré en jeu ;
 - les quatre `TileMapLayer` de Côte toxique sont prêts mais sans TileSet ;
 - le catalogue Côte toxique publie actuellement quatre pièces réutilisables :
   corniche naturelle, bloc bunker, passerelle industrielle et pont-tuyau ; ce
@@ -293,10 +302,11 @@ catalogues.
 
 ## Prochaine tranche recommandée
 
-Résoudre l'invalidité actuelle des marqueurs Landing/Combat Gates sans perdre
-les Transforms auteur en cours, relancer les contrats complets, puis jouer la
-cadence de douze apparitions avec les 88 poses v002. Ensuite seulement, produire
-le Set Piece du Boss : projectile lourd, phases data-driven et verrou Arena.
+Jouer la cadence actuelle de quinze apparitions et décider si
+`LandingCadence2` constitue une vraie seconde rencontre ou seulement un essai de
+placement. Ajuster ensuite ses seuils et offsets depuis l'Inspector/Resources,
+puis reprendre la stabilisation runtime du terrain destructible et des
+références de projectiles avant le Set Piece du Boss.
 
 
 ## Validations à exécuter
@@ -326,10 +336,9 @@ python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
 python3 pipeline/assets/tools/validate_enemy_animation_roster_v002.py
 ```
 
-Dernière validation complète avant l'édition parallèle de la carte : 2026-08-28,
-les 25 contrats headless passent. Validation actuelle de la tranche animation :
-import Godot, validateur pipeline et contrat dédié passent ; le contrat ennemi
-global s'arrête ensuite sur la rencontre bloquante `landing_cadence2`, sans
-Combat Gate correspondant dans `toxic_coast.tscn` en cours d'édition.
+Dernière validation complète : 2026-08-28, les 26 contrats headless passent
+après la migration des branches auteur/runtime et des scènes de personnages.
+`LandingCadence2` est valide, non bloquante et comprise dynamiquement dans le
+contrat de cadence.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames
 d'atterrissage : marche, impact, éjection et épave suivent la pente.

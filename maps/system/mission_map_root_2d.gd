@@ -7,9 +7,9 @@ const AUTHORING_PREVIEW_GROUP := &"map_authoring_preview"
 
 const REQUIRED_GAMEPLAY_BRANCHES := [
 	"Segments",
-	"SpawnPoints",
-	"EnemySpawns",
-	"Encounters",
+	"PlayerSpawnPoints",
+	"EncounterMarkers",
+	"CombatGates",
 	"GroundPieces",
 	"DestructibleZones",
 	"IndestructibleGeometry",
@@ -33,8 +33,18 @@ const REQUIRED_GAMEPLAY_BRANCHES := [
 @export_node_path("Node2D") var visual_root_path := NodePath("Visual")
 ## Branche auteur contenant segments, sols, dangers, interactions et marqueurs.
 @export_node_path("Node2D") var gameplay_root_path := NodePath("Gameplay")
-## Branche runtime recevant joueur, ennemis, projectiles et effets instanciés.
-@export_node_path("Node2D") var actors_root_path := NodePath("Actors")
+## Branche séparant explicitement les instances runtime du contenu auteur.
+@export_node_path("Node2D") var runtime_root_path := NodePath("Runtime")
+## Conteneur runtime réservé au joueur et aux ennemis instanciés.
+@export_node_path("Node2D") var actors_root_path := NodePath("Runtime/Actors")
+## Conteneur runtime réservé aux projectiles instanciés.
+@export_node_path("Node2D") var projectiles_root_path := NodePath("Runtime/Projectiles")
+## Conteneur runtime réservé aux effets temporaires instanciés.
+@export_node_path("Node2D") var effects_root_path := NodePath("Runtime/Effects")
+## Terrain destructible dérivé des zones auteur et des Ground Pieces.
+@export_node_path("DestructibleTerrain2D") var destructible_terrain_path := NodePath("Runtime/DestructibleTerrain")
+## Branche réservée aux silhouettes, gizmos et aides qui n'existent pas dans le jeu.
+@export_node_path("Node2D") var editor_preview_root_path := NodePath("EditorPreview")
 
 @export_category("Camera")
 ## Rectangle mondial, en pixels, que la caméra ne doit jamais dépasser.
@@ -75,8 +85,43 @@ func gameplay_root() -> Node2D:
 	return get_node_or_null(gameplay_root_path) as Node2D
 
 
+func runtime_root() -> Node2D:
+	return get_node_or_null(runtime_root_path) as Node2D
+
+
 func actors_root() -> Node2D:
 	return get_node_or_null(actors_root_path) as Node2D
+
+
+func projectiles_root() -> Node2D:
+	return get_node_or_null(projectiles_root_path) as Node2D
+
+
+func effects_root() -> Node2D:
+	return get_node_or_null(effects_root_path) as Node2D
+
+
+func destructible_terrain() -> DestructibleTerrain2D:
+	return get_node_or_null(destructible_terrain_path) as DestructibleTerrain2D
+
+
+func editor_preview_root() -> Node2D:
+	return get_node_or_null(editor_preview_root_path) as Node2D
+
+
+func player_spawn_points_root() -> Node2D:
+	var root := gameplay_root()
+	return root.get_node_or_null("PlayerSpawnPoints") as Node2D if root != null else null
+
+
+func encounter_markers_root() -> Node2D:
+	var root := gameplay_root()
+	return root.get_node_or_null("EncounterMarkers") as Node2D if root != null else null
+
+
+func combat_gates_root() -> Node2D:
+	var root := gameplay_root()
+	return root.get_node_or_null("CombatGates") as Node2D if root != null else null
 
 
 func authored_segments() -> Array[MapSegment2D]:
@@ -94,8 +139,7 @@ func authored_segments() -> Array[MapSegment2D]:
 
 
 func find_spawn(spawn_id: StringName) -> MapSpawnPoint2D:
-	var root := gameplay_root()
-	var spawn_root := root.get_node_or_null("SpawnPoints") if root != null else null
+	var spawn_root := player_spawn_points_root()
 	if spawn_root == null:
 		return null
 	for child in spawn_root.get_children():
@@ -117,8 +161,18 @@ func validation_errors() -> PackedStringArray:
 		errors.append("La branche Gameplay est introuvable.")
 	else:
 		_validate_gameplay_branches(errors)
+	if runtime_root() == null:
+		errors.append("La branche Runtime est introuvable.")
 	if actors_root() == null:
-		errors.append("La branche Actors est introuvable.")
+		errors.append("La branche Runtime/Actors est introuvable.")
+	if projectiles_root() == null:
+		errors.append("La branche Runtime/Projectiles est introuvable.")
+	if effects_root() == null:
+		errors.append("La branche Runtime/Effects est introuvable.")
+	if destructible_terrain() == null:
+		errors.append("Runtime/DestructibleTerrain est introuvable.")
+	if editor_preview_root() == null:
+		errors.append("La branche EditorPreview est introuvable.")
 	if str(default_spawn_id).is_empty() or find_spawn(default_spawn_id) == null:
 		errors.append("Le point d'apparition par défaut est absent.")
 	if camera_bounds.size.x <= 0.0 or camera_bounds.size.y <= 0.0:
@@ -133,10 +187,10 @@ func _validate_gameplay_branches(errors: PackedStringArray) -> void:
 	for branch_name in REQUIRED_GAMEPLAY_BRANCHES:
 		if root.get_node_or_null(branch_name) == null:
 			errors.append("Gameplay/%s est obligatoire." % branch_name)
-	_validate_unique_markers(root.get_node_or_null("SpawnPoints"), &"spawn_id", errors)
-	_validate_unique_markers(root.get_node_or_null("EnemySpawns"), &"encounter_id", errors)
-	_validate_encounters(root.get_node_or_null("EnemySpawns"), errors)
-	_validate_combat_gates(root.get_node_or_null("EnemySpawns"), root.get_node_or_null("Encounters"), errors)
+	_validate_unique_markers(player_spawn_points_root(), &"spawn_id", errors)
+	_validate_unique_markers(encounter_markers_root(), &"encounter_id", errors)
+	_validate_encounters(encounter_markers_root(), errors)
+	_validate_combat_gates(encounter_markers_root(), combat_gates_root(), errors)
 	_validate_segments(errors)
 	_validate_ground_pieces(root.get_node_or_null("GroundPieces"), errors)
 
@@ -159,13 +213,13 @@ func _validate_encounters(parent: Node, errors: PackedStringArray) -> void:
 	for child in parent.get_children():
 		var marker := child as MapEncounterMarker2D
 		if marker == null:
-			errors.append("Gameplay/EnemySpawns/%s doit être un MapEncounterMarker2D." % child.name)
+			errors.append("Gameplay/EncounterMarkers/%s doit être un MapEncounterMarker2D." % child.name)
 			continue
 		if marker.encounter_data == null:
-			errors.append("Gameplay/EnemySpawns/%s exige EncounterData." % marker.name)
+			errors.append("Gameplay/EncounterMarkers/%s exige EncounterData." % marker.name)
 			continue
 		for encounter_error in marker.encounter_data.validation_errors():
-			errors.append("Gameplay/EnemySpawns/%s : %s" % [marker.name, encounter_error])
+			errors.append("Gameplay/EncounterMarkers/%s : %s" % [marker.name, encounter_error])
 
 
 func _validate_combat_gates(markers_root: Node, gates_root: Node, errors: PackedStringArray) -> void:
@@ -180,10 +234,10 @@ func _validate_combat_gates(markers_root: Node, gates_root: Node, errors: Packed
 	for child in gates_root.get_children():
 		var gate := child as MissionCombatGate2D
 		if gate == null:
-			errors.append("Gameplay/Encounters/%s doit être un MissionCombatGate2D." % child.name)
+			errors.append("Gameplay/CombatGates/%s doit être un MissionCombatGate2D." % child.name)
 			continue
 		for gate_error in gate.validation_errors():
-			errors.append("Gameplay/Encounters/%s : %s" % [gate.name, gate_error])
+			errors.append("Gameplay/CombatGates/%s : %s" % [gate.name, gate_error])
 		if gate_ids.has(gate.encounter_id):
 			errors.append("Combat Gate '%s' est dupliqué." % gate.encounter_id)
 		if not marker_ids.has(gate.encounter_id):

@@ -1154,3 +1154,38 @@
 - prochaine action : rétablir la correspondance valide entre les marqueurs
   Landing et leurs Combat Gates, relancer les contrats complets puis faire la
   revue jouée de cadence à taille réelle.
+
+## 2026-08-28 — Arborescence Godot lisible et séparation auteur/runtime
+
+- conservé l'architecture Resource-first existante et refondu sa représentation
+  dans le SceneTree afin que chaque branche décrive son contenu réel ;
+- renommé les branches de map `SpawnPoints`, `EnemySpawns` et `Encounters` en
+  `PlayerSpawnPoints`, `EncounterMarkers` et `CombatGates` ;
+- créé `Runtime` avec quatre responsabilités explicites : `Actors`,
+  `Projectiles`, `Effects` et `DestructibleTerrain` ; déplacé silhouettes,
+  explosion de démonstration et caméra d'édition sous `EditorPreview` ;
+- regroupé les cinq services techniques de l'écran de mission sous
+  `RuntimeSystems`, tout en gardant `MapHost` et `MissionCameraRig` visibles à
+  leur niveau d'orchestration ;
+- supprimé le doublon de nom `Presentation` des scènes joueur et ennemies : le
+  composant devient `Components/Animation`, la représentation `Visuals`, et le
+  pivot de pente `GroundPivot` piloté par `Components/SlopeAlignment` ;
+- ajouté à `MissionMapRoot2D` des correspondances typées vers Runtime,
+  Projectiles, Effects, DestructibleTerrain, EditorPreview, PlayerSpawnPoints,
+  EncounterMarkers et CombatGates afin que les contrôleurs ne répètent plus les
+  chemins métier ;
+- migré tous les NodePath, pistes AnimationPlayer, spawners, contrôleurs,
+  tests, contrats auteur et correspondances du manifeste sans modifier les
+  Resources d'autorité gameplay ;
+- préservé `LandingCadence2`, désormais valide et non bloquante ; le contrat de
+  cadence dérive son total depuis tous les Markers actifs et vérifie quinze
+  instances pour l'état auteur courant au lieu de figer douze apparitions ;
+- renforcé les contrats pour refuser le retour des anciennes branches et
+  vérifier la séparation `Gameplay` / `Runtime` / `EditorPreview`, le groupe
+  `RuntimeSystems` et l'absence des deux anciens `Presentation` ;
+- validation réelle : `git diff --check` propre et les 26 contrats Godot
+  headless passent ;
+- limite volontaire : les deux rencontres Landing sont proches du départ et
+  leurs seuils se chevauchent probablement ; prochaine action recommandée :
+  revue jouée des quinze apparitions, puis stabilisation différée des collisions
+  destructibles et des références de tireur libérées.

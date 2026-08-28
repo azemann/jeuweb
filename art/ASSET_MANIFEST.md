@@ -68,7 +68,7 @@ intégré à partir de la caisse fermée, puis passée par une extraction alpha.
 | Fichier | Création | Intention | Intégration |
 |---|---|---|---|
 | `characters/player/player-body-key-poses-v001.png` | imagegen intégré puis extraction alpha, canevas fixe et atlas 4 × 3 déterministes | 12 poses clés du corps sans arme | `player_visual_frames.tres` → `Presentation/BodySprite` |
-| `weapons/player/player-primary-cannon-v001.png` | imagegen intégré puis normalisation 768 × 384 | canon modulaire séparé du corps | `Presentation/AimPivot/WeaponSprite` |
+| `weapons/player/player-primary-cannon-v001.png` | imagegen intégré puis normalisation 768 × 384 | canon modulaire séparé du corps | `Visuals/AimPivot/WeaponSprite` |
 
 Lot approuvé le 2026-08-25. Sources, prompts, profil, manifeste, provenance et
 QA : `pipeline/assets/{sources,recipes,profiles,manifests,provenance,working}`.

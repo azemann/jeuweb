@@ -14,13 +14,13 @@ extends CharacterBody2D
 ## Composant qui consomme la WeaponData, cadence les tirs et émet les demandes de projectile.
 @export_node_path("PlayerWeaponComponent") var weapon_component_path := NodePath("Components/Weapon")
 ## Composant traduisant le mouvement runtime en animations et orientation visuelle.
-@export_node_path("PlayerPresentationComponent") var presentation_component_path := NodePath("Components/Presentation")
+@export_node_path("PlayerPresentationComponent") var presentation_component_path := NodePath("Components/Animation")
 ## Composant partagé qui expose le root des pieds et projette l'ombre sur le vrai sol.
 @export_node_path("ActorGroundingComponent") var grounding_component_path := NodePath("Components/Grounding")
 ## Composant partagé qui incline uniquement le pivot visuel selon les deux sondes de pieds.
-@export_node_path("ActorSlopePresentationComponent") var slope_presentation_component_path := NodePath("Components/SlopePresentation")
+@export_node_path("ActorSlopePresentationComponent") var slope_presentation_component_path := NodePath("Components/SlopeAlignment")
 ## Branche regroupant sprites, arme, pivots et animations sans contenir la collision gameplay.
-@export_node_path("Node2D") var presentation_path := NodePath("Presentation")
+@export_node_path("Node2D") var visuals_path := NodePath("Visuals")
 
 
 func _ready() -> void:
@@ -83,13 +83,13 @@ func validation_errors() -> PackedStringArray:
 	if weapon_component() == null or weapon_component().weapon == null:
 		errors.append("Components/Weapon et sa WeaponData sont obligatoires.")
 	if presentation_component() == null:
-		errors.append("Components/Presentation est obligatoire.")
+		errors.append("Components/Animation est obligatoire.")
 	if grounding_component() == null or not grounding_component().validation_errors().is_empty():
 		errors.append("Components/Grounding et ses correspondances sont obligatoires.")
 	if slope_presentation_component() == null or not slope_presentation_component().validation_errors().is_empty():
-		errors.append("Components/SlopePresentation et son pivot visuel sont obligatoires.")
-	if get_node_or_null(presentation_path) == null:
-		errors.append("La branche Presentation est obligatoire.")
+		errors.append("Components/SlopeAlignment et son pivot visuel sont obligatoires.")
+	if get_node_or_null(visuals_path) == null:
+		errors.append("La branche Visuals est obligatoire.")
 	if get_node_or_null("CollisionShape2D") == null:
 		errors.append("CollisionShape2D est obligatoire.")
 	return errors

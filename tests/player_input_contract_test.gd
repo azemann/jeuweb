@@ -66,7 +66,7 @@ func _run() -> void:
 	root.add_child(player)
 	await process_frame
 	var aim := player.aim_component()
-	var pivot := player.get_node("Presentation/AimPivot") as Node2D
+	var pivot := player.get_node("Visuals/AimPivot") as Node2D
 	_check(aim.profile.allow_pointer_aim, "Le profil de visée doit autoriser la souris.")
 	_check(aim.aim_toward_global(pivot.global_position + Vector2(-120.0, -60.0)), "La commande de visée pointeur doit accepter une cible distante.")
 	_check(aim.aim_direction.x < 0.0 and aim.aim_direction.y < 0.0, "La cible pointeur doit produire la bonne direction.")

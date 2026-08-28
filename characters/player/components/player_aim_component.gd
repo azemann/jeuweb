@@ -8,9 +8,9 @@ signal facing_changed(direction: float)
 ## Profil de visée partagé qui définit directions permises, zone morte et seuil diagonal.
 @export var profile: PlayerAimProfile
 ## Pivot visuel tourné vers la direction de tir ; il porte normalement l'arme et le Muzzle.
-@export_node_path("Node2D") var aim_pivot_path := NodePath("../../Presentation/AimPivot")
+@export_node_path("Node2D") var aim_pivot_path := NodePath("../../Visuals/AimPivot")
 ## Sprite retourné horizontalement lorsque le joueur change de direction principale.
-@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Presentation/SlopeVisual/BodySprite")
+@export_node_path("AnimatedSprite2D") var body_sprite_path := NodePath("../../Visuals/GroundPivot/BodySprite")
 
 var aim_direction := Vector2.RIGHT
 var facing := 1.0

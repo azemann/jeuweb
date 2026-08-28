@@ -7,7 +7,7 @@ signal encounter_cleared(encounter_id: StringName)
 
 @export_category("Correspondence")
 ## Hôte qui expose la scène maîtresse et ses objectifs auteur.
-@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../MapHost")
+@export_node_path("MissionMapHost2D") var map_host_path := NodePath("../../MapHost")
 ## Spawner qui expose l'instance courante du joueur pour tester la sortie.
 @export_node_path("MissionActorSpawner2D") var actor_spawner_path := NodePath("../ActorSpawner")
 ## Contrôleur dont les signaux publient début, fin et population des rencontres.
@@ -76,7 +76,7 @@ func _on_map_loaded(map: MissionMapRoot2D) -> void:
 	_required_encounters.clear()
 	_cleared_encounters.clear()
 	_won = false
-	var root := map.get_node_or_null("Gameplay/EnemySpawns")
+	var root := map.encounter_markers_root()
 	if root == null:
 		return
 	for child in root.get_children():

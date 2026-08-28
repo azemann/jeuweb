@@ -46,7 +46,7 @@ projectile_scene = ExtResource("9_projectile")
 script = ExtResource("10_state")
 initial_state = 1
 
-[node name="Presentation" type="Node" parent="Components"]
+[node name="Animation" type="Node" parent="Components"]
 script = ExtResource("5_presentation")
 
 [node name="Ejection" type="Node" parent="Components"]
@@ -57,15 +57,15 @@ ejected_scene = ExtResource("13_pilot")
 shadow_size = Vector2(88, 18)
 foot_probe_span = 76.0
 
-[node name="SlopePresentation" parent="Components" instance=ExtResource("8_slope")]
+[node name="SlopeAlignment" parent="Components" instance=ExtResource("8_slope")]
 maximum_visual_tilt_degrees = 45.0
 
-[node name="Presentation" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
 
-[node name="SlopeVisual" type="Node2D" parent="Presentation"]
+[node name="GroundPivot" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true
 
-[node name="BodySprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual"]
+[node name="BodySprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot"]
 unique_name_in_owner = true
 position = Vector2(0, -46.2)
 scale = Vector2(0.55, 0.55)
@@ -73,7 +73,7 @@ sprite_frames = ExtResource("6_frames")
 animation = &"walk"
 autoplay = "walk"
 
-[node name="AttackSprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual"]
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot"]
 unique_name_in_owner = true
 position = Vector2(0, -46.2)
 scale = Vector2(0.55, 0.55)
@@ -81,10 +81,10 @@ sprite_frames = ExtResource("7_attack_frames")
 animation = &"toxic_attack"
 visible = false
 
-[node name="AttackOrigin" type="Marker2D" parent="Presentation/SlopeVisual"]
+[node name="AttackOrigin" type="Marker2D" parent="Visuals/GroundPivot"]
 position = Vector2(70, -58)
 gizmo_extents = 18.0
 
-[node name="EjectionOrigin" type="Marker2D" parent="Presentation/SlopeVisual"]
+[node name="EjectionOrigin" type="Marker2D" parent="Visuals/GroundPivot"]
 position = Vector2(0, -82)
 gizmo_extents = 18.0

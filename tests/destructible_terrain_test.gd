@@ -17,7 +17,7 @@ func _run() -> void:
 	var packed := load("res://maps/missions/toxic_coast/toxic_coast.tscn") as PackedScene
 	var map := packed.instantiate() as MissionMapRoot2D
 	root.add_child(map)
-	var terrain := map.get_node("DestructibleTerrain") as DestructibleTerrain2D
+	var terrain := map.destructible_terrain()
 	_check(terrain != null, "Côte toxique doit contenir DestructibleTerrain2D.")
 	if terrain != null:
 		_check(terrain.mask_image != null, "Le masque doit être généré depuis les zones auteur.")

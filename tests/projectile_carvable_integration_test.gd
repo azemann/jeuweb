@@ -21,10 +21,10 @@ func _run() -> void:
 		_finish()
 		return
 
-	var map := map_scene.instantiate()
+	var map := map_scene.instantiate() as MissionMapRoot2D
 	root.add_child(map)
 	await process_frame
-	var terrain := map.get_node("DestructibleTerrain") as DestructibleTerrain2D
+	var terrain := map.destructible_terrain()
 	var impact_position := Vector2(920, 625)
 	_check(terrain != null and terrain.is_solid_at(impact_position), "Le point de test doit commencer dans la matière Carvable.")
 

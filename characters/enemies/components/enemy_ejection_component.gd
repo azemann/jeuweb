@@ -8,7 +8,7 @@ signal ejected(actor: EnemyCharacter2D)
 ## Health dont la mort déclenche l'éjection après le délai auteur.
 @export_node_path("EnemyHealthComponent") var health_component_path := NodePath("../Health")
 ## Socket de la coque depuis lequel le pilote apparaît dans Actors.
-@export_node_path("Marker2D") var ejection_origin_path := NodePath("../../Presentation/SlopeVisual/EjectionOrigin")
+@export_node_path("Marker2D") var ejection_origin_path := NodePath("../../Visuals/GroundPivot/EjectionOrigin")
 ## Scène canonique instanciée pour le pilote éjecté.
 @export var ejected_scene: PackedScene
 ## Délai alignant l'acteur autonome avec l'ouverture visuelle de la coque.

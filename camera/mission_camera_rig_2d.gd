@@ -11,7 +11,7 @@ signal progression_changed(center_x: float)
 ## Chemin vers l'hôte fournissant la map courante et ses limites de caméra.
 @export_node_path("MissionMapHost2D") var map_host_path := NodePath("../MapHost")
 ## Chemin vers le spawner permettant de suivre le joueur réellement instancié.
-@export_node_path("MissionActorSpawner2D") var actor_spawner_path := NodePath("../ActorSpawner")
+@export_node_path("MissionActorSpawner2D") var actor_spawner_path := NodePath("../RuntimeSystems/ActorSpawner")
 
 @onready var camera: Camera2D = %Camera2D
 

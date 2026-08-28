@@ -41,31 +41,31 @@ projectile_scene = ExtResource("9")
 attack_cooldown = 1.8
 attack_range = 470.0
 attack_animation = &"attack"
-body_sprite_path = NodePath("../../Presentation/BodySprite")
-attack_sprite_path = NodePath("../../Presentation/AttackSprite")
-attack_origin_path = NodePath("../../Presentation/AttackOrigin")
+body_sprite_path = NodePath("../../Visuals/BodySprite")
+attack_sprite_path = NodePath("../../Visuals/AttackSprite")
+attack_origin_path = NodePath("../../Visuals/AttackOrigin")
 
 [node name="StateMachine" type="Node" parent="Components"]
 script = ExtResource("7")
 initial_state = 1
 
-[node name="Presentation" type="Node" parent="Components"]
+[node name="Animation" type="Node" parent="Components"]
 script = ExtResource("6")
-body_sprite_path = NodePath("../../Presentation/BodySprite")
+body_sprite_path = NodePath("../../Visuals/BodySprite")
 
-[node name="Presentation" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
 
-[node name="BodySprite" type="AnimatedSprite2D" parent="Presentation"]
+[node name="BodySprite" type="AnimatedSprite2D" parent="Visuals"]
 scale = Vector2(0.58, 0.58)
 sprite_frames = ExtResource("8")
 animation = &"walk"
 autoplay = "walk"
 
-[node name="AttackSprite" type="AnimatedSprite2D" parent="Presentation"]
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Visuals"]
 scale = Vector2(0.58, 0.58)
 sprite_frames = ExtResource("8")
 animation = &"attack"
 visible = false
 
-[node name="AttackOrigin" type="Marker2D" parent="Presentation"]
+[node name="AttackOrigin" type="Marker2D" parent="Visuals"]
 position = Vector2(74, 6)
