@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyArchetypeProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://characters/enemies/enemy_archetype_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+archetype_id = &"vacuum_flying"
+maximum_health = 42.0
+post_hit_invulnerability = 0.07
+locomotion_mode = 1
+movement_speed = 118.0
+acceleration = 680.0
+gravity = 0.0
+patrol_half_width = 190.0
+flight_bob_amplitude = 42.0
+flight_bob_frequency = 0.8

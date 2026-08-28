@@ -13,6 +13,14 @@ signal attack_finished
 @export_range(0.1, 10.0, 0.05) var attack_cooldown := 2.4
 ## Distance maximale entre l'ennemi et le joueur pour commencer une attaque.
 @export_range(32.0, 1200.0, 8.0) var attack_range := 360.0
+## Nom de l'animation jouée par AttackSprite pour cet archétype.
+@export var attack_animation: StringName = &"toxic_attack"
+## Pose qui exécute réellement le projectile ou le contact.
+@export_range(0, 15, 1) var release_frame := 3
+## Dégâts directs utilisés par les attaques de contact sans projectile.
+@export_range(0.0, 500.0, 1.0) var contact_damage := 0.0
+## Détruit l'attaquant après un contact accepté, pour le Saboteur.
+@export var self_destruct_on_contact := false
 
 @export_category("Correspondence")
 ## Sprite de locomotion masqué pendant la séquence d'attaque.
@@ -49,7 +57,7 @@ func _ready() -> void:
 		_sprite.frame_changed.connect(_on_frame_changed)
 	if _sprite != null and not _sprite.animation_finished.is_connected(_on_animation_finished):
 		_sprite.animation_finished.connect(_on_animation_finished)
-	set_physics_process(_sprite != null and _origin != null and projectile_scene != null)
+	set_physics_process(_sprite != null and _origin != null and (projectile_scene != null or contact_damage > 0.0))
 
 
 func _physics_process(delta: float) -> void:
@@ -73,10 +81,12 @@ func _start_attack() -> void:
 	if state != null and state.state_machine() != null:
 		state.state_machine().transition(ActorStateMachineComponent.State.ATTACK)
 	_sync_origin()
-	_sprite.play(&"toxic_attack")
+	_sprite.play(attack_animation)
 	_walk_sprite.visible = false
 	_sprite.visible = true
 	attack_started.emit()
+	if release_frame == 0:
+		_execute_attack()
 
 
 func cancel_attack() -> void:
@@ -97,13 +107,23 @@ func cancel_attack() -> void:
 
 
 func _on_frame_changed() -> void:
-	if not _attacking or _projectile_emitted or _sprite.animation != &"toxic_attack":
+	if not _attacking or _projectile_emitted or _sprite.animation != attack_animation:
 		return
-	if _sprite.frame == 3:
-		_spawn_projectile()
+	if _sprite.frame == release_frame:
+		_execute_attack()
 
 
-func _spawn_projectile() -> void:
+func _execute_attack() -> void:
+	_projectile_emitted = true
+	if contact_damage > 0.0:
+		var target := get_tree().get_first_node_in_group(&"players") as Node2D
+		if target != null and _origin.global_position.distance_to(target.global_position) <= attack_range * 1.25 and target.has_method(&"apply_damage"):
+			var accepted: Variant = target.call(&"apply_damage", contact_damage)
+			if self_destruct_on_contact and accepted is bool and accepted:
+				var owner_enemy := _actor as EnemyCharacter2D
+				if owner_enemy != null and owner_enemy.health_component() != null:
+					owner_enemy.apply_damage(owner_enemy.health_component().current_health)
+		return
 	var root := get_node_or_null(projectile_root_path) as Node2D
 	if root == null:
 		var actors := get_parent().get_parent().get_parent() as Node
@@ -122,12 +142,11 @@ func _spawn_projectile() -> void:
 		direction = _origin.global_position.direction_to(player.global_position)
 	projectile.global_position = _origin.global_position
 	projectile.launch(direction, get_parent().get_parent() as Node2D)
-	_projectile_emitted = true
 	projectile_requested.emit(projectile)
 
 
 func _on_animation_finished() -> void:
-	if not _attacking or _sprite.animation != &"toxic_attack":
+	if not _attacking or _sprite.animation != attack_animation:
 		return
 	_attacking = false
 	if _patrol != null:
@@ -135,6 +154,9 @@ func _on_animation_finished() -> void:
 	_sprite.visible = false
 	_walk_sprite.visible = true
 	_walk_sprite.play(&"walk")
+	var state := _actor as EnemyCharacter2D
+	if state != null and state.state_machine() != null:
+		state.state_machine().transition(ActorStateMachineComponent.State.RUN)
 	attack_finished.emit()
 
 
@@ -149,8 +171,8 @@ func _sync_origin() -> void:
 
 func validation_errors() -> PackedStringArray:
 	var errors := PackedStringArray()
-	if projectile_scene == null or not projectile_scene.can_instantiate():
-		errors.append("Projectile scene valide obligatoire.")
+	if (projectile_scene == null or not projectile_scene.can_instantiate()) and contact_damage <= 0.0:
+		errors.append("Projectile scene valide ou dégâts de contact obligatoires.")
 	if get_node_or_null(body_sprite_path) == null:
 		errors.append("BodySprite doit être assigné.")
 	if get_node_or_null(attack_sprite_path) == null:

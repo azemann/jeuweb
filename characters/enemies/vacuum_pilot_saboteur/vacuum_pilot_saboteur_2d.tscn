@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://characters/enemies/enemy_character_2d.gd" id="1"]
+[ext_resource type="Resource" path="res://characters/enemies/data/vacuum_pilot_saboteur_profile.tres" id="2"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_patrol_component.gd" id="3"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="4"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="5"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="6"]
+[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="7"]
+[ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_grounding_component.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_slope_presentation_component.tscn" id="9"]
+[ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_pilot_saboteur/vacuum_pilot_saboteur_frames.tres" id="10"]
+
+[sub_resource type="RectangleShape2D" id="Shape"]
+size = Vector2(38, 68)
+
+[node name="VacuumPilotSaboteur2D" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+floor_snap_length = 8.0
+script = ExtResource("1")
+profile = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -34)
+shape = SubResource("Shape")
+
+[node name="Components" type="Node2D" parent="."]
+
+[node name="Patrol" type="Node" parent="Components"]
+script = ExtResource("3")
+profile = ExtResource("2")
+
+[node name="Health" type="Node" parent="Components"]
+script = ExtResource("4")
+profile = ExtResource("2")
+
+[node name="Attack" type="Node" parent="Components"]
+script = ExtResource("5")
+attack_cooldown = 0.9
+attack_range = 58.0
+attack_animation = &"attack"
+release_frame = 3
+contact_damage = 34.0
+self_destruct_on_contact = true
+
+[node name="StateMachine" type="Node" parent="Components"]
+script = ExtResource("7")
+initial_state = 1
+
+[node name="Presentation" type="Node" parent="Components"]
+script = ExtResource("6")
+
+[node name="Grounding" parent="Components" instance=ExtResource("8")]
+shadow_size = Vector2(48, 12)
+foot_probe_span = 34.0
+
+[node name="SlopePresentation" parent="Components" instance=ExtResource("9")]
+maximum_visual_tilt_degrees = 42.0
+
+[node name="Presentation" type="Node2D" parent="."]
+
+[node name="SlopeVisual" type="Node2D" parent="Presentation"]
+unique_name_in_owner = true
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual"]
+position = Vector2(0, -46.2)
+scale = Vector2(0.55, 0.55)
+sprite_frames = ExtResource("10")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Presentation/SlopeVisual"]
+position = Vector2(0, -46.2)
+scale = Vector2(0.55, 0.55)
+sprite_frames = ExtResource("10")
+animation = &"attack"
+visible = false
+
+[node name="AttackOrigin" type="Marker2D" parent="Presentation/SlopeVisual"]
+position = Vector2(30, -40)

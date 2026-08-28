@@ -9,11 +9,15 @@ maîtresse de la carte.
 - placement, quantité, espacement et seuil d'activation :
   `MapEncounterMarker2D` dans la scène maîtresse ;
 - correspondance `enemy_archetype` → scène : `EnemyCatalog.tres` ;
-- PV, locomotion et amplitude de patrouille : `EnemyArchetypeProfile.tres` ;
+- PV, mode de locomotion, vitesse, amplitude de patrouille et vol ondulant :
+  `EnemyArchetypeProfile.tres` ;
 - vie courante : `EnemyHealthComponent` ;
 - vélocité et retournements de patrouille : `EnemyPatrolComponent` ;
 - animation et orientation visuelle : `EnemyPresentationComponent` ;
 - collision et composition : scène canonique de l'ennemi ;
+- attaque, frame de relâchement, projectile ou dégâts de contact :
+  `EnemyAttackComponent` dans la scène canonique ;
+- éjection optionnelle et scène du pilote : `EnemyEjectionComponent` ;
 - bitmap livré : `art/`, avec source, recette et QA sous `pipeline/assets/`.
 
 Une valeur de gameplay n'est jamais recopiée dans le spawner ou le script de
@@ -27,14 +31,17 @@ EnemyCharacter2D (CharacterBody2D)
 ├── Components
 │   ├── Patrol
 │   ├── Health
+│   ├── Attack
+│   ├── StateMachine
 │   ├── Presentation
-│   └── Grounding
+│   ├── Grounding (ennemis terrestres)
 │       ├── GroundAnchor
 │       ├── GroundProbe
 │       ├── LeftFootProbe
 │       ├── RightFootProbe
 │       └── GroundShadow
-│   └── SlopePresentation
+│   ├── SlopePresentation (ennemis terrestres)
+│   └── Ejection (optionnel)
 └── Presentation
     └── SlopeVisual
         └── BodySprite (AnimatedSprite2D)
@@ -62,6 +69,10 @@ le pipeline.
 - chaque instance reçoit son origine de patrouille depuis sa position générée ;
 - Patrol possède la vélocité ; Health possède les PV ; Presentation ne modifie
   aucun état gameplay ;
+- le profil choisit locomotion terrestre ou volante ; un volant omet
+  `Grounding` et `SlopePresentation`, et Patrol applique son oscillation auteur ;
+- Attack possède le déclenchement, la frame active et l'effet projectile ou
+  contact ; la scène conserve `AttackOrigin` comme socket auteur ;
 - Grounding est le composant transversal chargé du root des pieds et de l'ombre
   projetée sur le vrai collider World ;
 - `EnemyCharacter2D.apply_damage()` transmet uniquement l'intention à Health ;
@@ -70,13 +81,15 @@ le pipeline.
 - à zéro PV, la coque quitte la couche cible mais conserve sa collision World,
   Patrol ne fournit plus de mouvement horizontal et Presentation joue `death` ;
 - `EnemyCharacter2D` retire l'instance au signal de fin de `death`, jamais au
-  signal `died` lui-même ; attaque et récompense seront ajoutées comme
-  composants distincts.
+  signal `died` lui-même ; Ejection peut instancier un acteur indépendant dans
+  `Actors` avant cette suppression.
 
 ## Contrat de validation
 
-`enemy_contract_test.gd` protège le profil, le catalogue, les animations
-`walk`, `hit` et `death`, leurs cadences et boucles, l'arbre canonique, la
-réception des dégâts, la suspension/reprise de Patrol, la suppression différée,
-la correspondance du marqueur `VacuumPatrol` et l'apparition de deux ennemis
-dans les 1280 premiers pixels.
+`enemy_contract_test.gd` protège profils, catalogue, scènes, modes terrestre et
+volant, les quatre poses `walk`, `attack`, `hit`, `death` de chaque rôle,
+l'arbre canonique, les dégâts, la suppression différée et l'éjection réelle du
+Saboteur. `map_contract_test.gd` protège les marqueurs auteur et
+`mission_run_contract_test.gd` la victoire après les sept ennemis obligatoires.
+Le validateur Python du roster vérifie 64 poses, dimensions, alpha et identité
+binaire entre exports pipeline et copies runtime.

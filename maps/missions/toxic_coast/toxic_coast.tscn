@@ -164,34 +164,31 @@ encounter_id = &"vacuum_patrol_01"
 count = 2
 activation_distance = 620.0
 
-[node name="VacuumBruteGate" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=498996969]
+[node name="VacuumGruntGate" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=498996969]
 position = Vector2(1450, 450)
 gizmo_extents = 60.0
 script = ExtResource("5_encounter_script")
-encounter_id = &"vacuum_brute_gate"
-enemy_archetype = "vacuum_brute"
+encounter_id = &"vacuum_grunt_gate"
+enemy_archetype = "vacuum_grunt"
+count = 2
 activation_distance = 720.0
-enabled = false
 
-[node name="VacuumBridgeColumn" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=145651692]
-position = Vector2(2140, 455)
+[node name="VacuumFlyingColumn" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=145651692]
+position = Vector2(2140, 300)
 gizmo_extents = 52.0
 script = ExtResource("5_encounter_script")
-encounter_id = &"vacuum_bridge_column"
-enemy_archetype = "vacuum_siphoner"
-count = 3
+encounter_id = &"vacuum_flying_column"
+enemy_archetype = "vacuum_flying"
+count = 2
 activation_distance = 760.0
-enabled = false
 
-[node name="VacuumFoundryGuard" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=1205623005]
+[node name="VacuumFoundryBoss" type="Marker2D" parent="Gameplay/EnemySpawns" unique_id=1205623005]
 position = Vector2(3180, 430)
 gizmo_extents = 64.0
 script = ExtResource("5_encounter_script")
-encounter_id = &"vacuum_foundry_guard"
-enemy_archetype = "vacuum_brute"
-count = 2
+encounter_id = &"vacuum_foundry_boss"
+enemy_archetype = "vacuum_boss"
 activation_distance = 800.0
-enabled = false
 
 [node name="Encounters" type="Node2D" parent="Gameplay" unique_id=603695318]
 

@@ -1,0 +1,138 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://art/enemies/industrial_toxic/vacuum-pilot-saboteur-animation-4x4-v001.png" id="1_lfnh3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rl8m"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34npe"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imlj1"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swlh6"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kybx5"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(0, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehu68"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(192, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4vpa"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(384, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sia63"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(576, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl0nj"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6di7"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v45uy"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0isxg"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hroj"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qa3uc"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfhw5"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rduwf"]
+atlas = ExtResource("1_lfnh3")
+region = Rect2(576, 0, 192, 192)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.7,
+"texture": SubResource("AtlasTexture_2rl8m")
+}, {
+"duration": 2.1,
+"texture": SubResource("AtlasTexture_34npe")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_imlj1")
+}, {
+"duration": 2.4,
+"texture": SubResource("AtlasTexture_swlh6")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.6,
+"texture": SubResource("AtlasTexture_kybx5")
+}, {
+"duration": 1.9,
+"texture": SubResource("AtlasTexture_ehu68")
+}, {
+"duration": 2.4,
+"texture": SubResource("AtlasTexture_n4vpa")
+}, {
+"duration": 5.2,
+"texture": SubResource("AtlasTexture_sia63")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 0.9,
+"texture": SubResource("AtlasTexture_hl0nj")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_w6di7")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_v45uy")
+}, {
+"duration": 1.7,
+"texture": SubResource("AtlasTexture_0isxg")
+}],
+"loop": 0,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hroj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qa3uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfhw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rduwf")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 7.142857
+}]

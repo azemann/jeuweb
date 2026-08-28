@@ -12,9 +12,11 @@ signal direction_changed(direction: float)
 @export_enum("Left:-1", "Right:1") var initial_direction := -1
 
 var origin_x := 0.0
+var origin_y := 0.0
 var direction := -1.0
 var movement_enabled := true
 var _body: CharacterBody2D
+var _flight_time := 0.0
 
 
 func _ready() -> void:
@@ -22,6 +24,7 @@ func _ready() -> void:
 	direction = -1.0 if initial_direction < 0 else 1.0
 	if _body != null:
 		origin_x = _body.global_position.x
+		origin_y = _body.global_position.y
 	set_physics_process(not Engine.is_editor_hint() and _body != null and profile != null and profile.is_valid())
 
 
@@ -39,9 +42,15 @@ func _physics_process(delta: float) -> void:
 			direction_changed.emit(direction)
 		var target_speed := direction * profile.movement_speed
 		_body.velocity.x = move_toward(_body.velocity.x, target_speed, profile.acceleration * delta)
+		if profile.is_flying():
+			_flight_time += delta
+			var target_y := origin_y + sin(_flight_time * TAU * profile.flight_bob_frequency) * profile.flight_bob_amplitude
+			_body.velocity.y = clampf((target_y - _body.global_position.y) * 5.0, -profile.movement_speed, profile.movement_speed)
 	else:
 		_body.velocity.x = 0.0
-	if not _body.is_on_floor():
+		if profile.is_flying():
+			_body.velocity.y = 0.0
+	if not profile.is_flying() and not _body.is_on_floor():
 		_body.velocity.y = minf(_body.velocity.y + profile.gravity * delta, profile.maximum_fall_speed)
 	_body.move_and_slide()
 

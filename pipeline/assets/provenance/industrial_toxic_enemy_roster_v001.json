@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-enemy-roster-v001",
+  "generator": "OpenAI ImageGen integrated in Codex",
+  "sourceLibrary": "industrial-toxic-megapack-v001",
+  "sourceFiles": [
+    "vacuum-siphoner-source-v001.png",
+    "vacuum-scout-drone-source-v001.png",
+    "vacuum-brute-source-v001.png",
+    "alien-hatchling-saboteur-source-v001.png"
+  ],
+  "transformation": "deterministic alpha crop, uniform resize and authored-root placement",
+  "publicationTarget": "art/enemies/industrial_toxic/"
+}

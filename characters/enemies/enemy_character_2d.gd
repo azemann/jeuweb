@@ -95,9 +95,9 @@ func validation_errors() -> PackedStringArray:
 		errors.append("Components/StateMachine est obligatoire.")
 	if presentation_component() == null:
 		errors.append("Components/Presentation est obligatoire.")
-	if grounding_component() == null or not grounding_component().validation_errors().is_empty():
+	if (profile == null or not profile.is_flying()) and (grounding_component() == null or not grounding_component().validation_errors().is_empty()):
 		errors.append("Components/Grounding et ses correspondances sont obligatoires.")
-	if slope_presentation_component() == null or not slope_presentation_component().validation_errors().is_empty():
+	if (profile == null or not profile.is_flying()) and (slope_presentation_component() == null or not slope_presentation_component().validation_errors().is_empty()):
 		errors.append("Components/SlopePresentation et son pivot visuel sont obligatoires.")
 	if get_node_or_null(presentation_path) == null:
 		errors.append("La branche Presentation est obligatoire.")

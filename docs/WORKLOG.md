@@ -1038,3 +1038,34 @@
 - limites volontaires : checkpoints sans feedback, résultat sans score ni
   enchaînement de mission ; prochaine action recommandée : équilibrer le tir
   toxique puis ajouter le feedback des checkpoints.
+
+## 2026-08-28 — Roster ennemi complet et poses gameplay
+
+- généré avec ImageGen intégré quatre planches strictes 4×4, chacune composée
+  de quatre poses de déplacement, quatre d'attaque propre au rôle, quatre
+  d'impact et quatre de mort ; les quatre identités sources du megapack sont
+  conservées et les essais statiques rejetés ont été sortis du workspace ;
+- ajouté un processeur déterministe de fond cyan vers alpha, normalisé les 64
+  poses sur quatre canevas/root auteurs et publié les atlas sous
+  `art/enemies/industrial_toxic/`, avec revues, aperçus, manifeste, provenance,
+  recette et QA conservés sous `pipeline/assets/` ;
+- créé les scènes, profils, bindings et `SpriteFrames` de `vacuum_grunt`,
+  `vacuum_flying`, `vacuum_boss` et `vacuum_pilot_saboteur`, puis enrichi
+  `enemy_catalog.tres` sans renommer le Trooper existant ;
+- étendu le profil et Patrol avec un mode volant data-driven ; généralisé
+  Attack aux animations propres au rôle, aux projectiles et au contact
+  autodestructeur ;
+- ajouté `EnemyEjectionComponent` dans le SceneTree du Trooper : sa mort fait
+  apparaître un véritable Saboteur autonome dans `Actors` ;
+- activé dans Côte toxique deux Grunts, deux Drones et un Boss en plus des deux
+  Troopers ; les sept ennemis principaux sont obligatoires pour ouvrir la
+  sortie, tandis que les pilotes éjectés restent hors du décompte de mission ;
+- autorités : profils pour identité/locomotion, composants de scène pour
+  attaque et éjection, `SpriteFrames` pour poses/timings, catalogue pour la
+  correspondance et marqueurs de carte pour placement/objectif ;
+- validation réelle : processeur et validateur raster passés, 24 contrats
+  headless passés, démarrage complet du projet pendant 240 frames passé et
+  `git diff --check` propre ;
+- limite volontaire : le Boss utilise encore le projectile toxique commun ;
+  prochaine action recommandée : équilibrer la rencontre jouée puis produire
+  son projectile lourd dédié.

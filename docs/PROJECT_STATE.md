@@ -1,6 +1,6 @@
 # État courant du projet
 
-Dernière mise à jour : 2026-08-27
+Dernière mise à jour : 2026-08-28
 
 ## Vision stable
 
@@ -89,10 +89,19 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - attaque toxique publiée en huit phases, projectile lent en quatre frames et
   impact en six frames ; la correspondance gameplay est portée par
   `Components/Attack` et `ProjectileData` ;
+- roster industriel toxique publié avec quatre scènes canoniques : Grunt
+  Siphoner terrestre, Drone volant, Boss lourd et pilote Saboteur ; chaque rôle
+  possède quatre poses distinctes de déplacement, attaque, impact et mort ;
+- la patrouille comprend désormais un mode volant réglable par profil ; le
+  Drone oscille verticalement sans dupliquer les règles dans sa scène ;
+- l'attaque ennemie choisit projectile ou contact depuis son composant : le
+  Grunt, le Drone et le Boss tirent, le Saboteur charge puis s'autodétruit ;
+- le Vacuum Trooper éjecte réellement un `vacuum_pilot_saboteur` autonome à sa
+  mort via son composant `Ejection` visible dans le SceneTree ;
 - scène canonique `EnemyCharacter2D` composée de Patrol, Health et Presentation,
   profil et catalogue Resources éditables dans l'Inspector ;
-- `MissionEnemySpawner2D` traduit le marqueur auteur `VacuumPatrol` en deux
-  ennemis animés et destructibles dans les 1280 premiers pixels ;
+- `MissionEnemySpawner2D` traduit quatre marqueurs auteurs en sept ennemis
+  obligatoires : deux Troopers, deux Grunts, deux Drones et un Boss ;
 - joueur et ennemis partagent `ActorGroundingComponent`, avec GroundAnchor,
   GroundProbe et ombre projetée sur le vrai collider World ;
 - deux sondes d'appui mesurent chaque pente et `SlopePresentation` incline le
@@ -179,9 +188,13 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   `pipeline/assets/` ;
 - attaque, projectile et impact toxiques publiés du Vacuum Trooper : atlas sous
   `art/`, sources, profils, recettes, QA et revues sous `pipeline/assets/` ;
-- réglages de l'ennemi : `vacuum_trooper_profile.tres` ; correspondance du
-  marqueur vers la scène : `enemy_catalog.tres` ; placement et formation :
+- réglages d'un ennemi : sa Resource `EnemyArchetypeProfile` sous
+  `characters/enemies/data/` ; correspondance du marqueur vers les cinq scènes
+  publiées : `enemy_catalog.tres` ; placement et formation :
   `MapEncounterMarker2D` dans la scène maîtresse ;
+- pose active et timings : `SpriteFrames` de chaque scène ; déclenchement et
+  effet de l'attaque : `EnemyAttackComponent` ; éjection du Trooper :
+  `EnemyEjectionComponent` et sa `PackedScene` de pilote ;
 - root des pieds, projection et ombre : `ActorGroundingComponent` dans chaque
   scène canonique ; Permanent/Breakable : contour et surface de marche de la
   `GroundPieceDefinition` ; Carvable : masque et collisions runtime ;
@@ -203,7 +216,7 @@ catalogues.
 
 <!-- CATALOG_PROJECTION_BEGIN -->
 - `mission_maps` : `toxic_coast`
-- `enemy_archetypes` : `vacuum_trooper`
+- `enemy_archetypes` : `vacuum_boss`, `vacuum_flying`, `vacuum_grunt`, `vacuum_pilot_saboteur`, `vacuum_trooper`
 - `ground_pieces/toxic_coast` : `industrial_catwalk_medium`, `military_bunker_block_medium`, `natural_ledge_medium`, `toxic_pipe_bridge_medium`
 <!-- CATALOG_PROJECTION_END -->
 
@@ -226,10 +239,11 @@ catalogues.
   récompenses et enchaînement vers une mission suivante restent absents ;
 - la patrouille ne tremble plus : ses origines 700/840 sont fixées avant
   `_ready()` et ses demi-tours ne peuvent plus alterner chaque frame ;
-- les rencontres Brute et Siphoner restent dessinées mais désactivées dans
-  l'Inspector jusqu'à publication de leurs scènes canoniques ;
-- le pilote éjecté pendant `death` reste inclus dans le raster : il ne possède
-  encore ni corps physique, ni fuite autonome, ni règle de récompense ;
+- le Boss réutilise encore le projectile toxique commun malgré sa pose de blast
+  magenta ; un projectile lourd dédié reste à produire ;
+- les pilotes éjectés sont des acteurs hostiles autonomes mais ne comptent pas
+  parmi les objectifs obligatoires de la mission ; aucune règle de récompense
+  n'est encore définie ;
 - le premier canon n'a encore ni audio, ni recul du corps, ni secousse caméra ;
 - la munition de campagne utilise un petit impact dédié, pas l'explosion lourde
   canonique réservée aux obus et éléments explosifs ;
@@ -258,11 +272,10 @@ catalogues.
 
 ## Prochaine tranche recommandée
 
-Régler l'équilibrage du projectile toxique et ajouter un feedback visible aux
-checkpoints. Décider ensuite si le pilote éjecté
-reste un pur gag visuel ou devient un acteur gameplay. Toute future scène
-d'acteur et toute future pièce non Carvable devront suivre le contrat
-transversal pieds/surface/ombre désormais validé automatiquement.
+Jouer et équilibrer la rencontre complète à sept ennemis, puis produire le
+projectile lourd propre au Boss et ajouter un feedback visible aux checkpoints.
+Toute future scène d'acteur et toute future pièce non Carvable devront suivre
+le contrat transversal pieds/surface/ombre désormais validé automatiquement.
 
 
 ## Validations à exécuter
@@ -286,8 +299,9 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 python3 pipeline/assets/tools/validate_vacuum_trooper_hit_death_candidate.py
 python3 pipeline/assets/tools/validate_vacuum_trooper_attack_candidate.py
 python3 pipeline/assets/tools/validate_toxic_pressure_candidates.py
+python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
 ```
 
-Dernière validation complète : 2026-08-27, les 24 contrats headless passent.
+Dernière validation complète : 2026-08-28, les 24 contrats headless passent.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames
 d'atterrissage : marche, impact, éjection et épave suivent la pente.

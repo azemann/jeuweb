@@ -100,6 +100,19 @@ cellules 256 × 192, root `[128, 180]`, SHA-256 :
 Projectile 384 × 64, impact 576 × 320. Profils, recettes, manifestes,
 provenance et QA sous `pipeline/assets/`.
 
+## Ennemis — roster industriel toxique v001
+
+| Fichier | Création | Intention | Intégration |
+|---|---|---|---|
+| `enemies/industrial_toxic/vacuum-grunt-animation-4x4-v001.png` | ImageGen intégré depuis le Siphoner, extraction cyan et normalisation déterministe | marche, attaque toxique, impact et mort du Grunt | `vacuum_grunt_frames.tres` → scène `VacuumGrunt2D` |
+| `enemies/industrial_toxic/vacuum-flying-animation-4x4-v001.png` | ImageGen intégré depuis le Scout Drone, extraction cyan et normalisation déterministe | vol, tir, impact et destruction du Drone | `vacuum_flying_frames.tres` → scène `VacuumFlying2D` |
+| `enemies/industrial_toxic/vacuum-boss-animation-4x4-v001.png` | ImageGen intégré depuis la Brute, extraction cyan et normalisation déterministe | marche lourde, blast, impact et mort du Boss | `vacuum_boss_frames.tres` → scène `VacuumBoss2D` |
+| `enemies/industrial_toxic/vacuum-pilot-saboteur-animation-4x4-v001.png` | ImageGen intégré depuis le Hatchling, extraction cyan et normalisation déterministe | sprint, charge suicide, impact et mort du Saboteur | `vacuum_pilot_saboteur_frames.tres` → scène `VacuumPilotSaboteur2D` |
+
+Lot approuvé le 2026-08-27 : 64 poses sur alpha réel. Les quatre sources,
+prompts, atlas candidats, revues, aperçus, manifeste, provenance et QA sont
+conservés sous `pipeline/assets/`.
+
 ## Imports historiques non actifs
 
 Les fichiers `soil-*.png` et `surface-*.png` sans préfixe `toxic-` proviennent

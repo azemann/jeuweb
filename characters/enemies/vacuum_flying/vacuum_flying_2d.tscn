@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://characters/enemies/enemy_character_2d.gd" id="1"]
+[ext_resource type="Resource" path="res://characters/enemies/data/vacuum_flying_profile.tres" id="2"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_patrol_component.gd" id="3"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="4"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="5"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="6"]
+[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="7"]
+[ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_flying/vacuum_flying_frames.tres" id="8"]
+[ext_resource type="PackedScene" path="res://weapons/projectiles/toxic_pressure_2d.tscn" id="9"]
+
+[sub_resource type="CircleShape2D" id="Shape"]
+radius = 52.0
+
+[node name="VacuumFlying2D" type="CharacterBody2D"]
+motion_mode = 1
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1")
+profile = ExtResource("2")
+grounding_component_path = NodePath("")
+slope_presentation_component_path = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape")
+
+[node name="Components" type="Node2D" parent="."]
+
+[node name="Patrol" type="Node" parent="Components"]
+script = ExtResource("3")
+profile = ExtResource("2")
+
+[node name="Health" type="Node" parent="Components"]
+script = ExtResource("4")
+profile = ExtResource("2")
+
+[node name="Attack" type="Node" parent="Components"]
+script = ExtResource("5")
+projectile_scene = ExtResource("9")
+attack_cooldown = 1.8
+attack_range = 470.0
+attack_animation = &"attack"
+body_sprite_path = NodePath("../../Presentation/BodySprite")
+attack_sprite_path = NodePath("../../Presentation/AttackSprite")
+attack_origin_path = NodePath("../../Presentation/AttackOrigin")
+
+[node name="StateMachine" type="Node" parent="Components"]
+script = ExtResource("7")
+initial_state = 1
+
+[node name="Presentation" type="Node" parent="Components"]
+script = ExtResource("6")
+body_sprite_path = NodePath("../../Presentation/BodySprite")
+
+[node name="Presentation" type="Node2D" parent="."]
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="Presentation"]
+scale = Vector2(0.58, 0.58)
+sprite_frames = ExtResource("8")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Presentation"]
+scale = Vector2(0.58, 0.58)
+sprite_frames = ExtResource("8")
+animation = &"attack"
+visible = false
+
+[node name="AttackOrigin" type="Marker2D" parent="Presentation"]
+position = Vector2(74, 6)

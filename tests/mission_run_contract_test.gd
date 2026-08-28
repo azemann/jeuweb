@@ -39,13 +39,16 @@ func _run() -> void:
 		return
 
 	_check(controller.exit_path == NodePath("Gameplay/Exits/MissionEnd"), "Le chemin de sortie doit être relatif à la scène maîtresse.")
-	_check(controller.required_encounter_ids() == [&"vacuum_patrol_01"], "Seule la rencontre activée et obligatoire doit bloquer la sortie.")
+	var required_encounters := controller.required_encounter_ids()
+	var expected_encounters := [&"vacuum_flying_column", &"vacuum_foundry_boss", &"vacuum_grunt_gate", &"vacuum_patrol_01"]
+	_check(required_encounters.size() == expected_encounters.size() and required_encounters.all(func(encounter_id): return expected_encounters.has(encounter_id)), "Les quatre rencontres actives doivent bloquer la sortie : %s" % str(required_encounters))
 	_check(not controller.all_required_encounters_cleared(), "Une rencontre non apparue ne doit jamais être considérée comme éliminée.")
-	_check(controller.remaining_enemy_count(&"vacuum_patrol_01") == 2, "Le contrôleur doit suivre les deux ennemis instanciés.")
+	_check(controller.remaining_enemy_count(&"vacuum_patrol_01") == 2, "Le contrôleur doit suivre les deux Troopers instanciés.")
 
 	controller.mission_won.connect(_on_mission_won)
 	var exit := host.current_map.get_node("Gameplay/Exits/MissionEnd") as Marker2D
 	actor_spawner.current_player.global_position = exit.global_position
+	await physics_frame
 	await physics_frame
 	_check(_mission_won_count == 0, "Atteindre la sortie avant d'éliminer la rencontre ne doit pas terminer la mission.")
 
@@ -53,7 +56,7 @@ func _run() -> void:
 	for child in host.current_map.actors_root().get_children():
 		if child is EnemyCharacter2D:
 			enemies.append(child)
-	_check(enemies.size() == 2, "La rencontre obligatoire doit produire deux EnemyCharacter2D.")
+	_check(enemies.size() == 7, "Les quatre rencontres obligatoires doivent produire sept EnemyCharacter2D.")
 	for enemy in enemies:
 		var health := enemy.health_component()
 		_check(health != null, "Chaque ennemi obligatoire doit exposer Health.")
@@ -62,7 +65,7 @@ func _run() -> void:
 
 	await process_frame
 	await physics_frame
-	_check(controller.remaining_enemy_count(&"vacuum_patrol_01") == 0, "Le compteur doit atteindre zéro après les deux morts.")
+	_check(controller.remaining_enemy_count(&"vacuum_patrol_01") == 0, "Le compteur Trooper doit atteindre zéro après les deux morts.")
 	_check(controller.all_required_encounters_cleared(), "La rencontre doit être marquée éliminée après sa dernière mort.")
 	_check(_mission_won_count == 1, "La sortie doit émettre mission_won exactement une fois après l'objectif.")
 	_check(screen.get_node("ResultPanel").visible, "Le résultat de victoire doit être visible dans l'écran de mission.")

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-enemy-roster-v001",
+  "displayName": "Industrial Toxic Enemy Roster v001",
+  "status": "published",
+  "assetCount": 4,
+  "archetypes": [
+    "vacuum_grunt",
+    "vacuum_flying",
+    "vacuum_boss",
+    "vacuum_pilot_saboteur"
+  ],
+  "recipe": "pipeline/assets/recipes/industrial_toxic_enemy_roster_v001.md",
+  "provenance": "pipeline/assets/provenance/industrial_toxic_enemy_roster_v001.json",
+  "qa": "pipeline/assets/working/enemies/industrial_toxic_v001/industrial-toxic-enemy-roster-v001-qa.json"
+}

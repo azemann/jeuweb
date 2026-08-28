@@ -165,6 +165,7 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `EnemyPatrolComponent` | Node | Possède direction, vélocité et bornes de patrouille. |
 | `EnemyHealthComponent` | Node | Possède les PV runtime et la fenêtre d'invulnérabilité. |
 | `EnemyAttackComponent` | Node | Détecte la cible, orchestre l'attaque et demande son projectile. |
+| `EnemyEjectionComponent` | Node | Traduit la mort d'une coque en apparition différée de son pilote autonome. |
 | `EnemyPresentationComponent` | Node | Joue la marche et retourne le sprite selon la direction. |
 
 ### Armes, projectiles et effets

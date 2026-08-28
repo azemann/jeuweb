@@ -1,0 +1,989 @@
+{
+  "schema": "jeuweb.enemy-roster-qa.v1",
+  "status": "published",
+  "frame_count": 64,
+  "entries": [
+    {
+      "archetype_id": "vacuum_grunt",
+      "source": "pipeline/assets/sources/imagegen/enemies/industrial_toxic_v001/vacuum-grunt-animation-sheet-candidate-v001.png",
+      "source_sha256": "e7c8eb445de925b329c2425746f598bb50ba776ea3efcdf1544c08e37ff55ca0",
+      "atlas": "pipeline/assets/exports/enemies/industrial_toxic_v001/vacuum-grunt-animation-4x4-v001.png",
+      "atlas_sha256": "2c28553e4fe9f6f4ea3bdacdfc3acba1967a84223a29fd070da219da2c297f92",
+      "frame_size": [
+        320,
+        256
+      ],
+      "root": [
+        160,
+        240
+      ],
+      "review": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-grunt-animation-v001-review.png",
+      "preview": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-grunt-animation-v001-preview.webp",
+      "frames": [
+        {
+          "index": 0,
+          "phase": "move_0",
+          "alpha_bbox": [
+            52,
+            50,
+            288,
+            247
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "move_1",
+          "alpha_bbox": [
+            63,
+            48,
+            288,
+            246
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "move_2",
+          "alpha_bbox": [
+            63,
+            51,
+            288,
+            247
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "move_3",
+          "alpha_bbox": [
+            32,
+            39,
+            266,
+            247
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 4,
+          "phase": "attack_0",
+          "alpha_bbox": [
+            49,
+            37,
+            288,
+            232
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 5,
+          "phase": "attack_1",
+          "alpha_bbox": [
+            41,
+            40,
+            223,
+            232
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 6,
+          "phase": "attack_2",
+          "alpha_bbox": [
+            32,
+            40,
+            241,
+            232
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 7,
+          "phase": "attack_3",
+          "alpha_bbox": [
+            32,
+            58,
+            276,
+            232
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 8,
+          "phase": "hit_0",
+          "alpha_bbox": [
+            54,
+            24,
+            284,
+            256
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 9,
+          "phase": "hit_1",
+          "alpha_bbox": [
+            43,
+            29,
+            235,
+            217
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 10,
+          "phase": "hit_2",
+          "alpha_bbox": [
+            32,
+            43,
+            249,
+            217
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 11,
+          "phase": "hit_3",
+          "alpha_bbox": [
+            32,
+            31,
+            252,
+            217
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 12,
+          "phase": "death_0",
+          "alpha_bbox": [
+            61,
+            0,
+            266,
+            209
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 13,
+          "phase": "death_1",
+          "alpha_bbox": [
+            36,
+            22,
+            255,
+            211
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 14,
+          "phase": "death_2",
+          "alpha_bbox": [
+            32,
+            24,
+            253,
+            211
+          ],
+          "root": [
+            160,
+            240
+          ]
+        },
+        {
+          "index": 15,
+          "phase": "death_3",
+          "alpha_bbox": [
+            32,
+            49,
+            257,
+            214
+          ],
+          "root": [
+            160,
+            240
+          ]
+        }
+      ]
+    },
+    {
+      "archetype_id": "vacuum_flying",
+      "source": "pipeline/assets/sources/imagegen/enemies/industrial_toxic_v001/vacuum-flying-animation-sheet-candidate-v001.png",
+      "source_sha256": "c0e0a6d39dce272eca74fc6f31fbffe5e9cfce201c8555408b97ef35f2d2472e",
+      "atlas": "pipeline/assets/exports/enemies/industrial_toxic_v001/vacuum-flying-animation-4x4-v001.png",
+      "atlas_sha256": "d9421bfb8278d2739a574bebce9de0bc829f12ce96ee2e0690eaf076aa4d9d26",
+      "frame_size": [
+        256,
+        256
+      ],
+      "root": [
+        128,
+        128
+      ],
+      "review": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-flying-animation-v001-review.png",
+      "preview": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-flying-animation-v001-preview.webp",
+      "frames": [
+        {
+          "index": 0,
+          "phase": "move_0",
+          "alpha_bbox": [
+            25,
+            75,
+            256,
+            256
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "move_1",
+          "alpha_bbox": [
+            18,
+            66,
+            256,
+            256
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "move_2",
+          "alpha_bbox": [
+            14,
+            57,
+            256,
+            256
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "move_3",
+          "alpha_bbox": [
+            9,
+            71,
+            244,
+            256
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 4,
+          "phase": "attack_0",
+          "alpha_bbox": [
+            26,
+            0,
+            255,
+            247
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 5,
+          "phase": "attack_1",
+          "alpha_bbox": [
+            18,
+            0,
+            256,
+            246
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 6,
+          "phase": "attack_2",
+          "alpha_bbox": [
+            4,
+            0,
+            228,
+            245
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 7,
+          "phase": "attack_3",
+          "alpha_bbox": [
+            0,
+            0,
+            247,
+            243
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 8,
+          "phase": "hit_0",
+          "alpha_bbox": [
+            28,
+            40,
+            213,
+            216
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 9,
+          "phase": "hit_1",
+          "alpha_bbox": [
+            21,
+            49,
+            215,
+            213
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 10,
+          "phase": "hit_2",
+          "alpha_bbox": [
+            4,
+            29,
+            204,
+            216
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 11,
+          "phase": "hit_3",
+          "alpha_bbox": [
+            8,
+            40,
+            190,
+            216
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 12,
+          "phase": "death_0",
+          "alpha_bbox": [
+            19,
+            18,
+            215,
+            200
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 13,
+          "phase": "death_1",
+          "alpha_bbox": [
+            24,
+            19,
+            207,
+            202
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 14,
+          "phase": "death_2",
+          "alpha_bbox": [
+            6,
+            19,
+            243,
+            212
+          ],
+          "root": [
+            128,
+            128
+          ]
+        },
+        {
+          "index": 15,
+          "phase": "death_3",
+          "alpha_bbox": [
+            5,
+            65,
+            220,
+            211
+          ],
+          "root": [
+            128,
+            128
+          ]
+        }
+      ]
+    },
+    {
+      "archetype_id": "vacuum_boss",
+      "source": "pipeline/assets/sources/imagegen/enemies/industrial_toxic_v001/vacuum-boss-animation-sheet-candidate-v001.png",
+      "source_sha256": "db3120376dcb6756dfae479ed09a10a48461eb50fc25fa3e6111359b0a023d84",
+      "atlas": "pipeline/assets/exports/enemies/industrial_toxic_v001/vacuum-boss-animation-4x4-v001.png",
+      "atlas_sha256": "e27434b385eb6e6a8e97613eee28e4fbebcc33bffe7b50d93b7a16ae52fe6db6",
+      "frame_size": [
+        384,
+        320
+      ],
+      "root": [
+        192,
+        300
+      ],
+      "review": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-boss-animation-v001-review.png",
+      "preview": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-boss-animation-v001-preview.webp",
+      "frames": [
+        {
+          "index": 0,
+          "phase": "move_0",
+          "alpha_bbox": [
+            46,
+            54,
+            345,
+            305
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "move_1",
+          "alpha_bbox": [
+            46,
+            56,
+            348,
+            304
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "move_2",
+          "alpha_bbox": [
+            38,
+            61,
+            347,
+            305
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "move_3",
+          "alpha_bbox": [
+            41,
+            61,
+            349,
+            305
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 4,
+          "phase": "attack_0",
+          "alpha_bbox": [
+            41,
+            67,
+            345,
+            300
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 5,
+          "phase": "attack_1",
+          "alpha_bbox": [
+            35,
+            74,
+            322,
+            300
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 6,
+          "phase": "attack_2",
+          "alpha_bbox": [
+            32,
+            72,
+            325,
+            297
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 7,
+          "phase": "attack_3",
+          "alpha_bbox": [
+            32,
+            67,
+            352,
+            302
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 8,
+          "phase": "hit_0",
+          "alpha_bbox": [
+            41,
+            46,
+            336,
+            285
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 9,
+          "phase": "hit_1",
+          "alpha_bbox": [
+            37,
+            58,
+            348,
+            283
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 10,
+          "phase": "hit_2",
+          "alpha_bbox": [
+            32,
+            65,
+            319,
+            284
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 11,
+          "phase": "hit_3",
+          "alpha_bbox": [
+            32,
+            55,
+            343,
+            292
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 12,
+          "phase": "death_0",
+          "alpha_bbox": [
+            44,
+            22,
+            333,
+            259
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 13,
+          "phase": "death_1",
+          "alpha_bbox": [
+            36,
+            21,
+            328,
+            273
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 14,
+          "phase": "death_2",
+          "alpha_bbox": [
+            32,
+            68,
+            344,
+            276
+          ],
+          "root": [
+            192,
+            300
+          ]
+        },
+        {
+          "index": 15,
+          "phase": "death_3",
+          "alpha_bbox": [
+            32,
+            100,
+            342,
+            276
+          ],
+          "root": [
+            192,
+            300
+          ]
+        }
+      ]
+    },
+    {
+      "archetype_id": "vacuum_pilot_saboteur",
+      "source": "pipeline/assets/sources/imagegen/enemies/industrial_toxic_v001/vacuum-pilot-saboteur-animation-sheet-candidate-v001.png",
+      "source_sha256": "faade2f99077def05aeba4bf8f5c566fcc7fd317056976c2701024c14ee5aec8",
+      "atlas": "pipeline/assets/exports/enemies/industrial_toxic_v001/vacuum-pilot-saboteur-animation-4x4-v001.png",
+      "atlas_sha256": "294d0240f13ee448660aa2a601624cfa632cc6ef4c42ae705776fe60f45ddd6a",
+      "frame_size": [
+        192,
+        192
+      ],
+      "root": [
+        96,
+        180
+      ],
+      "review": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-pilot-saboteur-animation-v001-review.png",
+      "preview": "pipeline/assets/working/enemies/industrial_toxic_v001/vacuum-pilot-saboteur-animation-v001-preview.webp",
+      "frames": [
+        {
+          "index": 0,
+          "phase": "move_0",
+          "alpha_bbox": [
+            17,
+            23,
+            177,
+            187
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "move_1",
+          "alpha_bbox": [
+            14,
+            49,
+            167,
+            186
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "move_2",
+          "alpha_bbox": [
+            6,
+            23,
+            172,
+            187
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "move_3",
+          "alpha_bbox": [
+            14,
+            22,
+            163,
+            184
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 4,
+          "phase": "attack_0",
+          "alpha_bbox": [
+            19,
+            31,
+            145,
+            177
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 5,
+          "phase": "attack_1",
+          "alpha_bbox": [
+            9,
+            30,
+            150,
+            177
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 6,
+          "phase": "attack_2",
+          "alpha_bbox": [
+            0,
+            38,
+            172,
+            177
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 7,
+          "phase": "attack_3",
+          "alpha_bbox": [
+            0,
+            29,
+            182,
+            169
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 8,
+          "phase": "hit_0",
+          "alpha_bbox": [
+            28,
+            20,
+            177,
+            170
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 9,
+          "phase": "hit_1",
+          "alpha_bbox": [
+            3,
+            25,
+            167,
+            160
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 10,
+          "phase": "hit_2",
+          "alpha_bbox": [
+            17,
+            42,
+            157,
+            170
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 11,
+          "phase": "hit_3",
+          "alpha_bbox": [
+            15,
+            18,
+            147,
+            170
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 12,
+          "phase": "death_0",
+          "alpha_bbox": [
+            34,
+            3,
+            177,
+            165
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 13,
+          "phase": "death_1",
+          "alpha_bbox": [
+            20,
+            29,
+            142,
+            165
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 14,
+          "phase": "death_2",
+          "alpha_bbox": [
+            0,
+            46,
+            157,
+            165
+          ],
+          "root": [
+            96,
+            180
+          ]
+        },
+        {
+          "index": 15,
+          "phase": "death_3",
+          "alpha_bbox": [
+            0,
+            70,
+            175,
+            175
+          ],
+          "root": [
+            96,
+            180
+          ]
+        }
+      ]
+    }
+  ],
+  "statuses": {
+    "visual": "accepted",
+    "temporal": "accepted-key-poses",
+    "technical": "passed",
+    "gameplay": "integrated"
+  },
+  "known_limits": [
+    "L'alpha est extrait du fond cyan uniforme demandé à ImageGen.",
+    "Les interpolations entre les quatre poses restent portées par SpriteFrames."
+  ]
+}

@@ -1,6 +1,14 @@
 extends SceneTree
 
 var _failures: Array[String] = []
+var _ejected_pilot: EnemyCharacter2D
+
+const INDUSTRIAL_ROSTER := [
+	&"vacuum_grunt",
+	&"vacuum_flying",
+	&"vacuum_boss",
+	&"vacuum_pilot_saboteur",
+]
 
 
 func _initialize() -> void:
@@ -21,6 +29,22 @@ func _run() -> void:
 	var catalog := load("res://characters/enemies/data/enemy_catalog.tres") as EnemyCatalog
 	_check(catalog != null and catalog.validation_errors().is_empty(), "Le catalogue ennemi doit être valide.")
 	_check(catalog.find_scene(&"vacuum_trooper") != null, "Le catalogue doit résoudre Vacuum Trooper.")
+	for archetype_id: StringName in INDUSTRIAL_ROSTER:
+		var roster_scene := catalog.find_scene(archetype_id) if catalog != null else null
+		_check(roster_scene != null, "Le catalogue doit résoudre %s." % archetype_id)
+		var roster_enemy := roster_scene.instantiate() as EnemyCharacter2D if roster_scene != null else null
+		_check(roster_enemy != null, "%s doit produire un EnemyCharacter2D." % archetype_id)
+		if roster_enemy != null:
+			_check(roster_enemy.profile.archetype_id == archetype_id, "La scène %s doit consommer son profil autoritaire." % archetype_id)
+			_check(roster_enemy.validation_errors().is_empty(), "La scène %s doit respecter l'arbre canonique : %s" % [archetype_id, "; ".join(roster_enemy.validation_errors())])
+			var roster_frames := (roster_enemy.get_node_or_null("Presentation/SlopeVisual/BodySprite") as AnimatedSprite2D)
+			if roster_frames == null:
+				roster_frames = roster_enemy.get_node_or_null("Presentation/BodySprite") as AnimatedSprite2D
+			_check(roster_frames != null, "%s doit exposer son AnimatedSprite2D." % archetype_id)
+			if roster_frames != null:
+				for animation in [&"walk", &"attack", &"hit", &"death"]:
+					_check(roster_frames.sprite_frames.has_animation(animation) and roster_frames.sprite_frames.get_frame_count(animation) == 4, "%s/%s doit publier quatre poses." % [archetype_id, animation])
+			roster_enemy.free()
 
 	var frames := load("res://characters/enemies/vacuum_trooper/vacuum_trooper_frames.tres") as SpriteFrames
 	_check(frames != null and frames.has_animation(&"walk"), "La marche Vacuum Trooper doit être publiée.")
@@ -69,14 +93,20 @@ func _run() -> void:
 	_check(dying_enemy != null, "Le scénario de mort doit être instanciable.")
 	if dying_enemy != null:
 		root.add_child(dying_enemy)
+		var ejection := dying_enemy.get_node("Components/Ejection") as EnemyEjectionComponent
+		ejection.ejected.connect(_on_pilot_ejected)
 		await process_frame
 		_check(dying_enemy.apply_damage(profile.maximum_health), "Un dégât létal doit être accepté.")
 		_check(is_instance_valid(dying_enemy) and not dying_enemy.is_queued_for_deletion(), "La mort ne doit plus supprimer l'ennemi immédiatement.")
 		_check(dying_enemy.get_node("Presentation/SlopeVisual/BodySprite").animation == &"death", "Zéro PV doit jouer death.")
 		_check(dying_enemy.collision_layer == 0, "Une coque mourante ne doit plus recevoir de projectiles.")
 		_check(not dying_enemy.patrol_component().movement_enabled, "La patrouille doit rester suspendue pendant death.")
-		await create_timer(1.2).timeout
+		await create_timer(0.75).timeout
+		_check(_ejected_pilot != null and _ejected_pilot.profile.archetype_id == &"vacuum_pilot_saboteur", "La mort du Trooper doit éjecter la scène canonique du Saboteur.")
+		await create_timer(0.45).timeout
 		_check(not is_instance_valid(dying_enemy), "L'ennemi doit être supprimé seulement après la dernière pose de mort.")
+		if is_instance_valid(_ejected_pilot):
+			_ejected_pilot.queue_free()
 
 	var projectile_scene := load("res://weapons/projectiles/field_round_2d.tscn") as PackedScene
 	var target := enemy_scene.instantiate() as EnemyCharacter2D if enemy_scene != null else null
@@ -132,3 +162,7 @@ func _run() -> void:
 	else:
 		print("ENEMY_CONTRACT_TEST: FAIL (%d)" % _failures.size())
 		quit(1)
+
+
+func _on_pilot_ejected(pilot: EnemyCharacter2D) -> void:
+	_ejected_pilot = pilot

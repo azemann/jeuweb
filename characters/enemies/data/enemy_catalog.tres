@@ -3,7 +3,11 @@
 [ext_resource type="Script" uid="uid://cnhv15cbh7hk5" path="res://characters/enemies/enemy_catalog.gd" id="1_catalog"]
 [ext_resource type="Resource" path="res://characters/enemies/data/vacuum_trooper_binding.tres" id="2_trooper"]
 [ext_resource type="Script" uid="uid://0uuwp5utiucs" path="res://characters/enemies/enemy_scene_binding.gd" id="3_binding"]
+[ext_resource type="Resource" path="res://characters/enemies/data/vacuum_grunt_binding.tres" id="4_grunt"]
+[ext_resource type="Resource" path="res://characters/enemies/data/vacuum_flying_binding.tres" id="5_flying"]
+[ext_resource type="Resource" path="res://characters/enemies/data/vacuum_boss_binding.tres" id="6_boss"]
+[ext_resource type="Resource" path="res://characters/enemies/data/vacuum_pilot_saboteur_binding.tres" id="7_pilot"]
 
 [resource]
 script = ExtResource("1_catalog")
-bindings = Array[ExtResource("3_binding")]([ExtResource("2_trooper")])
+bindings = Array[ExtResource("3_binding")]([ExtResource("2_trooper"), ExtResource("4_grunt"), ExtResource("5_flying"), ExtResource("6_boss"), ExtResource("7_pilot")])

@@ -13,6 +13,8 @@ extends Resource
 @export_range(0.0, 2.0, 0.01) var post_hit_invulnerability := 0.08
 
 @export_category("Patrol")
+## Choisit une locomotion au sol ou une patrouille aérienne sans gravité.
+@export_enum("Ground", "Flying") var locomotion_mode := 0
 ## Vitesse horizontale de patrouille en pixels par seconde.
 @export_range(0.0, 600.0, 1.0) var movement_speed := 70.0
 ## Accélération horizontale en pixels par seconde carrée.
@@ -23,6 +25,14 @@ extends Resource
 @export_range(1.0, 3000.0, 10.0) var maximum_fall_speed := 900.0
 ## Distance maximale parcourue de chaque côté du point d'apparition.
 @export_range(0.0, 1200.0, 8.0) var patrol_half_width := 96.0
+## Amplitude verticale en pixels de la patrouille Flying.
+@export_range(0.0, 320.0, 2.0) var flight_bob_amplitude := 28.0
+## Fréquence en cycles par seconde de la patrouille Flying.
+@export_range(0.05, 4.0, 0.05) var flight_bob_frequency := 0.7
+
+
+func is_flying() -> bool:
+	return locomotion_mode == 1
 
 
 func is_valid() -> bool:
@@ -35,4 +45,6 @@ func is_valid() -> bool:
 		and gravity >= 0.0
 		and maximum_fall_speed > 0.0
 		and patrol_half_width >= 0.0
+		and flight_bob_amplitude >= 0.0
+		and flight_bob_frequency > 0.0
 	)

@@ -6,7 +6,7 @@ extends Marker2D
 ## Identité stable de cette occurrence dans la mission.
 @export var encounter_id: StringName
 ## Rôle attendu ; une future registry le traduira en PackedScene.
-@export_enum("vacuum_trooper", "vacuum_brute", "vacuum_siphoner", "alien_pilot") var enemy_archetype := "vacuum_trooper"
+@export_enum("vacuum_trooper", "vacuum_grunt", "vacuum_flying", "vacuum_boss", "vacuum_pilot_saboteur") var enemy_archetype := "vacuum_trooper"
 ## Nombre d'ennemis demandé par cette occurrence ; la formation reste décidée par le futur spawner.
 @export_range(1, 12, 1) var count := 1
 ## Distance horizontale, en pixels, entre deux ennemis successifs de la formation.
