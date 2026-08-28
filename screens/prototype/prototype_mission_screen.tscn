@@ -164,6 +164,34 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 1
 
+[node name="BossHealthPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 360.0
+offset_top = 100.0
+offset_right = -360.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
+[node name="Stack" type="VBoxContainer" parent="BossHealthPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BossHealthPanel/Stack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
+theme_override_font_sizes/font_size = 14
+text = "BRUTE ASPIRANTE"
+horizontal_alignment = 1
+
+[node name="BossHealth" type="ProgressBar" parent="BossHealthPanel/Stack"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+show_percentage = false
+
 [node name="BackButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 1

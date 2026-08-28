@@ -11,6 +11,8 @@ extends CharacterBody2D
 @export_node_path("EnemyPatrolComponent") var patrol_component_path := NodePath("Components/Patrol")
 ## Composant propriétaire des points de vie runtime.
 @export_node_path("EnemyHealthComponent") var health_component_path := NodePath("Components/Health")
+## Zone optionnelle dont la forme étend la réception des tirs au-delà du corps physique.
+@export_node_path("Area2D") var hurtbox_path := NodePath("Hurtbox")
 ## Composant qui télégraphie et exécute l'attaque data-driven de l'archétype.
 @export_node_path("EnemyAttackComponent") var attack_component_path := NodePath("Components/Attack")
 ## FSM commune exposant les états de l'ennemi aux composants et aux outils de mission.
@@ -52,6 +54,10 @@ func patrol_component() -> EnemyPatrolComponent:
 
 func health_component() -> EnemyHealthComponent:
 	return get_node_or_null(health_component_path) as EnemyHealthComponent
+
+
+func hurtbox() -> Area2D:
+	return get_node_or_null(hurtbox_path) as Area2D
 
 
 func attack_component() -> EnemyAttackComponent:
@@ -141,6 +147,9 @@ func _on_health_died() -> void:
 		state.transition(ActorStateMachineComponent.State.DEAD)
 	remove_from_group(&"damageable_actors")
 	collision_layer = 0
+	var damage_area := hurtbox()
+	if damage_area != null:
+		damage_area.collision_layer = 0
 	var patrol := patrol_component()
 	if patrol != null:
 		patrol.set_movement_enabled(false)

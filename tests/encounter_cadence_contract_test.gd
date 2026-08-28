@@ -72,6 +72,7 @@ func _run() -> void:
 	_check(_bridge_overlap_count == 2, "After Delay doit lancer le Pincer tandis que les deux ennemis volants sont encore actifs.")
 	_check(_wave_log.get(&"foundry_boss_gate", []) == [&"foundry_pressure", &"foundry_payoff"], "Le Combat Gate doit terminer sur le Boss.")
 	_check(screen.get_node("HUD/HUDLayout/CadenceStack/CadenceLabel").text == "ZONE SÉCURISÉE" or screen.get_node("ResultPanel").visible, "Le HUD doit rendre la cadence et sa résolution visibles au joueur.")
+	_check(screen.get_node("BossHealthPanel").visible and screen.get_node("BossHealthPanel/Stack/BossHealth").value == 0.0, "Le HUD doit rendre les dégâts et la mort du Boss explicitement visibles.")
 	for gate in host.current_map.get_node("Gameplay/Encounters").get_children():
 		_check(gate is MissionCombatGate2D and not gate.is_closed(), "Chaque Combat Gate doit être ouvert après sa rencontre.")
 		_check(gate.get_node("Barrier").collision_layer == 0 and not gate.get_node("EnergyField").visible, "Une porte ouverte doit réellement retirer collision et champ visuel.")

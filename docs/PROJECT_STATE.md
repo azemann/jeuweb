@@ -112,6 +112,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   physiquement chaque frontière et s'ouvrent à la résolution correspondante ;
 - le HUD annonce rencontre, beat et numéro de vague actifs ; les formations
   possèdent aussi un aperçu coloré dans l'éditeur ;
+- la Brute/Boss possède une Hurtbox élargie conforme à sa coque visible : les
+  tirs sur le bord supérieur et la trompe ne traversent plus la silhouette ;
+  une barre de Boss reliée à `EnemyHealthComponent` confirme chaque dégât ;
 - joueur et ennemis partagent `ActorGroundingComponent`, avec GroundAnchor,
   GroundProbe et ombre projetée sur le vrai collider World ;
 - deux sondes d'appui mesurent chaque pente et `SlopePresentation` incline le

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy_character_2d.gd" id="1"]
 [ext_resource type="Resource" path="res://characters/enemies/data/vacuum_boss_profile.tres" id="2"]
@@ -15,8 +15,11 @@
 [sub_resource type="RectangleShape2D" id="Shape"]
 size = Vector2(132, 158)
 
+[sub_resource type="RectangleShape2D" id="HurtboxShape"]
+size = Vector2(260, 175)
+
 [node name="VacuumBoss2D" type="CharacterBody2D"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 1
 floor_snap_length = 10.0
 script = ExtResource("1")
@@ -25,6 +28,15 @@ profile = ExtResource("2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -79)
 shape = SubResource("Shape")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -87.5)
+shape = SubResource("HurtboxShape")
 
 [node name="Components" type="Node2D" parent="."]
 

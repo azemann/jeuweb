@@ -29,6 +29,7 @@ présentation.
 ```text
 EnemyCharacter2D (CharacterBody2D)
 ├── CollisionShape2D
+├── Hurtbox (Area2D, optionnelle si la silhouette dépasse le corps physique)
 ├── Components
 │   ├── Patrol
 │   ├── Health
@@ -79,6 +80,8 @@ le pipeline.
 - Grounding est le composant transversal chargé du root des pieds et de l'ombre
   projetée sur le vrai collider World ;
 - `EnemyCharacter2D.apply_damage()` transmet uniquement l'intention à Health ;
+- lorsqu'une Hurtbox étendue existe, elle possède seule la couche de réception
+  des projectiles ; le corps conserve uniquement collision World et mouvement ;
 - un dégât accepté suspend Patrol et déclenche `hit` dans Presentation ; la
   marche reprend uniquement au signal de fin d'animation ;
 - à zéro PV, la coque quitte la couche cible mais conserve sa collision World,
@@ -95,5 +98,7 @@ l'arbre canonique, les dégâts, la suppression différée et l'éjection réell
 Saboteur. `map_contract_test.gd` protège les marqueurs auteur et
 `mission_run_contract_test.gd` la victoire après les douze apparitions de la
 cadence obligatoire.
+Le test tire aussi un vrai `FieldRound2D` sur le bord visible supérieur du Boss
+et protège l'autorité unique de sa Hurtbox.
 Le validateur Python du roster vérifie 64 poses, dimensions, alpha et identité
 binaire entre exports pipeline et copies runtime.

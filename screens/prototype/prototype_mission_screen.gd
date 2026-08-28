@@ -17,6 +17,8 @@ func _ready() -> void:
 		encounters.wave_started.connect(_on_wave_started)
 	if not encounters.encounter_completed.is_connected(_on_encounter_completed):
 		encounters.encounter_completed.connect(_on_encounter_completed)
+	if not encounters.enemy_registered.is_connected(_on_enemy_registered):
+		encounters.enemy_registered.connect(_on_enemy_registered)
 	%ActorSpawner.player_spawned.connect(_on_player_spawned)
 	if %ActorSpawner.current_player != null:
 		_on_player_spawned(%ActorSpawner.current_player, null)
@@ -41,6 +43,24 @@ func _on_wave_started(_encounter_id: StringName, wave_index: int, wave: WaveData
 
 func _on_encounter_completed(_encounter_id: StringName) -> void:
 	%CadenceLabel.text = "ZONE SÉCURISÉE"
+
+
+func _on_enemy_registered(_encounter_id: StringName, _wave_id: StringName, enemy: EnemyCharacter2D) -> void:
+	if enemy.profile == null or enemy.profile.archetype_id != &"vacuum_boss":
+		return
+	var health := enemy.health_component()
+	if health == null:
+		return
+	%BossHealthPanel.visible = true
+	%BossHealth.max_value = enemy.profile.maximum_health
+	%BossHealth.value = health.current_health
+	if not health.health_changed.is_connected(_on_boss_health_changed):
+		health.health_changed.connect(_on_boss_health_changed)
+
+
+func _on_boss_health_changed(current: float, maximum: float) -> void:
+	%BossHealth.max_value = maximum
+	%BossHealth.value = current
 
 
 func _unhandled_input(event: InputEvent) -> void:

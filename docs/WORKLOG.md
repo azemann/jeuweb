@@ -1105,3 +1105,20 @@
 - limite volontaire : Kill Room/Arena n'ont pas encore leur verrou caméra et
   Set Piece n'orchestre pas encore audio/VFX ; prochaine action recommandée :
   construire les phases et le projectile lourd du Boss comme premier Set Piece.
+
+## 2026-08-28 — Dégâts lisibles et Hurtbox du Boss
+
+- reproduit un impact réel de `FieldRound2D` sur le Boss : les dégâts étaient
+  acceptés au centre, mais le collider de 132 px ne couvrait pas la coque
+  raster d'environ 238 px, donnant l'impression que les tirs la traversaient ;
+- ajouté une Hurtbox auteur 260 × 175 sous la scène Boss et retiré sa couche de
+  réception du corps physique : la Hurtbox est désormais l'autorité unique des
+  impacts, tandis que le CharacterBody conserve mouvement et collision World ;
+- désactivé automatiquement cette Hurtbox à la mort depuis
+  `EnemyCharacter2D` ;
+- ajouté au HUD une barre « Brute aspirante » directement reliée au signal
+  `health_changed` de `EnemyHealthComponent` ;
+- étendu les tests avec un tir passant hors de l'ancien collider mais dans la
+  silhouette visible, et avec la barre atteignant zéro pendant le run complet.
+- validation réelle : les 25 contrats headless et le démarrage complet pendant
+  240 frames passent après le correctif.

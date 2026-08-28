@@ -128,6 +128,28 @@ func _run() -> void:
 			projectile.queue_free()
 		await process_frame
 
+	var boss_scene := catalog.find_scene(&"vacuum_boss") if catalog != null else null
+	var boss_target := boss_scene.instantiate() as EnemyCharacter2D if boss_scene != null else null
+	var boss_projectile := projectile_scene.instantiate() as Projectile2D if projectile_scene != null else null
+	_check(boss_target != null and boss_projectile != null, "Le scénario FieldRound vers Boss doit être instanciable.")
+	if boss_target != null and boss_projectile != null:
+		root.add_child(boss_target)
+		boss_target.global_position = Vector2(220, 220)
+		boss_target.patrol_component().set_physics_process(false)
+		_check(boss_target.collision_layer == 0 and boss_target.hurtbox() != null and boss_target.hurtbox().collision_layer == 4, "La Hurtbox doit être l'unique autorité de réception étendue du Boss.")
+		root.add_child(boss_projectile)
+		boss_projectile.global_position = Vector2(0, 50)
+		var boss_health_before := boss_target.health_component().current_health
+		var boss_projectile_damage := boss_projectile.data.damage
+		boss_projectile.launch(Vector2.RIGHT)
+		for _frame in 24:
+			await physics_frame
+		_check(boss_target.health_component().current_health == boss_health_before - boss_projectile_damage, "Un FieldRound visant le bord visible supérieur doit toucher la Hurtbox du Boss et retirer ses dégâts.")
+		boss_target.queue_free()
+		if is_instance_valid(boss_projectile):
+			boss_projectile.queue_free()
+		await process_frame
+
 	var screen_scene := load("res://screens/prototype/prototype_mission_screen.tscn") as PackedScene
 	var screen := screen_scene.instantiate()
 	root.add_child(screen)
