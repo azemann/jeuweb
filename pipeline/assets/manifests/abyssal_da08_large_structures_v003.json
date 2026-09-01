@@ -1,0 +1,13 @@
+{
+  "schema": "jeuweb.asset-manifest.v1",
+  "lot": "abyssal-da08-large-structures-v003",
+  "source_concept": "art/concepts/da-08-abyssal-mission.png",
+  "runtime_status": "published",
+  "outputs": [
+    {"piece_id": "abyssal_da08_massive_coral_machine_slab", "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-massive-coral-machine-slab-v003.png", "scene": "terrain/kits/abyssal/pieces/v003_large_structures/da08_massive_coral_machine_slab.tscn"},
+    {"piece_id": "abyssal_da08_broken_machine_floor", "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-broken-machine-floor-v003.png", "scene": "terrain/kits/abyssal/pieces/v003_large_structures/da08_broken_machine_floor.tscn"},
+    {"piece_id": "abyssal_da08_rotor_slope_floor", "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-rotor-slope-floor-v003.png", "scene": "terrain/kits/abyssal/pieces/v003_large_structures/da08_rotor_slope_floor.tscn"},
+    {"piece_id": "abyssal_da08_tide_bridge_foundation", "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-tide-bridge-foundation-v003.png", "scene": "terrain/kits/abyssal/pieces/v003_large_structures/da08_tide_bridge_foundation.tscn"},
+    {"piece_id": "abyssal_da08_right_engine_slab", "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-right-engine-slab-v003.png", "scene": "terrain/kits/abyssal/pieces/v003_large_structures/da08_right_engine_slab.tscn"}
+  ]
+}

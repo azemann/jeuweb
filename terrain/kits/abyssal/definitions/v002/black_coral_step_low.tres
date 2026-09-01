@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/v002/black-coral-step-low-v002.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_black_coral_step_low"
+display_name = "Abysses — marche basse corail"
+tags = PackedStringArray("abyssal", "black_coral", "step", "low", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 118)
+default_z_index = -1
+collision_source = 1
+authored_outline = PackedVector2Array(-260, 58, -74, 58, -74, -8, 210, -8, 232, 42, 178, 118, 12, 168, -166, 144, -282, 96)
+walk_surface_point_count = 4
+recommended_mode = 0

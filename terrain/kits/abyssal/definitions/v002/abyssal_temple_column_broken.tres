@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/v002/abyssal-temple-column-broken-v002.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_temple_column_broken"
+display_name = "Abysses — colonne de temple brisée"
+category = 2
+tags = PackedStringArray("abyssal", "temple", "column", "broken", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 318)
+default_z_index = -2
+collision_source = 1
+authored_outline = PackedVector2Array(-92, -240, 58, -270, 96, -218, 84, -10, 54, 0, -62, 0, -96, -14, -112, -200)
+walk_surface_point_count = 2
+recommended_mode = 0

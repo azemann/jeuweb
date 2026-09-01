@@ -26,7 +26,29 @@ func _run() -> void:
 			&"abyssal_black_coral_slope_connector",
 			&"abyssal_tide_engine_bridge_medium",
 			&"abyssal_destructible_pearl_wall_medium",
+			&"abyssal_black_coral_platform_small",
+			&"abyssal_black_coral_platform_large",
+			&"abyssal_black_coral_floor_cap_left",
+			&"abyssal_black_coral_floor_cap_right",
+			&"abyssal_black_coral_slope_up",
+			&"abyssal_black_coral_slope_down",
+			&"abyssal_black_coral_step_low",
+			&"abyssal_black_coral_step_high",
+			&"abyssal_tide_engine_bridge_short",
+			&"abyssal_tide_engine_bridge_long",
+			&"abyssal_tide_engine_support_pillar",
+			&"abyssal_temple_arch_large",
+			&"abyssal_temple_column_intact",
+			&"abyssal_temple_column_broken",
+			&"abyssal_destructible_pearl_wall_small",
+			&"abyssal_destructible_pearl_wall_large",
+			&"abyssal_da08_massive_coral_machine_slab",
+			&"abyssal_da08_broken_machine_floor",
+			&"abyssal_da08_rotor_slope_floor",
+			&"abyssal_da08_tide_bridge_foundation",
+			&"abyssal_da08_right_engine_slab",
 		]
+		_check(catalog.pieces.size() == expected_ids.size(), "Le kit abyssal doit exposer les 25 pièces v001/v002/v003.")
 		for piece_id in expected_ids:
 			var packed := catalog.scene_for(piece_id)
 			_check(packed != null and packed.can_instantiate(), "Le kit abyssal doit résoudre %s." % piece_id)
@@ -60,7 +82,7 @@ func _run() -> void:
 	_check(definition != null and definition.is_valid(), "La définition Mission 2 doit être valide.")
 	if definition != null:
 		_check(definition.map_id == &"mission_2_abyssal", "Le map_id de Mission 2 doit rester stable.")
-		_check(definition.world_size == Vector2i(2560, 720), "Le premier blockout Mission 2 doit couvrir un acte de 2560 px.")
+		_check(definition.world_size == Vector2i(5120, 720), "Le blockout Mission 2 doit couvrir deux actes de 2560 px.")
 
 	var map_catalog := load("res://maps/definitions/mission_map_catalog.tres") as MissionMapCatalog
 	_check(map_catalog != null and map_catalog.find_map(&"mission_2_abyssal") == definition, "Le catalogue de missions doit résoudre Mission 2.")
@@ -71,8 +93,8 @@ func _run() -> void:
 	_check(map != null, "Mission 2 doit produire un MissionMapRoot2D.")
 	if map != null:
 		_check(map.validation_errors().is_empty(), "Mission 2 doit respecter le contrat de carte : %s" % "; ".join(map.validation_errors()))
-		_check(map.camera_bounds == Rect2(0, 0, 2560, 720), "Les limites caméra Mission 2 doivent suivre world_size.")
-		_check(map.authored_segments().size() == 1, "Le blockout Mission 2 doit exposer un acte auteur.")
+		_check(map.camera_bounds == Rect2(0, 0, 5120, 720), "Les limites caméra Mission 2 doivent suivre world_size.")
+		_check(map.authored_segments().size() == 2, "Le blockout Mission 2 doit exposer deux actes auteur.")
 		_check(map.find_spawn(&"player_start") != null, "Mission 2 doit exposer un spawn joueur initial.")
 		var visual_root := map.get_node_or_null("Visual") as Node2D
 		var abyssal_tint := map.get_node_or_null("Visual/FarBackground/AbyssalTint") as ColorRect
@@ -81,8 +103,31 @@ func _run() -> void:
 		_check(abyssal_tint != null and abyssal_tint.z_index < -10 and abyssal_tint.color.a < 0.5, "L'aplat abyssal ne doit plus masquer les Ground Pieces dans l'éditeur.")
 		_check(mid_glow != null and mid_glow.z_index < -10 and mid_glow.color.a < 0.35, "La lueur de blockout doit rester décorative et légère.")
 		var pieces_root := map.get_node_or_null("Gameplay/GroundPieces")
-		_check(pieces_root != null and pieces_root.get_child_count() == 5, "Mission 2 doit placer les cinq premières occurrences de Ground Pieces.")
-		for node_name in ["EntryBlackCoral", "FirstDropSlope", "TideEngineBridge", "PearlWallGate", "ExitBlackCoral"]:
+		_check(pieces_root != null and pieces_root.get_child_count() == 22, "Mission 2 doit placer les 22 occurrences de blockout v002/v003.")
+		for node_name in [
+			"EntryBlackCoral",
+			"FirstDropSlope",
+			"TideEngineBridge",
+			"PearlWallGate",
+			"Da08LandingSlab",
+			"Da08BrokenApproach",
+			"ExitBlackCoral",
+			"Da08RotorSlopeFloor",
+			"EntryCapLeft",
+			"RuinsPlatformLarge",
+			"Da08TideBridgeFoundation",
+			"LowCoralStep",
+			"HighCoralStep",
+			"SlopeDownToEngine",
+			"LongTideBridge",
+			"Da08RightEngineSlab",
+			"BridgeSupportWest",
+			"BridgeSupportEast",
+			"TempleArchGate",
+			"BrokenTempleColumn",
+			"LargePearlWallGate",
+			"ExitCapRight",
+		]:
 			var piece := map.get_node_or_null("Gameplay/GroundPieces/%s" % node_name) as GroundPiece2D
 			_check(piece != null and piece.definition != null and piece.definition.is_valid(), "%s doit rester une Ground Piece éditable dans la scène." % node_name)
 		map.free()

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/v002/black-coral-step-high-v002.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_black_coral_step_high"
+display_name = "Abysses — marche haute corail"
+tags = PackedStringArray("abyssal", "black_coral", "step", "high", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 100)
+default_z_index = -1
+collision_source = 1
+authored_outline = PackedVector2Array(-282, 104, -84, 104, -84, -8, 238, -8, 260, 48, 202, 142, 34, 202, -160, 184, -304, 132)
+walk_surface_point_count = 4
+recommended_mode = 0

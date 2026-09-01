@@ -1,6 +1,7 @@
 # Mission 2 — DA abyssale et kit de structures
 
-Statut : direction v001, à éprouver dans l'éditeur Godot.
+Statut : direction v002, premier kit de structures publié et à éprouver dans
+l'éditeur Godot.
 
 ## Intention
 
@@ -100,6 +101,25 @@ Lot v002 prioritaire :
 Ce lot suffit pour composer un acte entier sans créer de grand bitmap de sol.
 Les hazards, checkpoints et props viennent ensuite seulement si le parcours les
 réclame.
+
+Statut actuel du lot v002 : publié sous
+`art/terrain/pieces/abyssal/v002/`, intégré au catalogue abyssal et placé dans
+un blockout de deux actes dans `maps/missions/mission2/mission_2.tscn`.
+
+## Leçon de production
+
+Le retour éditeur montre que les grands socles de la rangée basse de DA-08
+portent mieux l'identité et le level design que les petites variantes isolées.
+À partir de v003 :
+
+- les grands socles DA-08 servent de base de sol principale ;
+- les plateformes, caps, pentes et steps v002 servent de raccords ;
+- les piliers, arches et colonnes décorent ou soutiennent les grands socles ;
+- un fond sombre ne doit jamais masquer la lisibilité du bord de marche.
+
+Cette approche suit les méthodes observées chez d'autres workflows : fabriquer
+une palette de pièces éditables avant de composer le niveau, verrouiller pivots
+et modules, et éviter de reconstruire le level design pendant l'art pass.
 
 ## Autorités
 

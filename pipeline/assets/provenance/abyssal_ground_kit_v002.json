@@ -1,0 +1,14 @@
+{
+  "schema": "jeuweb.asset-provenance.v1",
+  "lot": "abyssal-ground-kit-v002",
+  "created_on": "2026-09-01",
+  "external_source": {
+    "path": "/home/evan/Dev/Dev-github/my-space/projets/jeuweb-abyssal-asset-pack-v001",
+    "branch": "agent/ajoute-serre-mecanique",
+    "commit": "e2b81a5",
+    "status": "candidate_sources_not_integrated"
+  },
+  "local_source_directory": "pipeline/assets/sources/terrain_kits/abyssal",
+  "processor": "pipeline/assets/tools/process_abyssal_ground_kit.py",
+  "qa": "pipeline/assets/working/terrain_kits/abyssal/v002/abyssal-ground-kit-v002-qa.json"
+}

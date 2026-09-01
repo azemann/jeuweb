@@ -112,6 +112,36 @@ lot `abyssal-ground-kit-v001` sous `pipeline/assets/`. Statut : intégré pour
 blockout auteur ; les contours, pivots et raccords restent à ajuster après
 test direct dans l'éditeur.
 
+### Mission 2 — kit de Ground Pieces abyssal v002
+
+| Famille | Fichiers publiés | Intégration Godot |
+|---|---|---|
+| Sols corail | `black-coral-platform-small-v002.png`, `black-coral-platform-large-v002.png`, `black-coral-floor-cap-left-v002.png`, `black-coral-floor-cap-right-v002.png` | quatre `GroundPieceDefinition` et scènes glissables |
+| Raccords | `black-coral-slope-up-v002.png`, `black-coral-slope-down-v002.png`, `black-coral-step-low-v002.png`, `black-coral-step-high-v002.png` | quatre scènes de parcours pour pentes et marches |
+| Structures | `tide-engine-bridge-short-v002.png`, `tide-engine-bridge-long-v002.png`, `tide-engine-support-pillar-v002.png`, `abyssal-temple-arch-large-v002.png`, `abyssal-temple-column-intact-v002.png`, `abyssal-temple-column-broken-v002.png` | six scènes de ponts, supports et ruines |
+| Destructibles | `destructible-pearl-wall-small-v002.png`, `destructible-pearl-wall-large-v002.png` | deux scènes Breakable avec profils externes |
+
+Lot publié le 2026-09-01 par
+`pipeline/assets/tools/process_abyssal_ground_kit.py`. Les 16 sorties v002
+étendent le catalogue abyssal à 20 pièces et servent au blockout deux actes de
+Mission 2. Statut : intégré pour level design ; revue visuelle et ajustement
+fin des contours à faire dans l'éditeur.
+
+### Mission 2 — grands socles DA-08 v003
+
+| Fichier | Création | Intention | Intégration |
+|---|---|---|---|
+| `terrain/pieces/abyssal/v003_large_structures/da08-massive-coral-machine-slab-v003.png` | extraction pipeline depuis la rangée basse de DA-08 | grand sol principal, machine et corail | `abyssal_da08_massive_coral_machine_slab.tres` |
+| `terrain/pieces/abyssal/v003_large_structures/da08-broken-machine-floor-v003.png` | extraction pipeline depuis DA-08 | socle brisé pour variation de rythme | `abyssal_da08_broken_machine_floor.tres` |
+| `terrain/pieces/abyssal/v003_large_structures/da08-rotor-slope-floor-v003.png` | extraction pipeline depuis DA-08 | grand raccord incliné à rotor | `abyssal_da08_rotor_slope_floor.tres` |
+| `terrain/pieces/abyssal/v003_large_structures/da08-tide-bridge-foundation-v003.png` | extraction pipeline depuis DA-08 | fondation lourde de pont | `abyssal_da08_tide_bridge_foundation.tres` |
+| `terrain/pieces/abyssal/v003_large_structures/da08-right-engine-slab-v003.png` | extraction pipeline depuis DA-08 | socle moteur pour fin d'acte | `abyssal_da08_right_engine_slab.tres` |
+
+Lot publié le 2026-09-01 par
+`pipeline/assets/tools/process_abyssal_da08_large_structures.py`. Ces grands
+socles portent désormais la base game art/level design de Mission 2 ; les
+pièces v002 restent des raccords et compléments.
+
 ## Joueur — assets runtime v001
 
 | Fichier | Création | Intention | Intégration |

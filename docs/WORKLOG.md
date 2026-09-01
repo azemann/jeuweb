@@ -1780,3 +1780,42 @@
 - limite volontaire : les nombreuses pièces listées ne sont pas encore toutes
   publiées en sprites runtime ; le prochain lot doit produire les modules
   prioritaires avant de densifier les props et hazards.
+
+## 2026-09-01 — Mission 2 level design blockout et Ground Kit abyssal v002
+
+- étendu `process_abyssal_ground_kit.py` pour publier un lot v002 de seize
+  sorties supplémentaires sans écraser les quatre pièces v001 ;
+- ajouté la source locale `abyssal-temple-arch-source-v001.png` dans le
+  pipeline, puis dérivé plateformes, caps, pentes, marches, ponts, support,
+  arche, colonnes et murs nacrés ;
+- créé seize `GroundPieceDefinition` v002, seize scènes glissables sous
+  `terrain/kits/abyssal/pieces/v002/` et un profil Breakable lourd pour le
+  grand mur nacré ;
+- étendu `abyssal_ground_kit.tres` à vingt scènes, toutes résolues par
+  `piece_id` stable ;
+- agrandi Mission 2 à 5120 × 720 avec deux segments auteur :
+  `abyssal_entry` et `tide_engine_ruins` ;
+- placé dix-sept occurrences de Ground Pieces dans `mission_2.tscn`, dont
+  pont long, supports, arche traversable, colonnes et grand mur destructible ;
+- renforcé `abyssal_ground_kit_contract_test.gd` pour protéger le catalogue
+  de 20 pièces, les deux segments et les 17 occurrences de blockout ;
+- limite volontaire : le parcours est un blockout game art/level design, pas
+  encore une mission jouable complète avec ennemis, checkpoints, hazards et
+  scoring.
+
+## 2026-09-01 — Grands socles DA-08 et apprentissage de production
+
+- intégré le retour auteur : les grands sols en bas de DA-08 doivent porter la
+  base de Mission 2, tandis que les petites pièces servent de raccords ;
+- consulté des workflows externes de Tilemap/TileSet et de kits modulaires :
+  palette de pièces éditables, pivots stables, modules cohérents et absence de
+  reconstruction du level design pendant l'art pass ;
+- ajouté `process_abyssal_da08_large_structures.py` pour extraire cinq grands
+  socles depuis la planche DA-08 locale, avec alpha, canevas 1024 × 320 et QA ;
+- publié cinq PNG sous
+  `art/terrain/pieces/abyssal/v003_large_structures/`, leurs
+  `GroundPieceDefinition` et scènes glissables ;
+- étendu `abyssal_ground_kit.tres` à vingt-cinq pièces et Mission 2 à vingt-deux
+  occurrences de blockout ;
+- renforcé le contrat abyssal pour protéger le nombre de pièces, les grands
+  socles DA-08 et la scène deux actes.

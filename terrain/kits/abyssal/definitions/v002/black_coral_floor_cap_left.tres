@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/v002/black-coral-floor-cap-left-v002.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_black_coral_floor_cap_left"
+display_name = "Abysses — terminaison gauche corail"
+tags = PackedStringArray("abyssal", "black_coral", "cap", "left", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 104)
+default_z_index = -1
+collision_source = 1
+authored_outline = PackedVector2Array(-178, -8, 190, -8, 208, 52, 132, 126, 12, 154, -116, 126, -214, 44)
+walk_surface_point_count = 2
+recommended_mode = 0

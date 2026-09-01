@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/v002/black-coral-slope-up-v002.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_black_coral_slope_up"
+display_name = "Abysses — pente corail montante"
+tags = PackedStringArray("abyssal", "black_coral", "slope", "up", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 134)
+default_z_index = -1
+collision_source = 1
+authored_outline = PackedVector2Array(-310, 54, -206, 38, -102, 22, 2, 4, 106, -12, 212, -30, 318, -46, 340, 34, 274, 122, 136, 178, -26, 186, -184, 146, -330, 92)
+walk_surface_point_count = 7
+recommended_mode = 0

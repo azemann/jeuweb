@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://terrain/ground_pieces/ground_piece_2d.tscn" id="1_piece"]
+[ext_resource type="Resource" path="res://terrain/kits/abyssal/definitions/v002/abyssal_temple_arch_large.tres" id="2_definition"]
+
+[node name="AbyssalTempleArchLarge" instance=ExtResource("1_piece")]
+definition = ExtResource("2_definition")
+ground_mode = 0

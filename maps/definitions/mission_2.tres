@@ -12,4 +12,4 @@ campaign_order = 2
 scene_path = "res://maps/missions/mission2/mission_2.tscn"
 preview_texture = ExtResource("2_preview")
 hud_theme = ExtResource("3_hud_theme")
-world_size = Vector2i(2560, 720)
+world_size = Vector2i(5120, 720)

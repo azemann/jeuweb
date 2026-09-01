@@ -1,0 +1,153 @@
+{
+  "schema": "jeuweb.abyssal-da08-large-structures.v1",
+  "lot": "abyssal-da08-large-structures-v003",
+  "source_concept": "art/concepts/da-08-abyssal-mission.png",
+  "status": "published-runtime-v003",
+  "outputs": [
+    {
+      "piece_id": "abyssal_da08_massive_coral_machine_slab",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/da08_large_structures/da-08-abyssal-mission-large-structures-source-v001.png",
+      "crop_box": [
+        16,
+        792,
+        346,
+        936
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v003_large_structures/da08-massive-coral-machine-slab-v003.png",
+      "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-massive-coral-machine-slab-v003.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        88
+      ],
+      "walk_width": 860,
+      "alpha_bbox": [
+        218,
+        32,
+        806,
+        278
+      ],
+      "source_sha256": "c0aa622a027ccf728a04e9117b02eb3d2030a5bba0cd9b899ceb31f88ba8e984",
+      "runtime_sha256": "ce083d7f5cdf183ab6668e7d77dc8f4ca96d1ab71a60c3af4554460d79fd81b6"
+    },
+    {
+      "piece_id": "abyssal_da08_broken_machine_floor",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/da08_large_structures/da-08-abyssal-mission-large-structures-source-v001.png",
+      "crop_box": [
+        350,
+        792,
+        620,
+        936
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v003_large_structures/da08-broken-machine-floor-v003.png",
+      "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-broken-machine-floor-v003.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        92
+      ],
+      "walk_width": 760,
+      "alpha_bbox": [
+        264,
+        32,
+        760,
+        278
+      ],
+      "source_sha256": "c0aa622a027ccf728a04e9117b02eb3d2030a5bba0cd9b899ceb31f88ba8e984",
+      "runtime_sha256": "a5b0e037b8ff428b9181079ccc82cd92b7f91d52c5598a8d9030c6ea771c1182"
+    },
+    {
+      "piece_id": "abyssal_da08_rotor_slope_floor",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/da08_large_structures/da-08-abyssal-mission-large-structures-source-v001.png",
+      "crop_box": [
+        626,
+        788,
+        902,
+        936
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v003_large_structures/da08-rotor-slope-floor-v003.png",
+      "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-rotor-slope-floor-v003.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        112
+      ],
+      "walk_width": 760,
+      "alpha_bbox": [
+        269,
+        32,
+        754,
+        278
+      ],
+      "source_sha256": "c0aa622a027ccf728a04e9117b02eb3d2030a5bba0cd9b899ceb31f88ba8e984",
+      "runtime_sha256": "1e8e3f161a845d475b100c9c32cea91cfdd2a9852ae5b94e17a2a9c14b25495e"
+    },
+    {
+      "piece_id": "abyssal_da08_tide_bridge_foundation",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/da08_large_structures/da-08-abyssal-mission-large-structures-source-v001.png",
+      "crop_box": [
+        904,
+        792,
+        1156,
+        936
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v003_large_structures/da08-tide-bridge-foundation-v003.png",
+      "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-tide-bridge-foundation-v003.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        96
+      ],
+      "walk_width": 760,
+      "alpha_bbox": [
+        286,
+        32,
+        738,
+        278
+      ],
+      "source_sha256": "c0aa622a027ccf728a04e9117b02eb3d2030a5bba0cd9b899ceb31f88ba8e984",
+      "runtime_sha256": "7269d76262b0131a6f101a75283942ae0ea08c598ce81d506ba4c00e4b6c03d4"
+    },
+    {
+      "piece_id": "abyssal_da08_right_engine_slab",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/da08_large_structures/da-08-abyssal-mission-large-structures-source-v001.png",
+      "crop_box": [
+        1160,
+        792,
+        1368,
+        936
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v003_large_structures/da08-right-engine-slab-v003.png",
+      "runtime": "art/terrain/pieces/abyssal/v003_large_structures/da08-right-engine-slab-v003.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        96
+      ],
+      "walk_width": 700,
+      "alpha_bbox": [
+        325,
+        32,
+        698,
+        277
+      ],
+      "source_sha256": "c0aa622a027ccf728a04e9117b02eb3d2030a5bba0cd9b899ceb31f88ba8e984",
+      "runtime_sha256": "cd0f185713203038ce305b103325794d0bc8d36cace130c25633720a3f12d102"
+    }
+  ]
+}

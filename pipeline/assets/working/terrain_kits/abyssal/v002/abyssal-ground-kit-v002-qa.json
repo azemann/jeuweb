@@ -1,0 +1,329 @@
+{
+  "schema": "jeuweb.abyssal-ground-kit.v2",
+  "lot": "abyssal-ground-kit-v002",
+  "source_pack": "jeuweb-abyssal-asset-pack-v001",
+  "source_pack_commit": "e2b81a5",
+  "status": "published-runtime-v002",
+  "outputs": [
+    {
+      "piece_id": "abyssal_black_coral_platform_small",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-platform-small-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-platform-small-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        189,
+        76,
+        578,
+        286
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "49ad6187ab02156d57f3f1db23bc87bbadc1315c5782d2a6ea4351af2fa711a9",
+      "runtime_sha256": "49ad6187ab02156d57f3f1db23bc87bbadc1315c5782d2a6ea4351af2fa711a9",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_black_coral_platform_large",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-platform-large-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-platform-large-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        106,
+        30,
+        661,
+        330
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "4a28b7b76b20c6b420e391545c1c2deda550405ff395ab027dbca16ab9002d72",
+      "runtime_sha256": "4a28b7b76b20c6b420e391545c1c2deda550405ff395ab027dbca16ab9002d72",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_black_coral_floor_cap_left",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-floor-cap-left-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-floor-cap-left-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        248,
+        62,
+        519,
+        314
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "7f3ada563b2d400b88447d2924d882707276bcdc06174a5ff1c7e1cc0040dd40",
+      "runtime_sha256": "7f3ada563b2d400b88447d2924d882707276bcdc06174a5ff1c7e1cc0040dd40",
+      "variant": "cap_left"
+    },
+    {
+      "piece_id": "abyssal_black_coral_floor_cap_right",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-floor-cap-right-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-floor-cap-right-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        248,
+        154,
+        519,
+        302
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "c3f359548b2c459b33ae5b2e0de33fd0693ad32d2598c2c581a5dc3ede913d8b",
+      "runtime_sha256": "c3f359548b2c459b33ae5b2e0de33fd0693ad32d2598c2c581a5dc3ede913d8b",
+      "variant": "cap_right"
+    },
+    {
+      "piece_id": "abyssal_black_coral_slope_up",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-slope-up-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-slope-up-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        185,
+        95,
+        590,
+        338
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "c6d49599286d7062bae5ebd5b13556b781f15a727301949b95d2114b2eba88bd",
+      "runtime_sha256": "c6d49599286d7062bae5ebd5b13556b781f15a727301949b95d2114b2eba88bd",
+      "variant": "slope_up"
+    },
+    {
+      "piece_id": "abyssal_black_coral_slope_down",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-slope-down-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-slope-down-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        172,
+        146,
+        586,
+        351
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "3248da7e7e413a2cddabde2413d4371837e76c4d7ec332a93ed66df50f38870c",
+      "runtime_sha256": "3248da7e7e413a2cddabde2413d4371837e76c4d7ec332a93ed66df50f38870c",
+      "variant": "slope_down"
+    },
+    {
+      "piece_id": "abyssal_black_coral_step_low",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-step-low-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-step-low-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        131,
+        106,
+        517,
+        384
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "4b3493b941f4db7a1e21f18ae322bb97a66f360c9c9220002a3d8dbfd154c594",
+      "runtime_sha256": "4b3493b941f4db7a1e21f18ae322bb97a66f360c9c9220002a3d8dbfd154c594",
+      "variant": "step_low"
+    },
+    {
+      "piece_id": "abyssal_black_coral_step_high",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/black-coral-step-high-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/black-coral-step-high-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        109,
+        82,
+        548,
+        384
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "8b2bbd49e8a95694ea885f4f5c730bd3cd3bddf674bc7f6194582b2f8ea608f0",
+      "runtime_sha256": "8b2bbd49e8a95694ea885f4f5c730bd3cd3bddf674bc7f6194582b2f8ea608f0",
+      "variant": "step_high"
+    },
+    {
+      "piece_id": "abyssal_tide_engine_bridge_short",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/tide-engine-bridge-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/tide-engine-bridge-short-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/tide-engine-bridge-short-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        197,
+        76,
+        571,
+        292
+      ],
+      "source_sha256": "416fb44956cca86730ae23a979036130bdf89b551e9494e0cc5604182edaf391",
+      "export_sha256": "2f0336bb806f7127dd4789a612cee9702215dcd2d64e7636635420028bfd1975",
+      "runtime_sha256": "2f0336bb806f7127dd4789a612cee9702215dcd2d64e7636635420028bfd1975",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_tide_engine_bridge_long",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/tide-engine-bridge-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/tide-engine-bridge-long-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/tide-engine-bridge-long-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        148,
+        48,
+        619,
+        320
+      ],
+      "source_sha256": "416fb44956cca86730ae23a979036130bdf89b551e9494e0cc5604182edaf391",
+      "export_sha256": "8900d9e28071e0da5a8cb411dac0d103c78f8a4f64f220f5858097c0505a372f",
+      "runtime_sha256": "8900d9e28071e0da5a8cb411dac0d103c78f8a4f64f220f5858097c0505a372f",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_tide_engine_support_pillar",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/tide-engine-bridge-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/tide-engine-support-pillar-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/tide-engine-support-pillar-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        295,
+        152,
+        472,
+        354
+      ],
+      "source_sha256": "416fb44956cca86730ae23a979036130bdf89b551e9494e0cc5604182edaf391",
+      "export_sha256": "705db73b5e5b5b221a46391d49872313826d0325dd94a37f03fca428504bfc5f",
+      "runtime_sha256": "705db73b5e5b5b221a46391d49872313826d0325dd94a37f03fca428504bfc5f",
+      "variant": "pillar"
+    },
+    {
+      "piece_id": "abyssal_temple_arch_large",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/abyssal-temple-arch-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/abyssal-temple-arch-large-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/abyssal-temple-arch-large-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        232,
+        26,
+        536,
+        356
+      ],
+      "source_sha256": "6e0f47ff0425622d1bc401e14298590b369d90bb4ff13f96931fbdfb40e3cf72",
+      "export_sha256": "35247d591db539fe59291914c08274c0bb413d8f95cc4f94253933509d23d51e",
+      "runtime_sha256": "35247d591db539fe59291914c08274c0bb413d8f95cc4f94253933509d23d51e",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_temple_column_intact",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/abyssal-temple-arch-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/abyssal-temple-column-intact-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/abyssal-temple-column-intact-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        338,
+        40,
+        429,
+        355
+      ],
+      "source_sha256": "6e0f47ff0425622d1bc401e14298590b369d90bb4ff13f96931fbdfb40e3cf72",
+      "export_sha256": "f8a67aa230347b4e687a4a511901fa82838fa88d6eadfee2c1af886787b3a048",
+      "runtime_sha256": "f8a67aa230347b4e687a4a511901fa82838fa88d6eadfee2c1af886787b3a048",
+      "variant": "column"
+    },
+    {
+      "piece_id": "abyssal_temple_column_broken",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/abyssal-temple-arch-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/abyssal-temple-column-broken-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/abyssal-temple-column-broken-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        344,
+        64,
+        424,
+        313
+      ],
+      "source_sha256": "6e0f47ff0425622d1bc401e14298590b369d90bb4ff13f96931fbdfb40e3cf72",
+      "export_sha256": "9701501e6e48263d9646d412ffc48bbc64a14f9a65bd2501c868f739568adcfc",
+      "runtime_sha256": "9701501e6e48263d9646d412ffc48bbc64a14f9a65bd2501c868f739568adcfc",
+      "variant": "column_broken"
+    },
+    {
+      "piece_id": "abyssal_destructible_pearl_wall_small",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/destructible-pearl-wall-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/destructible-pearl-wall-small-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/destructible-pearl-wall-small-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        254,
+        78,
+        514,
+        283
+      ],
+      "source_sha256": "ffdfb03f3ceab0a53c057e88ec945fd98b37e91e60a3cef21ea0e8ef480d6a1f",
+      "export_sha256": "4f106efe1162930450a58a265ce761b484db4ce7fbf03f780ee4fdda62790f24",
+      "runtime_sha256": "4f106efe1162930450a58a265ce761b484db4ce7fbf03f780ee4fdda62790f24",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_destructible_pearl_wall_large",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/destructible-pearl-wall-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v002/destructible-pearl-wall-large-v002.png",
+      "runtime": "art/terrain/pieces/abyssal/v002/destructible-pearl-wall-large-v002.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        170,
+        22,
+        597,
+        358
+      ],
+      "source_sha256": "ffdfb03f3ceab0a53c057e88ec945fd98b37e91e60a3cef21ea0e8ef480d6a1f",
+      "export_sha256": "9a98bf87881d8c7b00df869a68d62c64080fd2fb3269bf8da828aa7106dc9051",
+      "runtime_sha256": "9a98bf87881d8c7b00df869a68d62c64080fd2fb3269bf8da828aa7106dc9051",
+      "variant": "standard"
+    }
+  ]
+}

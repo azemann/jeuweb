@@ -1,0 +1,25 @@
+{
+  "schema": "jeuweb.asset-manifest.v1",
+  "lot": "abyssal-ground-kit-v002",
+  "source_pack": "jeuweb-abyssal-asset-pack-v001",
+  "source_pack_commit": "e2b81a5",
+  "runtime_status": "published",
+  "outputs": [
+    {"piece_id": "abyssal_black_coral_platform_small", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-platform-small-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_platform_small.tscn"},
+    {"piece_id": "abyssal_black_coral_platform_large", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-platform-large-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_platform_large.tscn"},
+    {"piece_id": "abyssal_black_coral_floor_cap_left", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-floor-cap-left-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_floor_cap_left.tscn"},
+    {"piece_id": "abyssal_black_coral_floor_cap_right", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-floor-cap-right-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_floor_cap_right.tscn"},
+    {"piece_id": "abyssal_black_coral_slope_up", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-slope-up-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_slope_up.tscn"},
+    {"piece_id": "abyssal_black_coral_slope_down", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-slope-down-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_slope_down.tscn"},
+    {"piece_id": "abyssal_black_coral_step_low", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-step-low-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_step_low.tscn"},
+    {"piece_id": "abyssal_black_coral_step_high", "runtime": "art/terrain/pieces/abyssal/v002/black-coral-step-high-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/black_coral_step_high.tscn"},
+    {"piece_id": "abyssal_tide_engine_bridge_short", "runtime": "art/terrain/pieces/abyssal/v002/tide-engine-bridge-short-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/tide_engine_bridge_short.tscn"},
+    {"piece_id": "abyssal_tide_engine_bridge_long", "runtime": "art/terrain/pieces/abyssal/v002/tide-engine-bridge-long-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/tide_engine_bridge_long.tscn"},
+    {"piece_id": "abyssal_tide_engine_support_pillar", "runtime": "art/terrain/pieces/abyssal/v002/tide-engine-support-pillar-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/tide_engine_support_pillar.tscn"},
+    {"piece_id": "abyssal_temple_arch_large", "runtime": "art/terrain/pieces/abyssal/v002/abyssal-temple-arch-large-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/abyssal_temple_arch_large.tscn"},
+    {"piece_id": "abyssal_temple_column_intact", "runtime": "art/terrain/pieces/abyssal/v002/abyssal-temple-column-intact-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/abyssal_temple_column_intact.tscn"},
+    {"piece_id": "abyssal_temple_column_broken", "runtime": "art/terrain/pieces/abyssal/v002/abyssal-temple-column-broken-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/abyssal_temple_column_broken.tscn"},
+    {"piece_id": "abyssal_destructible_pearl_wall_small", "runtime": "art/terrain/pieces/abyssal/v002/destructible-pearl-wall-small-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_small.tscn"},
+    {"piece_id": "abyssal_destructible_pearl_wall_large", "runtime": "art/terrain/pieces/abyssal/v002/destructible-pearl-wall-large-v002.png", "scene": "terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_large.tscn"}
+  ]
+}

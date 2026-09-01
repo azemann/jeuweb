@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_script")
-world_size = Vector2i(2560, 720)
-maximum_chunk_bodies = 48
-maximum_collision_shapes = 320
+world_size = Vector2i(5120, 720)
+maximum_chunk_bodies = 96
+maximum_collision_shapes = 640
 shallow_color = Color(0.0470588, 0.360784, 0.392157, 1)
 main_color = Color(0.0666667, 0.145098, 0.188235, 1)
 deep_color = Color(0.0156863, 0.0352941, 0.0588235, 1)

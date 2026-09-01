@@ -1,13 +1,34 @@
-[gd_resource type="Resource" script_class="GroundKitCatalog" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="GroundKitCatalog" load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://terrain/ground_pieces/ground_kit_catalog.gd" id="1_catalog"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/black_coral_platform_medium.tscn" id="2_platform"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/black_coral_slope_connector.tscn" id="3_slope"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/tide_engine_bridge_medium.tscn" id="4_bridge"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/destructible_pearl_wall_medium.tscn" id="5_wall"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_platform_small.tscn" id="6_platform_small"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_platform_large.tscn" id="7_platform_large"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_floor_cap_left.tscn" id="8_cap_left"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_floor_cap_right.tscn" id="9_cap_right"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_slope_up.tscn" id="10_slope_up"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_slope_down.tscn" id="11_slope_down"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_step_low.tscn" id="12_step_low"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/black_coral_step_high.tscn" id="13_step_high"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/tide_engine_bridge_short.tscn" id="14_bridge_short"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/tide_engine_bridge_long.tscn" id="15_bridge_long"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/tide_engine_support_pillar.tscn" id="16_pillar"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/abyssal_temple_arch_large.tscn" id="17_arch"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/abyssal_temple_column_intact.tscn" id="18_column"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/abyssal_temple_column_broken.tscn" id="19_column_broken"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_small.tscn" id="20_wall_small"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_large.tscn" id="21_wall_large"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_massive_coral_machine_slab.tscn" id="22_da08_slab"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_broken_machine_floor.tscn" id="23_da08_broken"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_rotor_slope_floor.tscn" id="24_da08_rotor"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_tide_bridge_foundation.tscn" id="25_da08_foundation"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_right_engine_slab.tscn" id="26_da08_right_slab"]
 
 [resource]
 script = ExtResource("1_catalog")
 kit_id = &"abyssal"
 display_name = "Abysses — Ground Pieces"
-pieces = Array[PackedScene]([ExtResource("2_platform"), ExtResource("3_slope"), ExtResource("4_bridge"), ExtResource("5_wall")])
+pieces = Array[PackedScene]([ExtResource("2_platform"), ExtResource("3_slope"), ExtResource("4_bridge"), ExtResource("5_wall"), ExtResource("6_platform_small"), ExtResource("7_platform_large"), ExtResource("8_cap_left"), ExtResource("9_cap_right"), ExtResource("10_slope_up"), ExtResource("11_slope_down"), ExtResource("12_step_low"), ExtResource("13_step_high"), ExtResource("14_bridge_short"), ExtResource("15_bridge_long"), ExtResource("16_pillar"), ExtResource("17_arch"), ExtResource("18_column"), ExtResource("19_column_broken"), ExtResource("20_wall_small"), ExtResource("21_wall_large"), ExtResource("22_da08_slab"), ExtResource("23_da08_broken"), ExtResource("24_da08_rotor"), ExtResource("25_da08_foundation"), ExtResource("26_da08_right_slab")])

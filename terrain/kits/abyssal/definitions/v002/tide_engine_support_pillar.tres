@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/v002/tide-engine-support-pillar-v002.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_tide_engine_support_pillar"
+display_name = "Abysses — pilier moteur de marée"
+category = 2
+tags = PackedStringArray("abyssal", "pillar", "support", "tide_engine", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 330)
+default_z_index = -2
+collision_source = 1
+authored_outline = PackedVector2Array(-92, -292, 92, -292, 108, -252, 98, -10, 70, 0, -70, 0, -98, -10, -108, -252)
+walk_surface_point_count = 2
+recommended_mode = 0
