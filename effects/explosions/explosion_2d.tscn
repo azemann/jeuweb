@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Script" path="res://effects/explosions/explosion_2d.gd" id="1_script"]
 [ext_resource type="Resource" path="res://effects/explosions/data/field_shell_explosion.tres" id="2_data"]
@@ -6,30 +6,108 @@
 [sub_resource type="CircleShape2D" id="Shape_damage"]
 radius = 94.0
 
+[sub_resource type="Gradient" id="Gradient_ring"]
+offsets = PackedFloat32Array(0, 0.58, 0.7, 0.79, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0.9, 1, 1, 1, 0.12, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture_ring"]
+gradient = SubResource("Gradient_ring")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_particle"]
+offsets = PackedFloat32Array(0, 0.42, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.72, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture_particle"]
+gradient = SubResource("Gradient_particle")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleMaterial_sparks"]
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 180.0
+initial_velocity_max = 390.0
+gravity = Vector3(0, 520, 0)
+scale_min = 0.08
+scale_max = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleMaterial_debris"]
+direction = Vector3(0, -1, 0)
+spread = 155.0
+initial_velocity_min = 130.0
+initial_velocity_max = 285.0
+gravity = Vector3(0, 610, 0)
+angular_velocity_min = -540.0
+angular_velocity_max = 540.0
+scale_min = 0.12
+scale_max = 0.3
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleMaterial_toxic"]
+direction = Vector3(0, -1, 0)
+spread = 170.0
+initial_velocity_min = 115.0
+initial_velocity_max = 260.0
+gravity = Vector3(0, 470, 0)
+scale_min = 0.1
+scale_max = 0.28
+
 [sub_resource type="Animation" id="Animation_reset"]
 resource_name = "RESET"
-length = 0.0
+length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Visuals:scale")
-tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0.05, 0.05)]}
+tracks/0/path = NodePath("VisualScale/VisualMotion:scale")
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0.92, 0.92)]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visuals:modulate")
+tracks/1/path = NodePath("VisualScale/VisualMotion:modulate")
 tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 1, 1, 0)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VisualScale/ShockwaveRoot/ShockwavePrimary:scale")
+tracks/2/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0.08, 0.08)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VisualScale/ShockwaveRoot/ShockwavePrimary:modulate")
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(1, 0.82, 0.2, 0)]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("VisualScale/ShockwaveRoot/ShockwaveSecondary:scale")
+tracks/4/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Vector2(0.08, 0.08)]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VisualScale/ShockwaveRoot/ShockwaveSecondary:modulate")
+tracks/5/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 0, "values": [Color(0.72, 1, 0.16, 0)]}
 
 [sub_resource type="Animation" id="Animation_detonate"]
 resource_name = "detonate"
 length = 0.42
 tracks/0/type = "value"
-tracks/0/path = NodePath("Visuals:scale")
+tracks/0/path = NodePath("VisualScale/VisualMotion:scale")
 tracks/0/interp = 2
-tracks/0/keys = {"times": PackedFloat32Array(0, 0.09, 0.28, 0.42), "transitions": PackedFloat32Array(0.35, 0.6, 1, 1), "update": 0, "values": [Vector2(0.05, 0.05), Vector2(1.15, 1.15), Vector2(1.55, 1.55), Vector2(1.9, 1.9)]}
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.06, 0.24, 0.42), "transitions": PackedFloat32Array(0.45, 0.7, 1, 1), "update": 0, "values": [Vector2(0.92, 0.92), Vector2(1.03, 1.03), Vector2(1, 1), Vector2(1.04, 1.04)]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visuals:modulate")
-tracks/1/interp = 1
-tracks/1/keys = {"times": PackedFloat32Array(0, 0.04, 0.28, 0.42), "transitions": PackedFloat32Array(1, 1, 1, 1), "update": 0, "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0.72), Color(1, 1, 1, 0)]}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/keys = {"times": PackedFloat32Array(0.045, 0.42), "transitions": PackedFloat32Array(1, 1), "values": [{"method": &"_animation_impact", "args": []}, {"method": &"_animation_finished", "args": []}]}
+tracks/1/path = NodePath("VisualScale/VisualMotion:modulate")
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.015, 0.34, 0.42), "transitions": PackedFloat32Array(1, 1, 1, 1), "update": 0, "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VisualScale/ShockwaveRoot/ShockwavePrimary:scale")
+tracks/2/interp = 2
+tracks/2/keys = {"times": PackedFloat32Array(0.02, 0.16, 0.29), "transitions": PackedFloat32Array(0.35, 0.75, 1), "update": 0, "values": [Vector2(0.08, 0.08), Vector2(0.72, 0.72), Vector2(1.45, 1.45)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VisualScale/ShockwaveRoot/ShockwavePrimary:modulate")
+tracks/3/keys = {"times": PackedFloat32Array(0.02, 0.06, 0.2, 0.29), "transitions": PackedFloat32Array(1, 1, 1, 1), "update": 0, "values": [Color(1, 0.82, 0.2, 0), Color(1, 0.82, 0.2, 0.9), Color(1, 0.35, 0.08, 0.34), Color(1, 0.35, 0.08, 0)]}
+tracks/4/type = "value"
+tracks/4/path = NodePath("VisualScale/ShockwaveRoot/ShockwaveSecondary:scale")
+tracks/4/interp = 2
+tracks/4/keys = {"times": PackedFloat32Array(0.07, 0.23, 0.38), "transitions": PackedFloat32Array(0.4, 0.8, 1), "update": 0, "values": [Vector2(0.08, 0.08), Vector2(0.85, 0.85), Vector2(1.7, 1.7)]}
+tracks/5/type = "value"
+tracks/5/path = NodePath("VisualScale/ShockwaveRoot/ShockwaveSecondary:modulate")
+tracks/5/keys = {"times": PackedFloat32Array(0.07, 0.11, 0.27, 0.38), "transitions": PackedFloat32Array(1, 1, 1, 1), "update": 0, "values": [Color(0.72, 1, 0.16, 0), Color(0.72, 1, 0.16, 0.7), Color(0.8, 0.15, 0.85, 0.24), Color(0.8, 0.15, 0.85, 0)]}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/keys = {"times": PackedFloat32Array(0.045, 0.13, 0.42), "transitions": PackedFloat32Array(1, 1, 1), "values": [{"method": &"_animation_impact", "args": []}, {"method": &"_animation_quench_light", "args": []}, {"method": &"_animation_finished", "args": []}]}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_explosion"]
 _data = {&"RESET": SubResource("Animation_reset"), &"detonate": SubResource("Animation_detonate")}
@@ -48,25 +126,95 @@ collision_mask = 6
 unique_name_in_owner = true
 shape = SubResource("Shape_damage")
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="VisualScale" type="Node2D" parent="."]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0)
-scale = Vector2(0.05, 0.05)
 
-[node name="Smoke" type="Polygon2D" parent="Visuals"]
+[node name="VisualMotion" type="Node2D" parent="VisualScale"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.92, 0.92)
+
+[node name="ArtSprite" type="AnimatedSprite2D" parent="VisualScale/VisualMotion"]
+unique_name_in_owner = true
+position = Vector2(0, -146)
+
+[node name="ProceduralFallback" type="Node2D" parent="VisualScale/VisualMotion"]
+unique_name_in_owner = true
+
+[node name="Smoke" type="Polygon2D" parent="VisualScale/VisualMotion/ProceduralFallback"]
 unique_name_in_owner = true
 polygon = PackedVector2Array(-76, 7, -61, -41, -22, -69, 23, -64, 63, -39, 79, 4, 61, 46, 22, 72, -26, 68, -64, 42)
 color = Color(1, 1, 1, 0.72)
 
-[node name="Fireball" type="Polygon2D" parent="Visuals"]
+[node name="Fireball" type="Polygon2D" parent="VisualScale/VisualMotion/ProceduralFallback"]
 unique_name_in_owner = true
 polygon = PackedVector2Array(-51, 2, -37, -31, -8, -51, 27, -42, 51, -10, 42, 24, 13, 49, -21, 42, -47, 23)
 
-[node name="Flash" type="Polygon2D" parent="Visuals"]
+[node name="Flash" type="Polygon2D" parent="VisualScale/VisualMotion/ProceduralFallback"]
 unique_name_in_owner = true
 polygon = PackedVector2Array(-31, 0, -17, -12, -12, -29, 1, -16, 18, -25, 17, -8, 34, 1, 17, 11, 22, 29, 3, 18, -12, 31, -14, 13)
+
+[node name="ShockwaveRoot" type="Node2D" parent="VisualScale"]
+unique_name_in_owner = true
+position = Vector2(0, -28)
+
+[node name="ShockwavePrimary" type="Sprite2D" parent="VisualScale/ShockwaveRoot"]
+unique_name_in_owner = true
+modulate = Color(1, 0.82, 0.2, 0)
+scale = Vector2(0.08, 0.08)
+texture = SubResource("GradientTexture_ring")
+
+[node name="ShockwaveSecondary" type="Sprite2D" parent="VisualScale/ShockwaveRoot"]
+unique_name_in_owner = true
+modulate = Color(0.72, 1, 0.16, 0)
+scale = Vector2(0.08, 0.08)
+texture = SubResource("GradientTexture_ring")
+
+[node name="FlashLight" type="PointLight2D" parent="VisualScale"]
+unique_name_in_owner = true
+position = Vector2(0, -74)
+energy = 0.0
+texture = SubResource("GradientTexture_ring")
+texture_scale = 1.5
+
+[node name="Sparks" type="GPUParticles2D" parent="VisualScale"]
+unique_name_in_owner = true
+z_index = 4
+emitting = false
+amount = 20
+texture = SubResource("GradientTexture_particle")
+lifetime = 0.72
+one_shot = true
+explosiveness = 1.0
+randomness = 0.7
+process_material = SubResource("ParticleMaterial_sparks")
+modulate = Color(1, 0.63, 0.08, 1)
+
+[node name="Debris" type="GPUParticles2D" parent="VisualScale"]
+unique_name_in_owner = true
+z_index = 3
+emitting = false
+amount = 10
+texture = SubResource("GradientTexture_particle")
+lifetime = 0.95
+one_shot = true
+explosiveness = 1.0
+randomness = 0.75
+process_material = SubResource("ParticleMaterial_debris")
+modulate = Color(0.18, 0.11, 0.08, 1)
+
+[node name="ToxicDroplets" type="GPUParticles2D" parent="VisualScale"]
+unique_name_in_owner = true
+z_index = 5
+emitting = false
+amount = 14
+texture = SubResource("GradientTexture_particle")
+lifetime = 0.88
+one_shot = true
+explosiveness = 1.0
+randomness = 0.7
+process_material = SubResource("ParticleMaterial_toxic")
+modulate = Color(0.58, 0.88, 0.04, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {&"": SubResource("AnimationLibrary_explosion")}
-

@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://terrain/ground_pieces/ground_piece_2d.tscn" id="1"]
+[ext_resource type="Resource" path="res://terrain/kits/toxic_coast/definitions/guard_tower_module.tres" id="2"]
+
+[node name="GuardTowerModule" instance=ExtResource("1")]
+definition = ExtResource("2")
+ground_mode = 0

@@ -3,6 +3,7 @@ class_name DestructibleTerrain2D
 extends Node2D
 
 const GroundPiece2DType = preload("res://terrain/ground_pieces/ground_piece_2d.gd")
+const TerrainCollisionBuilderType = preload("res://terrain/runtime/terrain_collision_builder.gd")
 
 signal terrain_generated(solid_pixels: int, chunk_count: int)
 signal terrain_carved(center: Vector2, radius: float, affected_chunks: int)
@@ -169,6 +170,20 @@ func pending_collision_chunk_count() -> int:
 
 func has_pending_collision_rebuild() -> bool:
 	return _dirty_flush_scheduled
+
+
+func collision_shape_count() -> int:
+	var count := 0
+	for body in _chunk_bodies.values():
+		if is_instance_valid(body):
+			count += (body as StaticBody2D).get_child_count()
+	return count
+
+
+func performance_budget_errors() -> PackedStringArray:
+	if profile == null:
+		return PackedStringArray(["Aucun profil ne définit les budgets du terrain."])
+	return profile.performance_budget_errors(_chunk_bodies.size(), collision_shape_count())
 
 
 func is_solid_at(world_position: Vector2) -> bool:
@@ -457,22 +472,15 @@ func _rebuild_chunk(coordinates: Vector2i) -> void:
 	body.set_meta(&"chunk_coordinates", coordinates)
 	add_child(body, false, Node.INTERNAL_MODE_BACK if Engine.is_editor_hint() else Node.INTERNAL_MODE_DISABLED)
 	for polygon in polygons:
-		if _polygon_area(polygon) < profile.minimum_polygon_area:
+		if polygon.size() < 3 or TerrainCollisionBuilderType.polygon_area(polygon) < profile.minimum_polygon_area:
 			continue
-		var collision := CollisionPolygon2D.new()
-		collision.polygon = polygon
-		body.add_child(collision)
+		for convex_polygon in TerrainCollisionBuilderType.convex_parts(polygon):
+			var shape := ConvexPolygonShape2D.new()
+			shape.points = convex_polygon
+			var collision := CollisionShape2D.new()
+			collision.shape = shape
+			body.add_child(collision)
 	_chunk_bodies[coordinates] = body
-
-
-func _polygon_area(polygon: PackedVector2Array) -> float:
-	var area := 0.0
-	for index in polygon.size():
-		var next := (index + 1) % polygon.size()
-		area += polygon[index].x * polygon[next].y - polygon[next].x * polygon[index].y
-	return absf(area) * 0.5
-
-
 func _draw() -> void:
 	if display_texture != null:
 		draw_texture(display_texture, Vector2.ZERO, Color(1, 1, 1, 0.55 if debug_transparency else 1.0))

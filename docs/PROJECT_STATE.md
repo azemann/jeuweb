@@ -1,6 +1,6 @@
 # État courant du projet
 
-Dernière mise à jour : 2026-08-28
+Dernière mise à jour : 2026-08-31
 
 ## Vision stable
 
@@ -21,20 +21,29 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 
 ## Fonctionnel dans Godot
 
-- Boot Flow, Start Flow et navigation locale sans Autoload ;
+- Boot Flow et Start Flow illustrés par la peau `industrial_toxic`, avec
+  backgrounds dédiés, emblème, plaque de titre native, cadre de menu et
+  indicateur magenta suivant réellement le focus clavier/manette ;
+- navigation locale sans Autoload ;
+- hiérarchie typographique commune portée par `game_ui_theme.tres` pour titres,
+  légendes, boutons, valeurs HUD, objectifs, notifications et contrôles tactiles ;
+- menu Start revu dans le renderer OpenGL réel en 1280 × 720 : cadre vertical au
+  ratio 2:3, verre sombre local, boutons sans cartouches génériques et colonnes
+  stables quand le focus change ;
 - galerie des sept planches de direction artistique ;
-- écran de mission prototype avec HUD ;
+- écran de mission prototype avec scène canonique `MissionHUD` ;
 - cet écran consomme la carte canonique par `MissionMapDefinition` et
   `MissionMapHost2D` ; l'ancienne scène autonome `levels/prototype` a été
   retirée ;
 - système de cartes par `MissionMapDefinition`, `MissionMapCatalog`,
   `MissionMapRoot2D` et `MissionMapHost2D` ;
-- première carte canonique `toxic_coast`, dimensions 3840 × 720 ;
+- première carte canonique `toxic_coast`, dimensions 7680 × 720, composée en
+  trois actes de 2560 px ;
 - arborescence auteur clarifiée : `Visual` et `Gameplay` portent le contenu
   placé, `Runtime` sépare Actors/Projectiles/Effects/DestructibleTerrain et
   `EditorPreview` regroupe uniquement les aides visibles dans l'éditeur ;
-- dans `Gameplay`, `PlayerSpawnPoints`, `EncounterMarkers` et `CombatGates`
-  remplacent les anciens noms ambigus ; l'écran regroupe ses cinq services sous
+- dans `Gameplay`, `PlayerSpawnPoints` et `EncounterMarkers` rendent la
+  progression visible sans branche de porte physique ; l'écran regroupe ses cinq services sous
   `RuntimeSystems` ;
 - trois segments auteurs visibles : débarquement, pont acide et fonderie ;
 - spawns, rencontres, dangers, sorties et limites caméra visibles ;
@@ -43,8 +52,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   visuel texturé et la collision ;
 - scène canonique `GroundPiece2D` glissable avec modes Permanent, Carvable et
   Breakable visibles dans l'Inspector ;
-- catalogue Côte toxique extensible pour l'édition des niveaux, avec quatre
-  scènes Ground Pieces publiées aujourd'hui et résolues par `piece_id` stable ;
+- catalogue Côte toxique extensible pour l'édition des niveaux, avec dix scènes
+  Ground Pieces publiées et résolues par `piece_id` stable ;
 - corniche illustrée intégrée en mode Carvable sous
   `Gameplay/GroundPieces` ;
 - pièces Carvable librement transformables dans l'éditeur ; couleur, masque et
@@ -59,7 +68,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - masque alpha et collisions par chunks de 128 px ;
 - cratères locaux sans reconstruction du bitmap complet ; masque et rendu sont
   immédiats, tandis que les chunks physiques sales sont dédupliqués puis
-  reconstruits par un unique flush différé après la requête physique ;
+  reconstruits par un unique flush différé après la requête physique ; leurs
+  contours concaves sont triangulés explicitement en formes convexes solides ;
 - scène canonique `Explosion2D` orchestrée par `AnimationPlayer` ;
 - `ExplosionData` éditable pour terrain, combat, timing et palette ;
 - impact d'explosion relié au terrain, dégâts radiaux autonomes par
@@ -71,24 +81,66 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   automatiquement hors écran tactile ;
 - composants Movement, Aim et Health visibles dans le SceneTree ;
 - trois Resources-panneaux pour locomotion, visée arcade et intégrité ;
-- spawn runtime depuis le marqueur auteur et HUD relié au HealthComponent ;
+- spawn runtime depuis le marqueur auteur et HUD relié aux composants Health,
+  Weapon, Loadout et CombatInventory sans posséder leurs données ;
+- thème `toxic_commando` choisi par `MissionMapDefinition`, avec portrait joueur,
+  aperçu réel de l'arme, vie, armure, munitions, objectif, Boss et Overdrive ;
+- chargement de mission recomposé avec turbine illustrée, ombre de contraste,
+  plaque et texte Godot centré au lieu de l'ancien aplat noir ;
+- signalétique de chargement validée en capture réelle : titre lime
+  `DÉPLOIEMENT`, sous-état crème et zone sûre intérieure au cadre ;
+- les cinq WeaponData publiées changent automatiquement visuel, nom et compteur
+  du panneau arme via `weapon_changed`, sans condition sur leur identifiant ;
+- `PlayerLoadoutProfile` décrit l'arsenal jouable standard : canon principal
+  gratuit, acide, électrique, implosion et démolition ; `Components/Loadout`
+  possède l'arme équipée runtime et refuse une WeaponData hors profil ;
+- `MissionHUD/WeaponWheel` permet de tester rapidement les cinq armes du
+  Loadout : maintenir `Tab` ou l'épaule gauche manette, viser un segment au
+  pointeur ou stick droit, puis relâcher pour équiper ; les armes spéciales
+  remplissent la réserve partagée en mode test pour pouvoir tirer tout de suite
+  leurs projectiles ;
+- `RUN_AND_GUN_PLAYER_KIT.md` sépare Player Kit, Controller, Feel, HUD et
+  Arsenal afin de décider quelles capacités garder avant de créer de nouvelles
+  armes ;
+- le bouton Retour reste masqué pendant l'action et ne réapparaît qu'en erreur
+  ou après victoire, avant son remplacement par le futur menu Pause/Options ;
 - corps joueur raster via AnimatedSprite2D et Resource SpriteFrames ;
+- dégâts joueur lisibles : pose `hurt`, flash et secousse orchestrés par
+  `AnimationPlayer`, puis retour automatique vers l'état de locomotion courant ;
+- mort joueur visible par une animation de disparition de 0,75 s qui laisse au
+  spawner de mission l'autorité du remplacement après 0,8 s ;
+- recul de tir directionnel appliqué ensemble au corps et au canon par un
+  composant visible, avec courbe réglable dans son AnimationPlayer ;
+- commande de secousse optionnelle bornée dans le profil caméra et appliquée
+  via `Camera2D.offset` sans perturber la progression ; le canon automatique
+  courant la règle explicitement à zéro pour préserver la lisibilité ;
 - canon modulaire séparé via AimPivot, WeaponSprite et socket Muzzle ;
 - canon de campagne jouable avec tir automatique sur `J` ou `X` ;
 - les impacts du canon creusent localement les surfaces Carvable avec un rayon
   réglé dans `field_round.tres`, façon Worms ;
+- le canon de campagne consomme maintenant son projectile bitmap publié et un
+  impact animé compact `FieldRoundImpact2D`, tous deux issus du lot
+  `projectile-impact-lot-v001` approuvé ;
 - `WeaponData`, `ProjectileData`, projectile Area2D rapide, flash de bouche et
   impact orchestré par AnimationPlayer ;
+- les projectiles peuvent survivre à leur tireur : toute exclusion physique
+  valide la référence de l'acteur et l'oublie lorsqu'il a été libéré ;
 - correspondance d'explosion optionnelle dans `ProjectileData`, permettant à
   une future munition de choisir scène et style au point d'impact sans modifier
   la balle de campagne actuelle ;
 - spawner de mission découplant le joueur du conteneur `Runtime/Projectiles` ;
-- caméra de mission unique avec look-ahead, limites et progression irréversible
-  vers la droite ;
-- trois profondeurs de décor avec parallaxe distincte ;
-- panoramas répétés à leur résolution native sur toute la progression ;
-- arrière-plan, midground transparent, foreground transparent et matières de
-  sol propres au projet intégrés à Côte toxique.
+- caméra de mission unique, sans déplacement au demi-tour, avec limites et suivi réversible ;
+- trois backgrounds opaques v002 de 2560 × 720, centrés sur les actes
+  débarquement, pont acide et fonderie sans répétition ni étirement ;
+- deux bandes de raccord 384 × 720 dérivées par pipeline et centrées sur les
+  frontières des actes empêchent une coupe brute entre leurs identités ;
+- midground transparent historique restauré à vitesse lente et foreground
+  transparent v002 restauré au plan proche via deux `Parallax2D` décoratifs ;
+- trois `EnvironmentFX2D` profilés rendent les actes vivants : fumée et nappe
+  toxique partout, orage plus dense au pont, étincelles dans la fonderie ; les
+  frappes sont orchestrées par `AnimationPlayer` et restent sans gameplay ;
+- arrière-plan, profondeur atmosphérique et matières de sol propres au projet
+  sont intégrés à Côte toxique.
 - cycle de marche du Vacuum Trooper publié en huit poses de 160 ms, normalisé
   sur frames 256 × 192 et root commun `[128, 180]` ;
 - impacts et mort du Vacuum Trooper publiés sur huit frames 256 × 192 au même
@@ -107,20 +159,25 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   Grunt, le Drone et le Boss tirent, le Saboteur charge puis s'autodétruit ;
 - le Vacuum Trooper éjecte réellement un `vacuum_pilot_saboteur` autonome à sa
   mort via son composant `Ejection` visible dans le SceneTree ;
-- scène canonique `EnemyCharacter2D` composée de Patrol, Health et Animation,
-  profil et catalogue Resources éditables dans l'Inspector ;
+- composition canonique `enemy_components.tscn` instanciée par les cinq scènes
+  `EnemyCharacter2D`, avec Patrol, Health, Attack, StateMachine et Animation
+  définis une seule fois ; profils, variantes et catalogue restent éditables
+  dans l'Inspector ;
 - chaîne de cadence Resource-first publiée : `EnemySpawnPatternData` décrit une
   formation, `WaveData` son beat et sa transition, `EncounterData` compose les
   vagues, puis `MapEncounterMarker2D` possède uniquement placement et activation ;
-- `MissionEncounterController` déroule actuellement quatre occurrences, neuf
-  vagues et quinze apparitions sur Côte toxique, dont `LandingCadence2`
-  non bloquante ajoutée dans la scène auteur ; le spawner ne fait plus que
-  traduire chaque archétype en scène canonique ;
-- courbe jouable : pression puis respiration au débarquement, Gauntlet avec
-  escalade terrestre/aérienne au pont, pression puis payoff Boss à la fonderie ;
-- trois `MissionCombatGate2D` visibles sous `Gameplay/CombatGates` bloquent
-  physiquement chaque frontière et s'ouvrent à la résolution correspondante ;
-- le HUD annonce rencontre, beat et numéro de vague actifs ; les formations
+- les trois recettes `EncounterData` restent des `.tres` externes assignables
+  aux Markers ; toutes leurs Waves et Patterns actuellement mono-usage sont
+  intégrés comme sous-resources, sans faux partage de fichiers ;
+- `MissionEncounterController` déroule exactement trois occurrences, huit
+  vagues et treize apparitions explicites sur Côte toxique ; le spawner ne fait
+  plus que traduire chaque archétype en scène canonique ;
+- partition jouable v001 : découverte de la caisse, pression puis respiration
+  au débarquement ; terrain-arme, chevauchement aérien et pince au pont ;
+  pression, déplacement aérien puis payoff Boss à la fonderie ;
+- mode Flux Libre : aucune Combat Gate physique ; Landing et Pont sont
+  facultatifs, tandis que la finale Boss seule conditionne la victoire ;
+- le HUD thémé annonce rencontre, beat et numéro de vague actifs ; les formations
   possèdent aussi un aperçu coloré dans l'éditeur ;
 - la Brute/Boss possède une Hurtbox élargie conforme à sa coque visible : les
   tirs sur le bord supérieur et la trompe ne traversent plus la silhouette ;
@@ -137,18 +194,36 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   passerelle industrielle et pont-tuyau, chacune réglable par instance en
   Permanent, Carvable ou Breakable ;
 - bassin acide glissable piloté par `HazardData`, avec zone et dégâts réglables ;
-- baril explosif glissable piloté par `ExplosivePropData`, destructible au tir
-  et relié à la scène d'explosion canonique ;
-- caisse militaire glissable avec états fermé/ouvert, vide pour cette première
-  version, ouvrable au tir ou par `player_interact` (`F` / manette Y) selon son
-  `SupplyCrateData` ;
+- objet explosif glissable piloté par `ExplosivePropData`, destructible au tir
+  et relié à la scène d'explosion canonique ; le Pont utilise
+  `toxic_standard_explosive_barrel`, la Fonderie utilise
+  `toxic_heavy_explosive_barrel` ;
+- caisse militaire glissable avec états fermé/ouvert, ouvrable au tir ou par
+  `player_interact` (`F` / manette Y / bouton tactile) selon son
+  `SupplyCrateData`, et première occurrence placée au débarcadère ;
+- injecteur de soin publié par le pipeline, piloté par `PickupData`, instancié
+  au `ContentsOrigin` de la caisse puis collecté via
+  `PlayerHealthComponent.heal()` sans autorité de vie parallèle ;
+- inventaire de combat visible dans le SceneTree : réserve spéciale, armure et
+  Overdrive réglés par `standard_combat_inventory.tres` ;
+- pickups tambour, plaque d'armure et noyau Overdrive publiés et placés ;
+- stations médicale, ravitaillement et quatre armureries configurables par
+  `ServiceStationData`, sans duplication du bitmap du casier ;
+- quatre armes spéciales jouables — acide, électrique, implosion et démolition
+  — avec WeaponData, projectile texturé et impact animé propres ;
+- lot industriel audité à 38 sources : 11 intégrées ou supplantées exclues et
+  27 sorties inédites publiées par pipeline déterministe ;
+- tour, arche traversable, culées, plateformes de fonderie, barricades et mur
+  destructible composent désormais la géométrie proche des trois actes ;
+- projecteur, relais radio, mine et évent toxique sont placés selon leurs
+  contrats WorldProp, mine et Hazard existants ;
 - `MissionActorSpawner2D` recrée le joueur après sa mort avec délai configurable
   et `respawn_spawn_id`, tandis que `PlayerHealthComponent.reset_health()` reste
   l'autorité unique des PV réinitialisés ;
 - deux `MissionCheckpoint2D` visibles sous `Gameplay/Interactions` font évoluer
   le spawn de reprise vers le pont puis la fonderie ;
-- `MissionRunController` suit les rencontres auteur obligatoires, verrouille la
-  sortie jusqu'à leur élimination puis affiche le résultat de victoire lorsque
+- `MissionRunController` suit uniquement la finale Boss obligatoire puis
+  affiche le résultat de victoire lorsque
   le joueur atteint `MissionEnd` ;
 - `ActorStateMachineComponent` est maintenant présente sur le joueur et les
   ennemis avec les états communs `IDLE`, `RUN`, `ATTACK`, `SHOOT`, `JUMP`,
@@ -157,6 +232,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 
 ## Autorités actuelles
 
+- routage applicatif et fondus : `AppFlowConfig.tres` ; peau visuelle du Boot et
+  du Start : `BootStartFlowTheme.tres` ; textes et composition : scènes
+  `BootFlow`/`StartFlow` ; hiérarchie typographique : `game_ui_theme.tres` ;
 - identité et contrat d'une carte : `MissionMapDefinition.tres` ;
 - placement final : scène maîtresse de carte ;
 - matière destructible initiale : `Gameplay/DestructibleZones` ;
@@ -175,12 +253,28 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - timing et représentation d'une explosion : `Explosion2D.tscn` ;
 - définition d'un bassin dangereux : sa `HazardData.tres` ; placement final :
   instance de sa scène dans la map ;
-- définition du baril explosif : `toxic_explosive_barrel.tres` ; état runtime :
-  son `ExplosiveProp2D` ; origine de détonation : `ExplosionOrigin` dans sa
-  scène ; style : `ExplosionData` injectée ;
+- définition de ce qui explose : `ExplosivePropData.prop_id` ; état runtime :
+  `ExplosiveProp2D` ; origine de détonation : `ExplosionOrigin` dans sa scène ;
+  style de détonation : `ExplosionData.explosion_id` injectée ;
 - définition et modes d'ouverture de la caisse : `military_supply_crate.tres` ;
-  état fermé/ouvert : instance `SupplyCrate2D` ; futur contenu : système de loot
-  séparé, encore absent ;
+  contenu : `SupplyCrateData.contents_scene` ; état fermé/ouvert : instance
+  `SupplyCrate2D` ; placement du contenu : `ContentsOrigin` ;
+- définition du soin : `pickups/data/health_injector.tres` ; effet et quantité :
+  `PickupData` ; occurrence runtime : `Pickup2D` ; vie courante :
+  `PlayerHealthComponent` ;
+- munitions spéciales, armure et Overdrive :
+  `PlayerCombatInventoryComponent` ; capacités :
+  `standard_combat_inventory.tres` ;
+- arsenal autorisé et arme de départ : `standard_loadout.tres` ; arme équipée
+  runtime : `PlayerLoadoutComponent` ; définition de chaque arme :
+  `WeaponData.tres` ;
+- layout du HUD : `ui/hud/mission_hud.tscn` ; cadres, portrait, icônes et
+  couleurs : `MissionHUDTheme.tres` ; choix par mission :
+  `MissionMapDefinition.hud_theme` ;
+- service d'une station et éventuelle arme accordée : `ServiceStationData` ;
+  occurrence et usages restants : `ServiceStation2D` ;
+- sélection d'une cible proche : `PlayerInteractionComponent` ; contrat de
+  correspondance : groupe `interaction_targets` et couche `Interactable` ;
 - locomotion du joueur : `PlayerMovementProfile.tres` ;
 - visée arcade : `PlayerAimProfile.tres` et `PlayerAimComponent` au runtime ;
 - correspondance périphériques → actions : Input Map de `project.godot` ;
@@ -205,7 +299,11 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   `MissionProjectileSpawner2D` ;
 - comportement caméra : `RunAndGunCameraProfile.tres` ; progression runtime :
   `MissionCameraRig2D` ; limites : `MissionMapRoot2D.camera_bounds` ;
-- vitesse relative d'un plan visuel : son Node `Parallax2D` dans la scène de map ;
+- placement d'un background : `Visual/SegmentBackgrounds` dans la scène
+  maîtresse ; bitmap et dimensions : livrable publié 2560 × 720 ;
+- placement et emprise d'une atmosphère : instance `EnvironmentFX2D` sous
+  `Visual/EnvironmentFX` ; intensités, couleurs et intervalles :
+  `EnvironmentFXProfile.tres` ; timing bref d'éclair : `AnimationPlayer` ;
 - ordre des planches : `GalleryCatalog.tres` ;
 - provenance des bitmaps : `art/ASSET_MANIFEST.md` ;
 - sources, recettes et intermédiaires d'assets : `pipeline/assets/` ;
@@ -243,7 +341,7 @@ catalogues.
 <!-- CATALOG_PROJECTION_BEGIN -->
 - `mission_maps` : `toxic_coast`
 - `enemy_archetypes` : `vacuum_boss`, `vacuum_flying`, `vacuum_grunt`, `vacuum_pilot_saboteur`, `vacuum_trooper`
-- `ground_pieces/toxic_coast` : `industrial_catwalk_medium`, `military_bunker_block_medium`, `natural_ledge_medium`, `toxic_pipe_bridge_medium`
+- `ground_pieces/toxic_coast` : `acid_bridge_abutment`, `destructible_military_wall`, `guard_tower_module`, `industrial_catwalk_medium`, `military_bunker_block_medium`, `natural_ledge_medium`, `portable_barricade`, `toxic_pipe_bridge_medium`, `vacuum_foundry_platform`, `walk_under_pipe_arch`
 <!-- CATALOG_PROJECTION_END -->
 
 ## Protection opérationnelle
@@ -253,8 +351,11 @@ catalogues.
 - caches Godot, états locaux Codex, captures, exports et journaux exclus par
   `.gitignore` ;
 - état animation contrôlé par le validateur raster v002 et son contrat headless
-  dédié ; la suite globale actuelle de 27 contrats est verte, dont un impact
-  terrain déclenché depuis une vraie callback `body_entered`.
+  dédié ; `scripts/run-tests.sh structure` exécute actuellement 34 contrats et
+  refuse toute sortie Godot `ERROR` ou `WARNING` ; le profil `content` protège
+  séparément la partition auteur explicitement acceptée ;
+- workflow GitHub Actions publié sous `.github/workflows/godot-tests.yml` avec
+  Godot 4.7.1 et le même profil structurel qu'en local.
 
 ## Limites connues
 
@@ -273,47 +374,146 @@ catalogues.
   n'est encore définie ;
 - les types `Kill Room`, `Arena` et `Set Piece` sont nommés et configurables,
   mais leurs verrous caméra et orchestrations audiovisuelles restent à publier ;
-- le premier canon n'a encore ni audio, ni recul du corps, ni secousse caméra ;
-- la munition de campagne utilise un petit impact dédié, pas l'explosion lourde
-  canonique réservée aux obus et éléments explosifs ;
+- le premier canon n'a encore aucun audio ; les bruitages sont volontairement
+  reportés pendant la finalisation du gameplay ;
+- la mort du joueur réutilise volontairement la pose `hurt` : aucun atlas de
+  mort distinct n'est déclaré tant qu'une séquence raster validée n'est pas
+  publiée par le pipeline ;
+- la munition de campagne utilise un petit impact animé dédié, pas d'explosion
+  radiale ; la roquette de démolition possède désormais son `ExplosionData`
+  de munition séparé des barils et des obus génériques ;
 - l'impulsion radiale est publiée avec `target_damaged`, mais les acteurs ne
   possèdent pas encore de contrat commun pour la consommer physiquement ;
 - les poses v002 sont découpées proprement et structurées en phases lisibles ;
   leur continuité jouée à taille réelle doit encore être revue sur la cadence
-  actuelle de quinze apparitions ;
-- `LandingCadence` et `LandingCadence2` possèdent actuellement de grands seuils
-  d'activation proches du départ : leur démarrage quasi simultané est valide
-  techniquement mais doit être confirmé ou rééquilibré en jeu ;
+  actuelle de treize apparitions explicites, auxquelles s'ajoutent les
+  Saboteurs réellement éjectés ;
+- la partition v001 est structurellement et fonctionnellement validée, mais ses
+  seuils, respirations et densités doivent encore être équilibrés par une vraie
+  session jouée avec métriques de dégâts et durée par beat ;
 - les quatre `TileMapLayer` de Côte toxique sont prêts mais sans TileSet ;
-- le catalogue Côte toxique publie actuellement quatre pièces réutilisables :
-  corniche naturelle, bloc bunker, passerelle industrielle et pont-tuyau ; ce
-  recensement décrit uniquement l'état présent et doit s'enrichir pour
-  l'édition des futurs niveaux ; le bassin acide, le baril explosif et la caisse
-  restent des scènes glissables séparées du catalogue de terrain ;
-- les premiers modules de sol permanent réutilisent encore les textures
-  génériques du terrain ; le pont et la fonderie n'ont pas encore leurs styles
-  ou scènes d'architecture spécifiques ;
-- les trois segments utilisent encore les mêmes panoramas répétés ; le pont et
-  la fonderie n'ont pas encore leurs modules visuels distinctifs ;
+- le chargement synchrone initial de Côte toxique coûte encore environ 3,57 s
+  en headless ; l'écran montre désormais un état de chargement ou l'erreur
+  réelle, mais une génération pré-calculée ou étalée du terrain reste à étudier ;
+- le terrain 7680 px respecte un budget auteur de 144 corps de chunks et 960
+  formes ; le chargement et les budgets doivent être remesurés sur machine de jeu ;
+- les trois backgrounds, les deux parallaxes et les atmosphères sont intégrés,
+  mais leurs raccords, leur contraste et la densité réelle des particules
+  doivent être contrôlés dans le renderer interactif ; le headless ne produit
+  pas de capture exploitable avec son renderer factice ;
 - les anciens fichiers de texture empruntés à `worms-revisite` restent présents
   dans le dossier mais ne sont plus référencés par le profil actif ;
 - aucun titre définitif, aucun logo définitif, aucun audio ;
 - les commandes téléphone sont fonctionnelles et responsive, mais leur confort
   sur appareils physiques et les safe areas doivent encore être validés sur un
   panel Android/iOS réel ;
+- l'arsenal possède désormais une autorité `PlayerLoadoutProfile`/Component,
+  mais conserve volontairement une seule arme équipée et une réserve spéciale
+  partagée ; les slots multiples et pools par famille attendent une tranche de
+  gameplay dédiée avant toute représentation HUD ;
+- la carte de sélection, ses six marqueurs, le cadenas et les lampes sont
+  publiés dans `BootStartFlowTheme`, mais restent volontairement sans écran
+  runtime jusqu'à la création d'un vrai catalogue de missions, de règles de
+  déverrouillage et d'une progression sauvegardée ;
+
+## Famille d'explosions de barils v001
+
+- `ExplosionData` est l'autorité unique de l'identité, de la famille, des
+  rayons, dégâts, impulsion, durée, atlas et intensités VFX ;
+- `ExplosivePropData.prop_id` identifie l'objet explosif concret, tandis que
+  `ExplosionData.explosion_id` identifie le profil de détonation ;
+- trois profils réutilisables `small`, `standard` et `heavy` forment une montée
+  monotone de puissance et de densité visuelle ;
+- le baril toxique actuel choisit explicitement `barrel_standard_explosion.tres`
+  et ne dépend plus du profil d'obus de campagne ;
+- `Explosion2D` compose animation peinte huit phases, fallback procédural,
+  double onde, lumière, étincelles, débris et gouttes toxiques ;
+- les effets restent locaux et ne possèdent aucun contrat de secousse caméra ;
+- les atlas publiés et leurs sources, recette, provenance, manifeste et QA sont
+  conservés dans le lot `barrel-explosion-family-v001` ;
+- limite volontaire : les profils petit et lourd sont prêts pour de futurs
+  contenants, mais aucune nouvelle scène de baril dupliquée n'est créée sans
+  asset de prop et intention de niveau réels ;
+- prochaine étape recommandée : équilibrer les dégâts, rayons, coûts et
+  feedbacks des munitions en jeu réel, sans convertir leurs petits impacts en
+  explosions de baril.
+
+## Objets explosifs identifiés v001
+
+- trois définitions d'objets explosifs existent sous `props/explosive/data/` :
+  `toxic_small_explosive_barrel`, `toxic_standard_explosive_barrel` et
+  `toxic_heavy_explosive_barrel` ;
+- elles réutilisent la scène canonique actuelle `ExplosiveProp2D` et le bitmap
+  publié du baril, mais possèdent des `prop_id`, PV et `ExplosionData`
+  distincts ;
+- la scène canonique expose `AuthorPreview`, visible dans l'éditeur, qui
+  projette `prop_id` et `explosion_id` pour éviter de confondre l'objet et son
+  profil de détonation ;
+- l'occurrence du Pont choisit le prop standard et l'occurrence de Fonderie
+  choisit le prop lourd directement dans la scène maîtresse ;
+- le rayon terrain et le rayon de dégâts d'une explosion sont indépendants :
+  une grosse charge peut creuser large sans appliquer ses dégâts sur toute la
+  largeur du cratère ;
+- limite volontaire : les scripts restent dans `props/explosive_barrel/` pour
+  compatibilité de cette tranche ; seule la donnée générique nouvelle est
+  introduite.
+
+## Arsenal joueur Resource-first v001
+
+- `PlayerLoadoutProfile` est l'autorité de l'arsenal autorisé, de l'arme
+  primaire et de l'arme de départ ;
+- `standard_loadout.tres` regroupe le canon de campagne et les quatre armes
+  spéciales déjà publiées, sans recopier cadence, projectile, bitmap ni coût ;
+- `PlayerLoadoutComponent` est visible sous `Player/Components/Loadout` et
+  possède `equipped_weapon` au runtime ;
+- `PlayerWeaponComponent` consomme l'arme équipée pour cadence, munitions,
+  recul, HUD et demande de projectile, mais ne possède plus l'arsenal ;
+- les armureries demandent l'équipement au Loadout et ajoutent éventuellement
+  des munitions via `PlayerCombatInventoryComponent` ;
+- les projectiles et armureries exposent `AuthorPreview` dans l'éditeur pour
+  afficher l'identifiant de munition, l'impact, l'explosion éventuelle, la
+  station et l'arme accordée ;
+- la roue d'armes HUD observe le Loadout, appelle `equip_weapon()` pour les
+  tests et recharge la réserve spéciale via CombatInventory lorsque son export
+  de test est actif ; elle ne possède pas de slots persistants ni de munitions
+  propres ;
+- le canon de campagne possède son bitmap de munition et son impact animé
+  publiés ; la roquette de démolition pointe vers
+  `demolition_rocket_burst` au lieu du profil d'obus de campagne ;
+- limite volontaire : pas encore de sélection multi-slot, pas de pools de
+  munitions par famille et pas de nouveaux affichages HUD tant que le gameplay
+  correspondant n'existe pas ;
+- prochaine étape recommandée : équilibrer les coûts, quantités accordées et
+  cadences des cinq WeaponData après playtest de Côte toxique.
+
+## Player Kit v001
+
+- le Player Kit désigne les actions et capacités du joueur, tandis que
+  l'arsenal n'en est qu'un sous-ensemble ;
+- le kit v001 gardé couvre courir, sauter, viser horizontal/vertical/diagonal,
+  viser au pointeur PC, tirer, tenir le tir pour les armes automatiques,
+  équiper via armurerie, ramasser soin/munitions/armure/Overdrive, subir dégâts,
+  i-frames, mort et respawn ;
+- crouch, drop-through, dash/slide, aim lock, melee, grenade, special attack
+  séparée, swap multi-slot, drop et rescue sont reportés tant qu'un besoin réel
+  de niveau, ennemi, animation, HUD et validation n'est pas établi ;
+- les cinq armes publiées sont conservées comme base v001 à jouer et à
+  différencier avant toute création d'un sixième rôle.
 
 ## Prochaine tranche recommandée
 
-Sécuriser les références de tireur conservées par les projectiles lorsqu'un
-acteur est libéré, puis jouer la cadence actuelle de quinze apparitions et décider si
-`LandingCadence2` constitue une vraie seconde rencontre ou seulement un essai de
-placement. Ajuster ensuite ses seuils et offsets depuis l'Inspector/Resources,
-avant le Set Piece du Boss.
+Jouer la nouvelle Côte toxique 7680 px à vitesse réelle et noter durée par beat,
+usage de chaque armurerie, consommation de munitions par arme, armure,
+Overdrive, dégâts reçus, lisibilité des passages et Player Feel. La prochaine
+tranche doit corriger le pacing, les coûts, les placements et la famille
+d'explosion de munition du lanceur, sans ajouter de nouveau système.
 
 
 ## Validations à exécuter
 
 ```bash
+./scripts/run-tests.sh structure
+./scripts/run-tests.sh content  # seulement après décision explicite sur le contenu auteur
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/foundation_smoke_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/map_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/destructible_terrain_test.gd
@@ -322,6 +522,7 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/asset_pipeline_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_input_contract_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/pickup_interaction_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_asset_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_camera_progression_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_run_contract_test.gd
@@ -329,6 +530,7 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/permanent_ground_module_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/weapon_projectile_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/class_glossary_contract_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/industrial_toxic_expansion_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/project_state_catalog_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/enemy_animation_roster_v002_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --quit-after 240
@@ -339,9 +541,11 @@ python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
 python3 pipeline/assets/tools/validate_enemy_animation_roster_v002.py
 ```
 
-Dernière validation complète : 2026-08-28, les 27 contrats headless passent
-après la reconstruction différée du terrain destructible.
-`LandingCadence2` est valide, non bloquante et comprise dynamiquement dans le
-contrat de cadence.
+Dernière validation complète : 2026-08-31, le profil `structure` passe 34/34.
+Dernière validation complète avant cette tranche : le profil `content` passe
+1/1, le pipeline des explosions de barils est reproductible bit à bit et
+`git diff --check` ne signale aucun défaut.
+La partition conserve trois occurrences, huit vagues et treize apparitions
+explicites sur la nouvelle largeur de 7680 px.
 Capture OpenGL réelle contrôlée sur `NaturalLedgeMedium` après 90 frames
 d'atterrissage : marche, impact, éjection et épave suivent la pente.

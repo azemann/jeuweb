@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HazardData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://terrain/hazards/hazard_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/toxic-pressure-vent-v001.png" id="2"]
+[resource]
+script = ExtResource("1")
+hazard_id = &"toxic_pressure_vent"
+display_name = "Évent de pression toxique"
+texture = ExtResource("2")
+pivot_px = Vector2(128, 304)
+damage_per_tick = 14.0
+tick_interval = 0.65
+damage_zone_size = Vector2(170, 230)
+damage_zone_offset = Vector2(0, -170)

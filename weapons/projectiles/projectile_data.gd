@@ -35,6 +35,10 @@ extends Resource
 @export_range(1.0, 300.0, 1.0) var terrain_radius := 10.0
 
 @export_category("Presentation")
+## Bitmap publié utilisé à la place des primitives Tracer/Core lorsqu'il est assigné.
+@export var texture: Texture2D
+## Échelle locale du bitmap de projectile sur son canevas normalisé.
+@export_range(0.05, 2.0, 0.05) var texture_scale := 0.35
 ## Couleur de la traînée extérieure, généralement accordée à la faction ou au type de munition.
 @export_color_no_alpha var tracer_color := Color("f1f59a")
 ## Couleur du noyau central, plus lumineux pour rester lisible sur les décors chargés.
@@ -56,6 +60,7 @@ func is_valid() -> bool:
 		and (not affects_destructible_terrain or terrain_radius > 0.0)
 		and tracer_length > 0.0
 		and tracer_width > 0.0
+		and texture_scale > 0.0
 	)
 
 

@@ -8,8 +8,10 @@ au runtime dans l'écran de jeu.
 - comportement et réglages arcade : `RunAndGunCameraProfile.tres` ;
 - limites spatiales : `MissionMapRoot2D.camera_bounds` ;
 - cible runtime : joueur produit par `MissionActorSpawner2D` ;
-- progression maximale atteinte : `MissionCameraRig2D` ;
-- vitesses relatives du décor : chaque `Parallax2D` de la scène maîtresse.
+- centre horizontal courant : `MissionCameraRig2D` ;
+- bornes et fréquence des secousses : `RunAndGunCameraProfile.tres` ;
+- intensité et durée demandées par un tir : `WeaponData.tres` ;
+- backgrounds segmentés : `Visual/SegmentBackgrounds` de la scène maîtresse.
 
 ## Arbre runtime visible
 
@@ -27,16 +29,23 @@ de Camera2D concurrente.
 ## Comportement run-and-gun
 
 - la caméra reste centrée sur l'écran au début de la carte ;
-- elle commence à avancer lorsque joueur + look-ahead dépasse ce centre ;
-- elle avance vers la droite avec le joueur ;
-- elle ne recule plus après qu'une portion du niveau a été révélée ;
+- elle commence à avancer lorsque le joueur dépasse ce centre ;
+- elle suit librement le joueur vers la droite comme vers la gauche ;
+- le profil de la Côte toxique conserve un look-ahead nul : changer de direction
+  sans déplacement du joueur ne déplace jamais la caméra ;
+- d'autres profils peuvent activer explicitement un look-ahead directionnel ;
 - elle reste bornée par `camera_bounds` ;
-- fond lointain, plan intermédiaire et premier plan utilisent des vitesses de
-  parallaxe distinctes.
+- les secousses utilisent uniquement `Camera2D.offset` et ne modifient jamais
+  la position du Rig ;
+- le canon automatique courant demande une amplitude nulle ; une secousse reste
+  une commande optionnelle réservée aux événements lourds ;
+- les backgrounds restent bornés par les segments de la scène maîtresse.
 
 ## Validation
 
 `mission_camera_progression_test.gd` vérifie l'unicité de la caméra runtime,
-la cible joueur, l'avance, le verrouillage arrière, la PreviewCamera inactive
-et la présence de la parallaxe lointaine.
-
+la cible joueur, l'avance, le retour arrière, l'absence de mouvement au demi-tour,
+la PreviewCamera inactive et les backgrounds segmentés.
+`weapon_projectile_integration_test.gd` vérifie qu'un vrai tir automatique
+conserve un offset nul. Le contrat caméra vérifie séparément qu'une demande
+lourde explicite déplace puis restaure l'offset sans déplacer le Rig.

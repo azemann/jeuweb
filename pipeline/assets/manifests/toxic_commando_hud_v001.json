@@ -1,0 +1,148 @@
+{
+  "lot": "toxic-commando-hud-v001",
+  "sources": [
+    {
+      "path": "pipeline/assets/sources/ui/hud/toxic_commando_v001/controls-slots-source-v001.png",
+      "sha256": "889e12c09f2477080896ec334ae196efaa3bd410e1bafc96768b79a56ed85a94",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "pipeline/assets/sources/ui/hud/toxic_commando_v001/gameplay-icons-source-v001.png",
+      "sha256": "faa8dac783a8ca29bcaa71daf16a23ab5d2b04c004f6e384e48620be4cef0bd4",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "pipeline/assets/sources/ui/hud/toxic_commando_v001/hud-frames-source-v001.png",
+      "sha256": "d6c0b7c7f044e35db648054d73cd98b234ca18f26f668521f1be04be3f8fdaff",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "pipeline/assets/working/player/body-canonical-384/00-idle.png",
+      "sha256": "3f82b234934fa28745027f7c7e9de228ff2d42d0e0f2aa8cab6fca7066ce30ec",
+      "width": 384,
+      "height": 384,
+      "role": "dérivé canonique joueur utilisé pour le portrait HUD"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "art/ui/hud/toxic_commando/frames/player-status-frame-v001.png",
+      "width": 640,
+      "height": 213,
+      "sha256": "2b3bc8c4023d36599fbfd5f78bcdb28bd036bf4fad34937ccb1c93678df8e793"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/frames/weapon-status-frame-v001.png",
+      "width": 384,
+      "height": 249,
+      "sha256": "35b52deb92d18a787a63eea843d2a2592becfc53cbd65726595fe1e4eec4f220"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/frames/objective-frame-v001.png",
+      "width": 640,
+      "height": 199,
+      "sha256": "8eef89727d69bf7e403d7d2783098c7b8f425fa3e269a9be532d0af1388f6beb"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/frames/boss-health-frame-v001.png",
+      "width": 1024,
+      "height": 199,
+      "sha256": "53e23ad2520bfa49995837b282b5e8ea1ed351d714d61ab4a7c1d4184f3ba71a"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/frames/overdrive-frame-v001.png",
+      "width": 640,
+      "height": 150,
+      "sha256": "914846af71ff130c25b72ec0219468beb4cc60cff31579fc1ace731ca1c7aac1"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/frames/notification-frame-v001.png",
+      "width": 384,
+      "height": 142,
+      "sha256": "a72865bd2f1a63fa29e687ca55c987bab82c7d8f4c6008e39b124b2378d1c5d2"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/health-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "2b1dbd3b7c5a2f33916d6f4efeb3d030b24b3c829c63796ec6eb5fb3826a4e51"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/armor-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "2d90e7c6935e5007186f65346d7468833ad926146e7f8533e200e5a061202fe9"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/ammo-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "c5e094d7f43235f58fa660af64ae60de915ddb98529ab36df161d1d93e1b1842"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/overdrive-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "48e0a7926ba1e02be347aab991f7df7dd3eb24a85f9b8983afbae9dd684c3502"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/grenade-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "1c47c9df936468ad27bb25b184224a0d35b2ad6fa6570364469be3b81ed934b3"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/objective-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "dc04439154920473f313993e2104ba87680048ba71954c9771fba0e4a1b0c2c1"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/boss-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "e5e94e56a43aa38f5d28d178fab59de74369d54a32630c6ed3a8728e4ec192bd"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/checkpoint-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "20318480a4fbf132b842a033410c647f3304536d7896f73a3a6f04f8a651f945"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/weapon-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "3cafc5785420e7f710391fe689871331a3fb6f96b8b82e64debdb176de0c8091"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/poison-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "0f98d0873cc65026c1915f04b6b4562d4eddb7fb9c4ff257cad2215f6428b821"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/electric-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "9ae1746143b09193d485358d307dd0edb5509366df0121b690f2954f99adda91"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/icons/fire-icon-v001.png",
+      "width": 160,
+      "height": 160,
+      "sha256": "02edb0aed7035152f27f65d37ff01faaac32af5f81615723b1a0b663d96c9d79"
+    },
+    {
+      "path": "art/ui/hud/toxic_commando/portraits/player-portrait-v001.png",
+      "width": 192,
+      "height": 192,
+      "sha256": "b6e5b72a7da2a807ce3efab0ab9ed1dc9234a9c250eb2150b3ee07a55fc8290b"
+    }
+  ],
+  "output_count": 19,
+  "status": "published"
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-megapack-v001",
+  "status": "candidate",
+  "automatedChecks": {
+    "expectedAssetCount": 38,
+    "actualAssetCount": 38,
+    "assetCountPassed": true,
+    "alphaAssetsChecked": 38,
+    "alphaAssetsPassed": 38,
+    "alphaCheckPassed": true,
+    "transparentCornerCheckPassed": true,
+    "referenceCount": 3,
+    "contactSheetPresent": true,
+    "catalogPresent": true
+  },
+  "reviewGates": {
+    "technicalSourceAudit": "passed",
+    "visualClassification": "pending",
+    "runtimeScaleNormalization": "pending",
+    "impactSheetSlicing": "pending",
+    "temporalAnimationReview": "pending",
+    "gameplayReadability": "pending",
+    "runtimePublication": "blocked"
+  },
+  "knownLimits": [
+    "Source dimensions and pixel density are not normalized per gameplay family.",
+    "The three impact sheets still require deterministic frame slicing and timing.",
+    "Pivots, weapon sockets, collision shapes and damage footprints are undefined.",
+    "No candidate has been copied to art/ or referenced by a Godot runtime resource."
+  ]
+}

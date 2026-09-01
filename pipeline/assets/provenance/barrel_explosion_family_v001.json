@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "barrel-explosion-family-v001",
+  "status": "integrated",
+  "generatedAt": "2026-08-31",
+  "tool": {
+    "provider": "OpenAI",
+    "surface": "Codex built-in imagegen",
+    "model": "built-in image generation"
+  },
+  "promptRecord": "pipeline/assets/recipes/barrel_explosion_family_v001.md",
+  "transformations": [
+    "strict 4x2 cell extraction",
+    "connected bright-neutral checkerboard removal for edited variants",
+    "Lanczos normalization to 288x384 cells",
+    "alpha cleanup at or below 4/255",
+    "controlled publication under art/effects/explosions/barrel"
+  ],
+  "validation": {
+    "technical": "passed",
+    "visual": "approved",
+    "consumerImport": "passed"
+  }
+}

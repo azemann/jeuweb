@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnvironmentFXProfile" format=3 uid="uid://c4pt1hix1emgu"]
+
+[ext_resource type="Script" uid="uid://ckvur2eckpk3a" path="res://effects/environment/environment_fx_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+display_name = "Embruns toxiques du débarquement"
+smoke_amount = 14
+smoke_color = Color(0.22, 0.27, 0.24, 0.34)
+fog_amount = 8
+fog_color = Color(0.47, 0.63, 0.13, 0.1)
+lightning_enabled = true
+lightning_interval_min = 5.0
+lightning_interval_max = 7.0
+lightning_color = Color(0.7, 0.88, 1, 1)

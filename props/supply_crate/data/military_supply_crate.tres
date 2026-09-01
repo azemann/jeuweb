@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SupplyCrateData" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="SupplyCrateData" format=3 uid="uid://wmuqcq2rcnre"]
 
-[ext_resource type="Script" path="res://props/supply_crate/supply_crate_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/props/toxic_coast/military-supply-crate-closed-v001.png" id="2"]
-[ext_resource type="Texture2D" path="res://art/props/toxic_coast/military-supply-crate-open-v001.png" id="3"]
+[ext_resource type="Script" uid="uid://10tcrycv71wj" path="res://props/supply_crate/supply_crate_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bfyr5bl6o6fn" path="res://art/props/toxic_coast/military-supply-crate-closed-v001.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b0qf8slo5s6ts" path="res://art/props/toxic_coast/military-supply-crate-open-v001.png" id="3"]
+[ext_resource type="PackedScene" path="res://pickups/health_injector_2d.tscn" id="4_contents"]
 
 [resource]
 script = ExtResource("1")
@@ -11,10 +12,4 @@ display_name = "Côte toxique — caisse de ravitaillement militaire"
 closed_texture = ExtResource("2")
 open_texture = ExtResource("3")
 pivot_px = Vector2(192, 304)
-opening_mode = 2
-maximum_health = 1.0
-interaction_action = &"player_interact"
-interaction_radius = 92.0
-collision_size = Vector2(300, 150)
-collision_offset = Vector2(0, -76)
-keep_collision_when_open = true
+contents_scene = ExtResource("4_contents")

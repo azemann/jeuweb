@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PickupData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://pickups/pickup_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/pickups/health-injector-v001.png" id="2_texture"]
+
+[resource]
+script = ExtResource("1_script")
+pickup_id = &"health_injector"
+display_name = "Injecteur de soin"
+texture = ExtResource("2_texture")
+visual_scale = 0.55
+effect = 0
+amount = 35.0
+collection_radius = 34.0

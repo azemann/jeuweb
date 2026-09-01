@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ExplosionData" format=3 uid="uid://c4rpmrah8ywex"]
+
+[ext_resource type="Script" uid="uid://dhux1to3w1642" path="res://effects/explosions/explosion_data.gd" id="1_data"]
+[ext_resource type="SpriteFrames" uid="uid://cw3bt27fqgqag" path="res://effects/explosions/barrel/barrel_standard_explosion_frames.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_data")
+explosion_id = &"barrel_standard"
+family_id = &"barrel"
+display_name = "Baril — explosion standard"
+terrain_radius = 92.0
+damage_radius = 108.0
+damage = 60.0
+impulse = 900.0
+duration = 0.8
+flash_color = Color(1, 0.95, 0.56, 1)
+fire_color = Color(1, 0.32, 0.04, 1)
+smoke_color = Color(0.2, 0.16, 0.18, 1)
+sprite_frames = ExtResource("2_frames")
+shockwave_scale = 1.05
+light_energy = 2.4
+spark_amount = 28
+debris_amount = 14
+toxic_droplet_amount = 20

@@ -82,7 +82,13 @@ func _on_player_died(player: PlayerCharacter2D) -> void:
 
 func set_respawn_spawn(spawn_id: StringName) -> bool:
 	var host := map_host()
-	if host == null or host.current_map == null or host.current_map.find_spawn(spawn_id) == null:
+	if host == null or host.current_map == null:
+		return false
+	var requested_spawn := host.current_map.find_spawn(spawn_id)
+	if requested_spawn == null:
+		return false
+	var current_spawn := host.current_map.find_spawn(respawn_spawn_id)
+	if current_spawn != null and requested_spawn.global_position.x < current_spawn.global_position.x:
 		return false
 	respawn_spawn_id = spawn_id
 	return true

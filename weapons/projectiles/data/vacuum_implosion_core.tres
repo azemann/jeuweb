@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://weapons/projectiles/projectile_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://effects/weapons/implosion/vacuum_implosion_impact_2d.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/weapons/projectiles/implosion/vacuum-implosion-core-v001.png" id="3"]
+[resource]
+script = ExtResource("1")
+projectile_id = &"vacuum_implosion_core"
+display_name = "Noyau d'implosion"
+speed = 620.0
+lifetime = 2.4
+damage = 42.0
+impulse = 420.0
+impact_scene = ExtResource("2")
+affects_destructible_terrain = true
+terrain_radius = 28.0
+texture = ExtResource("3")
+texture_scale = 0.36
+tracer_color = Color(0.85, 0.1, 1, 1)
+core_color = Color(1, 0.75, 1, 1)
+tracer_length = 36.0
+tracer_width = 14.0

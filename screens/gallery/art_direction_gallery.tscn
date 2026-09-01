@@ -73,12 +73,12 @@ theme_override_constants/separation = 16
 unique_name_in_owner = true
 layout_mode = 2
 text = "RETOUR"
+theme_type_variation = &"CompactButton"
 
 [node name="Title" type="Label" parent="SafeArea/Layout/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
-theme_override_font_sizes/font_size = 28
+theme_type_variation = &"SectionTitleLabel"
 text = "GALERIE DE DIRECTION ARTISTIQUE"
 horizontal_alignment = 1
 
@@ -87,6 +87,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "1 / 7"
+theme_type_variation = &"CaptionLabel"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -104,7 +105,7 @@ stretch_mode = 5
 [node name="BoardName" type="Label" parent="SafeArea/Layout"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"CaptionLabel"
 text = "DIRECTION MAÎTRESSE"
 horizontal_alignment = 1
 
@@ -118,14 +119,15 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 54)
 layout_mode = 2
 text = "◀ PRÉCÉDENTE"
+theme_type_variation = &"CompactButton"
 
 [node name="NextButton" type="Button" parent="SafeArea/Layout/Navigation"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 54)
 layout_mode = 2
 text = "SUIVANTE ▶"
+theme_type_variation = &"CompactButton"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {&"": SubResource("AnimationLibrary_gallery")}
-

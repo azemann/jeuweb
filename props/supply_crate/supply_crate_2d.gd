@@ -3,6 +3,7 @@ class_name SupplyCrate2D
 extends StaticBody2D
 
 signal opened(crate: SupplyCrate2D)
+signal content_spawned(content: Node2D)
 
 @export_category("Definition")
 ## Resource-panneau autoritaire pour les visuels, modes d'ouverture et collisions.
@@ -15,30 +16,18 @@ signal opened(crate: SupplyCrate2D)
 @onready var presentation: Sprite2D = %Presentation
 @onready var solid_shape: CollisionShape2D = %SolidShape
 @onready var interaction_shape: CollisionShape2D = %InteractionShape
+@onready var interaction_area: Area2D = %InteractionArea
+@onready var contents_origin: Marker2D = %ContentsOrigin
 
 var _health := 0.0
 var _is_open := false
-var _nearby_players := 0
+var _spawned_content: Node2D
 
 
 func _ready() -> void:
 	_sync_from_data()
 	if data != null:
 		_health = data.maximum_health
-	set_process(not Engine.is_editor_hint())
-
-
-func _process(_delta: float) -> void:
-	if (
-		_is_open
-		or data == null
-		or not data.accepts_interaction()
-		or _nearby_players <= 0
-		or not InputMap.has_action(data.interaction_action)
-	):
-		return
-	if Input.is_action_just_pressed(data.interaction_action):
-		open()
 
 
 func apply_damage(amount: float) -> bool:
@@ -58,6 +47,9 @@ func open() -> bool:
 	if not data.keep_collision_when_open:
 		collision_layer = 0
 		solid_shape.set_deferred(&"disabled", true)
+	interaction_area.set_deferred(&"monitorable", false)
+	interaction_area.collision_layer = 0
+	_spawn_contents()
 	opened.emit(self)
 	return true
 
@@ -66,14 +58,33 @@ func is_open() -> bool:
 	return _is_open
 
 
-func _on_interaction_body_entered(body: Node2D) -> void:
-	if body.is_in_group(&"players"):
-		_nearby_players += 1
+func can_interact(_actor: PlayerCharacter2D) -> bool:
+	return not _is_open and data != null and data.accepts_interaction()
 
 
-func _on_interaction_body_exited(body: Node2D) -> void:
-	if body.is_in_group(&"players"):
-		_nearby_players = maxi(0, _nearby_players - 1)
+func interact(actor: PlayerCharacter2D) -> bool:
+	return open() if can_interact(actor) else false
+
+
+func get_interaction_prompt() -> String:
+	return "OUVRIR"
+
+
+func spawned_content() -> Node2D:
+	return _spawned_content
+
+
+func _spawn_contents() -> void:
+	if _spawned_content != null or data == null or not data.has_contents():
+		return
+	var content := data.contents_scene.instantiate() as Node2D
+	if content == null:
+		return
+	contents_origin.add_child(content)
+	content.top_level = true
+	content.global_position = contents_origin.global_position
+	_spawned_content = content
+	content_spawned.emit(content)
 
 
 func _sync_from_data() -> void:

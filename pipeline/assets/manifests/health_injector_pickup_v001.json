@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "health-injector-pickup-v001",
+  "status": "published",
+  "assetCount": 1,
+  "sourceLot": "industrial-toxic-megapack-v001",
+  "recipe": "pipeline/assets/recipes/health_injector_pickup_v001.md",
+  "processor": "pipeline/assets/tools/process_health_injector_pickup.py",
+  "qa": "pipeline/assets/working/pickups/health-injector-pickup-v001-qa.json",
+  "published": "art/pickups/health-injector-v001.png",
+  "integrationAllowed": true
+}

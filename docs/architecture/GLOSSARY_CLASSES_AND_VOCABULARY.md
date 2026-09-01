@@ -4,7 +4,7 @@ Ce document est l'autorité des noms architecturaux employés dans le projet.
 Il doit permettre de comprendre le rôle d'une classe, d'une scène ou d'une
 Resource sans interpréter librement son suffixe.
 
-Le catalogue correspond à l'état du projet au 28 août 2026. Toute nouvelle
+Le catalogue correspond à l'état du projet au 30 août 2026. Toute nouvelle
 `class_name` doit être ajoutée ici dans le même changement.
 
 ## Règle de lecture d'un nom
@@ -41,6 +41,8 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `Flow` | Orchestration d'une succession d'écrans ou d'états | transitions et signaux de navigation | gameplay d'une mission |
 | `Style` | Données purement visuelles partagées | textures, couleurs, dimensions visuelles | collision ou état runtime |
 | `Config` | Configuration d'application ou de système | références et réglages de démarrage | contenu gameplay instanciable |
+| `State` | État runtime typé d'une occurrence | phase, indices et références de l'occurrence | définition auteur ou Node autonome |
+| `Builder` | Transformation algorithmique pure et sans état | entrée, calcul déterministe et résultat dérivé | autorité, cache global ou propriétaire du cycle de vie |
 
 `Data`, `Profile` et `Definition` sont proches mais pas interchangeables :
 
@@ -143,7 +145,10 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `AppFlow` | Control | Orchestre le flux principal et remplace le contenu de `ScreenHost`. |
 | `BootFlow` | Control | Joue l'introduction puis signale que le menu peut apparaître. |
 | `StartFlow` | Control | Expose les commandes du menu principal par signaux. |
+| `BootStartFlowTheme` | Resource | Associe backgrounds, emblème, cadres, ornements et marqueurs à une peau de démarrage réutilisable. |
 | `PrototypeMissionScreen` | Control | Assemble temporairement mission, HUD et retour au menu. |
+| `MissionHUDTheme` | Resource | Associe cadres, portrait, icônes et couleurs à une peau de HUD réutilisable. |
+| `MissionHUD` | Control | Présente vie, armure, arme, munitions, objectifs, Boss et Overdrive sans posséder leurs données. |
 | `ArtDirectionGallery` | Control | Affiche et fait parcourir les planches du catalogue artistique. |
 | `GalleryCatalog` | Resource | Ordonne les entrées disponibles dans la galerie. |
 | `GalleryEntry` | Resource | Décrit une planche, sa catégorie et sa texture publiée. |
@@ -162,14 +167,17 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `EnemySpawnPatternData` | Resource | Décrit archétype, formation, offsets et intervalle d'apparition d'un motif. |
 | `WaveData` | Resource | Ordonne les motifs d'une vague et porte son beat et sa condition d'avancement. |
 | `EncounterData` | Resource | Compose les vagues, leur intention et leur effet sur la sortie de mission. |
+| `EncounterRuntimeState` | RefCounted | Type les indices, le timer et la phase mutable d'une occurrence active. |
 | `MissionEncounterController` | Node | Déclenche les marqueurs et exécute leur cadence Resource au runtime. |
-| `MissionCombatGate2D` | Node2D | Bloque physiquement un passage puis l'ouvre à la fin de sa rencontre. |
+| `MissionCombatGate2D` | Node2D | Barrière de rencontre réservée aux futures missions fermées ; non instanciée en Flux Libre. |
 | `MissionActorSpawner2D` | Node | Instancie le joueur au spawn demandé dans la map chargée. |
 | `MissionEnemySpawner2D` | Node | Traduit les Encounter Markers via l'Enemy Catalog et instancie les ennemis. |
 | `MissionCheckpoint2D` | Area2D | Traduit le passage du joueur en changement de spawn de reprise. |
 | `MissionRunController` | Node | Suit les rencontres obligatoires et autorise la victoire à la sortie auteur. |
-| `RunAndGunCameraProfile` | Resource | Règle anticipation, verrou horizontal, cadrage vertical et lissage. |
+| `RunAndGunCameraProfile` | Resource | Règle anticipation, verrou horizontal, cadrage, lissage et bornes de secousse. |
 | `MissionCameraRig2D` | Camera2D | Suit le joueur et respecte la progression ainsi que les limites de la map. |
+| `EnvironmentFXProfile` | Resource | Règle fumée, brouillard, étincelles et éclairs d'un climat visuel. |
+| `EnvironmentFX2D` | Node2D | Applique un climat profilé aux effets natifs placés dans la scène maîtresse. |
 
 ### Joueur et acteurs partagés
 
@@ -179,11 +187,17 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `PlayerMovementProfile` | Resource | Valeurs de course, accélération, saut, gravité et tolérances. |
 | `PlayerAimProfile` | Resource | Directions autorisées et quantification de la visée arcade. |
 | `PlayerHealthProfile` | Resource | PV maximum et invulnérabilité du joueur. |
+| `PlayerCombatInventoryProfile` | Resource | Capacités de munitions spéciales, d'armure et durée de surpuissance. |
+| `PlayerLoadoutProfile` | Resource | Décrit l'arme primaire, les armes spéciales autorisées et l'arme de départ. |
 | `PlayerMovementComponent` | Node | Possède la vélocité et exécute la locomotion du joueur. |
 | `PlayerAimComponent` | Node | Produit la direction de visée et oriente sa présentation. |
 | `PlayerHealthComponent` | Node | Possède les PV runtime et émet dégâts, changements et mort. |
+| `PlayerLoadoutComponent` | Node | Possède l'arme équipée runtime et refuse les armes hors arsenal. |
 | `PlayerWeaponComponent` | Node | Cadence les tirs et émet une demande de projectile découplée. |
 | `PlayerPresentationComponent` | Node | Traduit le mouvement en animation et orientation visuelle. |
+| `PlayerRecoilComponent` | Node | Traduit un tir en recul directionnel des pivots visuels du joueur. |
+| `PlayerInteractionComponent` | Node | Sélectionne la cible auteur proche et lui transmet l'intention `player_interact`. |
+| `PlayerCombatInventoryComponent` | Node | Possède les munitions spéciales, l'armure et la surpuissance runtime du joueur. |
 | `ActorGroundingComponent` | Node2D | Expose le root des pieds et projette une ombre sur le vrai sol. |
 | `ActorSlopePresentationComponent` | Node | Incline uniquement la présentation selon la pente mesurée sous les appuis. |
 | `ActorStateMachineComponent` | Node | Possède l'état commun et valide les transitions runtime d'un acteur. |
@@ -206,11 +220,12 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 
 | Classe | Forme | Responsabilité |
 |---|---|---|
-| `WeaponData` | Resource | Décrit projectile, cadence, automatisme et animation de tir d'une arme. |
+| `WeaponData` | Resource | Décrit projectile, cadence, automatisme, recul et secousse d'une arme. |
 | `ProjectileData` | Resource | Décrit vol, dégâts, terrain, impact et présentation d'une munition. |
 | `Projectile2D` | Area2D | Déplace une occurrence, résout le premier obstacle et applique l'impact. |
 | `ProjectileImpact2D` | Node2D | Joue puis libère la présentation d'impact. |
 | `ToxicPressureImpact2D` | Node2D | Joue puis libère l'impact animé propre au projectile toxique. |
+| `AnimatedProjectileImpact2D` | Node2D | Joue une SpriteFrames d'impact publiée puis libère l'occurrence. |
 | `MissionProjectileSpawner2D` | Node | Place les projectiles dans la branche runtime de la mission. |
 | `ExplosionData` | Resource | Décrit rayons, dégâts, impulsion, durée et palette d'une explosion. |
 | `Explosion2D` | Node2D | Orchestre l'impact avec `AnimationPlayer` et signale les cibles. |
@@ -221,6 +236,7 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 |---|---|---|
 | `DestructibleTerrainProfile` | Resource | Règle canevas, chunks, textures, couleurs et simplification physique. |
 | `DestructibleTerrain2D` | Node2D | Autorité runtime du masque Carvable, de son rendu et de ses collisions. |
+| `TerrainCollisionBuilder` | RefCounted | Transforme sans état un contour raster en pièces convexes solides fusionnées. |
 | `GroundPieceDefinition` | Resource | Identité, PNG, pivot, géométrie et capacités d'une pièce glissable. |
 | `GroundPiece2D` | Node2D | Scène canonique choisissant Permanent, Carvable ou Breakable par instance. |
 | `GroundBreakableProfile` | Resource | Règle PV, seuil visuel et politique de disparition d'une pièce Breakable. |
@@ -238,13 +254,22 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `ExplosivePropData` | Resource | Décrit l'apparence, les PV, la collision et l'explosion d'un objet explosif. |
 | `ExplosiveProp2D` | StaticBody2D | Reçoit les tirs puis instancie et configure l'explosion canonique. |
 | `SupplyCrateData` | Resource | Décrit les visuels fermé/ouvert et les modes d'ouverture d'une caisse. |
-| `SupplyCrate2D` | StaticBody2D | Ouvre une caisse par tir ou interaction et émet l'événement `opened`. |
+| `SupplyCrate2D` | StaticBody2D | Ouvre une caisse par tir ou interaction et instancie son contenu auteur. |
+| `PickupData` | Resource | Décrit identité, présentation, effet, quantité et rayon d'un ramassable. |
+| `Pickup2D` | Area2D | Applique l'effet de sa Resource à l'acteur compatible puis se retire. |
+| `ServiceStationData` | Resource | Décrit une station, ses usages et le soin, ravitaillement ou armement accordé. |
+| `ServiceStation2D` | StaticBody2D | Exécute par interaction le service autorisé par sa Resource. |
+| `WorldPropData` | Resource | Décrit présentation et collision d'un accessoire architectural statique. |
+| `WorldProp2D` | StaticBody2D | Matérialise un accessoire statique à partir de sa Resource. |
+| `ProximityMineData` | Resource | Décrit sprite, rayon de détection et explosion d'une mine. |
+| `ProximityMine2D` | Area2D | Détecte le joueur et déclenche l'explosion configurée. |
 
 ### Interface et périphériques
 
 | Classe | Forme | Responsabilité |
 |---|---|---|
 | `MobileControls` | Control | Place les boutons tactiles et reflète leur état visuel. |
+| `WeaponWheelOverlay` | Control | Affiche temporairement les armes autorisées par le Loadout et demande l'équipement du segment choisi. |
 
 ## Comment choisir un nouveau nom
 

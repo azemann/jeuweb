@@ -1,12 +1,8 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy_character_2d.gd" id="1"]
 [ext_resource type="Resource" path="res://characters/enemies/data/vacuum_pilot_saboteur_profile.tres" id="2"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_patrol_component.gd" id="3"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="4"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="5"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="6"]
-[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="7"]
+[ext_resource type="PackedScene" path="res://characters/enemies/enemy_components.tscn" id="3_components"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_grounding_component.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_slope_presentation_component.tscn" id="9"]
 [ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_pilot_saboteur/vacuum_pilot_saboteur_frames.tres" id="10"]
@@ -25,31 +21,21 @@ profile = ExtResource("2")
 position = Vector2(0, -34)
 shape = SubResource("Shape")
 
-[node name="Components" type="Node2D" parent="."]
+[node name="Components" parent="." instance=ExtResource("3_components")]
 
-[node name="Patrol" type="Node" parent="Components"]
-script = ExtResource("3")
+[node name="Patrol" parent="Components" index="0"]
 profile = ExtResource("2")
 
-[node name="Health" type="Node" parent="Components"]
-script = ExtResource("4")
+[node name="Health" parent="Components" index="1"]
 profile = ExtResource("2")
 
-[node name="Attack" type="Node" parent="Components"]
-script = ExtResource("5")
+[node name="Attack" parent="Components" index="2"]
 attack_cooldown = 0.9
 attack_range = 58.0
 attack_animation = &"attack"
 release_frame = 3
 contact_damage = 34.0
 self_destruct_on_contact = true
-
-[node name="StateMachine" type="Node" parent="Components"]
-script = ExtResource("7")
-initial_state = 1
-
-[node name="Animation" type="Node" parent="Components"]
-script = ExtResource("6")
 
 [node name="Grounding" parent="Components" instance=ExtResource("8")]
 shadow_size = Vector2(48, 12)
@@ -79,3 +65,5 @@ visible = false
 
 [node name="AttackOrigin" type="Marker2D" parent="Visuals/GroundPivot"]
 position = Vector2(30, -40)
+
+[editable path="Components"]

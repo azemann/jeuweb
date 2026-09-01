@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://331fqkheh0qj"]
+
+[ext_resource type="PackedScene" path="res://terrain/ground_pieces/ground_piece_2d.tscn" id="1"]
+[ext_resource type="Resource" path="res://terrain/kits/toxic_coast/definitions/vacuum_foundry_platform.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://bpsxm80wxyuf3" path="res://art/terrain/pieces/toxic_coast/metal/vacuum-foundry-platform-v001.png" id="3_gbxt3"]
+
+[node name="VacuumFoundryPlatform" unique_id=418765646 instance=ExtResource("1")]
+definition = ExtResource("2")
+ground_mode = 0
+
+[node name="Presentation" parent="." index="0"]
+position = Vector2(-384, -48)
+texture = ExtResource("3_gbxt3")
+
+[node name="Collision" parent="PermanentBody" index="0"]
+position = Vector2(9.4999895, 118.05144)
+scale = Vector2(0.9830357, 0.6407442)
+polygon = PackedVector2Array(-353.49683, -3.201645, 328.06543, -3.201645, 312.80655, 110.72838, 61.544067, 263.67554, -161.23523, 246.50801, -318.9101, 140.3814)

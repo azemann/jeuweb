@@ -25,3 +25,14 @@ shape = SubResource("SolidShape")
 unique_name_in_owner = true
 position = Vector2(0, -106)
 gizmo_extents = 36.0
+
+[node name="AuthorPreview" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -96.0
+offset_top = -270.0
+offset_right = 96.0
+offset_bottom = -222.0
+text = "prop: toxic_standard_explosive_barrel
+explosion: barrel_standard"
+horizontal_alignment = 1

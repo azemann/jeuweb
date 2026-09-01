@@ -1,0 +1,23 @@
+name: Godot contracts
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.1
+          use-dotnet: false
+          include-templates: false
+
+      - name: Run structural and runtime contracts
+        run: ./scripts/run-tests.sh structure

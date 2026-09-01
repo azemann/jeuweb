@@ -15,7 +15,8 @@ maîtresse de la carte.
 - vie courante : `EnemyHealthComponent` ;
 - vélocité et retournements de patrouille : `EnemyPatrolComponent` ;
 - animation et orientation visuelle : `EnemyPresentationComponent` ;
-- collision et composition : scène canonique de l'ennemi ;
+- composition commune : `characters/enemies/enemy_components.tscn` ; collision,
+  présentation et variantes optionnelles : scène canonique de l'archétype ;
 - attaque, frame de relâchement, projectile ou dégâts de contact :
   `EnemyAttackComponent` dans la scène canonique ;
 - éjection optionnelle et scène du pilote : `EnemyEjectionComponent` ;
@@ -53,6 +54,12 @@ EnemyCharacter2D (CharacterBody2D)
 animations ; `Visuals` contient uniquement les sprites et sockets. Ces noms
 distincts interdisent l'ancienne ambiguïté de deux enfants `Presentation`.
 
+La branche `Components` est toujours une instance éditable de
+`enemy_components.tscn`. Une scène d'archétype surcharge uniquement les profils
+et réglages nécessaires, puis ajoute les composants réellement optionnels comme
+`Grounding`, `SlopeAlignment` ou `Ejection`. Elle ne recopie jamais Patrol,
+Health, Attack, StateMachine ou Animation.
+
 ## Workflow auteur
 
 1. pour une nouvelle animation raster, produire une bande séparée par action,
@@ -61,7 +68,9 @@ distincts interdisent l'ancienne ambiguïté de deux enfants `Presentation`.
 2. assigner l'atlas au `SpriteFrames` de l'ennemi et régler les timings dans
    l'Inspector Godot ;
 3. régler l'archétype dans sa Resource sous `characters/enemies/data/` ;
-4. assembler ou prévisualiser sa scène canonique dans Godot ;
+4. créer la scène d'archétype avec une instance éditable de
+   `enemy_components.tscn`, puis assembler collision, présentation et composants
+   optionnels dans Godot ;
 5. enregistrer sa correspondance dans `enemy_catalog.tres` ;
 6. référencer l'archétype depuis un `EnemySpawnPatternData`, puis le composer
    dans une `WaveData` et un `EncounterData` ;
@@ -106,11 +115,12 @@ le pipeline.
 
 ## Contrat de validation
 
-`enemy_contract_test.gd` protège profils, catalogue, scènes, modes terrestre et
-volant, les poses `walk`, `attack`, `hit`, `death` de chaque rôle,
+`enemy_contract_test.gd` protège profils, catalogue, scènes, instance commune
+`enemy_components.tscn`, modes terrestre et volant, ainsi que les poses `walk`,
+`attack`, `hit` et `death` de chaque rôle,
 l'arbre canonique, les dégâts, la suppression différée et l'éjection réelle du
 Saboteur. `map_contract_test.gd` protège les marqueurs auteur et
-`mission_run_contract_test.gd` la victoire après les douze apparitions de la
+`mission_run_contract_test.gd` la victoire après les treize apparitions de la
 cadence obligatoire.
 Le test tire aussi un vrai `FieldRound2D` sur le bord visible supérieur du Boss
 et protège l'autorité unique de sa Hurtbox.

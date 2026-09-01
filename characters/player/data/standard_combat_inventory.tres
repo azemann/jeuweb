@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerCombatInventoryProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://characters/player/data/player_combat_inventory_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+maximum_special_ammo = 40
+maximum_armor = 100.0
+overdrive_duration = 8.0
+overdrive_fire_interval_multiplier = 0.55

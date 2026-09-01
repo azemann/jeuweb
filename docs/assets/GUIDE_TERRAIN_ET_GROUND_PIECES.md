@@ -225,6 +225,24 @@ Aujourd'hui :
 | Matière creusée pendant la partie | `DestructibleTerrain2D` |
 | Vie d'une pièce cassable | composant runtime de la pièce |
 
+## Budgets physiques
+
+Le `DestructibleTerrainProfile` est l'autorité des budgets de chunks, de formes
+physiques et de chunks reconstruits par flush. `DestructibleTerrain2D` expose
+`collision_shape_count()` et `performance_budget_errors()` pour permettre aux
+tests de vérifier ces limites sans figer la géométrie exacte d'une carte.
+
+`TerrainCollisionBuilder` contient uniquement la transformation géométrique
+pure contour → pièces convexes. Il ne possède ni état, ni Node, ni autorité :
+le masque, les chunks sales, les corps et leur cycle de vie restent dans le
+`DestructibleTerrain2D` visible sous `Runtime/DestructibleTerrain`.
+
+Chaque contour solide est triangulé de façon déterministe, puis les triangles
+adjacents sont fusionnés tant que leur union reste convexe. Le terrain conserve
+ainsi un vrai volume physique — nécessaire aux détections d'`Area2D` — tout en
+évitant un `CollisionShape2D` séparé pour chaque triangle lorsque plusieurs
+triangles peuvent former une seule pièce convexe.
+
 ## Test mental avant toute modification
 
 Avant d'ajouter ou de modifier un élément de terrain, répondre à ces questions :

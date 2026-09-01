@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_patrol_component.gd" id="1_patrol"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="2_health"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="3_attack"]
+[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="4_state"]
+[ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="5_presentation"]
+
+[node name="Components" type="Node2D"]
+
+[node name="Patrol" type="Node" parent="."]
+script = ExtResource("1_patrol")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_health")
+
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("3_attack")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_state")
+initial_state = 1
+
+[node name="Animation" type="Node" parent="."]
+script = ExtResource("5_presentation")

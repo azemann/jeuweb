@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ExplosivePropData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://props/explosive_barrel/explosive_prop_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/explosive-barrel-v001.png" id="2"]
+[ext_resource type="PackedScene" path="res://effects/explosions/explosion_2d.tscn" id="3"]
+[ext_resource type="Resource" path="res://effects/explosions/data/barrel_standard_explosion.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+prop_id = &"toxic_standard_explosive_barrel"
+display_name = "Côte toxique — baril explosif standard"
+texture = ExtResource("2")
+pivot_px = Vector2(128, 304)
+maximum_health = 30.0
+collision_size = Vector2(94, 210)
+collision_offset = Vector2(0, -106)
+explosion_scene = ExtResource("3")
+explosion_data = ExtResource("4")

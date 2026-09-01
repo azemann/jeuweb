@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PickupData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://pickups/pickup_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/pickups/overdrive-vacuum-core-v001.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+pickup_id = &"overdrive_vacuum_core"
+display_name = "Noyau Overdrive"
+texture = ExtResource("2")
+effect = 3
+amount = 8.0
+collection_radius = 40.0

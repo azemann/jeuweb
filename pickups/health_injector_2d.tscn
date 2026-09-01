@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://pickups/pickup_2d.tscn" id="1_pickup"]
+[ext_resource type="Resource" path="res://pickups/data/health_injector.tres" id="2_data"]
+
+[node name="HealthInjector2D" instance=ExtResource("1_pickup")]
+data = ExtResource("2_data")

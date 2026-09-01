@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "toxic-coast-segment-backgrounds-v002",
+  "status": "published",
+  "assetCount": 3,
+  "derivedTransitionCount": 2,
+  "sourceRoot": "pipeline/assets/sources/imagegen/toxic_coast/backgrounds_v002",
+  "recipe": "pipeline/assets/recipes/toxic_coast_segment_backgrounds_v002.md",
+  "processor": "pipeline/assets/tools/process_toxic_coast_segment_backgrounds.py",
+  "qa": "pipeline/assets/working/maps/toxic_coast/backgrounds_v002/qa.json",
+  "consumerValidation": "tests/map_contract_test.gd",
+  "integrationAllowed": true
+}

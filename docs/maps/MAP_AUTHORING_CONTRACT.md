@@ -16,7 +16,7 @@ pendant la migration des anciens volumes et `GroundModule2D`.
 ## Autorités
 
 - `MissionMapDefinition.tres` possède identité, scène maîtresse, aperçu,
-  dimensions et politique de destruction ;
+  dimensions, politique de destruction et choix du `MissionHUDTheme` ;
 - la scène maîtresse possède le placement final ;
 - les `MapSegment2D` possèdent le découpage, l'ordre et l'intention des séquences ;
 - les `TileMapLayer` possèdent le décor répétitif lorsqu'un TileSet existe ;
@@ -27,6 +27,9 @@ pendant la migration des anciens volumes et `GroundModule2D`.
   physique de son morceau de sol permanent ;
 - `PermanentGroundStyle.tres` possède ses matières, couleurs et largeur de
   surface, jamais son placement ou sa géométrie.
+- les instances interactives possèdent leur placement sous
+  `Gameplay/Interactions` ; leur Resource possède contenu et réglages, jamais
+  leur position dans la mission.
 
 Une même information ne doit pas être encodée dans le nom d'un Node, dans une
 Resource et dans un script en parallèle.
@@ -40,7 +43,6 @@ MissionMapRoot2D
 │   ├── Segments
 │   ├── PlayerSpawnPoints
 │   ├── EncounterMarkers
-│   ├── CombatGates
 │   ├── GroundPieces
 │   ├── DestructibleZones
 │   ├── IndestructibleGeometry
@@ -59,15 +61,20 @@ MissionMapRoot2D
     └── PreviewCamera
 ```
 
-Les noms décrivent leur contenu réel : `EncounterMarkers` déclenche des
-rencontres complètes, tandis que `CombatGates` contient uniquement leurs
-barrières physiques. `Runtime` ne reçoit jamais de placement auteur permanent
+Les `EncounterMarkers` déclenchent des rencontres complètes sans créer de
+barrière physique. `Runtime` ne reçoit jamais de placement auteur permanent
 et `EditorPreview` ne contient jamais une autorité gameplay. L'auteur de niveau
 travaille principalement sous `Visual` et `Gameplay`; les contrôleurs peuplent
 `Runtime` pendant la partie.
 
 La racine doit retourner zéro erreur avec `validation_errors()`. Chaque
 `spawn_id` et chaque `encounter_id` est stable et unique dans la carte.
+
+Une cible activée par le joueur expose une `Area2D` sur la couche
+`Interactable`, membre du groupe `interaction_targets`. La zone de détection du
+joueur reste la seule à surveiller les chevauchements ; la cible traduit ensuite
+l'intention via `can_interact()` et `interact()`. Le contrat détaillé des caisses
+et pickups se trouve dans `docs/pickups/PICKUP_INTERACTION_AUTHORING_CONTRACT.md`.
 
 ## Objectifs et sortie de mission
 
@@ -84,6 +91,10 @@ La victoire exige simultanément l'élimination de toutes les rencontres auteur
 obligatoires et la présence du joueur dans le rayon de sortie réglable depuis
 l'Inspector.
 
+Côte toxique applique le mode **Flux Libre** : aucune branche `CombatGates`,
+retour arrière possible et seules les rencontres explicitement marquées
+`Blocks Mission Exit` conditionnent la victoire.
+
 Le contrat exhaustif des vagues, motifs et beats se trouve dans
 `docs/maps/ENCOUNTER_AUTHORING_CONTRACT.md`.
 
@@ -98,17 +109,24 @@ Un segment décrit une intention de level design, pas la possession de ses
 Nodes. Spawns, dangers et géométrie restent rangés dans leurs branches métier ;
 leur position dans la scène détermine le segment auquel ils appartiennent.
 
-## Panoramas et répétition
+## Backgrounds segmentés
 
-Un panorama n'est pas étiré pour simuler un niveau long. Le `Parallax2D`
-possède sa vitesse relative et sa période via `repeat_size`. La répétition est
-acceptable comme transition de production ; les futurs modules visuels
-distinctifs seront placés dans les `TileMapLayer` ou comme scènes de décor.
+Un panorama n'est jamais étiré ou répété pour simuler plusieurs actes
+différents. Pour une mission segmentée, chaque bitmap publié sous
+`Visual/SegmentBackgrounds` correspond à un `MapSegment2D`, partage exactement
+ses dimensions et se centre sur ses bornes auteur.
 
-Un plan de cadrage conserve une opacité franche. Sa lisibilité vient de sa
-composition : faible intrusion verticale dans le couloir jouable et raccords
-latéraux conçus pour sa période de répétition. L'opacité ne doit pas servir à
-masquer une planche mal adaptée.
+Le background conserve une opacité franche. Sa lisibilité vient de sa
+composition et d'une bande basse calme derrière le couloir jouable. Les
+transitions visuelles coïncident avec une frontière de segment mise en scène ;
+elles ne sont pas masquées par une répétition implicite ou une opacité faible.
+
+Un `Parallax2D` reste permis lorsqu'un même espace possède réellement plusieurs
+plans répétables. Il ne doit jamais remplacer l'identité propre d'un acte.
+Toxic Coast possède ainsi un midground lent et un foreground proche issus de
+bitmaps transparents historiques ; les panoramas segmentés restent visibles et
+autoritaires dessous. Les effets placés sous `Visual/EnvironmentFX` suivent le
+contrat `docs/effects/ENVIRONMENT_VISUAL_AUTHORING_CONTRACT.md`.
 
 ## Destruction
 
@@ -141,6 +159,12 @@ nouvelle zone auteur et toute nouvelle `GroundPiece2D` en mode `Carvable` en
 bénéficient automatiquement, sans script ni option supplémentaire sur la
 pièce. Le masque reste l'autorité immédiate de `is_solid_at()` ; les colliders
 en sont une représentation dérivée synchronisée juste après la frame physique.
+
+Les contours issus du masque sont triangulés explicitement en
+pièces `ConvexPolygonShape2D` solides fusionnées dans la limite de leur convexité. Un cratère produit naturellement des frontières
+concaves : elles ne doivent pas être confiées implicitement à la décomposition
+convexe de `CollisionPolygon2D`. Le masque reste l'autorité de la matière
+pleine ; les pièces convexes sont uniquement sa collision physique dérivée.
 
 ## Sol permanent sans TileSet
 

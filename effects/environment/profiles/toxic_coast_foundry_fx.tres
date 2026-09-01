@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnvironmentFXProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://effects/environment/environment_fx_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+display_name = "Rejets de la fonderie aspirante"
+smoke_amount = 32
+smoke_color = Color(0.16, 0.17, 0.18, 0.58)
+fog_amount = 14
+fog_color = Color(0.48, 0.66, 0.08, 0.15)
+sparks_enabled = true
+sparks_amount = 52
+sparks_color = Color(1, 0.38, 0.04, 0.95)
+lightning_enabled = true
+lightning_interval_min = 8.0
+lightning_interval_max = 14.0
+lightning_color = Color(1, 0.53, 0.18, 1)

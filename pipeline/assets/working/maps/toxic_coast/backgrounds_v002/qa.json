@@ -1,0 +1,67 @@
+{
+  "schema": "jeuweb.toxic-coast-segment-backgrounds.v2",
+  "lot_id": "toxic-coast-segment-backgrounds-v002",
+  "status": "published",
+  "asset_count": 3,
+  "assets": [
+    {
+      "segment_id": "landing_zone",
+      "source": "pipeline/assets/sources/imagegen/toxic_coast/backgrounds_v002/landing-zone-background-source-v002.png",
+      "export": "pipeline/assets/exports/maps/toxic_coast/backgrounds_v002/landing-zone-background-v002.png",
+      "published": "art/maps/toxic_coast/backgrounds/landing-zone-background-v002.png",
+      "size": [
+        2560,
+        720
+      ],
+      "source_sha256": "4a9dd48dcf4a184dda796a055a7d7819c5723154db644dad179c9340392135fb",
+      "published_sha256": "7f225c2b4eae009458e10fc9dc4df8982dc44c156a4cb4731908fca12dedc816"
+    },
+    {
+      "segment_id": "acid_bridge",
+      "source": "pipeline/assets/sources/imagegen/toxic_coast/backgrounds_v002/acid-bridge-background-source-v002.png",
+      "export": "pipeline/assets/exports/maps/toxic_coast/backgrounds_v002/acid-bridge-background-v002.png",
+      "published": "art/maps/toxic_coast/backgrounds/acid-bridge-background-v002.png",
+      "size": [
+        2560,
+        720
+      ],
+      "source_sha256": "f222841eb2a196b93747e5aa00a51e50db4eddbcb552f936c2e9c37d717c100c",
+      "published_sha256": "2750c855df7b7e7487ea53874d73042d6c26e8ecba45053c19de6f25e25d2094"
+    },
+    {
+      "segment_id": "vacuum_foundry",
+      "source": "pipeline/assets/sources/imagegen/toxic_coast/backgrounds_v002/vacuum-foundry-background-source-v002.png",
+      "export": "pipeline/assets/exports/maps/toxic_coast/backgrounds_v002/vacuum-foundry-background-v002.png",
+      "published": "art/maps/toxic_coast/backgrounds/vacuum-foundry-background-v002.png",
+      "size": [
+        2560,
+        720
+      ],
+      "source_sha256": "aca4259610adccf20ec96d79843ea4ec3e2b3f4defb1fa8f3706376dcbcae802",
+      "published_sha256": "31eced11b9dd03767624378972bde4bf51485cd9654a925132d4d7950249edba"
+    }
+  ],
+  "derived_transitions": [
+    {
+      "published": "art/maps/toxic_coast/backgrounds/transitions/landing-to-bridge-transition-v002.png",
+      "size": [
+        384,
+        720
+      ],
+      "published_sha256": "e62c5ba1b38cf4639ef7c5bb3fb81f3e739647fe44d225c1343b07e68f74b7b2"
+    },
+    {
+      "published": "art/maps/toxic_coast/backgrounds/transitions/bridge-to-foundry-transition-v002.png",
+      "size": [
+        384,
+        720
+      ],
+      "published_sha256": "f78d9da7846454b69284bf24987ea3f00c88e75dd34c9e59ebdaa48fc60c389b"
+    }
+  ],
+  "validation": {
+    "dimensions": "passed",
+    "gameplay_band": "passed",
+    "consumer_import": "pending"
+  }
+}

@@ -1,12 +1,8 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy_character_2d.gd" id="1"]
 [ext_resource type="Resource" path="res://characters/enemies/data/vacuum_flying_profile.tres" id="2"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_patrol_component.gd" id="3"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="4"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="5"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="6"]
-[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="7"]
+[ext_resource type="PackedScene" path="res://characters/enemies/enemy_components.tscn" id="3_components"]
 [ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_flying/vacuum_flying_frames.tres" id="8"]
 [ext_resource type="PackedScene" path="res://weapons/projectiles/toxic_pressure_2d.tscn" id="9"]
 
@@ -25,18 +21,15 @@ slope_presentation_component_path = NodePath("")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("Shape")
 
-[node name="Components" type="Node2D" parent="."]
+[node name="Components" parent="." instance=ExtResource("3_components")]
 
-[node name="Patrol" type="Node" parent="Components"]
-script = ExtResource("3")
+[node name="Patrol" parent="Components" index="0"]
 profile = ExtResource("2")
 
-[node name="Health" type="Node" parent="Components"]
-script = ExtResource("4")
+[node name="Health" parent="Components" index="1"]
 profile = ExtResource("2")
 
-[node name="Attack" type="Node" parent="Components"]
-script = ExtResource("5")
+[node name="Attack" parent="Components" index="2"]
 projectile_scene = ExtResource("9")
 attack_cooldown = 1.8
 attack_range = 470.0
@@ -45,12 +38,7 @@ body_sprite_path = NodePath("../../Visuals/BodySprite")
 attack_sprite_path = NodePath("../../Visuals/AttackSprite")
 attack_origin_path = NodePath("../../Visuals/AttackOrigin")
 
-[node name="StateMachine" type="Node" parent="Components"]
-script = ExtResource("7")
-initial_state = 1
-
-[node name="Animation" type="Node" parent="Components"]
-script = ExtResource("6")
+[node name="Animation" parent="Components" index="4"]
 body_sprite_path = NodePath("../../Visuals/BodySprite")
 
 [node name="Visuals" type="Node2D" parent="."]
@@ -69,3 +57,5 @@ visible = false
 
 [node name="AttackOrigin" type="Marker2D" parent="Visuals"]
 position = Vector2(74, 6)
+
+[editable path="Components"]

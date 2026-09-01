@@ -12,6 +12,14 @@ extends Resource
 ## Aire minimale, en pixels carrés, conservée comme collision ; élimine les poussières et petits îlots.
 @export_range(1.0, 1024.0, 1.0) var minimum_polygon_area := 12.0
 
+@export_category("Performance Budgets")
+## Nombre maximal de StaticBody2D de chunks accepté après une génération complète.
+@export_range(1, 512, 1) var maximum_chunk_bodies := 96
+## Nombre maximal de formes physiques dérivées accepté pour toute la carte.
+@export_range(1, 2048, 1) var maximum_collision_shapes := 256
+## Nombre maximal de chunks reconstruits dans un même flush différé d'impacts.
+@export_range(1, 64, 1) var maximum_chunks_per_flush := 9
+
 @export_category("Visual Surface")
 ## Texture de la couche proche de l'air, révélée autour de la surface intacte.
 @export var shallow_texture: Texture2D
@@ -51,4 +59,16 @@ func is_valid() -> bool:
 		and world_size.y >= 720
 		and chunk_size > 0
 		and collision_simplification > 0.0
+		and maximum_chunk_bodies > 0
+		and maximum_collision_shapes > 0
+		and maximum_chunks_per_flush > 0
 	)
+
+
+func performance_budget_errors(chunk_bodies: int, collision_shapes: int) -> PackedStringArray:
+	var errors := PackedStringArray()
+	if chunk_bodies > maximum_chunk_bodies:
+		errors.append("Le terrain utilise %d chunks physiques pour un budget de %d." % [chunk_bodies, maximum_chunk_bodies])
+	if collision_shapes > maximum_collision_shapes:
+		errors.append("Le terrain utilise %d formes physiques pour un budget de %d." % [collision_shapes, maximum_collision_shapes])
+	return errors

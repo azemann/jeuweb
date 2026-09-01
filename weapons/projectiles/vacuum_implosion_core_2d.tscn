@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://weapons/projectiles/field_round_2d.tscn" id="1"]
+[ext_resource type="Resource" path="res://weapons/projectiles/data/vacuum_implosion_core.tres" id="2"]
+[node name="VacuumImplosionCore2D" instance=ExtResource("1")]
+data = ExtResource("2")

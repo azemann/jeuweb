@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ServiceStationData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://props/service_station/service_station_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/ammo-resupply-locker-v001.png" id="2"]
+[resource]
+script = ExtResource("1")
+station_id = &"ammo_resupply_locker"
+display_name = "Casier de ravitaillement"
+texture = ExtResource("2")
+pivot_px = Vector2(192, 304)
+collision_size = Vector2(210, 260)
+collision_offset = Vector2(0, -130)
+service = 1
+amount = 24.0
+maximum_uses = 1
+interaction_prompt = "RAVITAILLER"

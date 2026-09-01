@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "health-injector-pickup-v001",
+  "recordedAt": "2026-08-29",
+  "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/pickups/health-injector-pickup-source-v001.png",
+  "generator": "OpenAI built-in imagegen, inherited from industrial-toxic-megapack-v001",
+  "transformations": [
+    "human visual classification as health pickup",
+    "deterministic alpha crop",
+    "Lanczos normalization to transparent 192x192 runtime canvas"
+  ],
+  "rightsStatus": "project-generated asset",
+  "publicationStatus": "approved for runtime pickup integration"
+}

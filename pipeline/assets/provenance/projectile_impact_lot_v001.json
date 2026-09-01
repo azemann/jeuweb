@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "lotId": "projectile-impact-lot-v001",
-  "status": "candidate",
+  "status": "integrated",
   "generatedAt": "2026-08-26",
   "tool": {
     "provider": "OpenAI",
@@ -28,9 +28,9 @@
   ],
   "validation": {
     "technical": "passed",
-    "visual": "pending",
-    "humanApproval": "pending",
-    "consumerImport": "not-run"
+    "visual": "approved for v001 by author request on 2026-08-31",
+    "humanApproval": "approved",
+    "consumerImport": "passed"
   },
   "rejectedAttempt": {
     "reason": "Image edit produced a baked checkerboard and opaque RGB output",

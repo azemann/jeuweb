@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "frames": 8,
+  "cell": [
+    288,
+    384
+  ],
+  "variants": {
+    "small": {
+      "source": "pipeline/assets/sources/imagegen/effects/explosions/barrel_v001/barrel-small-explosion-4x2-source-v001.png",
+      "export": "pipeline/assets/exports/effects/explosions/barrel_v001/barrel-small-explosion-4x2-v001.png",
+      "runtime": "art/effects/explosions/barrel/barrel-small-explosion-4x2-v001.png",
+      "size": [
+        1152,
+        768
+      ],
+      "occupiedFrames": 8,
+      "transparentCorners": true
+    },
+    "standard": {
+      "source": "pipeline/assets/sources/imagegen/effects/explosions/barrel_v001/barrel-standard-explosion-4x2-source-v001.png",
+      "export": "pipeline/assets/exports/effects/explosions/barrel_v001/barrel-standard-explosion-4x2-v001.png",
+      "runtime": "art/effects/explosions/barrel/barrel-standard-explosion-4x2-v001.png",
+      "size": [
+        1152,
+        768
+      ],
+      "occupiedFrames": 8,
+      "transparentCorners": true
+    },
+    "heavy": {
+      "source": "pipeline/assets/sources/imagegen/effects/explosions/barrel_v001/barrel-heavy-explosion-4x2-source-v001.png",
+      "export": "pipeline/assets/exports/effects/explosions/barrel_v001/barrel-heavy-explosion-4x2-v001.png",
+      "runtime": "art/effects/explosions/barrel/barrel-heavy-explosion-4x2-v001.png",
+      "size": [
+        1152,
+        768
+      ],
+      "occupiedFrames": 8,
+      "transparentCorners": true
+    }
+  }
+}

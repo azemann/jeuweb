@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/portable-barricade-v001.png" id="2"]
+[ext_resource type="Resource" path="res://terrain/kits/toxic_coast/breakables/industrial_ground_breakable.tres" id="3"]
+[resource]
+script = ExtResource("1")
+piece_id = &"portable_barricade"
+display_name = "Côte toxique — barricade portable"
+category = 1
+tags = PackedStringArray("military", "barricade", "cover", "breakable", "toxic_coast")
+texture = ExtResource("2")
+pivot_px = Vector2(256, 240)
+collision_source = 1
+authored_outline = PackedVector2Array(-235, -165, 235, -165, 235, 0, -235, 0)
+walk_surface_point_count = 2
+recommended_mode = 2
+breakable_profile = ExtResource("3")

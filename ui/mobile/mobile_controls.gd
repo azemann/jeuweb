@@ -28,6 +28,7 @@ const BUTTONS := {
 	"Down": "DownVisual",
 	"Jump": "JumpVisual",
 	"Fire": "FireVisual",
+	"Interact": "InteractVisual",
 }
 
 
@@ -61,8 +62,10 @@ func _layout_controls() -> void:
 
 	var fire_center := Vector2(size.x - edge_margin - button_radius, size.y - edge_margin - button_radius)
 	var jump_center := fire_center + Vector2(-button_radius * 2.25, -button_radius * 1.45)
+	var interact_center := fire_center + Vector2(0.0, -button_radius * 2.4)
 	_place_button("Fire", fire_center)
 	_place_button("Jump", jump_center)
+	_place_button("Interact", interact_center)
 
 
 func _place_button(button_name: String, center: Vector2) -> void:

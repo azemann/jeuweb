@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-expansion-v001",
+  "parentLot": "industrial-toxic-megapack-v001",
+  "transformation": "alpha crop, uniform resize, fixed canvas; 3x2 cell normalization for impacts",
+  "generatedContent": false,
+  "selection": "27 retained sources; 11 integrated or superseded sources excluded"
+}

@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b2s62xv7654be"]
+
+[ext_resource type="Texture2D" uid="uid://cti54phhg47f4" path="res://art/effects/weapons/electric/electric-impact-3x2-v001.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="F0"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 192, 160)
+
+[sub_resource type="AtlasTexture" id="F1"]
+atlas = ExtResource("1")
+region = Rect2(192, 0, 192, 160)
+
+[sub_resource type="AtlasTexture" id="F2"]
+atlas = ExtResource("1")
+region = Rect2(384, 0, 192, 160)
+
+[sub_resource type="AtlasTexture" id="F3"]
+atlas = ExtResource("1")
+region = Rect2(0, 160, 192, 160)
+
+[sub_resource type="AtlasTexture" id="F4"]
+atlas = ExtResource("1")
+region = Rect2(192, 160, 192, 160)
+
+[sub_resource type="AtlasTexture" id="F5"]
+atlas = ExtResource("1")
+region = Rect2(384, 160, 192, 160)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("F0")
+}, {
+"duration": 1.0,
+"texture": SubResource("F1")
+}, {
+"duration": 1.0,
+"texture": SubResource("F2")
+}, {
+"duration": 1.0,
+"texture": SubResource("F3")
+}, {
+"duration": 1.0,
+"texture": SubResource("F4")
+}, {
+"duration": 1.0,
+"texture": SubResource("F5")
+}],
+"loop": 0,
+"name": &"impact",
+"speed": 14.0
+}]

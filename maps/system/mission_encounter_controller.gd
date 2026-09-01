@@ -2,6 +2,8 @@
 class_name MissionEncounterController
 extends Node
 
+const EncounterRuntimeStateType = preload("res://maps/encounters/encounter_runtime_state.gd")
+
 signal encounter_started(encounter_id: StringName, data: EncounterData)
 signal wave_started(encounter_id: StringName, wave_index: int, wave: WaveData)
 signal wave_finished(encounter_id: StringName, wave_index: int, wave: WaveData)
@@ -16,11 +18,11 @@ signal encounter_completed(encounter_id: StringName)
 ## Spawner primitif qui traduit un archétype en scène sans décider de la cadence.
 @export_node_path("MissionEnemySpawner2D") var enemy_spawner_path := NodePath("../EnemySpawner")
 
-var _started: Dictionary = {}
-var _completed: Dictionary = {}
-var _active_counts: Dictionary = {}
-var _spawn_serials: Dictionary = {}
-var _states: Dictionary = {}
+var _started: Dictionary[StringName, bool] = {}
+var _completed: Dictionary[StringName, bool] = {}
+var _active_counts: Dictionary[StringName, int] = {}
+var _spawn_serials: Dictionary[StringName, int] = {}
+var _states: Dictionary[StringName, EncounterRuntimeStateType] = {}
 
 
 func _ready() -> void:
@@ -75,24 +77,15 @@ func _begin_encounter(map: MissionMapRoot2D, marker: MapEncounterMarker2D) -> vo
 	_started[marker.encounter_id] = true
 	_active_counts[marker.encounter_id] = 0
 	_spawn_serials[marker.encounter_id] = 0
-	_states[marker.encounter_id] = {
-		"map": map,
-		"marker": marker,
-		"wave_index": 0,
-		"pattern_index": 0,
-		"offset_index": 0,
-		"phase": &"lead_in",
-		"timer": marker.encounter_data.waves[0].lead_in_delay,
-	}
-	_set_combat_gate(map, marker.encounter_id, true)
+	_states[marker.encounter_id] = EncounterRuntimeStateType.new(map, marker)
 	encounter_started.emit(marker.encounter_id, marker.encounter_data)
 
 
 func _tick_encounter(encounter_id: StringName, delta: float) -> void:
 	if not _states.has(encounter_id):
 		return
-	var state: Dictionary = _states[encounter_id]
-	state.timer = maxf(0.0, float(state.timer) - delta)
+	var state := _states[encounter_id]
+	state.timer = maxf(0.0, state.timer - delta)
 	if state.timer > 0.0:
 		return
 	# Plusieurs transitions sans délai peuvent être résolues pendant la même frame.
@@ -101,16 +94,16 @@ func _tick_encounter(encounter_id: StringName, delta: float) -> void:
 		var data := marker.encounter_data
 		var wave_index := int(state.wave_index)
 		var wave := data.waves[wave_index] if wave_index < data.waves.size() else null
-		match StringName(state.phase):
-			&"lead_in":
+		match state.phase:
+			EncounterRuntimeStateType.Phase.LEAD_IN:
 				wave_started.emit(encounter_id, wave_index, wave)
 				state.pattern_index = 0
-				state.phase = &"pattern_delay"
+				state.phase = EncounterRuntimeStateType.Phase.PATTERN_DELAY
 				state.timer = wave.spawn_patterns[0].delay_before
-			&"pattern_delay":
+			EncounterRuntimeStateType.Phase.PATTERN_DELAY:
 				state.offset_index = 0
-				state.phase = &"spawn"
-			&"spawn":
+				state.phase = EncounterRuntimeStateType.Phase.SPAWN
+			EncounterRuntimeStateType.Phase.SPAWN:
 				var pattern := wave.spawn_patterns[int(state.pattern_index)]
 				var offsets := pattern.authored_offsets()
 				var offset_index := int(state.offset_index)
@@ -130,49 +123,48 @@ func _tick_encounter(encounter_id: StringName, delta: float) -> void:
 				else:
 					state.pattern_index = int(state.pattern_index) + 1
 					if int(state.pattern_index) < wave.spawn_patterns.size():
-						state.phase = &"pattern_delay"
+						state.phase = EncounterRuntimeStateType.Phase.PATTERN_DELAY
 						state.timer = wave.spawn_patterns[int(state.pattern_index)].delay_before
 					elif wave.advance_condition == WaveData.AdvanceCondition.WHEN_CLEARED:
-						state.phase = &"wait_clear"
+						state.phase = EncounterRuntimeStateType.Phase.WAIT_CLEAR
 					else:
-						state.phase = &"timed_advance"
+						state.phase = EncounterRuntimeStateType.Phase.TIMED_ADVANCE
 						state.timer = wave.advance_delay
-			&"wait_clear":
+			EncounterRuntimeStateType.Phase.WAIT_CLEAR:
 				if active_enemy_count(encounter_id) > 0:
 					return
 				_finish_wave(encounter_id, state, wave)
-			&"timed_advance":
+			EncounterRuntimeStateType.Phase.TIMED_ADVANCE:
 				_finish_wave(encounter_id, state, wave)
-			&"encounter_clear":
+			EncounterRuntimeStateType.Phase.ENCOUNTER_CLEAR:
 				if active_enemy_count(encounter_id) > 0:
 					return
-				state.phase = &"completion_delay"
+				state.phase = EncounterRuntimeStateType.Phase.COMPLETION_DELAY
 				state.timer = data.completion_delay
-			&"completion_delay":
+			EncounterRuntimeStateType.Phase.COMPLETION_DELAY:
 				_complete_encounter(encounter_id, state.map, marker)
 				return
-		if float(state.timer) > 0.0:
+		if state.timer > 0.0:
 			return
 	push_error("La rencontre '%s' dépasse la garde de transitions sans délai." % encounter_id)
 
 
-func _finish_wave(encounter_id: StringName, state: Dictionary, wave: WaveData) -> void:
-	var wave_index := int(state.wave_index)
+func _finish_wave(encounter_id: StringName, state: EncounterRuntimeStateType, wave: WaveData) -> void:
+	var wave_index := state.wave_index
 	wave_finished.emit(encounter_id, wave_index, wave)
 	state.wave_index = wave_index + 1
 	var marker := state.marker as MapEncounterMarker2D
-	if int(state.wave_index) < marker.encounter_data.waves.size():
-		state.phase = &"lead_in"
-		state.timer = marker.encounter_data.waves[int(state.wave_index)].lead_in_delay
+	if state.wave_index < marker.encounter_data.waves.size():
+		state.phase = EncounterRuntimeStateType.Phase.LEAD_IN
+		state.timer = marker.encounter_data.waves[state.wave_index].lead_in_delay
 	else:
-		state.phase = &"encounter_clear"
+		state.phase = EncounterRuntimeStateType.Phase.ENCOUNTER_CLEAR
 		state.timer = 0.0
 
 
 func _complete_encounter(encounter_id: StringName, map: MissionMapRoot2D, marker: MapEncounterMarker2D) -> void:
 	_completed[encounter_id] = true
 	_states.erase(encounter_id)
-	_set_combat_gate(map, encounter_id, false)
 	encounter_completed.emit(encounter_id)
 
 
@@ -206,16 +198,6 @@ func _on_map_loaded(_map: MissionMapRoot2D) -> void:
 	_active_counts.clear()
 	_spawn_serials.clear()
 	_states.clear()
-
-
-func _set_combat_gate(map: MissionMapRoot2D, encounter_id: StringName, closed: bool) -> void:
-	var gates_root := map.combat_gates_root()
-	if gates_root == null:
-		return
-	for child in gates_root.get_children():
-		var gate := child as MissionCombatGate2D
-		if gate != null and gate.encounter_id == encounter_id:
-			gate.set_closed(closed)
 
 
 func validation_errors() -> PackedStringArray:

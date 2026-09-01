@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PickupData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://pickups/pickup_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/pickups/armor-plate-v001.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+pickup_id = &"armor_plate"
+display_name = "Plaque d'armure"
+texture = ExtResource("2")
+effect = 2
+amount = 45.0
+collection_radius = 38.0

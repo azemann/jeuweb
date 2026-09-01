@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8hws5l7xoa36" path="res://maps/system/mission_map_definition.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://cy7ocolydomkl" path="res://art/concepts/da-03-environment-destruction.png" id="2_preview"]
+[ext_resource type="Resource" path="res://ui/hud/themes/toxic_commando_hud_theme.tres" id="3_hud_theme"]
 
 [resource]
 script = ExtResource("1_script")
@@ -9,4 +10,5 @@ map_id = &"toxic_coast"
 display_name = "Côte toxique"
 scene_path = "res://maps/missions/toxic_coast/toxic_coast.tscn"
 preview_texture = ExtResource("2_preview")
-world_size = Vector2i(3840, 720)
+hud_theme = ExtResource("3_hud_theme")
+world_size = Vector2i(7680, 720)

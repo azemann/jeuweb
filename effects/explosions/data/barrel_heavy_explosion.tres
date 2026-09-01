@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ExplosionData" format=3 uid="uid://c2x8fgas5ck8q"]
+
+[ext_resource type="Script" uid="uid://dhux1to3w1642" path="res://effects/explosions/explosion_data.gd" id="1_data"]
+[ext_resource type="SpriteFrames" uid="uid://hx12xihfnguw" path="res://effects/explosions/barrel/barrel_heavy_explosion_frames.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_data")
+explosion_id = &"barrel_heavy"
+family_id = &"barrel"
+display_name = "Baril — explosion lourde"
+terrain_radius = 300.0
+damage_radius = 164.0
+damage = 100.0
+impulse = 1480.0
+duration = 1.43
+flash_color = Color(1, 0.97, 0.68, 1)
+fire_color = Color(1, 0.27, 0.02, 1)
+smoke_color = Color(0.13, 0.11, 0.12, 1)
+sprite_frames = ExtResource("2_frames")
+visual_scale = 1.18
+shockwave_scale = 1.55
+light_energy = 4.2
+spark_amount = 52
+debris_amount = 28
+toxic_droplet_amount = 38

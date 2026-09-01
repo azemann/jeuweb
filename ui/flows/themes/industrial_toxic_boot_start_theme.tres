@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="BootStartFlowTheme" format=3 uid="uid://fpv0sakrbtun"]
+
+[ext_resource type="Script" uid="uid://c2ttrcjilv2cr" path="res://ui/flows/boot_start_flow_theme.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bpotqtgb7xn7i" path="res://art/ui/flows/industrial_toxic/branding/vacuum-faction-emblem-v001.png" id="2_emblem"]
+[ext_resource type="Texture2D" uid="uid://ct888nda505q6" path="res://art/ui/flows/industrial_toxic/frames/blank-armored-title-plaque-v001.png" id="3_plaque"]
+[ext_resource type="Texture2D" uid="uid://cupj2fsx06awi" path="res://art/ui/flows/industrial_toxic/frames/vertical-main-menu-frame-v001.png" id="4_menu"]
+[ext_resource type="Texture2D" uid="uid://jyndx30e6j8f" path="res://art/ui/flows/industrial_toxic/backgrounds/boot-radio-outpost-background-v001.png" id="5_boot"]
+[ext_resource type="Texture2D" uid="uid://de01p831dky5b" path="res://art/ui/flows/industrial_toxic/backgrounds/loading-vacuum-turbine-background-v001.png" id="6_loading"]
+[ext_resource type="Texture2D" uid="uid://c0ydp5ifyrhco" path="res://art/ui/flows/industrial_toxic/backgrounds/title-fortress-assault-background-v001.png" id="7_start"]
+[ext_resource type="Texture2D" uid="uid://3er25pb7mufc" path="res://art/ui/flows/industrial_toxic/backgrounds/mission-select-archipelago-map-v001.png" id="8_missions"]
+[ext_resource type="Texture2D" uid="uid://dgobjks78nlcu" path="res://art/ui/flows/industrial_toxic/ornaments/previous-inactive-v001.png" id="9_previous"]
+[ext_resource type="Texture2D" uid="uid://bvyp46866oee4" path="res://art/ui/flows/industrial_toxic/ornaments/previous-active-v001.png" id="10_previous_active"]
+[ext_resource type="Texture2D" uid="uid://by3j0fdu423tt" path="res://art/ui/flows/industrial_toxic/ornaments/locked-v001.png" id="11_locked"]
+[ext_resource type="Texture2D" uid="uid://d1f6ll1ocqs63" path="res://art/ui/flows/industrial_toxic/ornaments/divider-v001.png" id="12_divider"]
+[ext_resource type="Texture2D" uid="uid://ccibnbx3vr3lv" path="res://art/ui/flows/industrial_toxic/ornaments/lime-status-lamp-v001.png" id="13_lime"]
+[ext_resource type="Texture2D" uid="uid://bw6a6oi67pc3f" path="res://art/ui/flows/industrial_toxic/ornaments/magenta-status-lamp-v001.png" id="14_magenta"]
+[ext_resource type="Texture2D" uid="uid://bp84a7taaewds" path="res://art/ui/flows/industrial_toxic/markers/landing-marker-v001.png" id="15_landing"]
+[ext_resource type="Texture2D" uid="uid://cwqu2wm6asfdb" path="res://art/ui/flows/industrial_toxic/markers/pipeline-marker-v001.png" id="16_pipeline"]
+[ext_resource type="Texture2D" uid="uid://km12ipswykgc" path="res://art/ui/flows/industrial_toxic/markers/foundry-marker-v001.png" id="17_foundry"]
+[ext_resource type="Texture2D" uid="uid://buwjn8t7reyn1" path="res://art/ui/flows/industrial_toxic/markers/fortress-marker-v001.png" id="18_fortress"]
+[ext_resource type="Texture2D" uid="uid://dj8fsjkkkyxkp" path="res://art/ui/flows/industrial_toxic/markers/elite-marker-v001.png" id="19_elite"]
+[ext_resource type="Texture2D" uid="uid://djkifkd8aafnc" path="res://art/ui/flows/industrial_toxic/markers/completed-marker-v001.png" id="20_completed"]
+
+[resource]
+script = ExtResource("1_script")
+faction_emblem = ExtResource("2_emblem")
+title_plaque = ExtResource("3_plaque")
+main_menu_frame = ExtResource("4_menu")
+boot_background = ExtResource("5_boot")
+loading_background = ExtResource("6_loading")
+start_background = ExtResource("7_start")
+mission_select_background = ExtResource("8_missions")
+previous_inactive = ExtResource("9_previous")
+previous_active = ExtResource("10_previous_active")
+locked_ornament = ExtResource("11_locked")
+divider_ornament = ExtResource("12_divider")
+lime_status_lamp = ExtResource("13_lime")
+magenta_status_lamp = ExtResource("14_magenta")
+landing_marker = ExtResource("15_landing")
+pipeline_marker = ExtResource("16_pipeline")
+foundry_marker = ExtResource("17_foundry")
+fortress_marker = ExtResource("18_fortress")
+elite_marker = ExtResource("19_elite")
+completed_marker = ExtResource("20_completed")

@@ -13,8 +13,16 @@ extends CharacterBody2D
 @export_node_path("ActorStateMachineComponent") var state_machine_path := NodePath("Components/StateMachine")
 ## Composant qui consomme la WeaponData, cadence les tirs et émet les demandes de projectile.
 @export_node_path("PlayerWeaponComponent") var weapon_component_path := NodePath("Components/Weapon")
+## Autorité runtime de l'arsenal et de l'arme actuellement équipée.
+@export_node_path("PlayerLoadoutComponent") var loadout_component_path := NodePath("Components/Loadout")
+## Autorité runtime des munitions spéciales, de l'armure et de l'Overdrive.
+@export_node_path("PlayerCombatInventoryComponent") var combat_inventory_component_path := NodePath("Components/CombatInventory")
 ## Composant traduisant le mouvement runtime en animations et orientation visuelle.
 @export_node_path("PlayerPresentationComponent") var presentation_component_path := NodePath("Components/Animation")
+## Composant traduisant chaque tir en recul local sans déplacer le CharacterBody2D.
+@export_node_path("PlayerRecoilComponent") var recoil_component_path := NodePath("Components/Recoil")
+## Composant seul propriétaire de player_interact et de la cible locale choisie.
+@export_node_path("PlayerInteractionComponent") var interaction_component_path := NodePath("Components/Interaction")
 ## Composant partagé qui expose le root des pieds et projette l'ombre sur le vrai sol.
 @export_node_path("ActorGroundingComponent") var grounding_component_path := NodePath("Components/Grounding")
 ## Composant partagé qui incline uniquement le pivot visuel selon les deux sondes de pieds.
@@ -53,8 +61,24 @@ func weapon_component() -> PlayerWeaponComponent:
 	return get_node_or_null(weapon_component_path) as PlayerWeaponComponent
 
 
+func loadout_component() -> PlayerLoadoutComponent:
+	return get_node_or_null(loadout_component_path) as PlayerLoadoutComponent
+
+
+func combat_inventory_component() -> PlayerCombatInventoryComponent:
+	return get_node_or_null(combat_inventory_component_path) as PlayerCombatInventoryComponent
+
+
 func presentation_component() -> PlayerPresentationComponent:
 	return get_node_or_null(presentation_component_path) as PlayerPresentationComponent
+
+
+func recoil_component() -> PlayerRecoilComponent:
+	return get_node_or_null(recoil_component_path) as PlayerRecoilComponent
+
+
+func interaction_component() -> PlayerInteractionComponent:
+	return get_node_or_null(interaction_component_path) as PlayerInteractionComponent
 
 
 func grounding_component() -> ActorGroundingComponent:
@@ -67,7 +91,9 @@ func slope_presentation_component() -> ActorSlopePresentationComponent:
 
 func apply_damage(amount: float) -> bool:
 	var health := health_component()
-	return health.apply_damage(amount) if health != null else false
+	var inventory := combat_inventory_component()
+	var remaining := inventory.absorb_damage(amount) if inventory != null else amount
+	return true if remaining <= 0.0 and amount > 0.0 else (health.apply_damage(remaining) if health != null else false)
 
 
 func validation_errors() -> PackedStringArray:
@@ -82,8 +108,16 @@ func validation_errors() -> PackedStringArray:
 		errors.append("Components/StateMachine est obligatoire.")
 	if weapon_component() == null or weapon_component().weapon == null:
 		errors.append("Components/Weapon et sa WeaponData sont obligatoires.")
-	if presentation_component() == null:
-		errors.append("Components/Animation est obligatoire.")
+	if loadout_component() == null or not loadout_component().validation_errors().is_empty():
+		errors.append("Components/Loadout et son profil sont obligatoires.")
+	if combat_inventory_component() == null or not combat_inventory_component().validation_errors().is_empty():
+		errors.append("Components/CombatInventory et son profil sont obligatoires.")
+	if presentation_component() == null or not presentation_component().validation_errors().is_empty():
+		errors.append("Components/Animation et ses correspondances de feedback sont obligatoires.")
+	if recoil_component() == null or not recoil_component().validation_errors().is_empty():
+		errors.append("Components/Recoil et ses pivots visuels sont obligatoires.")
+	if interaction_component() == null or not interaction_component().validation_errors().is_empty():
+		errors.append("Components/Interaction, sa zone et son prompt sont obligatoires.")
 	if grounding_component() == null or not grounding_component().validation_errors().is_empty():
 		errors.append("Components/Grounding et ses correspondances sont obligatoires.")
 	if slope_presentation_component() == null or not slope_presentation_component().validation_errors().is_empty():

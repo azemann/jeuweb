@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PickupData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://pickups/pickup_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/pickups/ammo-drum-v001.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+pickup_id = &"ammo_drum"
+display_name = "Tambour de munitions"
+texture = ExtResource("2")
+effect = 1
+amount = 16.0
+collection_radius = 36.0

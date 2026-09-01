@@ -32,13 +32,21 @@ func _run() -> void:
 	_check(landing.combat_beats() == PackedInt32Array([WaveData.CombatBeat.PRESSURE, WaveData.CombatBeat.RELEASE]), "Landing doit matérialiser Pressure puis Release.")
 	_check(bridge.authored_enemy_count() == 6 and bridge.encounter_kind == EncounterData.EncounterKind.GAUNTLET, "Bridge doit être un Gauntlet de six ennemis.")
 	_check(bridge.combat_beats() == PackedInt32Array([WaveData.CombatBeat.PRESSURE, WaveData.CombatBeat.ESCALATION, WaveData.CombatBeat.ESCALATION]), "Bridge doit porter Pressure puis une double Escalation.")
-	_check(foundry.authored_enemy_count() == 3 and foundry.combat_beats()[-1] == WaveData.CombatBeat.PAYOFF, "Foundry doit culminer sur le payoff du Boss.")
+	_check(foundry.authored_enemy_count() == 4 and foundry.combat_beats() == PackedInt32Array([WaveData.CombatBeat.PRESSURE, WaveData.CombatBeat.ESCALATION, WaveData.CombatBeat.PAYOFF]), "Foundry doit déplacer le joueur avec un Drone avant le payoff du Boss.")
 
-	var pincer := load("res://maps/encounters/data/toxic_coast/patterns/bridge_grunt_pincer.tres") as EnemySpawnPatternData
-	var pincer_offsets := pincer.authored_offsets()
+	var pincer: EnemySpawnPatternData
+	for wave in bridge.waves:
+		for pattern in wave.spawn_patterns:
+			if pattern.pattern_id == &"grunt_pincer":
+				pincer = pattern
+	var pincer_offsets := pincer.authored_offsets() if pincer != null else PackedVector2Array()
 	_check(pincer_offsets.size() == 2 and pincer_offsets[0].x < 0.0 and pincer_offsets[1].x > 0.0, "Le Spawn Pattern Pincer doit encadrer le point auteur.")
-	var flying := load("res://maps/encounters/data/toxic_coast/patterns/bridge_flying_column.tres") as EnemySpawnPatternData
-	var flying_offsets := flying.authored_offsets()
+	var flying: EnemySpawnPatternData
+	for wave in bridge.waves:
+		for pattern in wave.spawn_patterns:
+			if pattern.pattern_id == &"flying_column":
+				flying = pattern
+	var flying_offsets := flying.authored_offsets() if flying != null else PackedVector2Array()
 	_check(flying_offsets.size() == 2 and not is_equal_approx(flying_offsets[0].y, flying_offsets[1].y), "La colonne volante doit étager ses deux ennemis verticalement.")
 
 	var packed := load("res://screens/prototype/prototype_mission_screen.tscn") as PackedScene
@@ -60,6 +68,8 @@ func _run() -> void:
 		if marker != null and marker.enabled and marker.encounter_data != null:
 			expected_enemy_count += marker.encounter_data.authored_enemy_count()
 			enabled_encounter_ids.append(marker.encounter_id)
+	_check(enabled_encounter_ids == [&"landing_cadence", &"bridge_gauntlet", &"foundry_boss_gate"], "La mission doit dérouler exactement Landing, Pont puis Fonderie.")
+	_check(expected_enemy_count == 13, "La partition v001 doit contenir treize apparitions explicites.")
 	actor_spawner.current_player.global_position = host.current_map.get_node("Gameplay/Exits/MissionEnd").global_position
 	for _frame in 900:
 		for child in host.current_map.actors_root().get_children():
@@ -82,12 +92,10 @@ func _run() -> void:
 	_check(_wave_log.get(&"landing_cadence", []) == [&"landing_pressure", &"landing_release"], "Les vagues Landing doivent conserver l'ordre auteur.")
 	_check(_wave_log.get(&"bridge_gauntlet", []) == [&"bridge_pressure", &"bridge_escalation_air", &"bridge_escalation_pincer"], "Le Gauntlet doit conserver ses trois vagues auteur.")
 	_check(_bridge_overlap_count == 2, "After Delay doit lancer le Pincer tandis que les deux ennemis volants sont encore actifs.")
-	_check(_wave_log.get(&"foundry_boss_gate", []) == [&"foundry_pressure", &"foundry_payoff"], "Le Combat Gate doit terminer sur le Boss.")
-	_check(screen.get_node("HUD/HUDLayout/CadenceStack/CadenceLabel").text == "ZONE SÉCURISÉE" or screen.get_node("ResultPanel").visible, "Le HUD doit rendre la cadence et sa résolution visibles au joueur.")
-	_check(screen.get_node("BossHealthPanel").visible and screen.get_node("BossHealthPanel/Stack/BossHealth").value == 0.0, "Le HUD doit rendre les dégâts et la mort du Boss explicitement visibles.")
-	for gate in host.current_map.combat_gates_root().get_children():
-		_check(gate is MissionCombatGate2D and not gate.is_closed(), "Chaque Combat Gate doit être ouvert après sa rencontre.")
-		_check(gate.get_node("Barrier").collision_layer == 0 and not gate.get_node("EnergyField").visible, "Une porte ouverte doit réellement retirer collision et champ visuel.")
+	_check(_wave_log.get(&"foundry_boss_gate", []) == [&"foundry_pressure", &"foundry_escalation_air", &"foundry_payoff"], "La Fonderie doit ménager pression, déplacement aérien puis entrée du Boss.")
+	_check(screen.get_node("MissionHUD/ObjectiveStatus/ObjectiveLabel").text.begins_with("ZONE SÉCURISÉE") or screen.get_node("MissionHUD/ResultPanel").visible, "Le HUD doit rendre la cadence et sa résolution visibles au joueur.")
+	_check(screen.get_node("MissionHUD/BossStatus").visible and screen.get_node("MissionHUD/BossStatus/BossHealth").value == 0.0, "Le HUD doit rendre les dégâts et la mort du Boss explicitement visibles.")
+	_check(host.current_map.get_node_or_null("Gameplay/CombatGates") == null, "La cadence doit fonctionner sans aucune Combat Gate physique.")
 	screen.queue_free()
 	await process_frame
 	if _failures.is_empty():

@@ -35,11 +35,15 @@ func apply_damage(amount: float) -> bool:
 	return true
 
 
-func heal(amount: float) -> void:
+func heal(amount: float) -> bool:
 	if profile == null or amount <= 0.0 or current_health <= 0.0:
-		return
+		return false
+	var previous := current_health
 	current_health = minf(profile.maximum_health, current_health + amount)
+	if is_equal_approx(current_health, previous):
+		return false
 	health_changed.emit(current_health, profile.maximum_health)
+	return true
 
 
 func reset_health() -> void:

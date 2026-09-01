@@ -32,6 +32,13 @@ signal finished
 @onready var damage_area: Area2D = %DamageArea
 @onready var damage_shape: CollisionShape2D = %DamageShape
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var visual_scale_root: Node2D = %VisualScale
+@onready var art_sprite: AnimatedSprite2D = %ArtSprite
+@onready var shockwave_root: Node2D = %ShockwaveRoot
+@onready var flash_light: PointLight2D = %FlashLight
+@onready var sparks: GPUParticles2D = %Sparks
+@onready var debris: GPUParticles2D = %Debris
+@onready var toxic_droplets: GPUParticles2D = %ToxicDroplets
 
 var _impact_applied := false
 
@@ -54,7 +61,14 @@ func detonate() -> void:
 	if data == null or not data.is_valid() or _impact_applied:
 		return
 	_refresh_from_data()
+	flash_light.energy = data.light_energy
 	animation_player.speed_scale = 0.42 / data.duration
+	if art_sprite.sprite_frames != null:
+		art_sprite.speed_scale = 1.0 / data.duration
+		art_sprite.play(data.sprite_animation)
+	sparks.restart()
+	debris.restart()
+	toxic_droplets.restart()
 	animation_player.play(&"detonate")
 	detonated.emit(global_position, data)
 
@@ -73,6 +87,10 @@ func editor_preview_impact() -> void:
 
 func _animation_impact() -> void:
 	apply_impact_now()
+
+
+func _animation_quench_light() -> void:
+	flash_light.energy = 0.0
 
 
 func _animation_finished() -> void:
@@ -148,3 +166,18 @@ func _refresh_from_data() -> void:
 	%Flash.modulate = Color(data.flash_color, 1.0)
 	%Fireball.modulate = Color(data.fire_color, 1.0)
 	%Smoke.modulate = Color(data.smoke_color, 1.0)
+	visual_scale_root.scale = Vector2.ONE * data.visual_scale
+	art_sprite.sprite_frames = data.sprite_frames
+	if data.sprite_frames != null:
+		art_sprite.animation = data.sprite_animation
+	art_sprite.position = data.sprite_offset
+	art_sprite.visible = data.sprite_frames != null
+	%ProceduralFallback.visible = data.sprite_frames == null
+	shockwave_root.scale = Vector2.ONE * data.shockwave_scale
+	flash_light.energy = 0.0
+	sparks.amount = maxi(1, data.spark_amount)
+	sparks.visible = data.spark_amount > 0
+	debris.amount = maxi(1, data.debris_amount)
+	debris.visible = data.debris_amount > 0
+	toxic_droplets.amount = maxi(1, data.toxic_droplet_amount)
+	toxic_droplets.visible = data.toxic_droplet_amount > 0

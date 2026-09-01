@@ -15,6 +15,7 @@
 [ext_resource type="Resource" path="res://characters/enemies/data/enemy_catalog.tres" id="13_enemy_catalog"]
 [ext_resource type="Script" path="res://maps/system/mission_run_controller.gd" id="15_run"]
 [ext_resource type="Script" path="res://maps/system/mission_encounter_controller.gd" id="16_encounter_controller"]
+[ext_resource type="PackedScene" path="res://ui/hud/mission_hud.tscn" id="17_mission_hud"]
 
 [node name="PrototypeMissionScreen" type="Control"]
 layout_mode = 3
@@ -43,6 +44,7 @@ render_target_update_mode = 4
 [node name="MapHost" type="Node2D" parent="MissionViewportContainer/MissionViewport"]
 script = ExtResource("2_map_host")
 definition = ExtResource("5_map_definition")
+load_on_ready = false
 
 [node name="RuntimeSystems" type="Node" parent="MissionViewportContainer/MissionViewport"]
 
@@ -93,109 +95,17 @@ map_host_path = NodePath("../../MapHost")
 actor_spawner_path = NodePath("../ActorSpawner")
 encounter_controller_path = NodePath("../EncounterController")
 
-[node name="HUD" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 24.0
-offset_top = 20.0
-offset_right = -24.0
-offset_bottom = 100.0
-grow_horizontal = 2
-
-[node name="HUDLayout" type="HBoxContainer" parent="HUD"]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="HealthPanel" type="PanelContainer" parent="HUD/HUDLayout"]
-custom_minimum_size = Vector2(360, 70)
-layout_mode = 2
-
-[node name="HealthStack" type="VBoxContainer" parent="HUD/HUDLayout/HealthPanel"]
-layout_mode = 2
-
-[node name="HealthLabel" type="Label" parent="HUD/HUDLayout/HealthPanel/HealthStack"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 15
-text = "INTÉGRITÉ"
-
-[node name="Health" type="ProgressBar" parent="HUD/HUDLayout/HealthPanel/HealthStack"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 20)
-layout_mode = 2
-value = 100.0
-show_percentage = false
-
-[node name="Spacer" type="Control" parent="HUD/HUDLayout"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MissionLabel" type="Label" parent="HUD/HUDLayout"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
-text = "MISSION 00 — LABORATOIRE VISUEL"
-vertical_alignment = 1
-
-[node name="CadenceStack" type="VBoxContainer" parent="HUD/HUDLayout"]
-layout_mode = 2
-alignment = 1
-
-[node name="EncounterLabel" type="Label" parent="HUD/HUDLayout/CadenceStack"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
-theme_override_font_sizes/font_size = 12
-text = "RENCONTRE · EN ATTENTE"
-horizontal_alignment = 1
-
-[node name="CadenceLabel" type="Label" parent="HUD/HUDLayout/CadenceStack"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.709804, 0.839216, 0.121569, 1)
-theme_override_font_sizes/font_size = 15
-text = "EXPLORATION"
-horizontal_alignment = 1
-
-[node name="ControlsLabel" type="Label" parent="HUD/HUDLayout"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.945098, 0.960784, 0.603922, 1)
-text = "CLAVIER · SOURIS · MANETTE · TACTILE"
-vertical_alignment = 1
-
 [node name="MobileControls" parent="." instance=ExtResource("11_mobile_controls")]
 unique_name_in_owner = true
 layout_mode = 1
 
-[node name="BossHealthPanel" type="PanelContainer" parent="."]
+[node name="MissionHUD" parent="." instance=ExtResource("17_mission_hud")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 360.0
-offset_top = 100.0
-offset_right = -360.0
-offset_bottom = 160.0
-grow_horizontal = 2
-
-[node name="Stack" type="VBoxContainer" parent="BossHealthPanel"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="BossHealthPanel/Stack"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.941176, 0.12549, 0.552941, 1)
-theme_override_font_sizes/font_size = 14
-text = "BRUTE ASPIRANTE"
-horizontal_alignment = 1
-
-[node name="BossHealth" type="ProgressBar" parent="BossHealthPanel/Stack"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-show_percentage = false
 
 [node name="BackButton" type="Button" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -208,6 +118,7 @@ offset_right = -24.0
 offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 text = "RETOUR"
 
 [node name="DesignReferencePanel" type="PanelContainer" parent="."]
@@ -217,23 +128,6 @@ offset_left = 24.0
 offset_top = 112.0
 offset_right = 514.0
 offset_bottom = 388.0
-
-[node name="ResultPanel" type="PanelContainer" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 360.0
-offset_top = 250.0
-offset_right = 920.0
-offset_bottom = 430.0
-
-[node name="ResultLabel" type="Label" parent="ResultPanel"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "MISSION ACCOMPLIE"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ReferenceTexture" type="TextureRect" parent="DesignReferencePanel"]
 layout_mode = 2

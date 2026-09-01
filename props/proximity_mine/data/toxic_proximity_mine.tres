@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ProximityMineData" load_steps=5 format=3]
+[ext_resource type="Script" path="res://props/proximity_mine/proximity_mine_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/proximity-blast-mine-v001.png" id="2"]
+[ext_resource type="PackedScene" path="res://effects/explosions/explosion_2d.tscn" id="3"]
+[ext_resource type="Resource" path="res://effects/explosions/data/field_shell_explosion.tres" id="4"]
+[resource]
+script = ExtResource("1")
+mine_id = &"toxic_proximity_mine"
+texture = ExtResource("2")
+pivot_px = Vector2(128, 112)
+trigger_radius = 76.0
+explosion_scene = ExtResource("3")
+explosion_data = ExtResource("4")

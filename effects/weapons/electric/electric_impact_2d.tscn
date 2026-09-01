@@ -1,0 +1,6 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://effects/weapons/animated_projectile_impact_2d.tscn" id="1"]
+[ext_resource type="SpriteFrames" path="res://effects/weapons/electric/electric_impact_frames.tres" id="2"]
+[node name="ElectricImpact2D" instance=ExtResource("1")]
+[node name="Visuals" parent="." index="0"]
+sprite_frames = ExtResource("2")

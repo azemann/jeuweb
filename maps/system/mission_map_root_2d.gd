@@ -9,7 +9,6 @@ const REQUIRED_GAMEPLAY_BRANCHES := [
 	"Segments",
 	"PlayerSpawnPoints",
 	"EncounterMarkers",
-	"CombatGates",
 	"GroundPieces",
 	"DestructibleZones",
 	"IndestructibleGeometry",
@@ -119,11 +118,6 @@ func encounter_markers_root() -> Node2D:
 	return root.get_node_or_null("EncounterMarkers") as Node2D if root != null else null
 
 
-func combat_gates_root() -> Node2D:
-	var root := gameplay_root()
-	return root.get_node_or_null("CombatGates") as Node2D if root != null else null
-
-
 func authored_segments() -> Array[MapSegment2D]:
 	var result: Array[MapSegment2D] = []
 	var root := gameplay_root()
@@ -190,7 +184,6 @@ func _validate_gameplay_branches(errors: PackedStringArray) -> void:
 	_validate_unique_markers(player_spawn_points_root(), &"spawn_id", errors)
 	_validate_unique_markers(encounter_markers_root(), &"encounter_id", errors)
 	_validate_encounters(encounter_markers_root(), errors)
-	_validate_combat_gates(encounter_markers_root(), combat_gates_root(), errors)
 	_validate_segments(errors)
 	_validate_ground_pieces(root.get_node_or_null("GroundPieces"), errors)
 
@@ -220,33 +213,6 @@ func _validate_encounters(parent: Node, errors: PackedStringArray) -> void:
 			continue
 		for encounter_error in marker.encounter_data.validation_errors():
 			errors.append("Gameplay/EncounterMarkers/%s : %s" % [marker.name, encounter_error])
-
-
-func _validate_combat_gates(markers_root: Node, gates_root: Node, errors: PackedStringArray) -> void:
-	if markers_root == null or gates_root == null:
-		return
-	var marker_ids: Dictionary = {}
-	for child in markers_root.get_children():
-		var marker := child as MapEncounterMarker2D
-		if marker != null:
-			marker_ids[marker.encounter_id] = true
-	var gate_ids: Dictionary = {}
-	for child in gates_root.get_children():
-		var gate := child as MissionCombatGate2D
-		if gate == null:
-			errors.append("Gameplay/CombatGates/%s doit être un MissionCombatGate2D." % child.name)
-			continue
-		for gate_error in gate.validation_errors():
-			errors.append("Gameplay/CombatGates/%s : %s" % [gate.name, gate_error])
-		if gate_ids.has(gate.encounter_id):
-			errors.append("Combat Gate '%s' est dupliqué." % gate.encounter_id)
-		if not marker_ids.has(gate.encounter_id):
-			errors.append("Combat Gate '%s' ne correspond à aucun Encounter Marker." % gate.encounter_id)
-		gate_ids[gate.encounter_id] = true
-	for child in markers_root.get_children():
-		var marker := child as MapEncounterMarker2D
-		if marker != null and marker.enabled and marker.encounter_data != null and marker.encounter_data.blocks_mission_exit and not gate_ids.has(marker.encounter_id):
-			errors.append("La rencontre bloquante '%s' exige un MissionCombatGate2D." % marker.encounter_id)
 
 
 func _validate_segments(errors: PackedStringArray) -> void:

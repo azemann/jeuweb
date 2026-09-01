@@ -22,6 +22,10 @@ enum DestructionPolicy {
 ## Aperçu utilisé par les menus de mission sans charger la scène complète.
 @export var preview_texture: Texture2D
 
+@export_category("Mission Presentation")
+## Thème visuel consommé par le MissionHUD sans posséder aucune donnée gameplay.
+@export var hud_theme: MissionHUDTheme
+
 @export_category("World Contract")
 ## Dimensions du monde en pixels, indépendantes de la fenêtre.
 @export var world_size := Vector2i(1920, 720)
@@ -37,7 +41,8 @@ func is_valid() -> bool:
 		and not display_name.strip_edges().is_empty()
 		and scene_path.begins_with("res://maps/missions/")
 		and scene_path.ends_with(".tscn")
+		and hud_theme != null
+		and hud_theme.is_valid()
 		and world_size.x >= 1280
 		and world_size.y >= 720
 	)
-

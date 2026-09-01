@@ -64,6 +64,7 @@ func _run() -> void:
 	_check(terrain.collision_flush_count == 1, "Deux impacts dans la même callback doivent partager un seul flush différé.")
 	_check(terrain.collision_chunk_rebuild_count == observations.affected_chunks, "Chaque chunk sale doit être reconstruit exactement une fois.")
 	_check(observations.rebuilt_chunks == observations.affected_chunks, "Le signal de synchronisation doit publier le nombre réel de chunks reconstruits.")
+	_check(observations.rebuilt_chunks <= terrain.profile.maximum_chunks_per_flush, "Un impact de référence doit rester sous le budget de chunks reconstruits par flush.")
 	_check(not terrain.has_pending_collision_rebuild() and terrain.pending_collision_chunk_count() == 0, "La file de chunks sales doit être vide après synchronisation.")
 
 	map.free()

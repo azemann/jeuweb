@@ -4,6 +4,9 @@
 
 [resource]
 script = ExtResource("1_data")
+explosion_id = &"field_shell_standard"
+family_id = &"field_shell"
+display_name = "Obus de campagne — standard"
 terrain_radius = 68.0
 damage_radius = 94.0
 damage = 50.0
@@ -12,4 +15,3 @@ duration = 0.42
 flash_color = Color(1, 0.952941, 0.639216, 1)
 fire_color = Color(1, 0.407843, 0.121569, 1)
 smoke_color = Color(0.345098, 0.176471, 0.388235, 1)
-

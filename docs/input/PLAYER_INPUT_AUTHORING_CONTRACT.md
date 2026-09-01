@@ -30,6 +30,7 @@ une méthode du joueur.
 | visée classique verticale | Z/W, S, flèches haut/bas | stick gauche Y, croix haut/bas | boutons haut/bas |
 | visée libre | position de la souris | stick droit | — |
 | tir automatique | J, X, clic gauche | X, RB, gâchette droite | bouton TIR |
+| interaction | F | Y | bouton INTERAGIR |
 
 Le stick gauche conserve la visée arcade classique : son axe horizontal
 déplace et fixe l'orientation, son axe vertical vise. Le stick droit et la
@@ -55,6 +56,7 @@ ils ne créent aucun bitmap ni pipeline artistique parallèle.
   `TouchScreenButton` ;
 - Movement consomme uniquement mouvement et saut ;
 - Weapon consomme uniquement `player_fire` ;
+- Interaction consomme uniquement `player_interact` ;
 - Aim consomme la visée classique et le stick droit ;
 - un mouvement de souris active la visée pointeur ; une entrée clavier,
   manette ou tactile rend l'autorité à la visée arcade ;
@@ -67,10 +69,10 @@ ils ne créent aucun bitmap ni pipeline artistique parallèle.
 
 `player_input_contract_test.gd` protège :
 
-- les huit actions canoniques ;
+- les neuf actions canoniques ;
 - la présence des familles d'événements clavier, souris et manette ;
 - les axes et boutons principaux de la manette ;
-- les six `TouchScreenButton` et leur correspondance d'action ;
+- les sept `TouchScreenButton` et leur correspondance d'action ;
 - l'intégration de `MobileControls` à l'écran de mission ;
 - la commande de visée vers une position globale.
 

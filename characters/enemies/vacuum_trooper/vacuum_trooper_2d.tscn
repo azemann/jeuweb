@@ -1,71 +1,56 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene format=3 uid="uid://blgtxrnlea0my"]
 
-[ext_resource type="Script" path="res://characters/enemies/enemy_character_2d.gd" id="1_enemy"]
+[ext_resource type="Script" uid="uid://bneug3cmucibc" path="res://characters/enemies/enemy_character_2d.gd" id="1_enemy"]
 [ext_resource type="Resource" path="res://characters/enemies/data/vacuum_trooper_profile.tres" id="2_profile"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_patrol_component.gd" id="3_patrol"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_health_component.gd" id="4_health"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_presentation_component.gd" id="5_presentation"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_attack_component.gd" id="6_attack"]
-[ext_resource type="Script" path="res://characters/shared/state_machine/actor_state_machine_component.gd" id="10_state"]
-[ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_frames.tres" id="6_frames"]
-[ext_resource type="SpriteFrames" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_attack_frames.tres" id="7_attack_frames"]
-[ext_resource type="PackedScene" path="res://weapons/projectiles/toxic_pressure_2d.tscn" id="9_projectile"]
+[ext_resource type="PackedScene" path="res://characters/enemies/enemy_components.tscn" id="3_components"]
+[ext_resource type="SpriteFrames" uid="uid://wda6dsgxcr7f" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_frames.tres" id="6_frames"]
+[ext_resource type="SpriteFrames" uid="uid://bnxvu8s41open" path="res://characters/enemies/vacuum_trooper/vacuum_trooper_attack_frames.tres" id="7_attack_frames"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_grounding_component.tscn" id="7_grounding"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_slope_presentation_component.tscn" id="8_slope"]
-[ext_resource type="Script" path="res://characters/enemies/components/enemy_ejection_component.gd" id="12_ejection"]
+[ext_resource type="PackedScene" path="res://weapons/projectiles/toxic_pressure_2d.tscn" id="9_projectile"]
+[ext_resource type="Script" uid="uid://cyjegsmkarhyc" path="res://characters/enemies/components/enemy_ejection_component.gd" id="12_ejection"]
 [ext_resource type="PackedScene" path="res://characters/enemies/vacuum_pilot_saboteur/vacuum_pilot_saboteur_2d.tscn" id="13_pilot"]
 
 [sub_resource type="ConvexPolygonShape2D" id="Shape_enemy"]
 points = PackedVector2Array(-38, -54, 38, -54, 40, -24, 24, -6, 0, 0, -24, -6, -40, -24)
 
-[node name="VacuumTrooper2D" type="CharacterBody2D"]
+[node name="VacuumTrooper2D" type="CharacterBody2D" unique_id=1865669644]
 collision_layer = 4
-collision_mask = 1
 floor_snap_length = 8.0
 script = ExtResource("1_enemy")
 profile = ExtResource("2_profile")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=471918065]
 shape = SubResource("Shape_enemy")
 
-[node name="Components" type="Node2D" parent="."]
+[node name="Components" parent="." unique_id=1667530770 instance=ExtResource("3_components")]
 
-[node name="Patrol" type="Node" parent="Components"]
-script = ExtResource("3_patrol")
+[node name="Patrol" parent="Components" index="0"]
 profile = ExtResource("2_profile")
 
-[node name="Health" type="Node" parent="Components"]
-script = ExtResource("4_health")
+[node name="Health" parent="Components" index="1"]
 profile = ExtResource("2_profile")
 
-[node name="Attack" type="Node" parent="Components"]
-script = ExtResource("6_attack")
+[node name="Attack" parent="Components" index="2"]
 projectile_scene = ExtResource("9_projectile")
 
-[node name="StateMachine" type="Node" parent="Components"]
-script = ExtResource("10_state")
-initial_state = 1
-
-[node name="Animation" type="Node" parent="Components"]
-script = ExtResource("5_presentation")
-
-[node name="Ejection" type="Node" parent="Components"]
+[node name="Ejection" type="Node" parent="Components" unique_id=7899203]
 script = ExtResource("12_ejection")
 ejected_scene = ExtResource("13_pilot")
 
-[node name="Grounding" parent="Components" instance=ExtResource("7_grounding")]
+[node name="Grounding" parent="Components" unique_id=926794231 instance=ExtResource("7_grounding")]
 shadow_size = Vector2(88, 18)
 foot_probe_span = 76.0
 
-[node name="SlopeAlignment" parent="Components" instance=ExtResource("8_slope")]
+[node name="SlopeAlignment" parent="Components" unique_id=1833158936 instance=ExtResource("8_slope")]
 maximum_visual_tilt_degrees = 45.0
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="." unique_id=145914194]
 
-[node name="GroundPivot" type="Node2D" parent="Visuals"]
+[node name="GroundPivot" type="Node2D" parent="Visuals" unique_id=666271191]
 unique_name_in_owner = true
 
-[node name="BodySprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot"]
+[node name="BodySprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot" unique_id=619220359]
 unique_name_in_owner = true
 position = Vector2(0, -46.2)
 scale = Vector2(0.55, 0.55)
@@ -73,18 +58,20 @@ sprite_frames = ExtResource("6_frames")
 animation = &"walk"
 autoplay = "walk"
 
-[node name="AttackSprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot"]
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Visuals/GroundPivot" unique_id=2000888250]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -46.2)
 scale = Vector2(0.55, 0.55)
 sprite_frames = ExtResource("7_attack_frames")
 animation = &"toxic_attack"
-visible = false
 
-[node name="AttackOrigin" type="Marker2D" parent="Visuals/GroundPivot"]
+[node name="AttackOrigin" type="Marker2D" parent="Visuals/GroundPivot" unique_id=1041180397]
 position = Vector2(70, -58)
 gizmo_extents = 18.0
 
-[node name="EjectionOrigin" type="Marker2D" parent="Visuals/GroundPivot"]
+[node name="EjectionOrigin" type="Marker2D" parent="Visuals/GroundPivot" unique_id=1313889200]
 position = Vector2(0, -82)
 gizmo_extents = 18.0
+
+[editable path="Components"]

@@ -32,6 +32,7 @@ func _run() -> void:
 	var encounter_controller := viewport.get_node("RuntimeSystems/EncounterController") as MissionEncounterController
 	var controller := viewport.get_node("RuntimeSystems/MissionRunController") as MissionRunController
 	_check(host != null and host.current_map != null, "La scène maîtresse doit être chargée pour la mission.")
+	_check(not screen.get_node("MissionHUD/MissionStatusPanel").visible, "L'état de chargement doit disparaître après le chargement de la mission.")
 	_check(actor_spawner != null and actor_spawner.current_player != null, "Le joueur doit être présent dans la mission.")
 	_check(encounter_controller != null and encounter_controller.validation_errors().is_empty(), "MissionEncounterController doit exposer ses correspondances dans le SceneTree.")
 	_check(controller != null and controller.validation_errors().is_empty(), "MissionRunController doit exposer des correspondances valides dans le SceneTree.")
@@ -42,8 +43,15 @@ func _run() -> void:
 
 	_check(controller.exit_path == NodePath("Gameplay/Exits/MissionEnd"), "Le chemin de sortie doit être relatif à la scène maîtresse.")
 	var required_encounters := controller.required_encounter_ids()
-	var expected_encounters := [&"bridge_gauntlet", &"foundry_boss_gate", &"landing_cadence"]
-	_check(required_encounters.size() == expected_encounters.size() and required_encounters.all(func(encounter_id): return expected_encounters.has(encounter_id)), "Les trois rencontres rythmées doivent bloquer la sortie : %s" % str(required_encounters))
+	var expected_encounters: Array[StringName] = []
+	var expected_required_enemy_count := 0
+	for child in host.current_map.encounter_markers_root().get_children():
+		var marker := child as MapEncounterMarker2D
+		if marker != null and marker.enabled and marker.encounter_data != null and marker.encounter_data.blocks_mission_exit:
+			expected_encounters.append(marker.encounter_id)
+			expected_required_enemy_count += marker.encounter_data.authored_enemy_count()
+	_check(required_encounters.size() == expected_encounters.size() and required_encounters.all(func(encounter_id): return expected_encounters.has(encounter_id)), "MissionRunController doit dériver toutes les rencontres bloquantes de la scène auteur : %s" % str(required_encounters))
+	_check(required_encounters == [&"foundry_boss_gate"], "Seule la finale Boss doit être obligatoire en Flux Libre.")
 	_check(not controller.all_required_encounters_cleared(), "Une rencontre non apparue ne doit jamais être considérée comme éliminée.")
 
 	controller.mission_won.connect(_on_mission_won)
@@ -52,6 +60,10 @@ func _run() -> void:
 	await physics_frame
 	await physics_frame
 	_check(_mission_won_count == 0, "Atteindre la sortie avant d'éliminer la rencontre ne doit pas terminer la mission.")
+
+	_check(actor_spawner.set_respawn_spawn(&"checkpoint_foundry"), "Le checkpoint le plus avancé doit pouvoir devenir l'autorité de reprise.")
+	_check(not actor_spawner.set_respawn_spawn(&"checkpoint_bridge"), "Revenir en arrière ne doit jamais rétrograder le checkpoint autoritaire.")
+	_check(actor_spawner.respawn_spawn_id == &"checkpoint_foundry", "Le checkpoint de reprise doit rester le plus avancé atteint.")
 
 	var killed := 0
 	for _frame in 900:
@@ -63,13 +75,13 @@ func _run() -> void:
 		await physics_frame
 		if controller.all_required_encounters_cleared():
 			break
-	_check(killed >= 12, "Le run doit réellement traverser les douze apparitions de la cadence auteur.")
+	_check(killed >= expected_required_enemy_count, "Le run doit réellement traverser les %d apparitions des rencontres bloquantes actuelles." % expected_required_enemy_count)
 	_check(controller.all_required_encounters_cleared(), "La rencontre doit être marquée éliminée après sa dernière mort.")
 	actor_spawner.current_player.global_position = exit.global_position
 	await physics_frame
 	await physics_frame
 	_check(_mission_won_count == 1, "La sortie doit émettre mission_won exactement une fois après l'objectif.")
-	_check(screen.get_node("ResultPanel").visible, "Le résultat de victoire doit être visible dans l'écran de mission.")
+	_check(screen.get_node("MissionHUD/ResultPanel").visible, "Le résultat de victoire doit être visible dans l'écran de mission.")
 	await physics_frame
 	_check(_mission_won_count == 1, "Une mission gagnée ne doit pas réémettre mission_won.")
 

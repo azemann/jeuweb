@@ -21,9 +21,10 @@ elles restent toutefois des livrables runtime pour la galerie interne.
 
 | Fichier | Création | Intention | Intégration |
 |---|---|---|---|
-| `maps/toxic_coast/toxic-coast-far-background-v001.png` | imagegen intégré ; prompt : panorama 8:3, ciel, océan et forteresse lointaine, aucun gameplay | fond opaque | `Visual/FarBackground` |
-| `maps/toxic_coast/toxic-coast-midground-v001.png` | imagegen intégré ; prompt : jungle industrielle intermédiaire sur alpha transparent | parallaxe lente | `Visual/MidgroundParallax` |
-| `maps/toxic_coast/toxic-coast-foreground-v001.png` | imagegen intégré ; prompt : tuyaux, végétation et débris aux bords sur alpha transparent | parallaxe rapide | `Visual/ForegroundParallax` |
+| `maps/toxic_coast/toxic-coast-far-background-v001.png` | imagegen intégré ; prompt : panorama 8:3, ciel, océan et forteresse lointaine, aucun gameplay | fond opaque historique | non référencé depuis backgrounds v002 |
+| `maps/toxic_coast/toxic-coast-midground-v001.png` | imagegen intégré ; prompt : jungle industrielle intermédiaire sur alpha transparent | plan intermédiaire commun | `Visual/MidgroundParallax/IndustrialJungle` |
+| `maps/toxic_coast/toxic-coast-foreground-v001.png` | imagegen intégré ; prompt : tuyaux, végétation et débris aux bords sur alpha transparent | parallaxe historique | non référencé depuis backgrounds v002 |
+| `maps/toxic_coast/toxic-coast-foreground-v002.png` | édition ImageGen lisible du cadre v001, alpha transparent | cadre proche commun | `Visual/ForegroundParallax/EdgeFraming` |
 | `terrain/toxic_coast/toxic-soil-shallow-v001.png` | dérivé ImageMagick de la source maître | couche haute | `toxic_coast_terrain.tres` |
 | `terrain/toxic_coast/toxic-soil-main-v001.png` | dérivé ImageMagick de la source maître | matière centrale | `toxic_coast_terrain.tres` |
 | `terrain/toxic_coast/toxic-soil-deep-v001.png` | dérivé ImageMagick de la source maître | matière profonde | `toxic_coast_terrain.tres` |
@@ -33,6 +34,33 @@ elles restent toutefois des livrables runtime pour la galerie interne.
 Source maître hors Godot :
 `pipeline/assets/sources/imagegen/toxic_coast/toxic-soil-master-v001.png`.
 Recette : `pipeline/assets/recipes/toxic_coast_v001.md`.
+
+## HUD — Toxic Commando v001
+
+| Fichier | Origine | Intention | Intégration |
+|---|---|---|---|
+| `ui/hud/toxic_commando/frames/player-status-frame-v001.png` | découpe normalisée de la planche HUD Toxic Commando | portrait, vie, armure et slots de statut | `MissionHUD/PlayerStatus` |
+| `ui/hud/toxic_commando/frames/weapon-status-frame-v001.png` | même lot | arme équipée et munitions | `MissionHUD/WeaponStatus` |
+| `ui/hud/toxic_commando/frames/objective-frame-v001.png` | même lot | objectif et beat courant | `MissionHUD/ObjectiveStatus` |
+| `ui/hud/toxic_commando/frames/boss-health-frame-v001.png` | même lot | intégrité du Boss | `MissionHUD/BossStatus` |
+| `ui/hud/toxic_commando/frames/overdrive-frame-v001.png` | même lot | durée de surcharge | `MissionHUD/OverdriveStatus` |
+| `ui/hud/toxic_commando/frames/notification-frame-v001.png` | même lot | résultat et notification | `MissionHUD/ResultPanel` |
+| `ui/hud/toxic_commando/portraits/player-portrait-v001.png` | dérivé de la pose idle canonique joueur | identité du joueur dans le grand cercle | `MissionHUDTheme.player_portrait` |
+| `ui/hud/toxic_commando/icons/health-icon-v001.png` | normalisation 160 × 160 de la planche d'icônes | repère vie | `MissionHUDTheme.health_icon` |
+| `ui/hud/toxic_commando/icons/armor-icon-v001.png` | même lot | repère armure | `MissionHUDTheme.armor_icon` |
+| `ui/hud/toxic_commando/icons/ammo-icon-v001.png` | même lot | repère munitions | `MissionHUDTheme.ammo_icon` |
+| `ui/hud/toxic_commando/icons/overdrive-icon-v001.png` | même lot | vocabulaire surcharge réutilisable | `MissionHUDTheme.overdrive_icon` |
+| `ui/hud/toxic_commando/icons/grenade-icon-v001.png` | même lot | vocabulaire grenade futur | `MissionHUDTheme` |
+| `ui/hud/toxic_commando/icons/objective-icon-v001.png` | même lot | repère objectif | `MissionHUDTheme.objective_icon` |
+| `ui/hud/toxic_commando/icons/boss-icon-v001.png` | même lot | vocabulaire Boss réutilisable hors cadre intégré | `MissionHUDTheme.boss_icon` |
+| `ui/hud/toxic_commando/icons/checkpoint-icon-v001.png` | même lot | vocabulaire checkpoint futur | `MissionHUDTheme` |
+| `ui/hud/toxic_commando/icons/weapon-icon-v001.png` | même lot | vocabulaire équipement futur | `MissionHUDTheme` |
+| `ui/hud/toxic_commando/icons/poison-icon-v001.png` | même lot | futur statut poison | `MissionHUDTheme` |
+| `ui/hud/toxic_commando/icons/electric-icon-v001.png` | même lot | futur statut électrique | `MissionHUDTheme` |
+| `ui/hud/toxic_commando/icons/fire-icon-v001.png` | même lot | futur statut feu | `MissionHUDTheme` |
+
+Sources immuables, outil de découpe, recette, manifeste, provenance et planche
+de contrôle : lot `toxic-commando-hud-v001` sous `pipeline/assets/`.
 
 ## Côte toxique — kit de Ground Pieces v001
 
@@ -74,6 +102,70 @@ Lot approuvé le 2026-08-25. Sources, prompts, profil, manifeste, provenance et
 QA : `pipeline/assets/{sources,recipes,profiles,manifests,provenance,working}`.
 Les poses clés sont intégrées ; leur continuité temporelle reste provisoire et
 sera affinée frame par frame.
+
+## Canon de campagne — projectile et impact v001
+
+| Fichier | Création | Intention | Intégration |
+|---|---|---|---|
+| `weapons/projectiles/field/field-round-v001.png` | ImageGen intégré puis normalisation pipeline 384 × 192 | munition bitmap du canon de campagne, orientée vers la droite | `field_round.tres` → `FieldRound2D/Visual` |
+| `effects/weapons/field/field-round-impact-3x2-v001.png` | ImageGen intégré puis découpe 3 × 2 en cellules 256 × 256 | impact animé court de la munition de campagne | `field_round_impact_frames.tres` → `FieldRoundImpact2D` |
+
+Lot approuvé le 2026-08-31 à partir des candidates techniques du lot
+`projectile-impact-lot-v001`. SHA-256 publiés :
+`0b5a8814905e6e8710667d9c52e34372b7fee63655e49112d7bd23f290d6b2cd` et
+`6e25618ecc70bb78fae1f9295fea9d2fdc05e5b3a27f9a80106a056493fb4e9c`.
+Sources, recette, manifeste, provenance, exports et QA restent sous
+`pipeline/assets/`.
+
+## Pickups — soin v001
+
+| Fichier | Création | Intention | Intégration |
+|---|---|---|---|
+| `pickups/health-injector-v001.png` | candidate du megapack industriel toxique, sélection puis normalisation déterministe 192 × 192 | injecteur de soin immédiatement identifiable sur alpha réel | `health_injector.tres` → `HealthInjector2D` |
+
+Lot publié le 2026-08-29. Source, recette, processeur, manifeste, provenance et
+QA : lot `health-injector-pickup-v001` sous `pipeline/assets/`. La scène
+canonique et son `PickupData` sont validées par
+`pickup_interaction_contract_test.gd`.
+
+## Expansion industrielle toxique v001
+
+Le megapack contient 38 candidats. La matrice d'intégration en exclut 11 déjà
+intégrés ou supplantés et publie exactement 27 sorties inédites.
+
+| Famille | Fichiers publiés | Intégration Godot |
+|---|---|---|
+| Architecture (5) | `acid-bridge-abutment-v001.png`, `destructible-military-wall-v001.png`, `guard-tower-module-v001.png`, `vacuum-foundry-platform-v001.png`, `walk-under-pipe-arch-v001.png` | cinq `GroundPieceDefinition` et scènes glissables |
+| Props (7) | `ammo-resupply-locker-v001.png`, `field-medical-station-v001.png`, `military-floodlight-v001.png`, `portable-barricade-v001.png`, `proximity-blast-mine-v001.png`, `radio-relay-antenna-v001.png`, `toxic-pressure-vent-v001.png` | stations, WorldProps, Ground Piece Breakable, mine et Hazard |
+| Pickups (3) | `ammo-drum-v001.png`, `armor-plate-v001.png`, `overdrive-vacuum-core-v001.png` | trois `PickupData` consommées par CombatInventory |
+| Armes (4) | `acid-sprayer-v001.png`, `electric-coil-rifle-v001.png`, `vacuum-imploder-cannon-v001.png`, `demolition-launcher-v001.png` | quatre `WeaponData` équipables par armurerie |
+| Projectiles (4) | `acid-capsule-v001.png`, `electric-coil-bolt-v001.png`, `vacuum-implosion-core-v001.png`, `demolition-rocket-v001.png` | quatre `ProjectileData` et scènes texturées |
+| Impacts (4) | atlas `acid`, `electric`, `vacuum-implosion` et `demolition`, chacun en 3 × 2 | quatre SpriteFrames et scènes `AnimatedProjectileImpact2D` |
+
+Lot publié le 2026-08-30 par
+`pipeline/assets/tools/process_industrial_toxic_expansion.py`. Matrice 11/27,
+recette, manifeste, provenance, exports et QA sont conservés sous
+`pipeline/assets/`. La validation Godot est portée par
+`industrial_toxic_expansion_contract_test.gd` ; aucun des 11 doublons exclus
+n'a produit une seconde autorité runtime.
+
+## Côte toxique — backgrounds segmentés v002
+
+| Fichier | Intention | Intégration |
+|---|---|---|
+| `maps/toxic_coast/backgrounds/landing-zone-background-v002.png` | côte militaire occupée, radar et flotte aspirante | `Visual/SegmentBackgrounds/LandingZoneBackground` |
+| `maps/toxic_coast/backgrounds/acid-bridge-background-v002.png` | ravin industriel, pont rompu et cascades acides | `Visual/SegmentBackgrounds/AcidBridgeBackground` |
+| `maps/toxic_coast/backgrounds/vacuum-foundry-background-v002.png` | fonderie monumentale et réacteur d'implosion | `Visual/SegmentBackgrounds/VacuumFoundryBackground` |
+| `maps/toxic_coast/backgrounds/transitions/landing-to-bridge-transition-v002.png` | raccord déterministe côte → ravin | frontière x=2560 |
+| `maps/toxic_coast/backgrounds/transitions/bridge-to-foundry-transition-v002.png` | raccord déterministe ravin → fonderie | frontière x=5120 |
+
+Sources générées avec l'outil ImageGen intégré le 2026-08-30, puis cadrées,
+redimensionnées et assombries sous le couloir jouable par
+`process_toxic_coast_segment_backgrounds.py`. Chaque sortie fait exactement
+2560 × 720 et correspond à un acte sans répétition ; deux bandes 384 × 720
+adoucisent les frontières. Recette, manifeste,
+provenance, exports, contact sheet et QA : lot
+`toxic-coast-segment-backgrounds-v002` sous `pipeline/assets/`.
 
 ## Ennemis — Vacuum Trooper v001
 
@@ -132,6 +224,35 @@ manifeste, revues, aperçus et QA : lot `enemy-animation-roster-v002` sous
 `pipeline/assets/`. Validation :
 `ENEMY_ANIMATION_ROSTER_V002_VALIDATION: PASS` et
 `ENEMY_ANIMATION_ROSTER_V002_TEST: PASS`.
+
+## Boot et Start Flow — Industrial Toxic v001
+
+| Famille | Fichiers publiés | Intégration |
+|---|---|---|
+| Backgrounds | `boot-radio-outpost-background-v001.png`, `loading-vacuum-turbine-background-v001.png`, `title-fortress-assault-background-v001.png`, `mission-select-archipelago-map-v001.png` | Boot, Start, loading de mission et futur Mission Select |
+| Identité et cadres | `vacuum-faction-emblem-v001.png`, `blank-armored-title-plaque-v001.png`, `vertical-main-menu-frame-v001.png` | `BootStartFlowTheme` → scènes Boot/Start |
+| Ornements | `previous-inactive-v001.png`, `previous-active-v001.png`, `locked-v001.png`, `divider-v001.png`, `lime-status-lamp-v001.png`, `magenta-status-lamp-v001.png` | flèche active reliée au focus ; autres éléments réservés aux états futurs réels |
+| Marqueurs | `landing-marker-v001.png`, `pipeline-marker-v001.png`, `foundry-marker-v001.png`, `fortress-marker-v001.png`, `elite-marker-v001.png`, `completed-marker-v001.png` | vocabulaire publié du futur Mission Select, sans logique runtime fictive |
+
+Lot ImageGen publié le 2026-08-30 par
+`pipeline/assets/tools/process_boot_start_flow.py`. Les quatre backgrounds sont
+préservés ; les éléments alpha sont normalisés et les deux planches 3 × 2 sont
+découpées en douze livrables. Manifeste, provenance, recette, exports et planche
+de revue : lot `industrial-toxic-boot-start-flow-v001` sous `pipeline/assets/`.
+Tout texte visible reste natif Godot et n'est jamais peint dans ces images.
+
+## Effets — explosions de barils v001
+
+| Fichier | Intention | Intégration |
+|---|---|---|
+| `effects/explosions/barrel/barrel-small-explosion-4x2-v001.png` | détonation compacte, rapide et peu persistante | `barrel_small_explosion.tres` |
+| `effects/explosions/barrel/barrel-standard-explosion-4x2-v001.png` | signature courante du baril toxique | `barrel_standard_explosion.tres` → `toxic_explosive_barrel.tres` |
+| `effects/explosions/barrel/barrel-heavy-explosion-4x2-v001.png` | énorme volume de feu, double onde et longue fumée | `barrel_heavy_explosion.tres` |
+
+Lot ImageGen publié le 2026-08-31. Chaque atlas mesure 1152 × 768, contient
+huit cellules 288 × 384 sur alpha réel et alimente la scène canonique composée
+`Explosion2D`. Recette, sources, exports, provenance, manifeste et QA : lot
+`barrel-explosion-family-v001` sous `pipeline/assets/`.
 
 ## Imports historiques non actifs
 

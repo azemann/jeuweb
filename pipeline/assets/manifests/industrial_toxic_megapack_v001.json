@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-megapack-v001",
+  "displayName": "Industrial Toxic Megapack v001",
+  "status": "candidate",
+  "sourceRoot": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001",
+  "assetCount": 38,
+  "referenceCount": 3,
+  "categories": {
+    "terrain": 9,
+    "props": 9,
+    "enemies": 4,
+    "pickups": 4,
+    "weapons": 12
+  },
+  "weaponFamilies": [
+    "acid",
+    "electric",
+    "implosion",
+    "rocket"
+  ],
+  "recipe": "pipeline/assets/recipes/industrial_toxic_megapack_v001.md",
+  "provenance": "pipeline/assets/provenance/industrial_toxic_megapack_v001.json",
+  "qa": "pipeline/assets/working/megapacks/industrial_toxic_v001/industrial-toxic-megapack-v001-qa.json",
+  "catalog": "pipeline/assets/working/megapacks/industrial_toxic_v001/asset-catalog-v001.md",
+  "integrationMatrix": "pipeline/assets/working/megapacks/industrial_toxic_v001/integration-matrix-v001.md",
+  "classification": {
+    "integratedOrSuperseded": 11,
+    "retainedForExpansion": 27
+  },
+  "reviewSheet": "pipeline/assets/working/megapacks/industrial_toxic_v001/megapack-contact-sheet-v001.jpg",
+  "integrationAllowed": false,
+  "nextGate": "human visual classification and per-family normalization"
+}

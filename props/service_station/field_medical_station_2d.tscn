@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://props/service_station/service_station_2d.tscn" id="1"]
+[ext_resource type="Resource" path="res://props/service_station/data/field_medical_station.tres" id="2"]
+[node name="FieldMedicalStation2D" instance=ExtResource("1")]
+data = ExtResource("2")

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-boot-start-flow-v001",
+  "automatedChecks": {
+    "assetCountExpected": 9,
+    "assetCountActual": 9,
+    "transparentAssetsExpected": 5,
+    "transparentAssetsWithAlpha": 5,
+    "opaqueBackgroundsExpected": 4,
+    "opaqueBackgroundsActual": 4,
+    "contactSheetPresent": true
+  },
+  "reviewGates": {
+    "sourceTechnicalAudit": "passed",
+    "visualSelection": "pending",
+    "spriteSheetSlicing": "pending",
+    "ninePatchSuitability": "pending",
+    "multiResolutionCropTest": "pending",
+    "runtimePublication": "blocked"
+  },
+  "knownLimits": [
+    "The title plaque and menu frame need stretch-region or nine-patch decisions.",
+    "Both 3x2 sheets require deterministic slicing before runtime use.",
+    "Background safe areas must be checked against the final UI layout and aspect ratios.",
+    "All visible menu text must remain native Godot text rather than raster artwork."
+  ]
+}

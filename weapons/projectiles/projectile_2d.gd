@@ -1,3 +1,4 @@
+@tool
 class_name Projectile2D
 extends Area2D
 
@@ -7,7 +8,17 @@ signal expired
 
 @export_category("Definition")
 ## Définition autoritaire du vol, de l'impact, du terrain et de la présentation du projectile.
-@export var data: ProjectileData
+@export var data: ProjectileData:
+	set(value):
+		data = value
+		_sync_author_preview()
+
+@export_category("Author Preview")
+## Affiche dans l'éditeur l'identité de la munition, son impact et son explosion éventuelle.
+@export var show_author_preview := true:
+	set(value):
+		show_author_preview = value
+		_sync_author_preview()
 
 var direction := Vector2.RIGHT
 var shooter: Node2D
@@ -16,7 +27,9 @@ var _resolved := false
 @onready var collision_shape: CollisionShape2D = %CollisionShape
 @onready var tracer: Polygon2D = %Tracer
 @onready var core: Polygon2D = %Core
+@onready var visual: Sprite2D = get_node_or_null("%Visual") as Sprite2D
 @onready var lifetime_timer: Timer = %Lifetime
+@onready var author_preview: Label = get_node_or_null("%AuthorPreview") as Label
 
 
 func _ready() -> void:
@@ -25,7 +38,9 @@ func _ready() -> void:
 		set_physics_process(false)
 		return
 	_apply_presentation()
-	lifetime_timer.start(data.lifetime)
+	_sync_author_preview()
+	if not Engine.is_editor_hint():
+		lifetime_timer.start(data.lifetime)
 
 
 func launch(requested_direction: Vector2, source: Node2D = null) -> void:
@@ -143,20 +158,38 @@ func _damage_receiver(source: Node) -> Node:
 
 
 func _belongs_to_shooter(candidate: Node) -> bool:
-	return shooter != null and (candidate == shooter or shooter.is_ancestor_of(candidate))
+	var valid_shooter := _validated_shooter()
+	return valid_shooter != null and (candidate == valid_shooter or valid_shooter.is_ancestor_of(candidate))
 
 
 func _ray_exclusions() -> Array[RID]:
 	var exclusions: Array[RID] = [get_rid()]
-	if shooter is CollisionObject2D:
-		exclusions.append((shooter as CollisionObject2D).get_rid())
-	if shooter != null:
-		for child in shooter.find_children("*", "CollisionObject2D", true, false):
+	var valid_shooter := _validated_shooter()
+	if valid_shooter == null:
+		return exclusions
+	if valid_shooter is CollisionObject2D:
+		exclusions.append((valid_shooter as CollisionObject2D).get_rid())
+	for child in valid_shooter.find_children("*", "CollisionObject2D", true, false):
+		if is_instance_valid(child):
 			exclusions.append((child as CollisionObject2D).get_rid())
 	return exclusions
 
 
+func _validated_shooter() -> Node2D:
+	if is_instance_valid(shooter):
+		return shooter
+	shooter = null
+	return null
+
+
 func _apply_presentation() -> void:
+	var uses_bitmap_visual := data.texture != null and visual != null
+	if visual != null:
+		visual.texture = data.texture
+		visual.scale = Vector2.ONE * data.texture_scale
+		visual.visible = uses_bitmap_visual
+	tracer.visible = not uses_bitmap_visual
+	core.visible = not uses_bitmap_visual
 	var half_length := data.tracer_length * 0.5
 	var half_width := data.tracer_width * 0.5
 	tracer.polygon = PackedVector2Array([
@@ -172,6 +205,31 @@ func _apply_presentation() -> void:
 	var rectangle := collision_shape.shape as RectangleShape2D
 	if rectangle != null:
 		rectangle.size = Vector2(data.tracer_length, maxf(2.0, data.tracer_width))
+
+
+func author_preview_text() -> String:
+	if data == null:
+		return "projectile: <none>\nimpact: <none>\nexplosion: <none>"
+	var impact_name := _resource_label(data.impact_scene)
+	var explosion_id := "<none>"
+	if data.explosion_data != null:
+		explosion_id = str(data.explosion_data.explosion_id)
+	return "projectile: %s\nimpact: %s\nexplosion: %s" % [data.projectile_id, impact_name, explosion_id]
+
+
+func _sync_author_preview() -> void:
+	if not is_node_ready() or author_preview == null:
+		return
+	author_preview.text = author_preview_text()
+	author_preview.visible = show_author_preview and Engine.is_editor_hint()
+
+
+func _resource_label(resource: Resource) -> String:
+	if resource == null:
+		return "<none>"
+	if not resource.resource_path.is_empty():
+		return resource.resource_path.get_file().get_basename()
+	return resource.get_class()
 
 
 func _on_lifetime_timeout() -> void:

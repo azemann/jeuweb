@@ -28,6 +28,10 @@ enum OpeningMode { SHOT_ONLY, INTERACTION_ONLY, SHOT_OR_INTERACTION }
 ## Rayon autour de la caisse dans lequel l'action d'interaction est acceptée.
 @export_range(16.0, 300.0, 1.0) var interaction_radius := 92.0
 
+@export_category("Contents")
+## Scène instanciée au ContentsOrigin lors de la première ouverture réussie.
+@export var contents_scene: PackedScene
+
 @export_category("Collision")
 ## Taille de la collision solide et tirable de la caisse fermée.
 @export var collision_size := Vector2(300.0, 150.0)
@@ -45,6 +49,10 @@ func accepts_interaction() -> bool:
 	return opening_mode != OpeningMode.SHOT_ONLY
 
 
+func has_contents() -> bool:
+	return contents_scene != null and contents_scene.can_instantiate()
+
+
 func is_valid() -> bool:
 	return (
 		not str(crate_id).is_empty()
@@ -54,6 +62,7 @@ func is_valid() -> bool:
 		and maximum_health > 0.0
 		and not str(interaction_action).is_empty()
 		and interaction_radius > 0.0
+		and (contents_scene == null or contents_scene.can_instantiate())
 		and collision_size.x > 0.0
 		and collision_size.y > 0.0
 	)

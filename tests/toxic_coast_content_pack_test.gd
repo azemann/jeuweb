@@ -64,7 +64,9 @@ func _run() -> void:
 	root.add_child(crate)
 	_check(crate.data != null and crate.data.is_valid(), "La caisse doit posséder une SupplyCrateData valide.")
 	_check(crate.data.accepts_shot() and crate.data.accepts_interaction(), "La caisse publiée doit accepter tir et interaction.")
-	_check(crate.apply_damage(1.0) and crate.is_open(), "Un tir doit ouvrir la caisse vide publiée.")
+	_check(crate.data.has_contents(), "La caisse publiée doit référencer son pickup de soin.")
+	_check(crate.apply_damage(1.0) and crate.is_open(), "Un tir doit ouvrir la caisse publiée.")
+	_check(crate.spawned_content() is Pickup2D, "L'ouverture doit instancier le contenu au ContentsOrigin.")
 	crate.queue_free()
 
 	await process_frame

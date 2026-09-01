@@ -9,6 +9,8 @@ const ACTIONS := [
 	&"player_aim_up",
 	&"player_aim_down",
 	&"player_fire",
+	&"player_interact",
+	&"player_weapon_wheel",
 ]
 
 var _failures: Array[String] = []
@@ -40,6 +42,10 @@ func _run() -> void:
 	_check(_has_mouse_button(&"player_fire", MOUSE_BUTTON_LEFT), "Le clic gauche doit pouvoir tirer.")
 	_check(_has_joy_button(&"player_fire", JOY_BUTTON_X), "Le bouton X de manette doit pouvoir tirer.")
 	_check(_has_joy_motion(&"player_fire", JOY_AXIS_TRIGGER_RIGHT, 1.0), "La gâchette droite doit pouvoir tirer.")
+	_check(_has_event_type(&"player_interact", InputEventKey), "L'interaction doit conserver une liaison clavier.")
+	_check(_has_joy_button(&"player_interact", JOY_BUTTON_Y), "Le bouton Y de manette doit pouvoir interagir.")
+	_check(_has_event_type(&"player_weapon_wheel", InputEventKey), "La roue d'armes doit conserver une liaison clavier.")
+	_check(_has_joy_button(&"player_weapon_wheel", JOY_BUTTON_LEFT_SHOULDER), "L'épaule gauche de manette doit ouvrir la roue d'armes.")
 
 	var mobile_scene := load("res://ui/mobile/mobile_controls.tscn") as PackedScene
 	_check(mobile_scene != null, "La scène canonique MobileControls doit être lisible.")
@@ -53,6 +59,7 @@ func _run() -> void:
 		"Down": &"player_aim_down",
 		"Jump": &"player_jump",
 		"Fire": &"player_fire",
+		"Interact": &"player_interact",
 	}
 	for node_name in touch_actions:
 		var button := mobile.get_node_or_null(node_name) as TouchScreenButton

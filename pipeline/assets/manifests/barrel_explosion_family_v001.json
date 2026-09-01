@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "barrel-explosion-family-v001",
+  "status": "integrated",
+  "assets": [
+    {"path": "art/effects/explosions/barrel/barrel-small-explosion-4x2-v001.png", "role": "small-barrel-explosion-atlas", "sha256": "4b66704d351e84cef6563ca2bfad9c8219075b2f65e42226305720dfb6238d3f"},
+    {"path": "art/effects/explosions/barrel/barrel-standard-explosion-4x2-v001.png", "role": "standard-barrel-explosion-atlas", "sha256": "d0bd53a43b58eec829e5d85376f812a54c2f34d7ebaf29887ee463359eb7612f"},
+    {"path": "art/effects/explosions/barrel/barrel-heavy-explosion-4x2-v001.png", "role": "heavy-barrel-explosion-atlas", "sha256": "8fc3d154b78add56e4f9e8d2a1ddf4eb1a4df5b9acb85e220dc2c5d869685ceb"}
+  ],
+  "recipe": "pipeline/assets/recipes/barrel_explosion_family_v001.md",
+  "provenance": "pipeline/assets/provenance/barrel_explosion_family_v001.json",
+  "qa": "pipeline/assets/working/effects/explosions/barrel_v001/barrel-explosion-family-v001-qa.json",
+  "integrationAllowed": true
+}

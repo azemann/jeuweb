@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldPropData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://props/world_prop/world_prop_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/radio-relay-antenna-v001.png" id="2"]
+[resource]
+script = ExtResource("1")
+prop_id = &"radio_relay_antenna"
+display_name = "Relais radio"
+texture = ExtResource("2")
+pivot_px = Vector2(160, 432)
+collision_size = Vector2(120, 300)
+collision_offset = Vector2(0, -150)

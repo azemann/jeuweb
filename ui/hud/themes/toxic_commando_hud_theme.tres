@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="MissionHUDTheme" format=3 uid="uid://b6x5bmosga0cs"]
+
+[ext_resource type="Script" uid="uid://boy5vlfxwdsg2" path="res://ui/hud/mission_hud_theme.gd" id="1_theme"]
+[ext_resource type="Texture2D" uid="uid://ctevkn370e0q1" path="res://art/ui/hud/toxic_commando/frames/player-status-frame-v001.png" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://cap85m2sclym" path="res://art/ui/hud/toxic_commando/frames/weapon-status-frame-v001.png" id="3_weapon"]
+[ext_resource type="Texture2D" uid="uid://b2urtco1j252f" path="res://art/ui/hud/toxic_commando/frames/objective-frame-v001.png" id="4_objective"]
+[ext_resource type="Texture2D" uid="uid://cxncaea73rjxc" path="res://art/ui/hud/toxic_commando/frames/boss-health-frame-v001.png" id="5_boss"]
+[ext_resource type="Texture2D" uid="uid://d1rtr72tnp8s6" path="res://art/ui/hud/toxic_commando/frames/overdrive-frame-v001.png" id="6_overdrive"]
+[ext_resource type="Texture2D" uid="uid://dajnkdxkxhp8t" path="res://art/ui/hud/toxic_commando/frames/notification-frame-v001.png" id="7_notification"]
+[ext_resource type="Texture2D" uid="uid://c8cabkisis114" path="res://art/ui/hud/toxic_commando/icons/health-icon-v001.png" id="8_health_icon"]
+[ext_resource type="Texture2D" uid="uid://bqpuxtbure1e8" path="res://art/ui/hud/toxic_commando/icons/armor-icon-v001.png" id="9_armor_icon"]
+[ext_resource type="Texture2D" uid="uid://cgbmtmkusg3jf" path="res://art/ui/hud/toxic_commando/icons/ammo-icon-v001.png" id="10_ammo_icon"]
+[ext_resource type="Texture2D" uid="uid://di8vbg5id02cp" path="res://art/ui/hud/toxic_commando/icons/overdrive-icon-v001.png" id="11_overdrive_icon"]
+[ext_resource type="Texture2D" uid="uid://dviyedfhqlmbp" path="res://art/ui/hud/toxic_commando/icons/objective-icon-v001.png" id="12_objective_icon"]
+[ext_resource type="Texture2D" uid="uid://dseb1b3cmobt" path="res://art/ui/hud/toxic_commando/icons/boss-icon-v001.png" id="13_boss_icon"]
+[ext_resource type="Texture2D" uid="uid://cbpp2w2aq6tk4" path="res://art/ui/hud/toxic_commando/portraits/player-portrait-v001.png" id="14_portrait"]
+[ext_resource type="Texture2D" uid="uid://0rd4ew4ck6ei" path="res://art/ui/hud/toxic_commando/icons/grenade-icon-v001.png" id="15_grenade"]
+[ext_resource type="Texture2D" uid="uid://cioyqru51v1vj" path="res://art/ui/hud/toxic_commando/icons/checkpoint-icon-v001.png" id="16_checkpoint"]
+[ext_resource type="Texture2D" uid="uid://4bpyv3rtm6ci" path="res://art/ui/hud/toxic_commando/icons/weapon-icon-v001.png" id="17_weapon_icon"]
+[ext_resource type="Texture2D" uid="uid://c8aruirus4fjl" path="res://art/ui/hud/toxic_commando/icons/poison-icon-v001.png" id="18_poison"]
+[ext_resource type="Texture2D" uid="uid://dnfltsa6jvc0o" path="res://art/ui/hud/toxic_commando/icons/electric-icon-v001.png" id="19_electric"]
+[ext_resource type="Texture2D" uid="uid://bywsfjejtg66a" path="res://art/ui/hud/toxic_commando/icons/fire-icon-v001.png" id="20_fire"]
+[ext_resource type="Texture2D" uid="uid://de01p831dky5b" path="res://art/ui/flows/industrial_toxic/backgrounds/loading-vacuum-turbine-background-v001.png" id="21_loading"]
+
+[resource]
+script = ExtResource("1_theme")
+theme_id = &"toxic_commando"
+display_name = "Commando toxique"
+player_status_frame = ExtResource("2_player")
+weapon_status_frame = ExtResource("3_weapon")
+objective_frame = ExtResource("4_objective")
+boss_health_frame = ExtResource("5_boss")
+overdrive_frame = ExtResource("6_overdrive")
+notification_frame = ExtResource("7_notification")
+loading_background = ExtResource("21_loading")
+player_portrait = ExtResource("14_portrait")
+health_icon = ExtResource("8_health_icon")
+armor_icon = ExtResource("9_armor_icon")
+ammo_icon = ExtResource("10_ammo_icon")
+overdrive_icon = ExtResource("11_overdrive_icon")
+objective_icon = ExtResource("12_objective_icon")
+boss_icon = ExtResource("13_boss_icon")
+grenade_icon = ExtResource("15_grenade")
+checkpoint_icon = ExtResource("16_checkpoint")
+weapon_icon = ExtResource("17_weapon_icon")
+poison_icon = ExtResource("18_poison")
+electric_icon = ExtResource("19_electric")
+fire_icon = ExtResource("20_fire")

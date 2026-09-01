@@ -7,6 +7,13 @@ signal back_requested
 func _ready() -> void:
 	%DesignReferencePanel.visible = false
 	%BackButton.pressed.connect(back_requested.emit)
+	var host := _map_host()
+	if not host.map_loading_started.is_connected(_on_map_loading_started):
+		host.map_loading_started.connect(_on_map_loading_started)
+	if not host.map_loaded.is_connected(_on_map_loaded):
+		host.map_loaded.connect(_on_map_loaded)
+	if not host.map_load_failed.is_connected(_on_map_load_failed):
+		host.map_load_failed.connect(_on_map_load_failed)
 	var run := %MissionRunController
 	if not run.mission_won.is_connected(_on_mission_won):
 		run.mission_won.connect(_on_mission_won)
@@ -22,27 +29,55 @@ func _ready() -> void:
 	%ActorSpawner.player_spawned.connect(_on_player_spawned)
 	if %ActorSpawner.current_player != null:
 		_on_player_spawned(%ActorSpawner.current_player, null)
+	get_tree().process_frame.connect(_load_mission, Object.CONNECT_ONE_SHOT)
+
+
+func _map_host() -> MissionMapHost2D:
+	return $MissionViewportContainer/MissionViewport/MapHost as MissionMapHost2D
+
+
+func _hud() -> MissionHUD:
+	return %MissionHUD as MissionHUD
+
+
+func _load_mission() -> void:
+	_map_host().load_map()
+
+
+func _on_map_loading_started(definition: MissionMapDefinition) -> void:
+	_hud().theme_profile = definition.hud_theme
+	_hud().show_loading()
+
+
+func _on_map_loaded(_map: MissionMapRoot2D) -> void:
+	_hud().hide_loading()
+
+
+func _on_map_load_failed(errors: PackedStringArray) -> void:
+	_hud().show_error(errors)
+	%BackButton.visible = true
+	%BackButton.focus_mode = Control.FOCUS_ALL
 	%BackButton.grab_focus()
 
 
 func _on_mission_won() -> void:
-	%ResultPanel.visible = true
-	%ResultLabel.text = "MISSION ACCOMPLIE\nCÔTE TOXIQUE SÉCURISÉE"
+	_hud().show_result("MISSION ACCOMPLIE\nCÔTE TOXIQUE SÉCURISÉE")
+	%BackButton.visible = true
+	%BackButton.focus_mode = Control.FOCUS_ALL
 	%BackButton.grab_focus()
 
 
 func _on_encounter_started(_encounter_id: StringName, data: EncounterData) -> void:
-	%EncounterLabel.text = "RENCONTRE · %s" % str(data.cadence_id).replace("_", " ").to_upper()
-	%CadenceLabel.text = "PRÉPARATION"
+	_hud().set_objective_text("ALERTE · %s" % str(data.cadence_id).replace("_", " ").to_upper())
 
 
 func _on_wave_started(_encounter_id: StringName, wave_index: int, wave: WaveData) -> void:
 	var beat_names := ["PRESSION", "RESPIRATION", "ESCALADE", "PAYOFF"]
-	%CadenceLabel.text = "%s · VAGUE %d" % [beat_names[wave.combat_beat], wave_index + 1]
+	_hud().set_objective_text("%s · VAGUE %d" % [beat_names[wave.combat_beat], wave_index + 1])
 
 
 func _on_encounter_completed(_encounter_id: StringName) -> void:
-	%CadenceLabel.text = "ZONE SÉCURISÉE"
+	_hud().set_objective_text("ZONE SÉCURISÉE · PROGRESSEZ")
 
 
 func _on_enemy_registered(_encounter_id: StringName, _wave_id: StringName, enemy: EnemyCharacter2D) -> void:
@@ -51,16 +86,7 @@ func _on_enemy_registered(_encounter_id: StringName, _wave_id: StringName, enemy
 	var health := enemy.health_component()
 	if health == null:
 		return
-	%BossHealthPanel.visible = true
-	%BossHealth.max_value = enemy.profile.maximum_health
-	%BossHealth.value = health.current_health
-	if not health.health_changed.is_connected(_on_boss_health_changed):
-		health.health_changed.connect(_on_boss_health_changed)
-
-
-func _on_boss_health_changed(current: float, maximum: float) -> void:
-	%BossHealth.max_value = maximum
-	%BossHealth.value = current
+	_hud().bind_boss(enemy)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -70,15 +96,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_player_spawned(player: PlayerCharacter2D, _spawn: MapSpawnPoint2D) -> void:
-	var health := player.health_component()
-	if health == null or health.profile == null:
-		return
-	%Health.max_value = health.profile.maximum_health
-	%Health.value = health.current_health
-	if not health.health_changed.is_connected(_on_player_health_changed):
-		health.health_changed.connect(_on_player_health_changed)
-
-
-func _on_player_health_changed(current: float, maximum: float) -> void:
-	%Health.max_value = maximum
-	%Health.value = current
+	_hud().bind_player(player)

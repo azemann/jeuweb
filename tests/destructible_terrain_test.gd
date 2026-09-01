@@ -37,6 +37,14 @@ func _run() -> void:
 		_check(not terrain.has_pending_collision_rebuild() and terrain.pending_collision_chunk_count() == 0, "Le flush différé doit vider tous les chunks sales.")
 		_check(terrain.collision_flush_count == 1 and terrain.collision_chunk_rebuild_count == affected, "Un cratère doit produire un seul flush contenant chaque chunk affecté une fois.")
 		_check(terrain.collision_bitmap_build_count == 1, "Une explosion locale ne doit pas reconstruire le bitmap complet.")
+		var collision_shapes := terrain.find_children("*", "CollisionShape2D", true, false)
+		_check(not collision_shapes.is_empty(), "Le terrain doit publier des formes de collision après le cratère.")
+		for collision in collision_shapes:
+			var shape := (collision as CollisionShape2D).shape
+			_check(
+				shape is ConvexPolygonShape2D and (shape as ConvexPolygonShape2D).points.size() >= 3,
+				"Les contours concaves doivent être découpés en pièces convexes solides."
+			)
 	map.free()
 
 	if _failures.is_empty():

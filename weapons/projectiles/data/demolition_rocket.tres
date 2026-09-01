@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://bse14s43mgv5b"]
+
+[ext_resource type="Script" uid="uid://byrgd63isx8aj" path="res://weapons/projectiles/projectile_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://effects/weapons/rocket/demolition_impact_2d.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://d14niogf2olbf" path="res://art/weapons/projectiles/rocket/demolition-rocket-v001.png" id="3"]
+[ext_resource type="PackedScene" path="res://effects/explosions/explosion_2d.tscn" id="4"]
+[ext_resource type="Resource" path="res://effects/explosions/data/demolition_rocket_explosion.tres" id="5"]
+
+[resource]
+script = ExtResource("1")
+projectile_id = &"demolition_rocket"
+display_name = "Roquette de démolition"
+speed = 820.0
+lifetime = 2.0
+damage = 55.0
+impulse = 650.0
+impact_scene = ExtResource("2")
+explosion_scene = ExtResource("4")
+explosion_data = ExtResource("5")
+affects_destructible_terrain = true
+terrain_radius = 44.0
+texture = ExtResource("3")
+texture_scale = 0.34
+tracer_color = Color(1, 0.35, 0.05, 1)
+core_color = Color(1, 0.9, 0.3, 1)
+tracer_length = 40.0
+tracer_width = 12.0

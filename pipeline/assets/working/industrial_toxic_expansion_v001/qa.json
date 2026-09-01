@@ -1,0 +1,1107 @@
+{
+  "schema": "jeuweb.industrial-toxic-expansion.v1",
+  "status": "published",
+  "source_lot": "industrial-toxic-megapack-v001",
+  "asset_count": 27,
+  "assets": [
+    {
+      "asset_id": "acid_bridge_abutment",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/terrain/acid-bridge-abutment-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/terrain/pieces/toxic_coast/military/acid-bridge-abutment-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/military/acid-bridge-abutment-v001.png",
+      "source_sha256": "af3835d48cd8cc84068681823c98820d9d9d71225912d1524645477e759163b8",
+      "published_sha256": "df3d135d702807cbc2f5ccc5100ce40006f0a3c6a7d7b584ff5357dc08e5f86f",
+      "canvas": [
+        768,
+        512
+      ],
+      "content_position": [
+        32,
+        32
+      ],
+      "content_size": [
+        704,
+        404
+      ],
+      "alpha_bbox": [
+        32,
+        32,
+        736,
+        436
+      ]
+    },
+    {
+      "asset_id": "destructible_military_wall",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/terrain/destructible-military-wall-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/terrain/pieces/toxic_coast/military/destructible-military-wall-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/military/destructible-military-wall-v001.png",
+      "source_sha256": "cd66495f8ee4ad63cf9f4a7560561907e409d8569cdc8582875eae4599166cfd",
+      "published_sha256": "cc86271568b4f318fafdaae7e61d346c819a1b3c778b097ed8e254b2a5e67373",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        32,
+        32
+      ],
+      "content_size": [
+        704,
+        278
+      ],
+      "alpha_bbox": [
+        32,
+        32,
+        736,
+        310
+      ]
+    },
+    {
+      "asset_id": "guard_tower_module",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/terrain/guard-tower-module-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/terrain/pieces/toxic_coast/military/guard-tower-module-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/military/guard-tower-module-v001.png",
+      "source_sha256": "509cb930e7dab398ebc63c4de76a0cd09262f1ece62251668230e0261d8a52b8",
+      "published_sha256": "7c40d5d97844ea3bd1ebf08f25a5b965fcf9f0317c85c7563a109def6032de40",
+      "canvas": [
+        512,
+        768
+      ],
+      "content_position": [
+        74,
+        32
+      ],
+      "content_size": [
+        363,
+        688
+      ],
+      "alpha_bbox": [
+        74,
+        32,
+        437,
+        720
+      ]
+    },
+    {
+      "asset_id": "vacuum_foundry_platform",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/terrain/vacuum-foundry-platform-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/terrain/pieces/toxic_coast/metal/vacuum-foundry-platform-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/metal/vacuum-foundry-platform-v001.png",
+      "source_sha256": "333f17abbfe01abab78491c5c3b7dfc521a8f3134c51c57d4a3d94d02e32d7c8",
+      "published_sha256": "a4ff06b579950537331873e45459740b63328434cac909aee7677b26dd3d2e05",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        51,
+        32
+      ],
+      "content_size": [
+        665,
+        304
+      ],
+      "alpha_bbox": [
+        51,
+        32,
+        716,
+        336
+      ]
+    },
+    {
+      "asset_id": "walk_under_pipe_arch",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/terrain/walk-under-pipe-arch-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/terrain/pieces/toxic_coast/pipes/walk-under-pipe-arch-v001.png",
+      "published": "art/terrain/pieces/toxic_coast/pipes/walk-under-pipe-arch-v001.png",
+      "source_sha256": "a2192257303040c9560cf156ccc380d153e978b635dc7ecc3b4f11ff3fa709b8",
+      "published_sha256": "2651f9b526b073377adf66d3b0d7b0a0e15cae2603c081276190e9bdbd54d08f",
+      "canvas": [
+        768,
+        512
+      ],
+      "content_position": [
+        118,
+        48
+      ],
+      "content_size": [
+        531,
+        448
+      ],
+      "alpha_bbox": [
+        118,
+        48,
+        649,
+        496
+      ]
+    },
+    {
+      "asset_id": "ammo_resupply_locker",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/props/ammo-resupply-locker-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/props/toxic_coast/ammo-resupply-locker-v001.png",
+      "published": "art/props/toxic_coast/ammo-resupply-locker-v001.png",
+      "source_sha256": "e4db532e0f2ad5864505f122bcf52e73fe58b85f3223b1892973da083da17d19",
+      "published_sha256": "4be2a8626f4ec41fdf733202abbde0d4180838a96a8245f6a75e1ecfb3670c17",
+      "canvas": [
+        384,
+        320
+      ],
+      "content_position": [
+        26,
+        16
+      ],
+      "content_size": [
+        332,
+        288
+      ],
+      "alpha_bbox": [
+        26,
+        16,
+        358,
+        304
+      ]
+    },
+    {
+      "asset_id": "field_medical_station",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/props/field-medical-station-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/props/toxic_coast/field-medical-station-v001.png",
+      "published": "art/props/toxic_coast/field-medical-station-v001.png",
+      "source_sha256": "1085c2039eb627d431bfbcfb5ea84bf523315a1c6a06fcc6b96ffe7fa4081b05",
+      "published_sha256": "f419156cc18cb1325729b51c376cba4567ba3a356aee42be71131754af547321",
+      "canvas": [
+        320,
+        384
+      ],
+      "content_position": [
+        16,
+        41
+      ],
+      "content_size": [
+        288,
+        327
+      ],
+      "alpha_bbox": [
+        16,
+        41,
+        304,
+        368
+      ]
+    },
+    {
+      "asset_id": "military_floodlight",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/props/military-floodlight-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/props/toxic_coast/military-floodlight-v001.png",
+      "published": "art/props/toxic_coast/military-floodlight-v001.png",
+      "source_sha256": "5bdfd9994bf787506cd307af6959ae203b63527798a6168aa1f2b65e1ee87f99",
+      "published_sha256": "94114f5bbe43d38ff4a3103eaec41d2ddbd9d2a9011befd92ccc8f2ec1cb9409",
+      "canvas": [
+        256,
+        384
+      ],
+      "content_position": [
+        16,
+        36
+      ],
+      "content_size": [
+        224,
+        332
+      ],
+      "alpha_bbox": [
+        16,
+        36,
+        240,
+        368
+      ]
+    },
+    {
+      "asset_id": "portable_barricade",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/props/portable-barricade-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/props/toxic_coast/portable-barricade-v001.png",
+      "published": "art/props/toxic_coast/portable-barricade-v001.png",
+      "source_sha256": "8b0dde8c71f4fadf97ea6ef210b255332345b7b7ba6b85e8956ee630a5a9d02d",
+      "published_sha256": "7656102248a389c37c176f1c8f4d9e376c54ee1c42a1080cb8a0bce8bf853a9c",
+      "canvas": [
+        512,
+        256
+      ],
+      "content_position": [
+        16,
+        43
+      ],
+      "content_size": [
+        480,
+        197
+      ],
+      "alpha_bbox": [
+        16,
+        43,
+        496,
+        240
+      ]
+    },
+    {
+      "asset_id": "proximity_blast_mine",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/props/proximity-blast-mine-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/props/toxic_coast/proximity-blast-mine-v001.png",
+      "published": "art/props/toxic_coast/proximity-blast-mine-v001.png",
+      "source_sha256": "5b015ff3035d8b1e81754edaf7033bf6c3ddf56087b51a046b1e776cd8b7c186",
+      "published_sha256": "88d648ab9d3098da287f8c92d2de7a365c6c76a2f7c7ebfb5fd91abe16bd6d7f",
+      "canvas": [
+        256,
+        128
+      ],
+      "content_position": [
+        19,
+        16
+      ],
+      "content_size": [
+        218,
+        96
+      ],
+      "alpha_bbox": [
+        19,
+        16,
+        237,
+        112
+      ]
+    },
+    {
+      "asset_id": "radio_relay_antenna",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/props/radio-relay-antenna-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/props/toxic_coast/radio-relay-antenna-v001.png",
+      "published": "art/props/toxic_coast/radio-relay-antenna-v001.png",
+      "source_sha256": "10e09b948776d9fd518b14a98589e72a0a3f82ccbf88e95be7335cb6b31d7088",
+      "published_sha256": "26bc8d9a7086f9c2267793a56fb7e285bdd1e6fd6b48449bf943a50efadb00e0",
+      "canvas": [
+        320,
+        448
+      ],
+      "content_position": [
+        26,
+        16
+      ],
+      "content_size": [
+        267,
+        416
+      ],
+      "alpha_bbox": [
+        26,
+        16,
+        293,
+        432
+      ]
+    },
+    {
+      "asset_id": "toxic_pressure_vent",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/props/toxic-pressure-vent-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/props/toxic_coast/toxic-pressure-vent-v001.png",
+      "published": "art/props/toxic_coast/toxic-pressure-vent-v001.png",
+      "source_sha256": "7a500c8ea4cd1216b6b412ec50602a01df994369566d0cd39f208253cc327742",
+      "published_sha256": "1a8473c68610db8c73e44c861e2f1c2bd6de06020d5c163df4732e9f709ada13",
+      "canvas": [
+        256,
+        320
+      ],
+      "content_position": [
+        55,
+        16
+      ],
+      "content_size": [
+        145,
+        288
+      ],
+      "alpha_bbox": [
+        55,
+        16,
+        200,
+        304
+      ]
+    },
+    {
+      "asset_id": "ammo_drum_pickup",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/pickups/ammo-drum-pickup-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/pickups/ammo-drum-v001.png",
+      "published": "art/pickups/ammo-drum-v001.png",
+      "source_sha256": "0651066514cbab5ad701baf2fdd5fbe0c3bd0e24c07b0832a127cc24df6e25b6",
+      "published_sha256": "45103bccbfc0d7da49fe33233e9a54eccb916533bb9994d8bf527e18539336dc",
+      "canvas": [
+        192,
+        192
+      ],
+      "content_position": [
+        21,
+        16
+      ],
+      "content_size": [
+        149,
+        160
+      ],
+      "alpha_bbox": [
+        21,
+        16,
+        170,
+        176
+      ]
+    },
+    {
+      "asset_id": "armor_plate_pickup",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/pickups/armor-plate-pickup-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/pickups/armor-plate-v001.png",
+      "published": "art/pickups/armor-plate-v001.png",
+      "source_sha256": "c80075a8b2e654737b2b8a3d66652629484fea233a5c5bd14d83ee30937589df",
+      "published_sha256": "f537064f3208d572de783ddfa1b70b5a041660657fd6d96068aa7e1a804a6d05",
+      "canvas": [
+        192,
+        192
+      ],
+      "content_position": [
+        13,
+        12
+      ],
+      "content_size": [
+        166,
+        168
+      ],
+      "alpha_bbox": [
+        13,
+        12,
+        179,
+        180
+      ]
+    },
+    {
+      "asset_id": "overdrive_core_pickup",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/pickups/overdrive-vacuum-core-pickup-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/pickups/overdrive-vacuum-core-v001.png",
+      "published": "art/pickups/overdrive-vacuum-core-v001.png",
+      "source_sha256": "8980bda608e83385f7642c6062c20839b12569996eb99fe7593689a115aaaf8e",
+      "published_sha256": "5996faebb3202fe8d2802cdee6d0ef8880a3f3545ee0fc917395cf5417966c27",
+      "canvas": [
+        192,
+        192
+      ],
+      "content_position": [
+        12,
+        21
+      ],
+      "content_size": [
+        168,
+        150
+      ],
+      "alpha_bbox": [
+        12,
+        21,
+        180,
+        171
+      ]
+    },
+    {
+      "asset_id": "acid_sprayer",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/acid/acid-sprayer-weapon-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/player/acid-sprayer-v001.png",
+      "published": "art/weapons/player/acid-sprayer-v001.png",
+      "source_sha256": "4a044e5e4743c470832c97c93c864fdc0d06cd8da1107f696842fb5524b72f5e",
+      "published_sha256": "9ddebfce8da4a09189afff47e24e472d9719b517703f696a1a5ea291ff0c96ae",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        32,
+        56
+      ],
+      "content_size": [
+        704,
+        272
+      ],
+      "alpha_bbox": [
+        32,
+        56,
+        736,
+        328
+      ]
+    },
+    {
+      "asset_id": "acid_capsule",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/acid/acid-capsule-projectile-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/projectiles/acid/acid-capsule-v001.png",
+      "published": "art/weapons/projectiles/acid/acid-capsule-v001.png",
+      "source_sha256": "e3091210d2648994554cb8f9a0bdb700b9b0f39edd58ca5bd06e160895b85772",
+      "published_sha256": "eb3e6af2639cdd19935d6f8d845ae1c9a080e56e899d7e84096f7a928b97558c",
+      "canvas": [
+        384,
+        128
+      ],
+      "content_position": [
+        16,
+        29
+      ],
+      "content_size": [
+        352,
+        69
+      ],
+      "alpha_bbox": [
+        16,
+        29,
+        368,
+        98
+      ]
+    },
+    {
+      "asset_id": "electric_coil_rifle",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/electric/electric-coil-rifle-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/player/electric-coil-rifle-v001.png",
+      "published": "art/weapons/player/electric-coil-rifle-v001.png",
+      "source_sha256": "899935b79037056aa0ad82d49c32a587e8ce13286663aa324d498d8ce90c7d1f",
+      "published_sha256": "5a8b3203310b1a2007bf2f5ed8ca7355dd5415267bd862ec29d3a9925ba16f7f",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        32,
+        60
+      ],
+      "content_size": [
+        704,
+        264
+      ],
+      "alpha_bbox": [
+        32,
+        60,
+        736,
+        324
+      ]
+    },
+    {
+      "asset_id": "electric_coil_bolt",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/electric/electric-coil-bolt-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/projectiles/electric/electric-coil-bolt-v001.png",
+      "published": "art/weapons/projectiles/electric/electric-coil-bolt-v001.png",
+      "source_sha256": "ffdca6aff121899f81ff07b96a00c7a5c939f4f69465f8db725961212ab4d2cc",
+      "published_sha256": "141f5b6a7773cc18af2874e7bd2558fc18b09190e8b457026036954519c60341",
+      "canvas": [
+        384,
+        128
+      ],
+      "content_position": [
+        16,
+        24
+      ],
+      "content_size": [
+        352,
+        79
+      ],
+      "alpha_bbox": [
+        17,
+        24,
+        368,
+        103
+      ]
+    },
+    {
+      "asset_id": "vacuum_imploder_cannon",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/implosion/vacuum-imploder-cannon-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/player/vacuum-imploder-cannon-v001.png",
+      "published": "art/weapons/player/vacuum-imploder-cannon-v001.png",
+      "source_sha256": "b0c698fcde42b33337504923cb84380ee0de9132b00a92ba4dbda15f3b57a0ae",
+      "published_sha256": "fdba99486af0f76232d2a30d05aa555429970905f5278c2dd7a187bdc3dca128",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        60,
+        40
+      ],
+      "content_size": [
+        648,
+        304
+      ],
+      "alpha_bbox": [
+        60,
+        40,
+        708,
+        344
+      ]
+    },
+    {
+      "asset_id": "vacuum_implosion_core",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/implosion/vacuum-implosion-core-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/projectiles/implosion/vacuum-implosion-core-v001.png",
+      "published": "art/weapons/projectiles/implosion/vacuum-implosion-core-v001.png",
+      "source_sha256": "8e6d7b96e558d3da53c1fd2e894d124cef9867aa1eaf3f477c87d95adfd7d283",
+      "published_sha256": "7f5d1eb763845b4e5fbe422d4d3b4ec0a01b6acd14db98bdbdef86126eb073da",
+      "canvas": [
+        384,
+        128
+      ],
+      "content_position": [
+        91,
+        16
+      ],
+      "content_size": [
+        201,
+        96
+      ],
+      "alpha_bbox": [
+        92,
+        16,
+        292,
+        112
+      ]
+    },
+    {
+      "asset_id": "demolition_launcher",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/rocket/demolition-launcher-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/player/demolition-launcher-v001.png",
+      "published": "art/weapons/player/demolition-launcher-v001.png",
+      "source_sha256": "f3dcd6ebfc3a7b0e8c0e48d8462a74b4be4494474ec9c4eb8b5a4e4eeb8afa50",
+      "published_sha256": "9da11d48b2739b91e16c42db7ebba5766531bd9a1a98b7a78dc091bfce377cdf",
+      "canvas": [
+        768,
+        384
+      ],
+      "content_position": [
+        68,
+        40
+      ],
+      "content_size": [
+        631,
+        304
+      ],
+      "alpha_bbox": [
+        68,
+        40,
+        699,
+        344
+      ]
+    },
+    {
+      "asset_id": "demolition_rocket",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/rocket/demolition-rocket-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/weapons/projectiles/rocket/demolition-rocket-v001.png",
+      "published": "art/weapons/projectiles/rocket/demolition-rocket-v001.png",
+      "source_sha256": "0ff462e9bba29ec90ee9c866efc10d978e6c4ed33ca3737cd052c4101c42de2a",
+      "published_sha256": "4cb8b2b33617dfe103be080aaa9b4c427e37e784b1f9c7c3bba4e421a9776832",
+      "canvas": [
+        384,
+        128
+      ],
+      "content_position": [
+        16,
+        23
+      ],
+      "content_size": [
+        352,
+        82
+      ],
+      "alpha_bbox": [
+        16,
+        23,
+        368,
+        105
+      ]
+    },
+    {
+      "asset_id": "acid_impact",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/acid/acid-impact-sheet-3x2-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/effects/weapons/acid/acid-impact-3x2-v001.png",
+      "published": "art/effects/weapons/acid/acid-impact-3x2-v001.png",
+      "source_sha256": "7044a87da2cf0848c2c87c86ac8ce375667e75f4070462089db8f61cb37d3843",
+      "published_sha256": "d99cbba6e8eb8401ccc658d40f101b5733fbdab4dbac9a3cddb227794219d849",
+      "canvas": [
+        576,
+        320
+      ],
+      "grid": [
+        3,
+        2
+      ],
+      "cell": [
+        192,
+        160
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "content_position": [
+            37,
+            12
+          ],
+          "content_size": [
+            117,
+            136
+          ],
+          "alpha_bbox": [
+            37,
+            12,
+            154,
+            148
+          ]
+        },
+        {
+          "index": 1,
+          "content_position": [
+            12,
+            22
+          ],
+          "content_size": [
+            168,
+            115
+          ],
+          "alpha_bbox": [
+            12,
+            22,
+            180,
+            137
+          ]
+        },
+        {
+          "index": 2,
+          "content_position": [
+            20,
+            12
+          ],
+          "content_size": [
+            152,
+            136
+          ],
+          "alpha_bbox": [
+            20,
+            12,
+            172,
+            148
+          ]
+        },
+        {
+          "index": 3,
+          "content_position": [
+            12,
+            12
+          ],
+          "content_size": [
+            168,
+            136
+          ],
+          "alpha_bbox": [
+            12,
+            12,
+            180,
+            148
+          ]
+        },
+        {
+          "index": 4,
+          "content_position": [
+            18,
+            12
+          ],
+          "content_size": [
+            156,
+            136
+          ],
+          "alpha_bbox": [
+            18,
+            12,
+            174,
+            148
+          ]
+        },
+        {
+          "index": 5,
+          "content_position": [
+            12,
+            16
+          ],
+          "content_size": [
+            168,
+            127
+          ],
+          "alpha_bbox": [
+            12,
+            16,
+            180,
+            143
+          ]
+        }
+      ]
+    },
+    {
+      "asset_id": "electric_impact",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/electric/electric-impact-sheet-3x2-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/effects/weapons/electric/electric-impact-3x2-v001.png",
+      "published": "art/effects/weapons/electric/electric-impact-3x2-v001.png",
+      "source_sha256": "a3d24f19919956b7e5f7391dbe8e617225fce2dfc5557c17d75e4e1c02358717",
+      "published_sha256": "6905a995c6e3f1e21579f8efecdc6ba16f2e14b0fdef675761602b0fc23bacb9",
+      "canvas": [
+        576,
+        320
+      ],
+      "grid": [
+        3,
+        2
+      ],
+      "cell": [
+        192,
+        160
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "content_position": [
+            34,
+            12
+          ],
+          "content_size": [
+            123,
+            136
+          ],
+          "alpha_bbox": [
+            34,
+            12,
+            157,
+            148
+          ]
+        },
+        {
+          "index": 1,
+          "content_position": [
+            12,
+            17
+          ],
+          "content_size": [
+            168,
+            126
+          ],
+          "alpha_bbox": [
+            12,
+            17,
+            180,
+            143
+          ]
+        },
+        {
+          "index": 2,
+          "content_position": [
+            27,
+            12
+          ],
+          "content_size": [
+            137,
+            136
+          ],
+          "alpha_bbox": [
+            27,
+            12,
+            164,
+            148
+          ]
+        },
+        {
+          "index": 3,
+          "content_position": [
+            12,
+            13
+          ],
+          "content_size": [
+            168,
+            133
+          ],
+          "alpha_bbox": [
+            12,
+            13,
+            180,
+            146
+          ]
+        },
+        {
+          "index": 4,
+          "content_position": [
+            12,
+            20
+          ],
+          "content_size": [
+            168,
+            120
+          ],
+          "alpha_bbox": [
+            12,
+            20,
+            180,
+            140
+          ]
+        },
+        {
+          "index": 5,
+          "content_position": [
+            19,
+            12
+          ],
+          "content_size": [
+            153,
+            136
+          ],
+          "alpha_bbox": [
+            19,
+            12,
+            172,
+            148
+          ]
+        }
+      ]
+    },
+    {
+      "asset_id": "vacuum_implosion_impact",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/implosion/vacuum-implosion-impact-sheet-3x2-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/effects/weapons/implosion/vacuum-implosion-impact-3x2-v001.png",
+      "published": "art/effects/weapons/implosion/vacuum-implosion-impact-3x2-v001.png",
+      "source_sha256": "c226ee9f8af1c2e51206081d9554e9882a2370efdbc9f5c4120171ce0d252793",
+      "published_sha256": "63ec45b497bd7a2fbff11a031b399451451ce8f8fa1c675108512a931290e0bf",
+      "canvas": [
+        576,
+        320
+      ],
+      "grid": [
+        3,
+        2
+      ],
+      "cell": [
+        192,
+        160
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "content_position": [
+            32,
+            12
+          ],
+          "content_size": [
+            128,
+            136
+          ],
+          "alpha_bbox": [
+            32,
+            12,
+            160,
+            148
+          ]
+        },
+        {
+          "index": 1,
+          "content_position": [
+            28,
+            12
+          ],
+          "content_size": [
+            135,
+            136
+          ],
+          "alpha_bbox": [
+            28,
+            12,
+            163,
+            148
+          ]
+        },
+        {
+          "index": 2,
+          "content_position": [
+            30,
+            12
+          ],
+          "content_size": [
+            131,
+            136
+          ],
+          "alpha_bbox": [
+            30,
+            12,
+            161,
+            148
+          ]
+        },
+        {
+          "index": 3,
+          "content_position": [
+            26,
+            12
+          ],
+          "content_size": [
+            139,
+            136
+          ],
+          "alpha_bbox": [
+            26,
+            12,
+            165,
+            148
+          ]
+        },
+        {
+          "index": 4,
+          "content_position": [
+            28,
+            12
+          ],
+          "content_size": [
+            136,
+            136
+          ],
+          "alpha_bbox": [
+            28,
+            12,
+            164,
+            148
+          ]
+        },
+        {
+          "index": 5,
+          "content_position": [
+            35,
+            12
+          ],
+          "content_size": [
+            122,
+            136
+          ],
+          "alpha_bbox": [
+            35,
+            12,
+            157,
+            148
+          ]
+        }
+      ]
+    },
+    {
+      "asset_id": "demolition_impact",
+      "source": "pipeline/assets/sources/imagegen/megapacks/industrial_toxic_v001/weapons/rocket/demolition-impact-sheet-3x2-source-v001.png",
+      "export": "pipeline/assets/exports/industrial_toxic_expansion_v001/effects/weapons/rocket/demolition-impact-3x2-v001.png",
+      "published": "art/effects/weapons/rocket/demolition-impact-3x2-v001.png",
+      "source_sha256": "63ef08e478e9da6e3db3a641bfacedec2921088fb9fa03ded86107d3f3588e29",
+      "published_sha256": "c372077e1240543c462a26978dea1d2b231e4999722ad59bca7e3f6729b39870",
+      "canvas": [
+        576,
+        320
+      ],
+      "grid": [
+        3,
+        2
+      ],
+      "cell": [
+        192,
+        160
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "content_position": [
+            24,
+            12
+          ],
+          "content_size": [
+            143,
+            136
+          ],
+          "alpha_bbox": [
+            24,
+            12,
+            166,
+            148
+          ]
+        },
+        {
+          "index": 1,
+          "content_position": [
+            12,
+            20
+          ],
+          "content_size": [
+            168,
+            119
+          ],
+          "alpha_bbox": [
+            12,
+            20,
+            180,
+            139
+          ]
+        },
+        {
+          "index": 2,
+          "content_position": [
+            18,
+            12
+          ],
+          "content_size": [
+            156,
+            136
+          ],
+          "alpha_bbox": [
+            18,
+            12,
+            174,
+            148
+          ]
+        },
+        {
+          "index": 3,
+          "content_position": [
+            25,
+            12
+          ],
+          "content_size": [
+            141,
+            136
+          ],
+          "alpha_bbox": [
+            25,
+            12,
+            166,
+            148
+          ]
+        },
+        {
+          "index": 4,
+          "content_position": [
+            30,
+            12
+          ],
+          "content_size": [
+            132,
+            136
+          ],
+          "alpha_bbox": [
+            30,
+            12,
+            162,
+            148
+          ]
+        },
+        {
+          "index": 5,
+          "content_position": [
+            12,
+            18
+          ],
+          "content_size": [
+            168,
+            124
+          ],
+          "alpha_bbox": [
+            12,
+            18,
+            180,
+            142
+          ]
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "technical": "passed",
+    "alpha": "passed",
+    "consumer_import": "pending"
+  }
+}

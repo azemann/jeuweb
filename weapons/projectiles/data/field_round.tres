@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://bg0diswue1b6x"]
 
 [ext_resource type="Script" uid="uid://byrgd63isx8aj" path="res://weapons/projectiles/projectile_data.gd" id="1_script"]
-[ext_resource type="PackedScene" path="res://weapons/projectiles/projectile_impact_2d.tscn" id="2_impact"]
+[ext_resource type="PackedScene" path="res://effects/weapons/field/field_round_impact_2d.tscn" id="2_impact"]
+[ext_resource type="Texture2D" uid="uid://ck5r6anfmk50r" path="res://art/weapons/projectiles/field/field-round-v001.png" id="3_texture"]
 
 [resource]
 script = ExtResource("1_script")
@@ -14,6 +15,8 @@ impulse = 220.0
 impact_scene = ExtResource("2_impact")
 affects_destructible_terrain = true
 terrain_radius = 12.0
+texture = ExtResource("3_texture")
+texture_scale = 0.24
 tracer_color = Color(0.945098, 0.960784, 0.603922, 1)
 tracer_length = 34.0
 tracer_width = 8.0

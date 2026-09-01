@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dtuv7tcxb4np1"]
+
+[node name="mission 2" type="Node2D" unique_id=556753022]
+
+[node name="visual" type="Node2D" parent="." unique_id=15846010]
+
+[node name="Far-arriereplan" type="Parallax2D" parent="visual" unique_id=1933542215]

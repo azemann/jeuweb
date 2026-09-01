@@ -37,6 +37,7 @@ func _run() -> void:
 		if roster_enemy != null:
 			_check(roster_enemy.profile.archetype_id == archetype_id, "La scène %s doit consommer son profil autoritaire." % archetype_id)
 			_check(roster_enemy.validation_errors().is_empty(), "La scène %s doit respecter l'arbre canonique : %s" % [archetype_id, "; ".join(roster_enemy.validation_errors())])
+			_check(roster_enemy.get_node("Components").scene_file_path == "res://characters/enemies/enemy_components.tscn", "%s doit instancier la composition ennemie canonique plutôt que la recopier." % archetype_id)
 			_check(roster_enemy.get_node_or_null("Components/Animation") is EnemyPresentationComponent, "%s doit ranger son pilote d'animation sous Components/Animation." % archetype_id)
 			_check(roster_enemy.get_node_or_null("Visuals") is Node2D, "%s doit isoler ses sprites sous Visuals." % archetype_id)
 			_check(roster_enemy.get_node_or_null("Presentation") == null and roster_enemy.get_node_or_null("Components/Presentation") == null, "%s ne doit plus exposer le doublon Presentation." % archetype_id)
@@ -174,19 +175,21 @@ func _run() -> void:
 	var viewport := screen.get_node("MissionViewportContainer/MissionViewport")
 	var host := viewport.get_node("MapHost") as MissionMapHost2D
 	var enemy_spawner := viewport.get_node("RuntimeSystems/EnemySpawner") as MissionEnemySpawner2D
+	var actor_spawner := viewport.get_node("RuntimeSystems/ActorSpawner") as MissionActorSpawner2D
 	_check(host.current_map != null, "La mission doit charger Côte toxique.")
 	_check(enemy_spawner.catalog == catalog, "L'écran doit exposer le catalogue ennemi dans l'Inspector.")
 	if host.current_map != null:
 		var marker := host.current_map.get_node("Gameplay/EncounterMarkers/LandingCadence") as MapEncounterMarker2D
 		var first_pattern := marker.encounter_data.waves[0].spawn_patterns[0]
-		_check(first_pattern.spawn_count() == 2 and marker.global_position.x < 1280.0, "La première pression doit demander deux Troopers dans le premier écran.")
+		_check(first_pattern.spawn_count() == 2 and marker.global_position.x < 2560.0, "La première pression doit demander deux Troopers dans le premier acte.")
+		actor_spawner.current_player.global_position.x = marker.global_position.x - marker.activation_distance
 		await create_timer(0.35).timeout
 		var runtime_enemies := host.current_map.actors_root().find_children("landing_cadence_*", "EnemyCharacter2D", true, false)
 		_check(runtime_enemies.size() == 2, "La première pression doit générer exactement deux Troopers avant la vague Release.")
 		var actual_origins: Array[float] = []
 		for runtime_enemy in runtime_enemies:
 			_check(runtime_enemy.get_parent() == host.current_map.actors_root(), "Chaque ennemi runtime doit appartenir à Actors.")
-			_check(runtime_enemy.global_position.x < 1280.0, "La première patrouille doit rester dans les 1280 premiers pixels.")
+			_check(runtime_enemy.global_position.x < 2560.0, "La première patrouille doit rester dans le premier acte.")
 			actual_origins.append(runtime_enemy.patrol_component().origin_x)
 		actual_origins.sort()
 		var offsets := first_pattern.authored_offsets()

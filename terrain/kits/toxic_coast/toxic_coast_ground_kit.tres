@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="GroundKitCatalog" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="GroundKitCatalog" format=3 uid="uid://batjxygexsovb"]
 
-[ext_resource type="Script" path="res://terrain/ground_pieces/ground_kit_catalog.gd" id="1_catalog"]
-[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/natural_ledge_medium.tscn" id="2_ledge"]
+[ext_resource type="Script" uid="uid://dkfe3ebgj2afd" path="res://terrain/ground_pieces/ground_kit_catalog.gd" id="1_catalog"]
+[ext_resource type="PackedScene" uid="uid://brwtvo216t85b" path="res://terrain/kits/toxic_coast/pieces/natural_ledge_medium.tscn" id="2_ledge"]
 [ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/military_bunker_block_medium.tscn" id="3_bunker"]
 [ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/industrial_catwalk_medium.tscn" id="4_catwalk"]
 [ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/toxic_pipe_bridge_medium.tscn" id="5_pipe"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/acid_bridge_abutment.tscn" id="6_abutment"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/destructible_military_wall.tscn" id="7_wall"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/guard_tower_module.tscn" id="8_tower"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/vacuum_foundry_platform.tscn" id="9_foundry"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/walk_under_pipe_arch.tscn" id="10_arch"]
+[ext_resource type="PackedScene" path="res://terrain/kits/toxic_coast/pieces/portable_barricade.tscn" id="11_barricade"]
 
 [resource]
 script = ExtResource("1_catalog")
 kit_id = &"toxic_coast"
 display_name = "Côte toxique — Ground Pieces"
-pieces = Array[PackedScene]([ExtResource("2_ledge"), ExtResource("3_bunker"), ExtResource("4_catwalk"), ExtResource("5_pipe")])
+pieces = Array[PackedScene]([ExtResource("2_ledge"), ExtResource("3_bunker"), ExtResource("4_catwalk"), ExtResource("5_pipe"), ExtResource("6_abutment"), ExtResource("7_wall"), ExtResource("8_tower"), ExtResource("9_foundry"), ExtResource("10_arch"), ExtResource("11_barricade")])

@@ -1,0 +1,582 @@
+[gd_scene format=3 uid="uid://bkt55tecd5phf"]
+
+[ext_resource type="Script" uid="uid://bcleyrvbobv8i" path="res://ui/hud/mission_hud.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://b6x5bmosga0cs" path="res://ui/hud/themes/toxic_commando_hud_theme.tres" id="2_theme"]
+[ext_resource type="Theme" uid="uid://dv67aek7nd53e" path="res://ui/themes/game_ui_theme.tres" id="3_ui_theme"]
+[ext_resource type="Texture2D" uid="uid://ctevkn370e0q1" path="res://art/ui/hud/toxic_commando/frames/player-status-frame-v001.png" id="4_nhkmu"]
+[ext_resource type="Texture2D" uid="uid://cbpp2w2aq6tk4" path="res://art/ui/hud/toxic_commando/portraits/player-portrait-v001.png" id="5_nmw5n"]
+[ext_resource type="Texture2D" uid="uid://c8cabkisis114" path="res://art/ui/hud/toxic_commando/icons/health-icon-v001.png" id="6_od4b7"]
+[ext_resource type="Texture2D" uid="uid://bqpuxtbure1e8" path="res://art/ui/hud/toxic_commando/icons/armor-icon-v001.png" id="7_4mymm"]
+[ext_resource type="Texture2D" uid="uid://cap85m2sclym" path="res://art/ui/hud/toxic_commando/frames/weapon-status-frame-v001.png" id="8_mpp3v"]
+[ext_resource type="Texture2D" uid="uid://cgbmtmkusg3jf" path="res://art/ui/hud/toxic_commando/icons/ammo-icon-v001.png" id="9_gum11"]
+[ext_resource type="Texture2D" uid="uid://b2urtco1j252f" path="res://art/ui/hud/toxic_commando/frames/objective-frame-v001.png" id="10_o5d5m"]
+[ext_resource type="Texture2D" uid="uid://dviyedfhqlmbp" path="res://art/ui/hud/toxic_commando/icons/objective-icon-v001.png" id="11_bcpf2"]
+[ext_resource type="Texture2D" uid="uid://cxncaea73rjxc" path="res://art/ui/hud/toxic_commando/frames/boss-health-frame-v001.png" id="12_mtksn"]
+[ext_resource type="Texture2D" uid="uid://d1rtr72tnp8s6" path="res://art/ui/hud/toxic_commando/frames/overdrive-frame-v001.png" id="13_l4gl2"]
+[ext_resource type="Texture2D" uid="uid://de01p831dky5b" path="res://art/ui/flows/industrial_toxic/backgrounds/loading-vacuum-turbine-background-v001.png" id="14_7cg4r"]
+[ext_resource type="Texture2D" uid="uid://dajnkdxkxhp8t" path="res://art/ui/hud/toxic_commando/frames/notification-frame-v001.png" id="15_72tu5"]
+[ext_resource type="Script" path="res://ui/hud/weapon_wheel_overlay.gd" id="16_wheel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt6y2"]
+bg_color = Color(0.025, 0.03, 0.025, 0.96)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehqix"]
+bg_color = Color(0.94, 0.04, 0.12, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3xbr"]
+bg_color = Color(0.025, 0.03, 0.025, 0.96)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sivs"]
+bg_color = Color(0.7, 0.84, 0.08, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmdei"]
+bg_color = Color(0.025, 0.03, 0.025, 0.96)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdedl"]
+bg_color = Color(0.94, 0.02, 0.26, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w54p0"]
+bg_color = Color(0.025, 0.03, 0.025, 0.96)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iykcc"]
+bg_color = Color(0.58, 0.94, 0.04, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="MissionHUD" type="Control" unique_id=384490334]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_ui_theme")
+script = ExtResource("1_script")
+theme_profile = ExtResource("2_theme")
+
+[node name="PlayerStatus" type="Control" parent="." unique_id=893033900]
+anchors_preset = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 412.0
+offset_bottom = 167.0
+mouse_filter = 2
+
+[node name="PlayerFrame" type="TextureRect" parent="PlayerStatus" unique_id=1849402655]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_nhkmu")
+expand_mode = 1
+
+[node name="PlayerPortrait" type="TextureRect" parent="PlayerStatus" unique_id=907508402]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 18.0
+offset_top = 30.0
+offset_right = 106.0
+offset_bottom = 118.0
+mouse_filter = 2
+texture = ExtResource("5_nmw5n")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HealthIcon" type="TextureRect" parent="PlayerStatus" unique_id=48668946]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 106.0
+offset_top = 40.0
+offset_right = 134.0
+offset_bottom = 68.0
+mouse_filter = 2
+texture = ExtResource("6_od4b7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Health" type="ProgressBar" parent="PlayerStatus" unique_id=403302916]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 134.0
+offset_top = 43.0
+offset_right = 359.0
+offset_bottom = 61.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_lt6y2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ehqix")
+show_percentage = false
+
+[node name="HealthValue" type="Label" parent="PlayerStatus" unique_id=1495098661]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 140.0
+offset_top = 34.0
+offset_right = 355.0
+offset_bottom = 69.0
+theme_type_variation = &"HUDValueLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArmorIcon" type="TextureRect" parent="PlayerStatus" unique_id=1667502059]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 106.0
+offset_top = 83.0
+offset_right = 134.0
+offset_bottom = 114.0
+mouse_filter = 2
+texture = ExtResource("7_4mymm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Armor" type="ProgressBar" parent="PlayerStatus" unique_id=1233647692]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 134.0
+offset_top = 91.0
+offset_right = 333.0
+offset_bottom = 106.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_e3xbr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5sivs")
+show_percentage = false
+
+[node name="ArmorValue" type="Label" parent="PlayerStatus" unique_id=388990989]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 140.0
+offset_top = 78.0
+offset_right = 330.0
+offset_bottom = 115.0
+theme_type_variation = &"HUDValueLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "ARMURE 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeaponStatus" type="Control" parent="." unique_id=1361598656]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -332.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 182.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="WeaponFrame" type="TextureRect" parent="WeaponStatus" unique_id=734018919]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_mpp3v")
+expand_mode = 1
+
+[node name="WeaponName" type="Label" parent="WeaponStatus" unique_id=1312248455]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 55.0
+offset_top = 114.0
+offset_right = 246.0
+offset_bottom = 136.0
+theme_type_variation = &"HUDWeaponLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "CANON DE CAMPAGNE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="WeaponPreview" type="TextureRect" parent="WeaponStatus" unique_id=267244623]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 56.0
+offset_top = 43.0
+offset_right = 232.0
+offset_bottom = 112.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmmoIcon" type="TextureRect" parent="WeaponStatus" unique_id=270027643]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 246.0
+offset_top = 45.0
+offset_right = 300.0
+offset_bottom = 99.0
+mouse_filter = 2
+texture = ExtResource("9_gum11")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmmoValue" type="Label" parent="WeaponStatus" unique_id=2065258779]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 58.0
+offset_top = 137.0
+offset_right = 240.0
+offset_bottom = 158.0
+theme_type_variation = &"HUDCompactLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "MUNITIONS ∞"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ObjectiveStatus" type="Control" parent="." unique_id=1061297012]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -225.0
+offset_top = 12.0
+offset_right = 225.0
+offset_bottom = 118.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ObjectiveFrame" type="TextureRect" parent="ObjectiveStatus" unique_id=1913565565]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_o5d5m")
+expand_mode = 1
+
+[node name="ObjectiveIcon" type="TextureRect" parent="ObjectiveStatus" unique_id=198322878]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 36.0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 82.0
+mouse_filter = 2
+texture = ExtResource("11_bcpf2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ObjectiveLabel" type="Label" parent="ObjectiveStatus" unique_id=349991379]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 92.0
+offset_top = 27.0
+offset_right = 408.0
+offset_bottom = 82.0
+theme_type_variation = &"HUDObjectiveLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "ATTEINDRE LA FONDERIE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BossStatus" type="Control" parent="." unique_id=165909069]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -390.0
+offset_top = 125.0
+offset_right = 390.0
+offset_bottom = 245.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="BossFrame" type="TextureRect" parent="BossStatus" unique_id=1770351677]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_mtksn")
+expand_mode = 1
+
+[node name="BossName" type="Label" parent="BossStatus" unique_id=256803281]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 108.0
+offset_top = 20.0
+offset_right = 704.0
+offset_bottom = 52.0
+theme_type_variation = &"HUDObjectiveLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "VACUUM BOSS"
+horizontal_alignment = 1
+
+[node name="BossHealth" type="ProgressBar" parent="BossStatus" unique_id=306416032]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 112.0
+offset_top = 58.0
+offset_right = 694.0
+offset_bottom = 79.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bmdei")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fdedl")
+show_percentage = false
+
+[node name="BossValue" type="Label" parent="BossStatus" unique_id=1700002456]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 120.0
+offset_top = 51.0
+offset_right = 688.0
+offset_bottom = 86.0
+theme_type_variation = &"HUDValueLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "500 / 500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OverdriveStatus" type="Control" parent="." unique_id=1076197716]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -245.0
+offset_top = -96.0
+offset_right = 245.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="OverdriveFrame" type="TextureRect" parent="OverdriveStatus" unique_id=724385735]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_l4gl2")
+expand_mode = 1
+
+[node name="Overdrive" type="ProgressBar" parent="OverdriveStatus" unique_id=1838994571]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 103.0
+offset_top = 35.0
+offset_right = 426.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_w54p0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iykcc")
+show_percentage = false
+
+[node name="OverdriveValue" type="Label" parent="OverdriveStatus" unique_id=1865659669]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 110.0
+offset_top = 27.0
+offset_right = 422.0
+offset_bottom = 64.0
+theme_type_variation = &"HUDValueLabel"
+theme_override_colors/font_color = Color(0.96, 0.91, 0.74, 1)
+text = "SURCHARGE 8.0 s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeaponWheel" type="Control" parent="." unique_id=2131803802]
+unique_name_in_owner = true
+visible = false
+z_index = 80
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("16_wheel")
+
+[node name="MissionStatusPanel" type="Control" parent="." unique_id=1626088531]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LoadingBackdrop" type="TextureRect" parent="MissionStatusPanel" unique_id=495795924]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_7cg4r")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LoadingShade" type="ColorRect" parent="MissionStatusPanel" unique_id=1304136348]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0156863, 0.0196078, 0.0156863, 0.42)
+
+[node name="LoadingFrame" type="TextureRect" parent="MissionStatusPanel" unique_id=1408872232]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -140.0
+offset_right = 380.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_72tu5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MissionStatusLabel" type="Label" parent="MissionStatusPanel" unique_id=1632179344]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -9.0
+offset_right = 174.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"LoadingLabel"
+text = "EN COURS"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LoadingTitle" type="Label" parent="MissionStatusPanel" unique_id=1000745926]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -45.0
+offset_right = 176.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"LoadingTitleLabel"
+text = "DÉPLOIEMENT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultPanel" type="Control" parent="." unique_id=1325353781]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ResultFrame" type="TextureRect" parent="ResultPanel" unique_id=1856935771]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_72tu5")
+expand_mode = 1
+
+[node name="ResultLabel" type="Label" parent="ResultPanel" unique_id=2115560274]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"NotificationLabel"
+text = "MISSION ACCOMPLIE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

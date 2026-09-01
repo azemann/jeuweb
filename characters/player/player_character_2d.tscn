@@ -15,10 +15,19 @@
 [ext_resource type="Resource" path="res://weapons/data/primary_field_cannon.tres" id="12_weapon_data"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_grounding_component.tscn" id="13_grounding"]
 [ext_resource type="PackedScene" path="res://characters/shared/grounding/actor_slope_presentation_component.tscn" id="14_slope"]
+[ext_resource type="Script" path="res://characters/player/components/player_recoil_component.gd" id="16_recoil"]
+[ext_resource type="Script" path="res://characters/player/components/player_interaction_component.gd" id="17_interaction"]
+[ext_resource type="Script" path="res://characters/player/components/player_combat_inventory_component.gd" id="18_inventory"]
+[ext_resource type="Resource" path="res://characters/player/data/standard_combat_inventory.tres" id="19_inventory_profile"]
+[ext_resource type="Script" path="res://characters/player/components/player_loadout_component.gd" id="20_loadout"]
+[ext_resource type="Resource" path="res://characters/player/data/standard_loadout.tres" id="21_loadout_profile"]
 
 [sub_resource type="CapsuleShape2D" id="Shape_player"]
 radius = 17.0
 height = 62.0
+
+[sub_resource type="CircleShape2D" id="Shape_interaction"]
+radius = 110.0
 
 [sub_resource type="Animation" id="Animation_weapon_reset"]
 resource_name = "RESET"
@@ -94,6 +103,44 @@ _data = {
 &"fire": SubResource("Animation_weapon_fire")
 }
 
+[sub_resource type="Animation" id="Animation_recoil_reset"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:recoil_weight")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_recoil"]
+resource_name = "recoil"
+length = 0.12
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:recoil_weight")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.12),
+"transitions": PackedFloat32Array(0.25, 0.7, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_recoil"]
+_data = {
+&"RESET": SubResource("Animation_recoil_reset"),
+&"recoil": SubResource("Animation_recoil")
+}
+
 [sub_resource type="Animation" id="Animation_reset"]
 resource_name = "RESET"
 length = 0.001
@@ -120,6 +167,98 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_damage"]
+resource_name = "damage"
+length = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.1, 0.16, 0.22),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.18, 0.12, 1), Color(1, 1, 1, 1), Color(1, 0.32, 0.2, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.22),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-5, 0), Vector2(4, -1), Vector2(-3, 0), Vector2(2, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_death"]
+resource_name = "death"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.45, 0.75),
+"transitions": PackedFloat32Array(1, 1, 0.6, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.15, 0.1, 1), Color(0.55, 0.08, 0.05, 0.8), Color(0.15, 0.02, 0.02, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0, 0.28]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.75),
+"transitions": PackedFloat32Array(1, 0.7, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.08, 0.92), Vector2(0.72, 0.72)]
 }
 
 [sub_resource type="Animation" id="Animation_idle"]
@@ -154,6 +293,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_player"]
 _data = {
 &"RESET": SubResource("Animation_reset"),
+&"damage": SubResource("Animation_damage"),
+&"death": SubResource("Animation_death"),
 &"idle": SubResource("Animation_idle")
 }
 
@@ -191,6 +332,10 @@ profile = ExtResource("7_health_profile")
 [node name="StateMachine" type="Node" parent="Components"]
 script = ExtResource("15_state")
 
+[node name="Loadout" type="Node" parent="Components"]
+script = ExtResource("20_loadout")
+profile = ExtResource("21_loadout_profile")
+
 [node name="Weapon" type="Node" parent="Components" unique_id=124057853]
 script = ExtResource("11_weapon_component")
 weapon = ExtResource("12_weapon_data")
@@ -198,8 +343,30 @@ weapon = ExtResource("12_weapon_data")
 [node name="FireCooldown" type="Timer" parent="Components/Weapon" unique_id=171226594]
 one_shot = true
 
+[node name="CombatInventory" type="Node" parent="Components"]
+script = ExtResource("18_inventory")
+profile = ExtResource("19_inventory_profile")
+
 [node name="Animation" type="Node" parent="Components" unique_id=1819554244]
 script = ExtResource("8_presentation")
+
+[node name="Recoil" type="Node" parent="Components"]
+script = ExtResource("16_recoil")
+
+[node name="RecoilAnimationPlayer" type="AnimationPlayer" parent="Components/Recoil"]
+libraries/ = SubResource("AnimationLibrary_recoil")
+
+[node name="Interaction" type="Node" parent="Components"]
+script = ExtResource("17_interaction")
+
+[node name="InteractionArea" type="Area2D" parent="Components/Interaction"]
+collision_layer = 0
+collision_mask = 32
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/Interaction/InteractionArea"]
+position = Vector2(0, -42)
+shape = SubResource("Shape_interaction")
 
 [node name="Grounding" parent="Components" instance=ExtResource("13_grounding")]
 shadow_size = Vector2(52, 14)
@@ -251,3 +418,17 @@ libraries/ = SubResource("AnimationLibrary_weapon")
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_player")
 autoplay = &"idle"
+
+[node name="InteractionPrompt" type="Label" parent="."]
+visible = false
+z_index = 20
+offset_left = -62.0
+offset_top = -124.0
+offset_right = 62.0
+offset_bottom = -94.0
+theme_override_colors/font_color = Color(0.945098, 0.960784, 0.603922, 1)
+theme_override_colors/font_outline_color = Color(0.0470588, 0.0588235, 0.0784314, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "OUVRIR"
+horizontal_alignment = 1

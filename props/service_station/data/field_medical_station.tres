@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ServiceStationData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://props/service_station/service_station_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/toxic_coast/field-medical-station-v001.png" id="2"]
+[resource]
+script = ExtResource("1")
+station_id = &"field_medical_station"
+display_name = "Station médicale de campagne"
+texture = ExtResource("2")
+pivot_px = Vector2(160, 368)
+collision_size = Vector2(150, 280)
+collision_offset = Vector2(0, -140)
+service = 0
+amount = 100.0
+maximum_uses = 1
+interaction_prompt = "SE SOIGNER"

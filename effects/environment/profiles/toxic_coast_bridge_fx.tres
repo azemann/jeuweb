@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnvironmentFXProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://effects/environment/environment_fx_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+display_name = "Orage du ravin acide"
+smoke_amount = 20
+smoke_color = Color(0.19, 0.23, 0.18, 0.46)
+fog_amount = 22
+fog_color = Color(0.63, 0.82, 0.05, 0.22)
+sparks_enabled = false
+lightning_enabled = true
+lightning_interval_min = 6.0
+lightning_interval_max = 11.0
+lightning_color = Color(0.78, 0.95, 0.55, 1)

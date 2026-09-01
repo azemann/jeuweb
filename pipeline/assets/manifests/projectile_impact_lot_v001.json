@@ -1,30 +1,30 @@
 {
   "schemaVersion": "1.0.0",
   "lotId": "projectile-impact-lot-v001",
-  "status": "candidate",
+  "status": "integrated",
   "assets": [
     {
       "path": "pipeline/assets/sources/imagegen/weapons/field-round-source-v001.png",
       "role": "projectile-source",
-      "status": "candidate",
+      "status": "source",
       "sha256": "b0731f2513171f759c501b8f0b2326127f05e9e2d31d5e4b5f1e55b3ae0d4b3b"
     },
     {
       "path": "pipeline/assets/sources/imagegen/weapons/field-round-impact-sheet-source-v001.png",
       "role": "impact-animation-source-sheet",
-      "status": "candidate",
+      "status": "source",
       "sha256": "75a9ceaa838043a61faea9668642e704a35c9841ca3d2a5f73f0390b07c17930"
     },
     {
       "path": "pipeline/assets/exports/weapons/field-round-384x192-v001.png",
       "role": "normalized-projectile-candidate",
-      "status": "candidate",
+      "status": "integrated",
       "sha256": "0b5a8814905e6e8710667d9c52e34372b7fee63655e49112d7bd23f290d6b2cd"
     },
     {
       "path": "pipeline/assets/exports/weapons/field-round-impact-3x2-256-v001.png",
       "role": "normalized-impact-candidate",
-      "status": "candidate",
+      "status": "integrated",
       "sha256": "6e25618ecc70bb78fae1f9295fea9d2fdc05e5b3a27f9a80106a056493fb4e9c"
     }
   ],
@@ -32,6 +32,6 @@
   "recipe": "pipeline/assets/recipes/projectile_impact_lot_v001.md",
   "provenance": "pipeline/assets/provenance/projectile_impact_lot_v001.json",
   "qa": "pipeline/assets/working/weapons/field-round-lot-v001-qa.json",
-  "integrationAllowed": false,
-  "nextGate": "human visual approval"
+  "integrationAllowed": true,
+  "nextGate": "integrated in Godot runtime"
 }

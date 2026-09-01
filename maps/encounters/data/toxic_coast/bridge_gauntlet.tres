@@ -1,14 +1,63 @@
-[gd_resource type="Resource" script_class="EncounterData" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="EncounterData" format=3 uid="uid://m8dhwsyxsojt"]
 
-[ext_resource type="Script" path="res://maps/encounters/encounter_data.gd" id="1"]
-[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/bridge_pressure.tres" id="2"]
-[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/bridge_escalation_air.tres" id="3"]
-[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/bridge_escalation_pincer.tres" id="4"]
-[ext_resource type="Script" path="res://maps/encounters/wave_data.gd" id="5"]
+[ext_resource type="Script" uid="uid://bui3dauu447sn" path="res://maps/encounters/encounter_data.gd" id="1_encounter"]
+[ext_resource type="Script" uid="uid://dej2py36g0ck4" path="res://maps/encounters/wave_data.gd" id="2_wave"]
+[ext_resource type="Script" uid="uid://bwvlpidgnlxln" path="res://maps/encounters/enemy_spawn_pattern_data.gd" id="3_pattern"]
+
+[sub_resource type="Resource" id="Pattern_pressure"]
+script = ExtResource("3_pattern")
+pattern_id = &"bridge_grunt_line"
+formation = 1
+count = 2
+spacing = Vector2(180, 0)
+local_offset = Vector2(-90, 0)
+custom_offsets = PackedVector2Array()
+spawn_interval = 0.2
+
+[sub_resource type="Resource" id="Wave_pressure"]
+script = ExtResource("2_wave")
+wave_id = &"bridge_pressure"
+spawn_patterns = Array[ExtResource("3_pattern")]([SubResource("Pattern_pressure")])
+
+[sub_resource type="Resource" id="Pattern_flying_column"]
+script = ExtResource("3_pattern")
+pattern_id = &"flying_column"
+enemy_archetype = &"vacuum_flying"
+formation = 3
+count = 2
+spacing = Vector2(90, 100)
+local_offset = Vector2(0, -150)
+custom_offsets = PackedVector2Array()
+spawn_interval = 0.3
+
+[sub_resource type="Resource" id="Wave_air"]
+script = ExtResource("2_wave")
+wave_id = &"bridge_escalation_air"
+combat_beat = 2
+spawn_patterns = Array[ExtResource("3_pattern")]([SubResource("Pattern_flying_column")])
+lead_in_delay = 0.35
+advance_condition = 1
+advance_delay = 0.75
+
+[sub_resource type="Resource" id="Pattern_pincer"]
+script = ExtResource("3_pattern")
+pattern_id = &"grunt_pincer"
+formation = 4
+count = 2
+spacing = Vector2(210, 0)
+custom_offsets = PackedVector2Array()
+spawn_interval = 0.15
+
+[sub_resource type="Resource" id="Wave_pincer"]
+script = ExtResource("2_wave")
+wave_id = &"bridge_escalation_pincer"
+combat_beat = 2
+spawn_patterns = Array[ExtResource("3_pattern")]([SubResource("Pattern_pincer")])
 
 [resource]
-script = ExtResource("1")
+script = ExtResource("1_encounter")
 cadence_id = &"toxic_coast_bridge_gauntlet"
 encounter_kind = 3
-waves = Array[ExtResource("5")]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
+blocks_mission_exit = false
 completion_delay = 0.4
+waves = Array[ExtResource("2_wave")]([SubResource("Wave_pressure"), SubResource("Wave_air"), SubResource("Wave_pincer")])

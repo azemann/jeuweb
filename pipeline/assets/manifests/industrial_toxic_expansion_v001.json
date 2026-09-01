@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-expansion-v001",
+  "status": "published",
+  "sourceLot": "industrial-toxic-megapack-v001",
+  "assetCount": 27,
+  "duplicateCountExcluded": 11,
+  "integrationMatrix": "pipeline/assets/working/megapacks/industrial_toxic_v001/integration-matrix-v001.md",
+  "recipe": "pipeline/assets/recipes/industrial_toxic_expansion_v001.md",
+  "processor": "pipeline/assets/tools/process_industrial_toxic_expansion.py",
+  "qa": "pipeline/assets/working/industrial_toxic_expansion_v001/qa.json",
+  "consumerValidation": "tests/industrial_toxic_expansion_contract_test.gd:passed:2026-08-30",
+  "integrationAllowed": true
+}

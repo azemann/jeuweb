@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "lotId": "industrial-toxic-boot-start-flow-v001",
+  "origin": "/home/evan/Dev/Dev-github/my-space/projets/jeuweb-boot-start-flow-assets-v001",
+  "generator": "OpenAI built-in imagegen",
+  "publicationStatus": "published",
+  "transformations": [
+    "copie contrôlée des neuf sources candidates",
+    "préservation des quatre arrière-plans opaques",
+    "trim alpha et normalisation des trois éléments transparents autonomes",
+    "découpe déterministe 3x2 des ornements et marqueurs",
+    "normalisation sur canevas transparents stables",
+    "publication versionnée sous art/ui/flows/industrial_toxic"
+  ]
+}

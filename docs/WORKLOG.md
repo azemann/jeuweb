@@ -1218,3 +1218,523 @@
   et `git diff --check` propre ;
 - limite restante : la référence `shooter` d'un projectile doit encore être
   protégée par `is_instance_valid()` lorsque son acteur est libéré.
+
+## 2026-08-28 — Contours concaves et durée de vie des projectiles
+
+- reproduit depuis le journal joué les deux erreurs restantes après le flush
+  différé : échec de décomposition convexe d'un contour creusé et accès à un
+  `shooter` déjà libéré ;
+- conservé le masque/`BitMap` comme autorité de la matière et publié ses
+  contours physiques dérivés comme triangles `ConvexPolygonShape2D` solides,
+  adaptés aux cratères concaves sans décomposition convexe implicite ;
+- centralisé la validation de `Projectile2D.shooter` : un projectile survivant
+  à son acteur oublie la référence libérée avant les exclusions de raycast et
+  les tests d'ascendance ;
+- renforcé les contrats terrain et projectile avec la vérification des formes
+  triangulaires solides et un tireur explicitement libéré avant sa munition ;
+- validations réelles : `destructible_terrain_test.gd`,
+  `destructible_terrain_deferred_rebuild_test.gd`,
+  `destructible_terrain_collision_alignment_test.gd`,
+  `projectile_carvable_integration_test.gd` et
+  `weapon_projectile_integration_test.gd` passent, `git diff --check` propre ;
+- limite hors tranche : la carte auteur locale reste en cours d'édition autour
+  de `LandingFly` et `bridge_gauntlet.tres` ; ces données n'ont pas été corrigées
+  ou écrasées par le refactor runtime.
+
+## 2026-08-28 — Durcissement structurel et workflow auteur des rencontres
+
+- ajouté `scripts/run-tests.sh` avec profils `structure`, `content` et `all` :
+  chaque test possède ses répertoires Godot isolés et toute sortie `ERROR` ou
+  `WARNING` fait échouer le runner même si le processus retourne zéro ;
+- publié la CI Godot 4.7.1 et séparé les invariants architecturaux des snapshots
+  de cadence, afin qu'une modification volontaire dans l'Inspector ne ressemble
+  plus à une casse du runtime ;
+- fait piloter le chargement par `PrototypeMissionScreen` après une frame : le
+  `MissionMapHost2D` émet désormais loading/loaded/failed et l'écran affiche
+  chargement ou diagnostic au lieu d'un viewport gris silencieux ;
+- ajouté sur `MapEncounterMarker2D` l'avertissement immédiat des IDs frères
+  dupliqués, le bouton Inspector `Générer un Encounter ID unique` et l'alerte
+  sur les recettes encore intégrées à la scène ; la Resource partagée reste
+  volontairement réutilisable et n'est jamais copiée silencieusement ;
+- placé les budgets physiques dans `DestructibleTerrainProfile` et exposé leur
+  validation runtime ; Côte toxique publie 96 corps, 640 formes et neuf chunks
+  par flush comme limites inspectables ;
+- remplacé les 904 triangles initiaux par 434 pièces convexes pleines obtenues
+  par fusion sûre, réduisant les Nodes mesurés de 1119 à 649 ; après vingt
+  petits cratères concentrés, la mesure reste à 522 formes ;
+- extrait la géométrie pure dans `TerrainCollisionBuilder` sans lui transférer
+  d'état ni d'autorité, et remplacé le dictionnaire libre de cadence par
+  `EncounterRuntimeState` et son enum de phases ;
+- renforcé les contrats carte, mission, terrain et auteur ; validation finale :
+  `./scripts/run-tests.sh structure` passe 26/26 sans erreur ni warning Godot ;
+- limite volontaire : le coût froid reste proche de 3,57 s en headless et le
+  snapshot de contenu attend la décision auteur sur LandingFly/Bridge.
+
+## 2026-08-28 — Composition ennemie canonique sans nouvelle classe
+
+- remplacé la copie manuelle de Patrol, Health, Attack, StateMachine et
+  Animation dans les cinq scènes ennemies par une instance éditable commune de
+  `characters/enemies/enemy_components.tscn` ;
+- conservé dans chaque scène d'archétype uniquement son profil, ses réglages
+  d'attaque, sa collision, sa présentation et ses composants optionnels
+  Grounding, SlopeAlignment ou Ejection ;
+- n'a ajouté aucun nouveau `class_name`, Profile, Data, Definition, Binding ou
+  Catalog : la factorisation utilise uniquement la composition de scènes native
+  de Godot ;
+- renforcé `enemy_contract_test.gd` pour refuser toute scène du roster qui
+  recopierait la branche Components au lieu d'instancier la composition
+  canonique ;
+- validation ciblée réelle : `enemy_contract_test.gd` passe avec les cinq
+  archétypes, y compris dégâts, mort animée, suppression différée, éjection,
+  Hurtbox du Boss et spawn de mission ;
+- validation structurelle globale : 25 contrats sur 26 passent ; l'unique
+  échec est le `map_contract_test.gd` déjà affecté par les données auteur
+  locales LandingFly/Bridge hors de cette tranche ;
+- limite volontaire : les autorités de données `EnemyArchetypeProfile`,
+  `EnemySceneBinding` et les réglages locaux d'Attack restent inchangés ; leur
+  consolidation éventuelle constitue une tranche séparée.
+
+## 2026-08-29 — Resources de rencontres proportionnées à leur réutilisation
+
+- conservé cinq recettes `EncounterData` externes et assignables depuis les
+  Markers de Côte toxique ; externalisé notamment l'ancienne recette intégrée
+  `LandingCadence2` et rangé `LandingFly` avec les autres recettes de mission ;
+- intégré dans leur parent toutes les Waves et tous les Spawn Patterns utilisés
+  une seule fois, sans modifier leurs identifiants, ordres, beats, formations,
+  quantités, offsets ou délais auteur actuellement présents ;
+- conservé externes uniquement `landing_pressure.tres`,
+  `landing_release.tres` et `bridge_flying_column.tres`, car ces trois Resources
+  possèdent réellement plusieurs consommateurs ;
+- supprimé douze fichiers `.tres` mono-usage et ajouté un seul fichier de
+  recette explicite pour `LandingCadence2`, soit onze fichiers de moins sans
+  nouvelle classe runtime ;
+- ajouté `encounter_resource_structure_test.gd`, qui protège automatiquement la
+  frontière entre recette externe, sous-resource mono-usage et donnée partagée ;
+- validations réelles : nouveau contrat structurel PASS, `git diff --check`
+  propre et profil structure à 26/27 ; l'unique échec reste le Marker/Gate
+  Bridge absent de la scène auteur ; le profil contenu retrouve séparément les
+  cinq écarts Bridge déjà présents avant cette migration ;
+- limite volontaire : les choix auteur en cours — ordre et population Bridge,
+  absence actuelle du Marker/Gate Bridge et nouvelle occurrence LandingFly —
+  sont préservés tels quels et ne sont pas acceptés comme nouveau snapshot de
+  contenu par cette tranche structurelle.
+
+## 2026-08-29 — Feedback de dégâts et de mort du joueur
+
+- conservé `PlayerHealthComponent` comme autorité des PV et
+  `ActorStateMachineComponent` comme autorité de l'état runtime ;
+- étendu `Components/Animation` sans créer de contrôleur parallèle : il traduit
+  désormais `HURT` et `DEAD` vers la pose raster et les animations de feedback ;
+- ajouté dans l'`AnimationPlayer` de la scène canonique les timings auteurs
+  `damage` et `death` : flash/secousse de 0,22 s, puis disparition de 0,75 s ;
+- corrigé le cycle incomplet de `HURT` : la fin de `damage` restaure maintenant
+  automatiquement `IDLE`, `RUN`, `JUMP` ou `FALL` selon le CharacterBody2D ;
+- conservé la pose `hurt` comme représentation provisoire de mort, sans créer
+  ni publier d'asset artificiel hors du pipeline ;
+- ajouté `player_feedback_contract_test.gd`, qui protège pose, timings,
+  transition de reprise et disparition avant le respawn de 0,8 s ;
+- validations réelles : contrats feedback, joueur et intégration des assets
+  joueur PASS ; profil structure global à 27/28, avec le seul
+  `map_contract_test.gd` déjà hors tranche en échec sur rencontre/Gate Bridge et
+  rotation auteur de la corniche ; `git diff --check` propre ;
+- prochaine action recommandée : ajouter l'audio, le recul du corps et la
+  secousse caméra en gardant leurs autorités séparées de Health.
+
+## 2026-08-29 — Recul corporel et secousse caméra sans audio
+
+- reporté explicitement l'audio afin de poursuivre la finalisation du gameplay
+  sans publier de placeholders sonores comme assets définitifs ;
+- ajouté `Components/Recoil` et son AnimationPlayer à la scène joueur : la
+  courbe normalisée de 0,12 s est auteur, tandis que le composant applique la
+  direction opposée du tir aux pivots Body et Aim sans déplacer le corps physique ;
+- ajouté à `WeaponData` les autorités par arme Body Recoil Distance, Camera
+  Shake Strength et Camera Shake Duration ;
+- relié `PlayerWeaponComponent.fired` au `MissionCameraRig2D`, qui borne toute
+  demande non nulle avec son profil et écrit uniquement `Camera2D.offset` ;
+- après contrôle joué, réglé explicitement le canon automatique à zéro secousse :
+  chaque balle conserve le recul local mais le viewport reste parfaitement stable ;
+- renforcé les contrats joueur, caméra et projectile avec un vrai tir, le recul
+  visible, le retour exact aux positions auteur, l'offset nul du canon courant
+  et une commande de secousse lourde testée séparément ;
+- validations ciblées réelles : `player_contract_test.gd`,
+  `mission_camera_progression_test.gd` et
+  `weapon_projectile_integration_test.gd` PASS sans erreur ni warning Godot ;
+- prochaine action recommandée : poursuivre le gameplay par Interaction et
+  pickups, l'audio restant volontairement hors tranche.
+
+## 2026-08-29 — Première chaîne caisse et pickup de soin
+
+- sélectionné l'injecteur de soin du megapack industriel toxique, rejeté deux
+  extractions génératives qui altéraient inutilement le dessin, puis publié la
+  source valide sur alpha réel avec un processeur déterministe 192 × 192 ;
+- créé le lot traçable `health-injector-pickup-v001` avec recette, manifeste,
+  provenance, export, copie runtime et rapport QA séparés de l'importeur Godot ;
+- ajouté `PickupData` et la scène canonique `Pickup2D` : l'effet soin appelle
+  uniquement `PlayerHealthComponent.heal()` et le pickup reste présent lorsque
+  le joueur est déjà à son maximum ;
+- ajouté `Components/Interaction` au joueur, son volume inspectable, son prompt
+  et la sélection de la cible `interaction_targets` la plus proche ; complété
+  clavier `F`, manette Y et septième commande tactile sans lecture d'entrée dans
+  la caisse ;
+- étendu `SupplyCrateData` avec `Contents Scene`, ajouté `ContentsOrigin` et
+  garanti une seule occurrence top-level qui n'hérite pas de l'échelle de la
+  caisse placée sous `Gameplay/Interactions/LandingSupplyCrate` ;
+- publié `PICKUP_INTERACTION_AUTHORING_CONTRACT.md`, synchronisé glossaire,
+  contrats joueur/input/map et manifeste des assets ;
+- ajouté `pickup_interaction_contract_test.gd`, qui valide détection, prompt,
+  ouverture, spawn unique, collecte et soin ; corrigé en parallèle le test de
+  projectile pour attendre une frame physique avant de mesurer son déplacement ;
+- validation structurelle réelle : 28 contrats sur 29 passent ; l'unique échec
+  reste `map_contract_test.gd` sur les trois données auteur Bridge/corniche déjà
+  connues, sans lien avec cette tranche ; `weapon_projectile_integration_test.gd`
+  repasse après restauration de sa synchronisation physique ;
+- prochaine action gameplay recommandée : définir l'autorité des réserves de
+  munitions avant de publier le pickup tambour, afin d'éviter un item sans
+  consommateur canonique.
+
+## 2026-08-29 — Partition de combat Côte toxique v001
+
+- formalisé la mission sur six plans auteur — dramatique, spatial, tactique,
+  rythmique, économique et spectaculaire — dans
+  `TOXIC_COAST_COMBAT_SEQUENCE_V001.md`, sans ajouter de nouvelle abstraction
+  runtime ;
+- supprimé les occurrences concurrentes `LandingCadence2`, `LandingFly` et les
+  deux Markers anonymes afin de restaurer exactement un acte par segment ;
+- déplacé les seuils après les zones de préparation : caisse avant Landing,
+  déclenchement du Pont dans son propre segment et checkpoint avant Fonderie ;
+- recomposé Landing en deux Troopers puis un Grunt, le Pont en pression terrestre
+  puis deux Drones chevauchés et une pince, et la Fonderie en deux Grunts, un
+  Drone de déplacement puis le Boss après une seconde de silence ;
+- restauré `BridgeCombatGate`, rendu les trois portes visibles, rétabli la
+  rotation auteur −35° de la corniche et replacé le bunker dans la branche
+  `Gameplay/GroundPieces` ;
+- placé un baril d'apprentissage au Pont et un baril de maîtrise dans la
+  Fonderie, tandis que la caisse de soin reste la ponctuation de découverte du
+  débarquement ;
+- intégré toutes les Waves et Patterns désormais mono-usage dans leurs trois
+  recettes `EncounterData`, puis supprimé les anciens fichiers prétendument
+  partagés ;
+- renforcé les contrats map, structure Resource et cadence : trois actes, huit
+  vagues, treize apparitions, seuils par segment, deux props tactiques,
+  chevauchement aérien du Pont et entrée finale du Boss sont vérifiés ;
+- les validations ciblées `map_contract_test.gd`,
+  `encounter_resource_structure_test.gd`, `encounter_cadence_contract_test.gd`,
+  `mission_run_contract_test.gd` et `toxic_coast_content_pack_test.gd` passent ;
+- prochaine action recommandée : playtest chronométré de chaque beat avant de
+  définir réserves de munitions et pickup tambour.
+
+## 2026-08-30 — Expansion industrielle sans doublons et Côte toxique 7680
+
+- audité les 38 candidats du megapack dans une matrice explicite : 11 contenus
+  déjà intégrés ou supplantés restent exclus, 27 sorties inédites sont retenues ;
+- publié ces 27 bitmaps avec recette, processeur déterministe, manifeste,
+  provenance, exports et QA, puis validé leur import Godot ;
+- étendu le Ground Kit de quatre à dix pièces avec culée, mur destructible,
+  tour, plateforme de fonderie, arche traversable et barricade Breakable ;
+- ajouté stations médicale et munitions, projecteur, relais radio, mine et évent
+  selon quatre contrats existants distincts plutôt qu'un système de props opaque ;
+- ajouté `PlayerCombatInventoryComponent` et son profil comme autorités uniques
+  des munitions spéciales, de l'armure et de l'Overdrive ; publié les trois pickups ;
+- publié quatre familles complètes — acide, électrique, implosion et démolition
+  — avec WeaponData, ProjectileData, scènes et impacts animés ; quatre
+  `ServiceStationData` réutilisent le casier unique pour les rendre équipables ;
+- reconstruit Côte toxique sur 7680 × 720 en trois actes de 2560 px et placé les
+  nouveautés selon une fonction de lecture, de décision ou de récompense ;
+- porté le budget du terrain à 144 chunks et 960 formes pour cette autorité de
+  taille ; `map_contract_test.gd` vérifie encore les budgets effectifs ;
+- validation complète PASS : profil `structure` 30/30, profil `content` 1/1
+  et `git diff --check` propre ;
+- limite volontaire : le pacing et la lisibilité visuelle des placements
+  exigent maintenant un playtest réel, pas un nouveau système ;
+- prochaine action recommandée : jouer les trois actes et noter durée, dépenses
+  de munitions, choix d'armurerie, dégâts, armure et usage de l'Overdrive.
+
+## 2026-08-30 — Backgrounds dédiés aux trois actes
+
+- corrigé l'omission de la première refonte : les anciens panoramas v001
+  répétés ne représentaient ni le pont acide ni la fonderie ;
+- audité les sources existantes et refusé de recycler les backgrounds de menu,
+  qui constituent des compositions opaques hors contrat de mission ;
+- généré trois sources ImageGen distinctes : côte militaire, ravin du pont
+  acide et fonderie aspirante avec réacteur d'implosion ;
+- ajouté un pipeline déterministe qui cadre en 16:9, publie en 2560 × 720 et
+  assombrit progressivement la bande basse pour préserver le gameplay ;
+- remplacé les trois anciens `Parallax2D` répétés par
+  `Visual/SegmentBackgrounds`, dont chaque Sprite2D correspond exactement aux
+  bornes d'un `MapSegment2D` ;
+- renforcé `map_contract_test.gd` : trois backgrounds, dimensions, centres et
+  absence des anciens parallaxes sont désormais contractuels ;
+- ajouté deux raccords dérivés 384 × 720, visibles dans le SceneTree et centrés
+  sur les frontières x=2560 et x=5120 ;
+- validation complète PASS après intégration : profil `structure` 30/30,
+  profil `content` 1/1 et `git diff --check` propre ;
+- limite volontaire : contrôler en jeu les deux raccords de segment et le
+  contraste réel derrière personnages, projectiles et VFX.
+
+## 2026-08-30 — Correction du débogueur projectile toxique
+
+- reproduit les deux erreurs runtime du débogueur : `%Visual` introuvable puis
+  assignation de texture sur une instance nulle dans `Projectile2D` ;
+- identifié la cause : les nouvelles munitions utilisent un `Sprite2D` bitmap,
+  tandis que `ToxicPressure2D` possède légitimement un `AnimatedSprite2D` ;
+- rendu le Sprite2D bitmap optionnel sans toucher à l'animation toxique, aux
+  primitives Tracer/Core ni à leur autorité `ProjectileData` ;
+- ajouté une régression dans `weapon_projectile_integration_test.gd` qui
+  instancie le projectile toxique et vérifie que son animation joue sans erreur ;
+- retiré deux anciens fichiers mono-usage non référencés réapparus sur disque ;
+  leurs sous-resources autoritaires restent intégrées aux EncounterData ;
+- validation : les 29 autres contrats structurels passaient déjà, puis les
+  contrats projectile et structure Encounter corrigés repassent sans erreur ;
+  `git diff --check` reste propre.
+
+## 2026-08-30 — Mode Flux Libre sans Combat Gates
+
+- supprimé la branche `Gameplay/CombatGates` et ses trois barrières de la scène
+  maîtresse ; `MissionMapRoot2D` et `MissionEncounterController` n'en dépendent
+  plus au runtime ni en validation ;
+- rendu Landing et Pont facultatifs via leurs `EncounterData`, tandis que la
+  finale Fonderie passe en `Arena` et reste le seul objectif de victoire ;
+- désactivé le verrou arrière dans `arcade_forward_camera.tres` et signé le
+  look-ahead avec la direction de visée pour permettre un vrai retour gauche ;
+- renforcé `MissionActorSpawner2D.set_respawn_spawn()` : un spawn situé derrière
+  le checkpoint courant ne peut jamais devenir l'autorité de reprise ;
+- adapté les contrats carte, cadence, mission et caméra : absence de portes,
+  Boss unique obligatoire, retour caméra et checkpoint monotone sont vérifiés ;
+- conservé `MissionCombatGate2D` comme vocabulaire réservé aux futures missions
+  fermées, sans aucune occurrence dans Côte toxique.
+- validation complète PASS : profil `structure` 30/30, profil `content` 1/1
+  et `git diff --check` propre.
+# 2026-08-30 — Caméra stable lors des changements de direction
+
+- neutralisé le look-ahead du profil de la Côte toxique afin qu'un demi-tour du
+  joueur ne déplace plus le cadre ;
+- conservé le look-ahead comme option explicite pour de futurs profils caméra ;
+- ajouté une régression vérifiant qu'un changement de visée sans déplacement ne
+  modifie pas la position du CameraRig.
+
+## 2026-08-30 — Profondeur et atmosphères animées de Toxic Coast
+
+- conservé les trois panoramas v002 comme identité lointaine autoritaire et
+  restauré deux bitmaps transparents historiques comme `MidgroundParallax` et
+  `ForegroundParallax`, sans réintroduire le fond opaque v001 ;
+- créé la scène canonique `EnvironmentFX2D` composée de trois
+  `GPUParticles2D`, d'un flash, de deux branches `Line2D`, d'un `Timer` et d'un
+  `AnimationPlayer` ;
+- créé trois `EnvironmentFXProfile` pour le débarquement, le pont acide et la
+  fonderie, puis placé leurs instances et origines dans la scène maîtresse ;
+- établi `ENVIRONMENT_VISUAL_AUTHORING_CONTRACT.md` : la Resource possède le
+  climat, la scène possède le placement et aucun effet ne contrôle le gameplay ;
+- mis à jour le manifeste pour rendre explicite la réactivation du midground
+  v001 et du foreground v002, sans créer de nouvel asset ni doublon ;
+- ajouté `environment_fx_contract_test.gd` et renforcé le contrat carte ; la
+  validation finale passe 31/31 en structure, 1/1 en contenu, 240 frames
+  runtime sans erreur et `git diff --check` propre ;
+- limite volontaire : le renderer headless factice ne permet pas la capture,
+  donc densité, contraste et cadence des éclairs restent à valider visuellement
+  dans Godot interactif.
+
+## 2026-08-30 — HUD Toxic Commando orienté arsenal
+
+- importé les trois planches sources du thème Toxic Commando dans le pipeline,
+  sans référencer le pack externe depuis Godot ;
+- créé un processeur déterministe isolant les composants alpha principaux : six
+  cadres, douze icônes, un portrait joueur dérivé et une planche de contrôle ;
+- corrigé une première composition sémantiquement fausse après revue : le grand
+  cercle affiche désormais le portrait du commando, tandis que le cœur reste un
+  petit repère de la barre de vie ;
+- supprimé les icônes Boss et Overdrive du layout, leurs cadres portant déjà
+  ces emblèmes, et réservé les slots inférieurs aux futurs statuts réels ;
+- créé `MissionHUDTheme` et `MissionHUD` ; le layout observe Health, Weapon,
+  CombatInventory et Boss Health sans posséder leurs données ;
+- ajouté `weapon_changed` et une fenêtre consommant directement
+  `WeaponData.weapon_texture` ; les cinq armes publiées sont couvertes par le
+  même contrat sans condition sur `weapon_id` ;
+- confié le choix de thème à `MissionMapDefinition.hud_theme` pour permettre aux
+  futures missions de changer de peau sans modifier l'écran ou les composants ;
+- remplacé les anciens panneaux de debug et masqué le bouton Retour pendant le
+  gameplay ; Pause/Options reste la prochaine autorité de navigation à créer ;
+- ajouté le contrat auteur HUD, le manifeste du lot et
+  `mission_hud_contract_test.gd` ; validation finale 32/32 en structure, 1/1 en
+  contenu, pipeline reproductible sur 19 sorties et `git diff --check` propre.
+
+## 2026-08-30 — Boot/Start illustré et ressenti typographique
+
+- repris le lot candidat `industrial-toxic-boot-start-flow-v001` déjà conservé
+  dans le pipeline et publié dix-neuf livrables par découpe et normalisation
+  déterministes, sans dépendance runtime vers le dépôt externe ;
+- créé `BootStartFlowTheme`, panneau Resource autoritaire des quatre
+  backgrounds, de l'emblème, des cadres, des ornements et des six marqueurs ;
+- remplacé les glyphes et concept boards provisoires du Boot/Start par les
+  illustrations publiées, tout en gardant titres, légendes et boutons sous
+  forme de Controls Godot localisables ;
+- relié la flèche magenta au focus clavier/manette réel au lieu d'en faire une
+  décoration fixe ; le menu reste un émetteur d'intentions et ne route aucun
+  écran lui-même ;
+- enrichi `game_ui_theme.tres` avec des variations sémantiques pour titres,
+  légendes, HUD, objectifs, notifications, boutons compacts et commandes
+  tactiles, avec contours lisibles sur les illustrations chargées ;
+- remplacé l'aplat noir du chargement en mission par la turbine publiée, une
+  ombre, une plaque et un message centré ; `MissionHUDTheme` choisit cette
+  présentation sans devenir autorité du message ou du chargement ;
+- conservé carte, marqueurs, cadenas et lampes comme vocabulaire préparé : leur
+  runtime attend un vrai Mission Catalog et une autorité de progression ;
+- ajouté le contrat auteur Boot/Start et
+  `boot_start_flow_contract_test.gd`, couvrant les dix-neuf sorties, les rôles
+  sémantiques, le focus, la typographie et le loading composé.
+- validation finale : profil `structure` 33/33, profil `content` 1/1,
+  pipeline Boot/Start 19/19 et `git diff --check` propre.
+
+### Revue artistique corrective sur captures réelles
+
+- capturé le Start Flow, le HUD joué et le loading avec le renderer OpenGL réel
+  en 1280 × 720 ; la première version contractuellement valide restait
+  visuellement refusée ;
+- constaté puis corrigé le cadre vertical déformé, le sous-titre débordant, les
+  boutons gris génériques, le fond trop lumineux sous le menu et la colonne qui
+  se décalait lorsque l'indicateur de focus passait en `visible = false` ;
+- ajouté une ombre latérale progressive, un verre sombre dans l'ouverture, une
+  variation `StartMenuButton` sans boîte opaque et deux SystemFont condensées
+  avec fallbacks ;
+- recalibré les textes du panneau d'arme et rendu le `MissionHUD` autonome en
+  lui assignant explicitement `game_ui_theme.tres` ;
+- recomposé le loading en signalétique à deux niveaux : `DÉPLOIEMENT` lime et
+  `EN COURS` crème, tous deux contenus dans la fenêtre centrale du cadre ;
+- renforcé le contrat auteur et le test afin de protéger ratio 2:3, colonne
+  stable, variation dédiée, hiérarchie du loading et Theme explicite du HUD.
+
+## 2026-08-31 — Famille d'explosions de barils v001
+
+- généré puis normalisé trois atlas ImageGen 4 × 2 pour les explosions petite,
+  standard et lourde, avec huit phases, alpha réel et ancrage commun ;
+- créé `process_barrel_explosion_family.py`, la recette, la provenance, le
+  manifeste et la QA du lot `barrel-explosion-family-v001` ;
+- étendu `ExplosionData` avec identité, famille, animation et intensités VFX,
+  sans déplacer l'autorité gameplay vers la scène ou le consommateur ;
+- créé trois profils `.tres` monotones et branché le baril toxique courant sur
+  le profil standard au lieu du profil `field_shell` ;
+- recomposé `Explosion2D` autour d'un `AnimatedSprite2D`, de deux ondes, d'une
+  lumière et de trois couches de particules, tout en conservant le fallback
+  procédural pour les familles sans atlas ;
+- interdit par contrat et test toute caméra interne ou secousse globale : la
+  richesse VFX ne doit pas déplacer l'écran ;
+- ajouté `barrel_explosion_family_contract_test.gd`, couvrant validité, huit
+  frames, progression des puissances, branchement du baril et SceneTree VFX ;
+- limite volontaire : aucun faux petit/gros baril n'est créé sans prop publié ;
+  les deux profils attendent leurs futurs consommateurs réels ;
+- validation finale : profil `structure` 34/34, profil `content` 1/1, atlas
+  reproductibles bit à bit et `git diff --check` propre.
+
+## 2026-08-31 — Arsenal joueur Resource-first v001
+
+- créé `PlayerLoadoutProfile` comme autorité de l'arsenal autorisé, de l'arme
+  primaire et de l'arme de départ ;
+- créé `standard_loadout.tres` avec le canon de campagne et les quatre armes
+  spéciales déjà publiées, sans recopier les `WeaponData` ou leurs
+  `ProjectileData` ;
+- ajouté `PlayerLoadoutComponent` sous `Player/Components/Loadout`, propriétaire
+  de l'arme équipée runtime et du refus des armes hors profil ;
+- branché `PlayerWeaponComponent` sur le Loadout : il consomme l'arme équipée
+  pour cadence, munitions, feedback et demande de projectile, mais ne devient
+  pas catalogue d'armes ;
+- branché les armureries sur `PlayerLoadoutComponent.equip_weapon()`, avec
+  fallback vers l'ancien composant de tir uniquement pour compatibilité locale ;
+- corrigé le baril toxique revenu par UID/cache sur l'explosion lourde : il
+  choisit de nouveau `barrel_standard_explosion.tres`, et le test compare
+  maintenant l'identité stable `explosion_id`/`family_id` ;
+- renforcé `player_contract_test.gd` et
+  `industrial_toxic_expansion_contract_test.gd` pour protéger la présence du
+  Loadout, les cinq armes du profil standard et le refus d'une arme non listée ;
+- mis à jour les contrats joueur, armes/projectiles, pickups/stations, HUD et
+  glossaire ;
+- validation finale : `player_contract_test.gd`,
+  `weapon_projectile_integration_test.gd`,
+  `industrial_toxic_expansion_contract_test.gd`,
+  `barrel_explosion_family_contract_test.gd` et profil `structure` 34/34 PASS ;
+- limite volontaire : pas de slots multiples, pas de pools de munitions par
+  famille et pas d'affichage HUD supplémentaire avant un gameplay réel de
+  sélection d'armes.
+
+## 2026-08-31 — Cadrage Player Kit avant nouvelles armes
+
+- clarifié le vocabulaire de conception : Player Kit, Player Controller,
+  Player Feel, HUD Layout et Arsenal ;
+- créé `docs/characters/RUN_AND_GUN_PLAYER_KIT.md` pour inventorier ce que le
+  joueur peut déjà faire et décider ce qui est gardé, reporté ou à mesurer ;
+- acté que courir, sauter, viser horizontal/vertical/diagonal, viser au
+  pointeur PC, tirer, tenir le tir, équiper via armurerie, interagir, ramasser,
+  subir dégâts, i-frames, mort et respawn forment le kit v001 ;
+- reporté crouch, drop-through, dash/slide, aim lock, melee, grenade, attaque
+  spéciale séparée, swap multi-slot, drop et rescue tant que Côte toxique ne
+  démontre pas leur besoin ;
+- conservé les cinq armes publiées comme base v001 à différencier par
+  équilibrage avant de créer un nouveau rôle d'arme ;
+- prochaine action recommandée : créer une famille d'explosions de munitions
+  pour le lanceur de démolition, puis playtester les coûts et cadences des cinq
+  armes.
+
+## 2026-08-31 — IDs d'objets explosifs distincts des explosions
+
+- clarifié le problème auteur : `barrel_heavy` était un profil d'explosion, pas
+  l'identité de l'objet qui explose ;
+- créé trois `ExplosivePropData` génériques sous `props/explosive/data/` avec
+  `prop_id` distinct : petit contenant, baril standard et gros contenant ;
+- conservé la scène canonique existante `ExplosiveProp2D` sans migration de
+  scripts pour limiter le risque ;
+- assigné explicitement `toxic_standard_explosive_barrel` au baril du Pont et
+  `toxic_heavy_explosive_barrel` au baril de Fonderie dans la scène maîtresse ;
+- ajouté `AuthorPreview` dans la scène canonique pour afficher dans l'éditeur
+  le `prop_id` de l'objet et le `explosion_id` réellement déclenché ;
+- adapté `ExplosionData.is_valid()` : `terrain_radius` et `damage_radius` sont
+  indépendants, car une grosse explosion peut creuser plus large qu'elle ne
+  blesse ;
+- renforcé `barrel_explosion_family_contract_test.gd` et `map_contract_test.gd`
+  pour protéger la séparation `prop_id` / `explosion_id` et les deux
+  occurrences de Côte toxique ;
+- validation ciblée PASS :
+  `barrel_explosion_family_contract_test.gd` et `map_contract_test.gd`.
+
+## 2026-08-31 — Assets manquants du canon de campagne et arsenal lisible
+
+- publié les deux candidates techniques du lot `projectile-impact-lot-v001`
+  vers `art/` après accord auteur : projectile `field-round-v001.png` et impact
+  `field-round-impact-3x2-v001.png` ;
+- créé `effects/weapons/field/field_round_impact_frames.tres` et
+  `FieldRoundImpact2D` sur la scène canonique `AnimatedProjectileImpact2D` ;
+- branché `field_round.tres` sur le bitmap de munition et son impact animé,
+  sans changer son rôle de projectile direct qui creuse un petit cratère ;
+- créé `demolition_rocket_explosion.tres` pour que la roquette de démolition
+  possède son propre `ExplosionData` de munition au lieu de réutiliser
+  l'ancien profil d'obus de campagne ;
+- ajouté `AuthorPreview` aux projectiles et armureries afin de voir depuis
+  l'éditeur les identifiants réellement branchés : projectile, impact,
+  explosion éventuelle, station et arme accordée ;
+- mis à jour le manifeste `art/`, le manifeste pipeline, la provenance, le
+  contrat armes/projectiles et la mémoire projet ;
+- validation ciblée PASS :
+  `validate_projectile_impact_candidates.py`,
+  `weapon_projectile_integration_test.gd` et
+  `industrial_toxic_expansion_contract_test.gd`.
+
+## 2026-08-31 — Roue d'armes de test v001
+
+- ajouté `WeaponWheelOverlay` au HUD de mission pour sélectionner rapidement
+  une arme parmi celles autorisées par `PlayerLoadoutComponent` ;
+- ajouté l'action `player_weapon_wheel`, maintenue avec `Tab` au clavier ou
+  l'épaule gauche de manette ;
+- la roue se sélectionne au pointeur ou au stick droit et équipe au
+  relâchement via `PlayerLoadoutComponent.equip_weapon()`, sans posséder de
+  liste d'armes ni d'inventaire parallèle ;
+- elle affiche le coût de munition par segment et recharge la réserve spéciale
+  partagée lorsqu'une arme consommatrice est choisie, pour permettre le test
+  immédiat de chaque projectile ;
+- renforcé `mission_hud_contract_test.gd` et `player_input_contract_test.gd`
+  pour protéger le Node HUD, l'action Input Map et l'équipement par la roue.
+
+## 2026-09-01 — Impact du canon de campagne réduit
+
+- réduit l'échelle de `FieldRoundImpact2D/Visuals` à 0,42 pour que le canon de
+  base lise comme un impact compact plutôt qu'une explosion lourde ;
+- conservé le PNG publié et la `ProjectileData` inchangés : seul l'assemblage
+  de présentation Godot règle la sensation visuelle ;
+- renforcé `weapon_projectile_integration_test.gd` pour empêcher l'impact du
+  canon de base de redevenir trop grand.

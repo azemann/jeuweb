@@ -1,13 +1,52 @@
-[gd_resource type="Resource" script_class="EncounterData" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="EncounterData" format=3 uid="uid://dmgq68b3si7ni"]
 
-[ext_resource type="Script" path="res://maps/encounters/encounter_data.gd" id="1"]
-[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/foundry_pressure.tres" id="2"]
-[ext_resource type="Resource" path="res://maps/encounters/data/toxic_coast/waves/foundry_payoff.tres" id="3"]
-[ext_resource type="Script" path="res://maps/encounters/wave_data.gd" id="4"]
+[ext_resource type="Script" uid="uid://bui3dauu447sn" path="res://maps/encounters/encounter_data.gd" id="1_encounter"]
+[ext_resource type="Script" uid="uid://dej2py36g0ck4" path="res://maps/encounters/wave_data.gd" id="2_wave"]
+[ext_resource type="Script" uid="uid://bwvlpidgnlxln" path="res://maps/encounters/enemy_spawn_pattern_data.gd" id="3_pattern"]
+
+[sub_resource type="Resource" id="Pattern_pressure"]
+script = ExtResource("3_pattern")
+pattern_id = &"foundry_guard_line"
+count = 2
+spacing = Vector2(190, 0)
+custom_offsets = PackedVector2Array()
+spawn_interval = 0.2
+
+[sub_resource type="Resource" id="Wave_pressure"]
+script = ExtResource("2_wave")
+wave_id = &"foundry_pressure"
+spawn_patterns = Array[ExtResource("3_pattern")]([SubResource("Pattern_pressure")])
+
+[sub_resource type="Resource" id="Pattern_escalation_air"]
+script = ExtResource("3_pattern")
+pattern_id = &"foundry_air_displacement"
+enemy_archetype = &"vacuum_flying"
+local_offset = Vector2(0, -170)
+custom_offsets = PackedVector2Array()
+
+[sub_resource type="Resource" id="Wave_escalation"]
+script = ExtResource("2_wave")
+wave_id = &"foundry_escalation_air"
+combat_beat = 2
+spawn_patterns = Array[ExtResource("3_pattern")]([SubResource("Pattern_escalation_air")])
+lead_in_delay = 0.55
+
+[sub_resource type="Resource" id="Pattern_payoff"]
+script = ExtResource("3_pattern")
+pattern_id = &"boss_payoff"
+enemy_archetype = &"vacuum_boss"
+custom_offsets = PackedVector2Array()
+
+[sub_resource type="Resource" id="Wave_payoff"]
+script = ExtResource("2_wave")
+wave_id = &"foundry_payoff"
+combat_beat = 3
+spawn_patterns = Array[ExtResource("3_pattern")]([SubResource("Pattern_payoff")])
+lead_in_delay = 1.0
 
 [resource]
-script = ExtResource("1")
+script = ExtResource("1_encounter")
 cadence_id = &"toxic_coast_foundry_boss_gate"
-encounter_kind = 1
-waves = Array[ExtResource("4")]([ExtResource("2"), ExtResource("3")])
+encounter_kind = 5
 completion_delay = 0.6
+waves = Array[ExtResource("2_wave")]([SubResource("Wave_pressure"), SubResource("Wave_escalation"), SubResource("Wave_payoff")])

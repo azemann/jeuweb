@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ExplosivePropData" format=3 uid="uid://b1bibf14i8bve"]
+
+[ext_resource type="Script" uid="uid://bhp587vj1c7xm" path="res://props/explosive_barrel/explosive_prop_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://de2e4n48dqcfv" path="res://art/props/toxic_coast/explosive-barrel-v001.png" id="2"]
+[ext_resource type="PackedScene" path="res://effects/explosions/explosion_2d.tscn" id="3"]
+[ext_resource type="Resource" uid="uid://c2x8fgas5ck8q" path="res://effects/explosions/data/barrel_heavy_explosion.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+prop_id = &"toxic_heavy_explosive_barrel"
+display_name = "Côte toxique — gros contenant explosif"
+texture = ExtResource("2")
+pivot_px = Vector2(128, 304)
+maximum_health = 45.0
+collision_offset = Vector2(0, -105.97)
+explosion_scene = ExtResource("3")
+explosion_data = ExtResource("4")

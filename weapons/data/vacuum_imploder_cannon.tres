@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://weapons/weapon_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://weapons/projectiles/vacuum_implosion_core_2d.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/weapons/player/vacuum-imploder-cannon-v001.png" id="3"]
+[resource]
+script = ExtResource("1")
+weapon_id = &"vacuum_imploder_cannon"
+display_name = "Canon imploseur"
+projectile_scene = ExtResource("2")
+fire_interval = 0.72
+automatic = false
+uses_special_ammo = true
+ammo_cost = 4
+weapon_texture = ExtResource("3")
+weapon_visual_scale = 0.18
+body_recoil_distance = 13.0
+camera_shake_strength = 2.0
+camera_shake_duration = 0.08

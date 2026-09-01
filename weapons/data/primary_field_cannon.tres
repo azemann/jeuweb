@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://ctf1otqckogni"]
 
-[ext_resource type="Script" path="res://weapons/weapon_data.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://uwco60bu5qvn" path="res://weapons/weapon_data.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://weapons/projectiles/field_round_2d.tscn" id="2_projectile"]
+[ext_resource type="Texture2D" uid="uid://ctty4cank8sva" path="res://art/weapons/player/player-primary-cannon-v001.png" id="3_texture"]
 
 [resource]
 script = ExtResource("1_script")
@@ -9,5 +10,7 @@ weapon_id = &"primary_field_cannon"
 display_name = "Canon de campagne"
 projectile_scene = ExtResource("2_projectile")
 fire_interval = 0.14
-automatic = true
-fire_animation = &"fire"
+weapon_texture = ExtResource("3_texture")
+weapon_visual_scale = 0.18
+camera_shake_strength = 0.0
+camera_shake_duration = 0.0

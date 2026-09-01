@@ -1,0 +1,14 @@
+{
+  "lot": "toxic-commando-hud-v001",
+  "origin": "/home/evan/Dev/Dev-github/my-space/projets/jeuweb-hud-asset-themes-v001",
+  "selected_theme": "toxic_commando",
+  "transformations": [
+    "copie immuable des trois planches sources",
+    "découpe déterministe par régions",
+    "trim alpha à seuil 8",
+    "normalisation des icônes sur canevas 160x160",
+    "portrait 192x192 dérivé de la pose idle canonique du joueur",
+    "redimensionnement Lanczos des cadres",
+    "publication versionnée sous art/ui/hud/toxic_commando"
+  ]
+}
