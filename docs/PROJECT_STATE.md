@@ -235,9 +235,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   missions, avec un acte auteur de 2560 × 720 et un spawn joueur initial ;
 - le kit terrain abyssal publie désormais vingt-cinq scènes Ground Pieces
   glissables : socle v001, variantes v002 de raccords et cinq grands socles
-  v003 extraits de la rangée basse de DA-08 ; Mission 2 en place vingt-deux
-  occurrences sous `Gameplay/GroundPieces` pour tester un premier parcours de
-  deux actes ;
+  v004 générés pour une seule hauteur de sol lisible ; Mission 2 en place
+  vingt-deux occurrences sous `Gameplay/GroundPieces` pour tester un premier
+  parcours de deux actes ;
 - DA-08 `da-08-abyssal-mission.png` fixe la direction Mission 2 : ruines
   techno-abyssales, corail noir, nacre cassable, cuivre oxydé et énergie
   cyan/violette ; son vocabulaire de production est détaillé dans
@@ -358,7 +358,7 @@ catalogues.
 <!-- CATALOG_PROJECTION_BEGIN -->
 - `mission_maps` : `mission_2_abyssal`, `toxic_coast`
 - `enemy_archetypes` : `vacuum_boss`, `vacuum_flying`, `vacuum_grunt`, `vacuum_pilot_saboteur`, `vacuum_trooper`
-- `ground_pieces/abyssal` : `abyssal_black_coral_floor_cap_left`, `abyssal_black_coral_floor_cap_right`, `abyssal_black_coral_platform_large`, `abyssal_black_coral_platform_medium`, `abyssal_black_coral_platform_small`, `abyssal_black_coral_slope_connector`, `abyssal_black_coral_slope_down`, `abyssal_black_coral_slope_up`, `abyssal_black_coral_step_high`, `abyssal_black_coral_step_low`, `abyssal_da08_broken_machine_floor`, `abyssal_da08_massive_coral_machine_slab`, `abyssal_da08_right_engine_slab`, `abyssal_da08_rotor_slope_floor`, `abyssal_da08_tide_bridge_foundation`, `abyssal_destructible_pearl_wall_large`, `abyssal_destructible_pearl_wall_medium`, `abyssal_destructible_pearl_wall_small`, `abyssal_temple_arch_large`, `abyssal_temple_column_broken`, `abyssal_temple_column_intact`, `abyssal_tide_engine_bridge_long`, `abyssal_tide_engine_bridge_medium`, `abyssal_tide_engine_bridge_short`, `abyssal_tide_engine_support_pillar`
+- `ground_pieces/abyssal` : `abyssal_black_coral_floor_cap_left`, `abyssal_black_coral_floor_cap_right`, `abyssal_black_coral_platform_large`, `abyssal_black_coral_platform_medium`, `abyssal_black_coral_platform_small`, `abyssal_black_coral_slope_connector`, `abyssal_black_coral_slope_down`, `abyssal_black_coral_slope_up`, `abyssal_black_coral_step_high`, `abyssal_black_coral_step_low`, `abyssal_destructible_pearl_wall_large`, `abyssal_destructible_pearl_wall_medium`, `abyssal_destructible_pearl_wall_small`, `abyssal_generated_black_coral_slab`, `abyssal_generated_coral_machine_slab`, `abyssal_generated_right_coral_engine_slab`, `abyssal_generated_ruin_engine_slab`, `abyssal_generated_tide_engine_floor`, `abyssal_temple_arch_large`, `abyssal_temple_column_broken`, `abyssal_temple_column_intact`, `abyssal_tide_engine_bridge_long`, `abyssal_tide_engine_bridge_medium`, `abyssal_tide_engine_bridge_short`, `abyssal_tide_engine_support_pillar`
 - `ground_pieces/toxic_coast` : `acid_bridge_abutment`, `destructible_military_wall`, `guard_tower_module`, `industrial_catwalk_medium`, `military_bunker_block_medium`, `natural_ledge_medium`, `portable_barricade`, `toxic_pipe_bridge_medium`, `vacuum_foundry_platform`, `walk_under_pipe_arch`
 <!-- CATALOG_PROJECTION_END -->
 
@@ -536,7 +536,7 @@ catalogues.
   large, caps gauche/droite, pentes up/down, marches low/high, ponts
   short/long, pilier de support, arche traversable, colonnes intacte/brisée et
   murs nacrés small/large ;
-- cinq grands socles v003 extraits de la rangée basse de DA-08 deviennent la
+- cinq grands socles v004 générés remplacent la v003 refusée et deviennent la
   base principale du sol de Mission 2 ; les pièces v002 sont maintenant
   considérées comme raccords et compléments ;
 - `GroundPieceDefinition` reste l'autorité de chaque `piece_id`, texture,

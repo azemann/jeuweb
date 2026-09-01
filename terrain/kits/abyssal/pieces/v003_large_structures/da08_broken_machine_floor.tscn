@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3]
-
-[ext_resource type="PackedScene" path="res://terrain/ground_pieces/ground_piece_2d.tscn" id="1_piece"]
-[ext_resource type="Resource" path="res://terrain/kits/abyssal/definitions/v003_large_structures/da08_broken_machine_floor.tres" id="2_definition"]
-
-[node name="Da08BrokenMachineFloor" instance=ExtResource("1_piece")]
-definition = ExtResource("2_definition")
-ground_mode = 0

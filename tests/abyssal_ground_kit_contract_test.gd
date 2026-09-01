@@ -42,13 +42,13 @@ func _run() -> void:
 			&"abyssal_temple_column_broken",
 			&"abyssal_destructible_pearl_wall_small",
 			&"abyssal_destructible_pearl_wall_large",
-			&"abyssal_da08_massive_coral_machine_slab",
-			&"abyssal_da08_broken_machine_floor",
-			&"abyssal_da08_rotor_slope_floor",
-			&"abyssal_da08_tide_bridge_foundation",
-			&"abyssal_da08_right_engine_slab",
+			&"abyssal_generated_coral_machine_slab",
+			&"abyssal_generated_tide_engine_floor",
+			&"abyssal_generated_black_coral_slab",
+			&"abyssal_generated_ruin_engine_slab",
+			&"abyssal_generated_right_coral_engine_slab",
 		]
-		_check(catalog.pieces.size() == expected_ids.size(), "Le kit abyssal doit exposer les 25 pièces v001/v002/v003.")
+		_check(catalog.pieces.size() == expected_ids.size(), "Le kit abyssal doit exposer les 25 pièces v001/v002/v004.")
 		for piece_id in expected_ids:
 			var packed := catalog.scene_for(piece_id)
 			_check(packed != null and packed.can_instantiate(), "Le kit abyssal doit résoudre %s." % piece_id)
@@ -103,24 +103,24 @@ func _run() -> void:
 		_check(abyssal_tint != null and abyssal_tint.z_index < -10 and abyssal_tint.color.a < 0.5, "L'aplat abyssal ne doit plus masquer les Ground Pieces dans l'éditeur.")
 		_check(mid_glow != null and mid_glow.z_index < -10 and mid_glow.color.a < 0.35, "La lueur de blockout doit rester décorative et légère.")
 		var pieces_root := map.get_node_or_null("Gameplay/GroundPieces")
-		_check(pieces_root != null and pieces_root.get_child_count() == 22, "Mission 2 doit placer les 22 occurrences de blockout v002/v003.")
+		_check(pieces_root != null and pieces_root.get_child_count() == 22, "Mission 2 doit placer les 22 occurrences de blockout v002/v004.")
 		for node_name in [
 			"EntryBlackCoral",
 			"FirstDropSlope",
 			"TideEngineBridge",
 			"PearlWallGate",
-			"Da08LandingSlab",
-			"Da08BrokenApproach",
+			"GeneratedLandingSlab",
+			"GeneratedEngineApproach",
 			"ExitBlackCoral",
-			"Da08RotorSlopeFloor",
+			"GeneratedBlackCoralSpan",
 			"EntryCapLeft",
 			"RuinsPlatformLarge",
-			"Da08TideBridgeFoundation",
+			"GeneratedRuinFoundation",
 			"LowCoralStep",
 			"HighCoralStep",
 			"SlopeDownToEngine",
 			"LongTideBridge",
-			"Da08RightEngineSlab",
+			"GeneratedRightEngineSlab",
 			"BridgeSupportWest",
 			"BridgeSupportEast",
 			"TempleArchGate",

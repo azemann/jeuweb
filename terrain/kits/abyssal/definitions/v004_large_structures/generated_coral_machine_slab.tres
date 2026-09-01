@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/v004_large_structures/generated-coral-machine-slab-v004.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_generated_coral_machine_slab"
+display_name = "Abysses généré - grand socle corail machine"
+category = 2
+tags = PackedStringArray("abyssal", "generated", "large_structure", "floor", "machine", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(512, 82)
+default_z_index = -3
+collision_source = 1
+authored_outline = PackedVector2Array(-430, 0, -286, -4, -142, -3, 0, -5, 142, -3, 286, -4, 430, 0, 456, 78, 384, 190, 180, 230, 0, 238, -180, 230, -384, 188, -456, 78)
+walk_surface_point_count = 7
+recommended_mode = 0

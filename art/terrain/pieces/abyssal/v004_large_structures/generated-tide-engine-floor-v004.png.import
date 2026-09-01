@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgkso1nclq3p5"
-path="res://.godot/imported/da08-broken-machine-floor-v003.png-4ce3cb25f185536b7845f032042f27d7.ctex"
+uid="uid://ct0y4olp1jo26"
+path="res://.godot/imported/generated-tide-engine-floor-v004.png-6328a5ac80747f2ed61754c54494f9d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/terrain/pieces/abyssal/v003_large_structures/da08-broken-machine-floor-v003.png"
-dest_files=["res://.godot/imported/da08-broken-machine-floor-v003.png-4ce3cb25f185536b7845f032042f27d7.ctex"]
+source_file="res://art/terrain/pieces/abyssal/v004_large_structures/generated-tide-engine-floor-v004.png"
+dest_files=["res://.godot/imported/generated-tide-engine-floor-v004.png-6328a5ac80747f2ed61754c54494f9d9.ctex"]
 
 [params]
 

@@ -1,0 +1,169 @@
+{
+  "schema": "jeuweb.abyssal-generated-large-structures.v1",
+  "lot": "abyssal-generated-large-structures-v004",
+  "source_type": "imagegen-generated-sheet",
+  "status": "published-runtime-v004",
+  "replaces_rejected_lot": "abyssal-da08-large-structures-v003",
+  "constraints": [
+    "single clear walkable top edge per module",
+    "transparent background",
+    "no direct DA-08 crop in runtime"
+  ],
+  "outputs": [
+    {
+      "piece_id": "abyssal_generated_coral_machine_slab",
+      "display_name": "Abysses g\u00e9n\u00e9r\u00e9 \u2014 grand socle corail machine",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/generated_large_structures/abyssal-large-ground-structures-source-v004.png",
+      "crop_box": [
+        0,
+        0,
+        900,
+        724
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v004_large_structures/generated-coral-machine-slab-v004.png",
+      "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-coral-machine-slab-v004.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        82
+      ],
+      "walk_half_width": 430,
+      "walk_surface_y": 0,
+      "alpha_bbox": [
+        255,
+        14,
+        768,
+        318
+      ],
+      "source_sha256": "36d0acfc647459392b7f84897356cc8ce9b28698aee90c2f6048798b26a40a20",
+      "runtime_sha256": "fd6c624860ffb59988fddbdad8a635a3506f7284d87774384bd8a5ca73f1f6d4"
+    },
+    {
+      "piece_id": "abyssal_generated_tide_engine_floor",
+      "display_name": "Abysses g\u00e9n\u00e9r\u00e9 \u2014 plancher moteur de mar\u00e9e",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/generated_large_structures/abyssal-large-ground-structures-source-v004.png",
+      "crop_box": [
+        320,
+        0,
+        1220,
+        724
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v004_large_structures/generated-tide-engine-floor-v004.png",
+      "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-tide-engine-floor-v004.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        82
+      ],
+      "walk_half_width": 430,
+      "walk_surface_y": 0,
+      "alpha_bbox": [
+        238,
+        14,
+        785,
+        318
+      ],
+      "source_sha256": "36d0acfc647459392b7f84897356cc8ce9b28698aee90c2f6048798b26a40a20",
+      "runtime_sha256": "e20393eae0b2f9c9396430479240cbf8edddba68ed49d5cb36ed52860632da64"
+    },
+    {
+      "piece_id": "abyssal_generated_black_coral_slab",
+      "display_name": "Abysses g\u00e9n\u00e9r\u00e9 \u2014 socle corail noir",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/generated_large_structures/abyssal-large-ground-structures-source-v004.png",
+      "crop_box": [
+        650,
+        0,
+        1550,
+        724
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v004_large_structures/generated-black-coral-slab-v004.png",
+      "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-black-coral-slab-v004.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        82
+      ],
+      "walk_half_width": 420,
+      "walk_surface_y": 0,
+      "alpha_bbox": [
+        239,
+        14,
+        785,
+        318
+      ],
+      "source_sha256": "36d0acfc647459392b7f84897356cc8ce9b28698aee90c2f6048798b26a40a20",
+      "runtime_sha256": "6a1af642775ae31a4d68d3a3947f4b4a35521240665c5b44cbc09b9c9f7184e3"
+    },
+    {
+      "piece_id": "abyssal_generated_ruin_engine_slab",
+      "display_name": "Abysses g\u00e9n\u00e9r\u00e9 \u2014 socle ruine moteur",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/generated_large_structures/abyssal-large-ground-structures-source-v004.png",
+      "crop_box": [
+        970,
+        0,
+        1870,
+        724
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v004_large_structures/generated-ruin-engine-slab-v004.png",
+      "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-ruin-engine-slab-v004.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        82
+      ],
+      "walk_half_width": 420,
+      "walk_surface_y": 0,
+      "alpha_bbox": [
+        260,
+        14,
+        764,
+        318
+      ],
+      "source_sha256": "36d0acfc647459392b7f84897356cc8ce9b28698aee90c2f6048798b26a40a20",
+      "runtime_sha256": "f39315c1b1eb39be856874e3ad74eef121dab6544142bf323bc38ecec41afcf0"
+    },
+    {
+      "piece_id": "abyssal_generated_right_coral_engine_slab",
+      "display_name": "Abysses g\u00e9n\u00e9r\u00e9 \u2014 socle moteur corail droit",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/generated_large_structures/abyssal-large-ground-structures-source-v004.png",
+      "crop_box": [
+        1270,
+        0,
+        2172,
+        724
+      ],
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/v004_large_structures/generated-right-coral-engine-slab-v004.png",
+      "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-right-coral-engine-slab-v004.png",
+      "canvas": [
+        1024,
+        320
+      ],
+      "pivot_px": [
+        512,
+        82
+      ],
+      "walk_half_width": 410,
+      "walk_surface_y": 0,
+      "alpha_bbox": [
+        266,
+        14,
+        758,
+        318
+      ],
+      "source_sha256": "36d0acfc647459392b7f84897356cc8ce9b28698aee90c2f6048798b26a40a20",
+      "runtime_sha256": "2741cd51b0cc94cfa893bf96a3216d5acb54247874ee9cbc32d2bd58be17565c"
+    }
+  ]
+}

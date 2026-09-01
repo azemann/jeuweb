@@ -1,0 +1,13 @@
+{
+  "schema": "jeuweb.asset-manifest.v1",
+  "lot": "abyssal-generated-large-structures-v004",
+  "status": "published-runtime-v004",
+  "replaces": "abyssal-da08-large-structures-v003",
+  "outputs": [
+    {"piece_id": "abyssal_generated_coral_machine_slab", "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-coral-machine-slab-v004.png", "scene": "terrain/kits/abyssal/pieces/v004_large_structures/generated_coral_machine_slab.tscn"},
+    {"piece_id": "abyssal_generated_tide_engine_floor", "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-tide-engine-floor-v004.png", "scene": "terrain/kits/abyssal/pieces/v004_large_structures/generated_tide_engine_floor.tscn"},
+    {"piece_id": "abyssal_generated_black_coral_slab", "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-black-coral-slab-v004.png", "scene": "terrain/kits/abyssal/pieces/v004_large_structures/generated_black_coral_slab.tscn"},
+    {"piece_id": "abyssal_generated_ruin_engine_slab", "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-ruin-engine-slab-v004.png", "scene": "terrain/kits/abyssal/pieces/v004_large_structures/generated_ruin_engine_slab.tscn"},
+    {"piece_id": "abyssal_generated_right_coral_engine_slab", "runtime": "art/terrain/pieces/abyssal/v004_large_structures/generated-right-coral-engine-slab-v004.png", "scene": "terrain/kits/abyssal/pieces/v004_large_structures/generated_right_coral_engine_slab.tscn"}
+  ]
+}

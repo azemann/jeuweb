@@ -127,20 +127,22 @@ Lot publié le 2026-09-01 par
 Mission 2. Statut : intégré pour level design ; revue visuelle et ajustement
 fin des contours à faire dans l'éditeur.
 
-### Mission 2 — grands socles DA-08 v003
+### Mission 2 — grands socles générés v004
 
 | Fichier | Création | Intention | Intégration |
 |---|---|---|---|
-| `terrain/pieces/abyssal/v003_large_structures/da08-massive-coral-machine-slab-v003.png` | extraction pipeline depuis la rangée basse de DA-08 | grand sol principal, machine et corail | `abyssal_da08_massive_coral_machine_slab.tres` |
-| `terrain/pieces/abyssal/v003_large_structures/da08-broken-machine-floor-v003.png` | extraction pipeline depuis DA-08 | socle brisé pour variation de rythme | `abyssal_da08_broken_machine_floor.tres` |
-| `terrain/pieces/abyssal/v003_large_structures/da08-rotor-slope-floor-v003.png` | extraction pipeline depuis DA-08 | grand raccord incliné à rotor | `abyssal_da08_rotor_slope_floor.tres` |
-| `terrain/pieces/abyssal/v003_large_structures/da08-tide-bridge-foundation-v003.png` | extraction pipeline depuis DA-08 | fondation lourde de pont | `abyssal_da08_tide_bridge_foundation.tres` |
-| `terrain/pieces/abyssal/v003_large_structures/da08-right-engine-slab-v003.png` | extraction pipeline depuis DA-08 | socle moteur pour fin d'acte | `abyssal_da08_right_engine_slab.tres` |
+| `terrain/pieces/abyssal/v004_large_structures/generated-coral-machine-slab-v004.png` | ImageGen intégré puis normalisation pipeline | grand sol principal corail-machine | `abyssal_generated_coral_machine_slab.tres` |
+| `terrain/pieces/abyssal/v004_large_structures/generated-tide-engine-floor-v004.png` | ImageGen intégré puis normalisation pipeline | plancher moteur de marée | `abyssal_generated_tide_engine_floor.tres` |
+| `terrain/pieces/abyssal/v004_large_structures/generated-black-coral-slab-v004.png` | ImageGen intégré puis normalisation pipeline | grand socle corail noir | `abyssal_generated_black_coral_slab.tres` |
+| `terrain/pieces/abyssal/v004_large_structures/generated-ruin-engine-slab-v004.png` | ImageGen intégré puis normalisation pipeline | socle ruine mécanique | `abyssal_generated_ruin_engine_slab.tres` |
+| `terrain/pieces/abyssal/v004_large_structures/generated-right-coral-engine-slab-v004.png` | ImageGen intégré puis normalisation pipeline | socle moteur de fin d'acte | `abyssal_generated_right_coral_engine_slab.tres` |
 
 Lot publié le 2026-09-01 par
-`pipeline/assets/tools/process_abyssal_da08_large_structures.py`. Ces grands
-socles portent désormais la base game art/level design de Mission 2 ; les
-pièces v002 restent des raccords et compléments.
+`pipeline/assets/tools/process_abyssal_generated_large_structures.py`. Il
+remplace la v003 refusée : l'extraction directe de DA-08 créait plusieurs
+hauteurs de sol visibles dans une même pièce. Les grands socles v004 portent la
+base game art/level design de Mission 2 ; les pièces v002 restent des raccords
+et compléments.
 
 ## Joueur — assets runtime v001
 

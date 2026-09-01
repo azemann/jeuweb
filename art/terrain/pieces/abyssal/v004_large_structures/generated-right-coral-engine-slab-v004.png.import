@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsaga8pvjipju"
-path="res://.godot/imported/da08-massive-coral-machine-slab-v003.png-57e6c93e485061a0f196edb8bcb983d2.ctex"
+uid="uid://oear5v7ulm5s"
+path="res://.godot/imported/generated-right-coral-engine-slab-v004.png-95123305a03ae317b005b98e69ca54b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/terrain/pieces/abyssal/v003_large_structures/da08-massive-coral-machine-slab-v003.png"
-dest_files=["res://.godot/imported/da08-massive-coral-machine-slab-v003.png-57e6c93e485061a0f196edb8bcb983d2.ctex"]
+source_file="res://art/terrain/pieces/abyssal/v004_large_structures/generated-right-coral-engine-slab-v004.png"
+dest_files=["res://.godot/imported/generated-right-coral-engine-slab-v004.png-95123305a03ae317b005b98e69ca54b4.ctex"]
 
 [params]
 

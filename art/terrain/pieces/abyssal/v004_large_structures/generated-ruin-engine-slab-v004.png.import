@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be11fcjmt8ldu"
-path="res://.godot/imported/da08-right-engine-slab-v003.png-af5c19fa5957cfe29416d76d88dfb6f2.ctex"
+uid="uid://blgvo17bqf2a8"
+path="res://.godot/imported/generated-ruin-engine-slab-v004.png-ecc78e02ae977ffa9f26411b588e1cda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/terrain/pieces/abyssal/v003_large_structures/da08-right-engine-slab-v003.png"
-dest_files=["res://.godot/imported/da08-right-engine-slab-v003.png-af5c19fa5957cfe29416d76d88dfb6f2.ctex"]
+source_file="res://art/terrain/pieces/abyssal/v004_large_structures/generated-ruin-engine-slab-v004.png"
+dest_files=["res://.godot/imported/generated-ruin-engine-slab-v004.png-ecc78e02ae977ffa9f26411b588e1cda.ctex"]
 
 [params]
 

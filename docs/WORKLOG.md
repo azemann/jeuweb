@@ -1803,19 +1803,22 @@
   encore une mission jouable complète avec ennemis, checkpoints, hazards et
   scoring.
 
-## 2026-09-01 — Grands socles DA-08 et apprentissage de production
+## 2026-09-01 — Grands socles générés et apprentissage de production
 
 - intégré le retour auteur : les grands sols en bas de DA-08 doivent porter la
-  base de Mission 2, tandis que les petites pièces servent de raccords ;
+  base de Mission 2, mais ne doivent pas être extraits tels quels si la DA crée
+  plusieurs hauteurs de sol visibles ;
 - consulté des workflows externes de Tilemap/TileSet et de kits modulaires :
   palette de pièces éditables, pivots stables, modules cohérents et absence de
   reconstruction du level design pendant l'art pass ;
-- ajouté `process_abyssal_da08_large_structures.py` pour extraire cinq grands
-  socles depuis la planche DA-08 locale, avec alpha, canevas 1024 × 320 et QA ;
+- refusé la v003 extraite de DA-08 : pseudo-rendu, double lecture de hauteur et
+  mauvaise adaptation en sprite gameplay ;
+- ajouté `process_abyssal_generated_large_structures.py` pour publier cinq
+  grands socles générés, avec alpha, canevas 1024 × 320 et QA ;
 - publié cinq PNG sous
-  `art/terrain/pieces/abyssal/v003_large_structures/`, leurs
+  `art/terrain/pieces/abyssal/v004_large_structures/`, leurs
   `GroundPieceDefinition` et scènes glissables ;
 - étendu `abyssal_ground_kit.tres` à vingt-cinq pièces et Mission 2 à vingt-deux
   occurrences de blockout ;
 - renforcé le contrat abyssal pour protéger le nombre de pièces, les grands
-  socles DA-08 et la scène deux actes.
+  socles générés et la scène deux actes.

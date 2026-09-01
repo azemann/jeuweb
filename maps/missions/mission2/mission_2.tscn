@@ -26,11 +26,11 @@
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/abyssal_temple_column_broken.tscn" id="24_column_broken"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_small.tscn" id="25_wall_small"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_large.tscn" id="26_wall_large"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_massive_coral_machine_slab.tscn" id="27_da08_slab"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_broken_machine_floor.tscn" id="28_da08_broken"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_rotor_slope_floor.tscn" id="29_da08_rotor"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_tide_bridge_foundation.tscn" id="30_da08_foundation"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_right_engine_slab.tscn" id="31_da08_right_slab"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_coral_machine_slab.tscn" id="27_generated_slab"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_tide_engine_floor.tscn" id="28_generated_engine"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_black_coral_slab.tscn" id="29_generated_coral"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_ruin_engine_slab.tscn" id="30_generated_ruin"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_right_coral_engine_slab.tscn" id="31_generated_right"]
 
 [node name="Mission2Abyssal" type="Node2D" unique_id=1551418550]
 script = ExtResource("1_root_script")
@@ -101,10 +101,10 @@ position = Vector2(963, 471)
 [node name="TideEngineBridge" parent="Gameplay/GroundPieces" unique_id=237124801 instance=ExtResource("9_bridge")]
 position = Vector2(1420, 510)
 
-[node name="Da08LandingSlab" parent="Gameplay/GroundPieces" instance=ExtResource("27_da08_slab")]
+[node name="GeneratedLandingSlab" parent="Gameplay/GroundPieces" instance=ExtResource("27_generated_slab")]
 position = Vector2(640, 582)
 
-[node name="Da08BrokenApproach" parent="Gameplay/GroundPieces" instance=ExtResource("28_da08_broken")]
+[node name="GeneratedEngineApproach" parent="Gameplay/GroundPieces" instance=ExtResource("28_generated_engine")]
 position = Vector2(1520, 584)
 
 [node name="PearlWallGate" parent="Gameplay/GroundPieces" unique_id=484378040 instance=ExtResource("10_wall")]
@@ -114,7 +114,7 @@ position = Vector2(1810, 526)
 position = Vector2(2152, 531)
 scale = Vector2(0.82, 0.82)
 
-[node name="Da08RotorSlopeFloor" parent="Gameplay/GroundPieces" instance=ExtResource("29_da08_rotor")]
+[node name="GeneratedBlackCoralSpan" parent="Gameplay/GroundPieces" instance=ExtResource("29_generated_coral")]
 position = Vector2(2440, 604)
 
 [node name="EntryCapLeft" parent="Gameplay/GroundPieces" instance=ExtResource("13_cap_left")]
@@ -123,7 +123,7 @@ position = Vector2(2700, 548)
 [node name="RuinsPlatformLarge" parent="Gameplay/GroundPieces" instance=ExtResource("12_platform_large")]
 position = Vector2(3070, 536)
 
-[node name="Da08TideBridgeFoundation" parent="Gameplay/GroundPieces" instance=ExtResource("30_da08_foundation")]
+[node name="GeneratedRuinFoundation" parent="Gameplay/GroundPieces" instance=ExtResource("30_generated_ruin")]
 position = Vector2(3320, 584)
 
 [node name="LowCoralStep" parent="Gameplay/GroundPieces" instance=ExtResource("17_step_low")]
@@ -138,7 +138,7 @@ position = Vector2(4070, 502)
 [node name="LongTideBridge" parent="Gameplay/GroundPieces" instance=ExtResource("20_bridge_long")]
 position = Vector2(4380, 510)
 
-[node name="Da08RightEngineSlab" parent="Gameplay/GroundPieces" instance=ExtResource("31_da08_right_slab")]
+[node name="GeneratedRightEngineSlab" parent="Gameplay/GroundPieces" instance=ExtResource("31_generated_right")]
 position = Vector2(4500, 586)
 
 [node name="BridgeSupportWest" parent="Gameplay/GroundPieces" instance=ExtResource("21_pillar")]

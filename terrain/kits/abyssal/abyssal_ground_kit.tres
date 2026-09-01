@@ -21,14 +21,14 @@
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/abyssal_temple_column_broken.tscn" id="19_column_broken"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_small.tscn" id="20_wall_small"]
 [ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v002/destructible_pearl_wall_large.tscn" id="21_wall_large"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_massive_coral_machine_slab.tscn" id="22_da08_slab"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_broken_machine_floor.tscn" id="23_da08_broken"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_rotor_slope_floor.tscn" id="24_da08_rotor"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_tide_bridge_foundation.tscn" id="25_da08_foundation"]
-[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v003_large_structures/da08_right_engine_slab.tscn" id="26_da08_right_slab"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_coral_machine_slab.tscn" id="22_generated_slab"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_tide_engine_floor.tscn" id="23_generated_engine"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_black_coral_slab.tscn" id="24_generated_coral"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_ruin_engine_slab.tscn" id="25_generated_ruin"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/v004_large_structures/generated_right_coral_engine_slab.tscn" id="26_generated_right"]
 
 [resource]
 script = ExtResource("1_catalog")
 kit_id = &"abyssal"
 display_name = "Abysses — Ground Pieces"
-pieces = Array[PackedScene]([ExtResource("2_platform"), ExtResource("3_slope"), ExtResource("4_bridge"), ExtResource("5_wall"), ExtResource("6_platform_small"), ExtResource("7_platform_large"), ExtResource("8_cap_left"), ExtResource("9_cap_right"), ExtResource("10_slope_up"), ExtResource("11_slope_down"), ExtResource("12_step_low"), ExtResource("13_step_high"), ExtResource("14_bridge_short"), ExtResource("15_bridge_long"), ExtResource("16_pillar"), ExtResource("17_arch"), ExtResource("18_column"), ExtResource("19_column_broken"), ExtResource("20_wall_small"), ExtResource("21_wall_large"), ExtResource("22_da08_slab"), ExtResource("23_da08_broken"), ExtResource("24_da08_rotor"), ExtResource("25_da08_foundation"), ExtResource("26_da08_right_slab")])
+pieces = Array[PackedScene]([ExtResource("2_platform"), ExtResource("3_slope"), ExtResource("4_bridge"), ExtResource("5_wall"), ExtResource("6_platform_small"), ExtResource("7_platform_large"), ExtResource("8_cap_left"), ExtResource("9_cap_right"), ExtResource("10_slope_up"), ExtResource("11_slope_down"), ExtResource("12_step_low"), ExtResource("13_step_high"), ExtResource("14_bridge_short"), ExtResource("15_bridge_long"), ExtResource("16_pillar"), ExtResource("17_arch"), ExtResource("18_column"), ExtResource("19_column_broken"), ExtResource("20_wall_small"), ExtResource("21_wall_large"), ExtResource("22_generated_slab"), ExtResource("23_generated_engine"), ExtResource("24_generated_coral"), ExtResource("25_generated_ruin"), ExtResource("26_generated_right")])

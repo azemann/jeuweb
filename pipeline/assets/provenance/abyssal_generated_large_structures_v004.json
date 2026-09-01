@@ -1,0 +1,13 @@
+{
+  "schema": "jeuweb.asset-provenance.v1",
+  "lot": "abyssal-generated-large-structures-v004",
+  "created_at": "2026-09-01",
+  "source": "pipeline/assets/sources/terrain_kits/abyssal/generated_large_structures/abyssal-large-ground-structures-source-v004.png",
+  "processor": "pipeline/assets/tools/process_abyssal_generated_large_structures.py",
+  "qa": "pipeline/assets/working/terrain_kits/abyssal/v004_large_structures/abyssal-generated-large-structures-v004-qa.json",
+  "runtime_dir": "art/terrain/pieces/abyssal/v004_large_structures",
+  "generation_mode": "imagegen",
+  "replaces_rejected_lot": "abyssal-da08-large-structures-v003",
+  "rejection_reason": "La v003 extrayait des éléments de DA-08 avec plusieurs hauteurs de sol visibles dans une même pièce, ce qui nuisait à la lecture gameplay.",
+  "status": "published-runtime-v004"
+}

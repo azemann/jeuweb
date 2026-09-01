@@ -108,14 +108,19 @@ un blockout de deux actes dans `maps/missions/mission2/mission_2.tscn`.
 
 ## Leçon de production
 
-Le retour éditeur montre que les grands socles de la rangée basse de DA-08
-portent mieux l'identité et le level design que les petites variantes isolées.
-À partir de v003 :
+Le retour éditeur montre deux choses distinctes : les grands socles doivent
+porter l'identité et le level design, mais la rangée basse de DA-08 ne peut pas
+être découpée telle quelle en sprites runtime. La v003 est refusée parce qu'elle
+montre plusieurs hauteurs de sol dans une même pièce.
 
-- les grands socles DA-08 servent de base de sol principale ;
+À partir de v004 :
+
+- les grands socles sont générés ou dessinés comme sprites de terrain dédiés ;
 - les plateformes, caps, pentes et steps v002 servent de raccords ;
 - les piliers, arches et colonnes décorent ou soutiennent les grands socles ;
 - un fond sombre ne doit jamais masquer la lisibilité du bord de marche.
+- une pièce avec deux hauteurs de sol visibles est rejetée, sauf si elle décrit
+  explicitement un escalier ou une pente dans son `GroundPieceDefinition`.
 
 Cette approche suit les méthodes observées chez d'autres workflows : fabriquer
 une palette de pièces éditables avant de composer le niveau, verrouiller pivots
