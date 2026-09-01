@@ -1738,3 +1738,27 @@
   de présentation Godot règle la sensation visuelle ;
 - renforcé `weapon_projectile_integration_test.gd` pour empêcher l'impact du
   canon de base de redevenir trop grand.
+
+## 2026-09-01 — Mission 2 blockout abyssal et Ground Kit v001
+
+- repris le pack externe `jeuweb-abyssal-asset-pack-v001` comme source
+  conceptuelle read-only, branche `agent/ajoute-serre-mecanique`, commit
+  `e2b81a5` ;
+- copié les sources terrain retenues dans
+  `pipeline/assets/sources/terrain_kits/abyssal/`, puis publié quatre PNG
+  runtime sous `art/terrain/pieces/abyssal/` via
+  `process_abyssal_ground_kit.py` ;
+- créé le catalogue `terrain/kits/abyssal/abyssal_ground_kit.tres`, quatre
+  `GroundPieceDefinition`, quatre scènes glissables et un profil Breakable pour
+  le mur nacré ;
+- transformé `maps/missions/mission2/mission_2.tscn` en scène maître
+  `MissionMapRoot2D` conforme, avec un acte de 2560 × 720, un spawn joueur, les
+  branches auteur/runtime obligatoires et cinq occurrences de Ground Pieces ;
+- créé `maps/definitions/mission_2.tres` et ajouté `mission_2_abyssal` au
+  catalogue de missions ;
+- ajouté `abyssal_ground_kit_contract_test.gd` et étendu
+  `project_state_catalog_contract_test.gd` pour protéger le nouveau kit et la
+  projection de catalogue ;
+- limite volontaire : aucun ennemi, checkpoint, background final ou boucle de
+  victoire Mission 2 n'est inventé dans cette tranche ; le but est seulement de
+  tester le sol et les raccords dans l'éditeur.

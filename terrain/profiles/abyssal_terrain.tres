@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DestructibleTerrainProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://terrain/destructible_terrain_profile.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+world_size = Vector2i(2560, 720)
+maximum_chunk_bodies = 48
+maximum_collision_shapes = 320
+shallow_color = Color(0.0470588, 0.360784, 0.392157, 1)
+main_color = Color(0.0666667, 0.145098, 0.188235, 1)
+deep_color = Color(0.0156863, 0.0352941, 0.0588235, 1)
+edge_color = Color(0.482353, 0.905882, 0.890196, 1)
+fresh_cut_color = Color(0.843137, 0.592157, 0.956863, 1)
+seed = 2602

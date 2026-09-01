@@ -1,0 +1,89 @@
+{
+  "schema": "jeuweb.abyssal-ground-kit.v1",
+  "lot": "abyssal-ground-kit-v001",
+  "source_pack": "jeuweb-abyssal-asset-pack-v001",
+  "source_pack_commit": "e2b81a5",
+  "status": "published-runtime-v001",
+  "outputs": [
+    {
+      "piece_id": "abyssal_black_coral_platform_medium",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/black-coral-platform-medium-v001.png",
+      "runtime": "art/terrain/pieces/abyssal/black-coral-platform-medium-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        128,
+        42,
+        639,
+        318
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "b53d4d829f4992c026d486f4236c4c208a10787380398a2c1173a0b6b5111b1d",
+      "runtime_sha256": "b53d4d829f4992c026d486f4236c4c208a10787380398a2c1173a0b6b5111b1d",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_black_coral_slope_connector",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/black-coral-platform-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/black-coral-slope-connector-v001.png",
+      "runtime": "art/terrain/pieces/abyssal/black-coral-slope-connector-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        174,
+        86,
+        601,
+        342
+      ],
+      "source_sha256": "94334a27bc44ffcbdfc319fbf8d33383792aba6838ce62776ec5dab5d02e1d08",
+      "export_sha256": "32bbf9bd425a261453582e30b3ad3550463411dbe3c77e1d32a4872158940b44",
+      "runtime_sha256": "32bbf9bd425a261453582e30b3ad3550463411dbe3c77e1d32a4872158940b44",
+      "variant": "slope"
+    },
+    {
+      "piece_id": "abyssal_tide_engine_bridge_medium",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/tide-engine-bridge-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/tide-engine-bridge-medium-v001.png",
+      "runtime": "art/terrain/pieces/abyssal/tide-engine-bridge-medium-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        157,
+        52,
+        611,
+        314
+      ],
+      "source_sha256": "416fb44956cca86730ae23a979036130bdf89b551e9494e0cc5604182edaf391",
+      "export_sha256": "c23f77feddd06b2c300a11e3be507aa64f109bdc88b9f2195f48b80a8446fa8b",
+      "runtime_sha256": "c23f77feddd06b2c300a11e3be507aa64f109bdc88b9f2195f48b80a8446fa8b",
+      "variant": "standard"
+    },
+    {
+      "piece_id": "abyssal_destructible_pearl_wall_medium",
+      "source": "pipeline/assets/sources/terrain_kits/abyssal/destructible-pearl-wall-source-v001.png",
+      "export": "pipeline/assets/exports/terrain_kits/abyssal/destructible-pearl-wall-medium-v001.png",
+      "runtime": "art/terrain/pieces/abyssal/destructible-pearl-wall-medium-v001.png",
+      "canvas": [
+        768,
+        384
+      ],
+      "alpha_bbox": [
+        204,
+        34,
+        564,
+        318
+      ],
+      "source_sha256": "ffdfb03f3ceab0a53c057e88ec945fd98b37e91e60a3cef21ea0e8ef480d6a1f",
+      "export_sha256": "3b746250c2fcfa314567ce1b4ddb1fb45642dc69339e683c423289078a574251",
+      "runtime_sha256": "3b746250c2fcfa314567ce1b4ddb1fb45642dc69339e683c423289078a574251",
+      "variant": "standard"
+    }
+  ]
+}

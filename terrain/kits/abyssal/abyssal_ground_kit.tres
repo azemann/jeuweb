@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GroundKitCatalog" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_kit_catalog.gd" id="1_catalog"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/black_coral_platform_medium.tscn" id="2_platform"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/black_coral_slope_connector.tscn" id="3_slope"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/tide_engine_bridge_medium.tscn" id="4_bridge"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/destructible_pearl_wall_medium.tscn" id="5_wall"]
+
+[resource]
+script = ExtResource("1_catalog")
+kit_id = &"abyssal"
+display_name = "Abysses — Ground Pieces"
+pieces = Array[PackedScene]([ExtResource("2_platform"), ExtResource("3_slope"), ExtResource("4_bridge"), ExtResource("5_wall")])

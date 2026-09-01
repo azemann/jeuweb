@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GroundBreakableProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_breakable_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+maximum_health = 180.0
+damaged_health_ratio = 0.35
+remove_collision_when_broken = true
+remove_after_break = true

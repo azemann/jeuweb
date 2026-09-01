@@ -91,6 +91,22 @@ rapport QA restent sous `pipeline/assets/`; les sept PNG de cette table sont les
 copies runtime publiées. La caisse ouverte a été générée avec l'outil ImageGen
 intégré à partir de la caisse fermée, puis passée par une extraction alpha.
 
+## Mission 2 — kit de Ground Pieces abyssal v001
+
+| Fichier | Création | Intention | Intégration |
+|---|---|---|---|
+| `terrain/pieces/abyssal/black-coral-platform-medium-v001.png` | pack source abyssal `e2b81a5`, nettoyage alpha puis normalisation pipeline 768 × 384 | plateforme principale du blockout Mission 2 | `abyssal_black_coral_platform_medium.tres` → scène glissable |
+| `terrain/pieces/abyssal/black-coral-slope-connector-v001.png` | dérivé pipeline de la plateforme de corail noir | raccord incliné pour tester pentes et transitions | `abyssal_black_coral_slope_connector.tres` → scène glissable |
+| `terrain/pieces/abyssal/tide-engine-bridge-medium-v001.png` | pack source abyssal `e2b81a5`, nettoyage alpha puis normalisation pipeline 768 × 384 | passerelle techno-abyssale de Mission 2 | `abyssal_tide_engine_bridge_medium.tres` → scène glissable |
+| `terrain/pieces/abyssal/destructible-pearl-wall-medium-v001.png` | pack source abyssal `e2b81a5`, nettoyage alpha puis normalisation pipeline 768 × 384 | mur nacré destructible pour portes, secrets et tests Breakable | `abyssal_destructible_pearl_wall_medium.tres` → scène glissable |
+
+Lot publié le 2026-09-01 depuis le pack candidat
+`jeuweb-abyssal-asset-pack-v001`, branche `agent/ajoute-serre-mecanique`,
+commit `e2b81a5`. Sources locales, recette, manifeste, provenance et QA :
+lot `abyssal-ground-kit-v001` sous `pipeline/assets/`. Statut : intégré pour
+blockout auteur ; les contours, pivots et raccords restent à ajuster après
+test direct dans l'éditeur.
+
 ## Joueur — assets runtime v001
 
 | Fichier | Création | Intention | Intégration |

@@ -229,6 +229,13 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   ennemis avec les états communs `IDLE`, `RUN`, `ATTACK`, `SHOOT`, `JUMP`,
   `FALL`, `HURT`, `DEAD` et
   `RESPAWN` ; les placeholders futurs devront reprendre cette brique ;
+- Mission 2 possède une première scène maître `mission_2.tscn` conforme au
+  contrat de carte, publiée comme `mission_2_abyssal` dans le catalogue de
+  missions, avec un acte auteur de 2560 × 720 et un spawn joueur initial ;
+- le premier kit terrain abyssal publie quatre scènes Ground Pieces glissables :
+  plateforme de corail noir, raccord incliné, pont moteur de marée et mur nacré
+  destructible ; Mission 2 en place cinq occurrences sous
+  `Gameplay/GroundPieces` pour tester immédiatement le blockout dans l'éditeur ;
 
 ## Autorités actuelles
 
@@ -244,6 +251,10 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - liste extensible des pièces proposées aux auteurs de niveaux : tableau
   `pieces` de `GroundKitCatalog.tres` ; le nombre actuel d'entrées n'est pas un
   contrat et augmentera avec les futurs kits et niveaux ;
+- vocabulaire de Mission 2 : `terrain/kits/abyssal/abyssal_ground_kit.tres` ;
+  ses sources locales et recettes restent sous `pipeline/assets/`, ses PNG
+  runtime publiés sous `art/terrain/pieces/abyssal/` et le placement final dans
+  `maps/missions/mission2/mission_2.tscn` ;
 - mode et placement d'une pièce : son instance `GroundPiece2D` dans la scène
   maîtresse, y compris son Transform complet ; état creusé :
   `DestructibleTerrain2D` ;
@@ -339,8 +350,9 @@ contenu impose la mise à jour de la mémoire du projet sans figer la taille des
 catalogues.
 
 <!-- CATALOG_PROJECTION_BEGIN -->
-- `mission_maps` : `toxic_coast`
+- `mission_maps` : `mission_2_abyssal`, `toxic_coast`
 - `enemy_archetypes` : `vacuum_boss`, `vacuum_flying`, `vacuum_grunt`, `vacuum_pilot_saboteur`, `vacuum_trooper`
+- `ground_pieces/abyssal` : `abyssal_black_coral_platform_medium`, `abyssal_black_coral_slope_connector`, `abyssal_destructible_pearl_wall_medium`, `abyssal_tide_engine_bridge_medium`
 - `ground_pieces/toxic_coast` : `acid_bridge_abutment`, `destructible_military_wall`, `guard_tower_module`, `industrial_catwalk_medium`, `military_bunker_block_medium`, `natural_ledge_medium`, `portable_barricade`, `toxic_pipe_bridge_medium`, `vacuum_foundry_platform`, `walk_under_pipe_arch`
 <!-- CATALOG_PROJECTION_END -->
 
@@ -415,6 +427,10 @@ catalogues.
   publiés dans `BootStartFlowTheme`, mais restent volontairement sans écran
   runtime jusqu'à la création d'un vrai catalogue de missions, de règles de
   déverrouillage et d'une progression sauvegardée ;
+- Mission 2 n'a encore ni background final, ni ennemis, ni rencontres, ni
+  checkpoint, ni sortie de victoire branchée dans un écran de mission ; son
+  premier acte sert uniquement de blockout auteur pour valider le kit terrain
+  abyssal, ses pivots, ses contours et ses raccords ;
 
 ## Famille d'explosions de barils v001
 
@@ -499,6 +515,30 @@ catalogues.
   de niveau, ennemi, animation, HUD et validation n'est pas établi ;
 - les cinq armes publiées sont conservées comme base v001 à jouer et à
   différencier avant toute création d'un sixième rôle.
+
+## Mission 2 — blockout abyssal v001
+
+- l'ambiance du pack `jeuweb-abyssal-asset-pack-v001` est conservée comme
+  direction conceptuelle, mais les PNG sources ne sont pas référencés
+  directement par Godot ;
+- quatre livrables runtime v001 sont publiés par
+  `process_abyssal_ground_kit.py` : plateforme de corail noir, pente de corail,
+  pont moteur de marée et mur nacré destructible ;
+- `GroundPieceDefinition` reste l'autorité de chaque `piece_id`, texture,
+  pivot, contour et surface de marche ; `GroundPiece2D` garde le mode et le
+  Transform auteur instance par instance ;
+- `mission_2.tscn` expose les branches obligatoires `Visual`, `Gameplay`,
+  `Runtime` et `EditorPreview`, avec cinq occurrences de Ground Pieces sous
+  `Gameplay/GroundPieces` ;
+- le mur nacré conseille `Breakable` via un profil externe
+  `pearl_wall_breakable.tres` ; les autres pièces conseillent `Permanent` pour
+  tester d'abord la marche et les raccords ;
+- limite volontaire : `DestructibleTerrain` est présent mais ne génère pas à
+  l'entrée de scène, car ce premier blockout ne définit pas encore de zones
+  destructibles ni de pièces Carvable de mission validées ;
+- prochaine action recommandée : ouvrir Mission 2 dans Godot, déplacer les
+  cinq pièces à la main, vérifier les pivots/surfaces de marche, puis décider
+  quelles pièces doivent devenir Carvable ou recevoir des variantes visuelles.
 
 ## Prochaine tranche recommandée
 

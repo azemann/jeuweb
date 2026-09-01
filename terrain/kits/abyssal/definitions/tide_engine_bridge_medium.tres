@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/tide-engine-bridge-medium-v001.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_tide_engine_bridge_medium"
+display_name = "Abysses — pont moteur de marée"
+category = 2
+tags = PackedStringArray("abyssal", "bridge", "tide_engine", "metal", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 96)
+default_z_index = -1
+collision_source = 1
+authored_outline = PackedVector2Array(-318, -10, -220, -14, -110, -12, 0, -10, 110, -12, 220, -14, 318, -10, 336, 56, 304, 132, 196, 180, 60, 198, -74, 192, -210, 164, -322, 94)
+walk_surface_point_count = 7
+recommended_mode = 0

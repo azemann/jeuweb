@@ -3,7 +3,8 @@ extends SceneTree
 const PROJECT_STATE_PATH := "res://docs/PROJECT_STATE.md"
 const MISSION_CATALOG_PATH := "res://maps/definitions/mission_map_catalog.tres"
 const ENEMY_CATALOG_PATH := "res://characters/enemies/data/enemy_catalog.tres"
-const GROUND_KIT_PATH := "res://terrain/kits/toxic_coast/toxic_coast_ground_kit.tres"
+const TOXIC_GROUND_KIT_PATH := "res://terrain/kits/toxic_coast/toxic_coast_ground_kit.tres"
+const ABYSSAL_GROUND_KIT_PATH := "res://terrain/kits/abyssal/abyssal_ground_kit.tres"
 const PROJECTION_BEGIN := "<!-- CATALOG_PROJECTION_BEGIN -->"
 const PROJECTION_END := "<!-- CATALOG_PROJECTION_END -->"
 
@@ -25,7 +26,8 @@ func _run() -> void:
 	var expected := {
 		"mission_maps": _published_mission_ids(),
 		"enemy_archetypes": _published_enemy_ids(),
-		"ground_pieces/toxic_coast": _published_ground_piece_ids(),
+		"ground_pieces/toxic_coast": _published_ground_piece_ids(TOXIC_GROUND_KIT_PATH),
+		"ground_pieces/abyssal": _published_ground_piece_ids(ABYSSAL_GROUND_KIT_PATH),
 	}
 	for key in expected:
 		_check_projection(key, expected[key], projection)
@@ -112,13 +114,13 @@ func _published_enemy_ids() -> PackedStringArray:
 	return ids
 
 
-func _published_ground_piece_ids() -> PackedStringArray:
+func _published_ground_piece_ids(catalog_path: String) -> PackedStringArray:
 	var ids := PackedStringArray()
-	var catalog := load(GROUND_KIT_PATH) as GroundKitCatalog
-	_check(catalog != null, "Le Ground Kit Côte toxique doit être chargeable.")
+	var catalog := load(catalog_path) as GroundKitCatalog
+	_check(catalog != null, "Le Ground Kit %s doit être chargeable." % catalog_path)
 	if catalog == null:
 		return ids
-	_check(catalog.validation_errors().is_empty(), "Le Ground Kit Côte toxique doit être valide.")
+	_check(catalog.validation_errors().is_empty(), "Le Ground Kit %s doit être valide." % catalog_path)
 	for packed in catalog.pieces:
 		if packed == null or not packed.can_instantiate():
 			continue

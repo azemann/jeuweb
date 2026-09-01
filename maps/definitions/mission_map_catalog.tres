@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MissionMapCatalog" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="MissionMapCatalog" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://maps/system/mission_map_catalog.gd" id="1_script"]
 [ext_resource type="Script" path="res://maps/system/mission_map_definition.gd" id="2_definition_script"]
 [ext_resource type="Resource" path="res://maps/definitions/toxic_coast.tres" id="3_toxic_coast"]
+[ext_resource type="Resource" path="res://maps/definitions/mission_2.tres" id="4_mission_2"]
 
 [resource]
 script = ExtResource("1_script")
-maps = Array[ExtResource("2_definition_script")]([ExtResource("3_toxic_coast")])
-
+maps = Array[ExtResource("2_definition_script")]([ExtResource("3_toxic_coast"), ExtResource("4_mission_2")])

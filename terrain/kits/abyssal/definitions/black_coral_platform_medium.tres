@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GroundPieceDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://terrain/ground_pieces/ground_piece_definition.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/black-coral-platform-medium-v001.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+piece_id = &"abyssal_black_coral_platform_medium"
+display_name = "Abysses — plateforme de corail noir"
+tags = PackedStringArray("abyssal", "black_coral", "platform", "mission_2")
+texture = ExtResource("2")
+pivot_px = Vector2(384, 84)
+default_z_index = -1
+collision_source = 1
+authored_outline = PackedVector2Array(-326, -8, -238, -14, -150, -12, -64, -10, 32, -12, 128, -10, 226, -14, 326, -8, 340, 52, 296, 126, 210, 176, 82, 210, -48, 204, -166, 172, -276, 118, -340, 50)
+walk_surface_point_count = 8
+recommended_mode = 0

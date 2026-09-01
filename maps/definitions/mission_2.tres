@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MissionMapDefinition" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://maps/system/mission_map_definition.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/terrain/pieces/abyssal/black-coral-platform-medium-v001.png" id="2_preview"]
+[ext_resource type="Resource" path="res://ui/hud/themes/toxic_commando_hud_theme.tres" id="3_hud_theme"]
+
+[resource]
+script = ExtResource("1_script")
+map_id = &"mission_2_abyssal"
+display_name = "Mission 2 — Abysses mécaniques"
+campaign_order = 2
+scene_path = "res://maps/missions/mission2/mission_2.tscn"
+preview_texture = ExtResource("2_preview")
+hud_theme = ExtResource("3_hud_theme")
+world_size = Vector2i(2560, 720)

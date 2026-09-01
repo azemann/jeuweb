@@ -1,7 +1,126 @@
-[gd_scene format=3 uid="uid://dtuv7tcxb4np1"]
+[gd_scene load_steps=10 format=3 uid="uid://dtuv7tcxb4np1"]
 
-[node name="mission 2" type="Node2D" unique_id=556753022]
+[ext_resource type="Script" path="res://maps/system/mission_map_root_2d.gd" id="1_root_script"]
+[ext_resource type="Resource" path="res://maps/definitions/mission_2.tres" id="2_definition"]
+[ext_resource type="Script" path="res://maps/system/map_segment_2d.gd" id="3_segment_script"]
+[ext_resource type="Script" path="res://maps/system/map_spawn_point_2d.gd" id="4_spawn_script"]
+[ext_resource type="Script" path="res://terrain/destructible_terrain_2d.gd" id="5_terrain_script"]
+[ext_resource type="Resource" path="res://terrain/profiles/abyssal_terrain.tres" id="6_terrain_profile"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/black_coral_platform_medium.tscn" id="7_platform"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/black_coral_slope_connector.tscn" id="8_slope"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/tide_engine_bridge_medium.tscn" id="9_bridge"]
+[ext_resource type="PackedScene" path="res://terrain/kits/abyssal/pieces/destructible_pearl_wall_medium.tscn" id="10_wall"]
 
-[node name="visual" type="Node2D" parent="." unique_id=15846010]
+[node name="Mission2Abyssal" type="Node2D"]
+script = ExtResource("1_root_script")
+definition = ExtResource("2_definition")
+camera_bounds = Rect2(0, 0, 2560, 720)
 
-[node name="Far-arriereplan" type="Parallax2D" parent="visual" unique_id=1933542215]
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Parallax2D" parent="Visual"]
+scroll_scale = Vector2(0.18, 0.18)
+
+[node name="AbyssalTint" type="ColorRect" parent="Visual/FarBackground"]
+offset_right = 2560.0
+offset_bottom = 720.0
+color = Color(0.0105, 0.024, 0.036, 1)
+
+[node name="MidGlow" type="ColorRect" parent="Visual"]
+offset_top = 432.0
+offset_right = 2560.0
+offset_bottom = 720.0
+color = Color(0.015, 0.13, 0.16, 0.46)
+
+[node name="Gameplay" type="Node2D" parent="."]
+
+[node name="Segments" type="Node2D" parent="Gameplay"]
+
+[node name="AbyssalEntry" type="Node2D" parent="Gameplay/Segments"]
+script = ExtResource("3_segment_script")
+segment_id = &"abyssal_entry"
+display_name = "Entrée abyssale"
+size = Vector2(2560, 720)
+gameplay_intent = "Premier blockout de Mission 2 : marcher, sauter et tester les raccords du kit terrain abyssal sans ajouter encore de combat."
+editor_color = Color(0.482353, 0.905882, 0.890196, 0.72)
+
+[node name="PlayerSpawnPoints" type="Node2D" parent="Gameplay"]
+
+[node name="PlayerStart" type="Marker2D" parent="Gameplay/PlayerSpawnPoints"]
+position = Vector2(140, 430)
+script = ExtResource("4_spawn_script")
+spawn_id = &"player_start"
+gizmo_extents = 40.0
+
+[node name="EncounterMarkers" type="Node2D" parent="Gameplay"]
+
+[node name="GroundPieces" type="Node2D" parent="Gameplay"]
+
+[node name="EntryBlackCoral" parent="Gameplay/GroundPieces" instance=ExtResource("7_platform")]
+position = Vector2(430, 548)
+
+[node name="FirstDropSlope" parent="Gameplay/GroundPieces" instance=ExtResource("8_slope")]
+position = Vector2(930, 584)
+
+[node name="TideEngineBridge" parent="Gameplay/GroundPieces" instance=ExtResource("9_bridge")]
+position = Vector2(1420, 510)
+
+[node name="PearlWallGate" parent="Gameplay/GroundPieces" instance=ExtResource("10_wall")]
+position = Vector2(1810, 526)
+
+[node name="ExitBlackCoral" parent="Gameplay/GroundPieces" instance=ExtResource("7_platform")]
+position = Vector2(2160, 548)
+scale = Vector2(0.82, 0.82)
+
+[node name="DestructibleZones" type="Node2D" parent="Gameplay"]
+
+[node name="IndestructibleGeometry" type="Node2D" parent="Gameplay"]
+
+[node name="Hazards" type="Node2D" parent="Gameplay"]
+
+[node name="Interactions" type="Node2D" parent="Gameplay"]
+
+[node name="CameraZones" type="Node2D" parent="Gameplay"]
+
+[node name="BaseCameraBounds" type="ReferenceRect" parent="Gameplay/CameraZones"]
+visible = false
+offset_right = 2560.0
+offset_bottom = 720.0
+border_color = Color(0.482353, 0.905882, 0.890196, 0.72)
+border_width = 2.0
+
+[node name="Exits" type="Node2D" parent="Gameplay"]
+
+[node name="MissionEnd" type="Marker2D" parent="Gameplay/Exits"]
+position = Vector2(2420, 430)
+gizmo_extents = 48.0
+
+[node name="Runtime" type="Node2D" parent="."]
+
+[node name="Actors" type="Node2D" parent="Runtime"]
+y_sort_enabled = true
+
+[node name="Projectiles" type="Node2D" parent="Runtime"]
+
+[node name="Effects" type="Node2D" parent="Runtime"]
+
+[node name="DestructibleTerrain" type="Node2D" parent="Runtime"]
+z_index = 8
+script = ExtResource("5_terrain_script")
+profile = ExtResource("6_terrain_profile")
+generate_on_ready = false
+
+[node name="EditorPreview" type="Node2D" parent="." groups=["map_authoring_preview"]]
+
+[node name="EnemySilhouettes" type="Node2D" parent="EditorPreview"]
+
+[node name="ExplosionPreview" type="Node2D" parent="EditorPreview"]
+
+[node name="PreviewCamera" type="Camera2D" parent="EditorPreview"]
+position = Vector2(640, 360)
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 720
+position_smoothing_enabled = true
