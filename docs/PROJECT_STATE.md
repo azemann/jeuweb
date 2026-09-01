@@ -553,7 +553,8 @@ catalogues.
   short/long, pilier de support, arche traversable, colonnes intacte/brisée et
   murs nacrés small/large ;
 - cinq grands socles v004 générés remplacent la v003 refusée et deviennent la
-  base principale du sol de Mission 2 ; les pièces v002 sont maintenant
+  base principale du sol de Mission 2 ; ils sont `Permanent` par défaut pour
+  être immédiatement solides en playtest, tandis que les pièces v002 sont
   considérées comme raccords et compléments ;
 - `GroundPieceDefinition` reste l'autorité de chaque `piece_id`, texture,
   pivot, contour et surface de marche ; `GroundPiece2D` garde le mode et le

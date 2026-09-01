@@ -5,3 +5,4 @@
 
 [node name="GeneratedTideEngineFloor" instance=ExtResource("1_piece")]
 definition = ExtResource("2_definition")
+ground_mode = 0

@@ -68,6 +68,8 @@ func _run() -> void:
 				)
 				_check(piece.definition.collision_source == GroundPieceDefinition.CollisionSource.AUTHORED_OUTLINE, "%s doit posséder un contour auteur inspectable." % piece_id)
 				_check(piece.definition.walk_surface().size() >= 2, "%s doit exposer une surface de marche auteur." % piece_id)
+				if str(piece.definition.piece_id).begins_with("abyssal_generated_"):
+					_check(piece.ground_mode == GroundPiece2DType.GroundMode.PERMANENT, "%s doit être Permanent par défaut pour le blockout jouable." % piece_id)
 			if piece != null:
 				piece.free()
 

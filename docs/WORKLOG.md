@@ -1854,3 +1854,16 @@
 - validation : `./scripts/run-tests.sh` passe le profil `structure` à 37/37 ;
 - non pris dans cette tranche : les modifications auteur en cours dans
   `maps/missions/mission2/mission_2.tscn`, qui restent hors commit.
+
+## 2026-09-01 — Grands socles abyssaux solides en playtest
+
+- diagnostiqué que les grands socles v004 héritaient du défaut `CARVABLE` de
+  `GroundPiece2D`, alors que Mission 2 garde
+  `Runtime/DestructibleTerrain.generate_on_ready = false` pendant le blockout ;
+- conséquence corrigée : ces socles pouvaient être visibles en édition mais ne
+  produire aucune collision locale en playtest ;
+- fixé les cinq scènes publiées v004 en `ground_mode = Permanent` par défaut,
+  sans modifier les positions auteur dans `mission_2.tscn` ;
+- renforcé `abyssal_ground_kit_contract_test.gd` pour empêcher les grands
+  socles générés de revenir en `Carvable` par défaut ;
+- validation ciblée : `abyssal_ground_kit_contract_test.gd` passe.
