@@ -10,6 +10,7 @@ map_id = &"mission_2_abyssal"
 display_name = "Mission 2 — Abysses mécaniques"
 campaign_order = 2
 scene_path = "res://maps/missions/mission2/mission_2.tscn"
+playtest_scene_path = "res://screens/prototype/mission_2_playtest_screen.tscn"
 preview_texture = ExtResource("2_preview")
 hud_theme = ExtResource("3_hud_theme")
 world_size = Vector2i(5120, 720)

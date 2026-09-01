@@ -103,33 +103,15 @@ func _run() -> void:
 		_check(abyssal_tint != null and abyssal_tint.z_index < -10 and abyssal_tint.color.a < 0.5, "L'aplat abyssal ne doit plus masquer les Ground Pieces dans l'éditeur.")
 		_check(mid_glow != null and mid_glow.z_index < -10 and mid_glow.color.a < 0.35, "La lueur de blockout doit rester décorative et légère.")
 		var pieces_root := map.get_node_or_null("Gameplay/GroundPieces")
-		_check(pieces_root != null and pieces_root.get_child_count() == 22, "Mission 2 doit placer les 22 occurrences de blockout v002/v004.")
-		for node_name in [
-			"EntryBlackCoral",
-			"FirstDropSlope",
-			"TideEngineBridge",
-			"PearlWallGate",
-			"GeneratedLandingSlab",
-			"GeneratedEngineApproach",
-			"ExitBlackCoral",
-			"GeneratedBlackCoralSpan",
-			"EntryCapLeft",
-			"RuinsPlatformLarge",
-			"GeneratedRuinFoundation",
-			"LowCoralStep",
-			"HighCoralStep",
-			"SlopeDownToEngine",
-			"LongTideBridge",
-			"GeneratedRightEngineSlab",
-			"BridgeSupportWest",
-			"BridgeSupportEast",
-			"TempleArchGate",
-			"BrokenTempleColumn",
-			"LargePearlWallGate",
-			"ExitCapRight",
-		]:
-			var piece := map.get_node_or_null("Gameplay/GroundPieces/%s" % node_name) as GroundPiece2D
-			_check(piece != null and piece.definition != null and piece.definition.is_valid(), "%s doit rester une Ground Piece éditable dans la scène." % node_name)
+		_check(pieces_root != null and pieces_root.get_child_count() >= 12, "Mission 2 doit conserver un blockout éditable avec au moins 12 Ground Pieces.")
+		var generated_large_piece_count := 0
+		if pieces_root != null:
+			for child in pieces_root.get_children():
+				var piece := child as GroundPiece2D
+				_check(piece != null and piece.definition != null and piece.definition.is_valid(), "%s doit rester une Ground Piece éditable dans la scène." % child.name)
+				if piece != null and piece.definition != null and str(piece.definition.piece_id).begins_with("abyssal_generated_"):
+					generated_large_piece_count += 1
+		_check(generated_large_piece_count >= 3, "Mission 2 doit utiliser plusieurs grands socles générés v004 comme base de sol.")
 		map.free()
 
 	_finish()

@@ -233,6 +233,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - Mission 2 possède une première scène maître `mission_2.tscn` conforme au
   contrat de carte, publiée comme `mission_2_abyssal` dans le catalogue de
   missions, avec un acte auteur de 2560 × 720 et un spawn joueur initial ;
+- le plugin éditeur `Mission Authoring` expose un dock `Missions` qui lit
+  `MissionMapCatalog`, ouvre la `MissionMapDefinition`, ouvre la scène maître
+  et lance la scène de playtest déclarée par chaque mission ;
 - le kit terrain abyssal publie désormais vingt-cinq scènes Ground Pieces
   glissables : socle v001, variantes v002 de raccords et cinq grands socles
   v004 générés pour une seule hauteur de sol lisible ; Mission 2 en place
@@ -249,6 +252,10 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   du Start : `BootStartFlowTheme.tres` ; textes et composition : scènes
   `BootFlow`/`StartFlow` ; hiérarchie typographique : `game_ui_theme.tres` ;
 - identité et contrat d'une carte : `MissionMapDefinition.tres` ;
+- point d'entrée de test d'une carte :
+  `MissionMapDefinition.playtest_scene_path` ;
+- cockpit d'édition/test : plugin `addons/mission_authoring`, qui lit le
+  catalogue sans posséder les missions ;
 - placement final : scène maîtresse de carte ;
 - matière destructible initiale : `Gameplay/DestructibleZones` ;
 - matière runtime : masque alpha de `DestructibleTerrain2D` ;
@@ -346,6 +353,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   `docs/architecture/GLOSSARY_CLASSES_AND_VOCABULARY.md` ;
 - décisions issues de la recherche d'architecture :
   `docs/research/GAME_ARCHITECTURE_RESEARCH.md`.
+- cockpit d'édition/test des missions :
+  `docs/architecture/MISSION_AUTHORING_COCKPIT_CONTRACT.md`.
 
 ## Projection validée des catalogues publiés
 
@@ -597,7 +606,7 @@ python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
 python3 pipeline/assets/tools/validate_enemy_animation_roster_v002.py
 ```
 
-Dernière validation complète : 2026-08-31, le profil `structure` passe 34/34.
+Dernière validation complète : 2026-09-01, le profil `structure` passe 36/36.
 Dernière validation complète avant cette tranche : le profil `content` passe
 1/1, le pipeline des explosions de barils est reproductible bit à bit et
 `git diff --check` ne signale aucun défaut.

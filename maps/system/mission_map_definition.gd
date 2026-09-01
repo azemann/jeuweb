@@ -19,6 +19,8 @@ enum DestructionPolicy {
 @export_category("Master Scene")
 ## Scène Godot autoritaire qui assemble visuel, gameplay, destruction et caméra.
 @export_file("*.tscn") var scene_path := ""
+## Écran de test lancé depuis le dock Missions pour jouer cette carte directement.
+@export_file("*.tscn") var playtest_scene_path := ""
 ## Aperçu utilisé par les menus de mission sans charger la scène complète.
 @export var preview_texture: Texture2D
 
@@ -41,8 +43,20 @@ func is_valid() -> bool:
 		and not display_name.strip_edges().is_empty()
 		and scene_path.begins_with("res://maps/missions/")
 		and scene_path.ends_with(".tscn")
+		and _optional_playtest_path_is_valid()
 		and hud_theme != null
 		and hud_theme.is_valid()
 		and world_size.x >= 1280
 		and world_size.y >= 720
+	)
+
+
+func has_playtest_scene() -> bool:
+	return _optional_playtest_path_is_valid() and not playtest_scene_path.is_empty()
+
+
+func _optional_playtest_path_is_valid() -> bool:
+	return playtest_scene_path.is_empty() or (
+		playtest_scene_path.begins_with("res://screens/")
+		and playtest_scene_path.ends_with(".tscn")
 	)

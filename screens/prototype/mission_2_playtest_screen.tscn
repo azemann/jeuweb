@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://screens/prototype/prototype_mission_screen.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://maps/definitions/mission_2.tres" id="2_mission"]
+
+[node name="Mission2PlaytestScreen" instance=ExtResource("1_base")]
+mission_definition_override = ExtResource("2_mission")

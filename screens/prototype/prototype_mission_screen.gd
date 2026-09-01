@@ -3,11 +3,20 @@ extends Control
 
 signal back_requested
 
+## Mission jouée par cet écran ; vide, l'écran conserve la définition assignée au MapHost.
+@export var mission_definition_override: MissionMapDefinition:
+	set(value):
+		mission_definition_override = value
+		if is_inside_tree() and _map_host() != null and value != null:
+			_map_host().definition = value
+
 
 func _ready() -> void:
 	%DesignReferencePanel.visible = false
 	%BackButton.pressed.connect(back_requested.emit)
 	var host := _map_host()
+	if mission_definition_override != null:
+		host.definition = mission_definition_override
 	if not host.map_loading_started.is_connected(_on_map_loading_started):
 		host.map_loading_started.connect(_on_map_loading_started)
 	if not host.map_loaded.is_connected(_on_map_loaded):
@@ -41,7 +50,10 @@ func _hud() -> MissionHUD:
 
 
 func _load_mission() -> void:
-	_map_host().load_map()
+	if mission_definition_override != null:
+		_map_host().load_map(mission_definition_override)
+	else:
+		_map_host().load_map()
 
 
 func _on_map_loading_started(definition: MissionMapDefinition) -> void:
@@ -61,7 +73,9 @@ func _on_map_load_failed(errors: PackedStringArray) -> void:
 
 
 func _on_mission_won() -> void:
-	_hud().show_result("MISSION ACCOMPLIE\nCÔTE TOXIQUE SÉCURISÉE")
+	var definition := _map_host().definition
+	var mission_name := definition.display_name.to_upper() if definition != null else "MISSION"
+	_hud().show_result("MISSION ACCOMPLIE\n%s" % mission_name)
 	%BackButton.visible = true
 	%BackButton.focus_mode = Control.FOCUS_ALL
 	%BackButton.grab_focus()

@@ -9,6 +9,7 @@ script = ExtResource("1_script")
 map_id = &"toxic_coast"
 display_name = "Côte toxique"
 scene_path = "res://maps/missions/toxic_coast/toxic_coast.tscn"
+playtest_scene_path = "res://screens/prototype/prototype_mission_screen.tscn"
 preview_texture = ExtResource("2_preview")
 hud_theme = ExtResource("3_hud_theme")
 world_size = Vector2i(7680, 720)

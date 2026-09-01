@@ -1822,3 +1822,17 @@
   occurrences de blockout ;
 - renforcé le contrat abyssal pour protéger le nombre de pièces, les grands
   socles générés et la scène deux actes.
+
+## 2026-09-01 — Cockpit d'édition/test des missions
+
+- relu la méthode `rpg-01` : dock éditeur, correspondances visibles, ouverture
+  des sources et de la scène dérivée depuis Godot ;
+- adapté cette méthode à `jeuweb` sans reprendre Tiled : le dock `Missions`
+  lit `MissionMapCatalog`, puis ouvre la `MissionMapDefinition`, la scène
+  maître ou la scène de playtest ;
+- ajouté `MissionMapDefinition.playtest_scene_path` comme autorité Resource du
+  point d'entrée de test ;
+- rendu `PrototypeMissionScreen` paramétrable par `mission_definition_override`
+  pour tester Mission 2 sans dupliquer toute la scène de mission runtime ;
+- ajouté `mission_authoring_tools_contract_test.gd` pour protéger le plugin,
+  les chemins de playtest et l'instanciation des scènes de test.

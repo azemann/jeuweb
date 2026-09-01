@@ -99,6 +99,10 @@ player_weapon_wheel={
 ]
 }
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/mission_authoring/plugin.cfg")
+
 [layer_names]
 
 2d_physics/layer_1="World"
