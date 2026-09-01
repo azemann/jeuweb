@@ -30,7 +30,8 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - menu Start revu dans le renderer OpenGL réel en 1280 × 720 : cadre vertical au
   ratio 2:3, verre sombre local, boutons sans cartouches génériques et colonnes
   stables quand le focus change ;
-- galerie des sept planches de direction artistique ;
+- galerie des huit planches de direction artistique, dont DA-08 pour la Mission
+  2 abyssale ;
 - écran de mission prototype avec scène canonique `MissionHUD` ;
 - cet écran consomme la carte canonique par `MissionMapDefinition` et
   `MissionMapHost2D` ; l'ancienne scène autonome `levels/prototype` a été
@@ -236,6 +237,10 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   plateforme de corail noir, raccord incliné, pont moteur de marée et mur nacré
   destructible ; Mission 2 en place cinq occurrences sous
   `Gameplay/GroundPieces` pour tester immédiatement le blockout dans l'éditeur ;
+- DA-08 `da-08-abyssal-mission.png` fixe la direction Mission 2 : ruines
+  techno-abyssales, corail noir, nacre cassable, cuivre oxydé et énergie
+  cyan/violette ; son vocabulaire de production est détaillé dans
+  `docs/assets/MISSION_2_ABYSSAL_ART_DIRECTION_AND_STRUCTURE_KIT.md` ;
 
 ## Autorités actuelles
 
@@ -521,6 +526,8 @@ catalogues.
 - l'ambiance du pack `jeuweb-abyssal-asset-pack-v001` est conservée comme
   direction conceptuelle, mais les PNG sources ne sont pas référencés
   directement par Godot ;
+- DA-08 devient la référence visible de Mission 2 dans la galerie, tandis que
+  le document de kit liste les pièces de structure à produire en lots ;
 - quatre livrables runtime v001 sont publiés par
   `process_abyssal_ground_kit.py` : plateforme de corail noir, pente de corail,
   pont moteur de marée et mur nacré destructible ;
@@ -538,7 +545,10 @@ catalogues.
   destructibles ni de pièces Carvable de mission validées ;
 - prochaine action recommandée : ouvrir Mission 2 dans Godot, déplacer les
   cinq pièces à la main, vérifier les pivots/surfaces de marche, puis décider
-  quelles pièces doivent devenir Carvable ou recevoir des variantes visuelles.
+  quelles pièces doivent devenir Carvable ou recevoir des variantes visuelles ;
+- lot v002 recommandé : plateformes small/medium/large, caps gauche/droite,
+  slopes up/down, pont short/long, pilier de support, arche traversable et murs
+  nacrés small/large.
 
 ## Prochaine tranche recommandée
 

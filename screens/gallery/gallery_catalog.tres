@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cynu0p1sgwhm5" path="res://art/concepts/da-05-ui-flow.png" id="7_ui"]
 [ext_resource type="Texture2D" uid="uid://b1rhm8x7lncye" path="res://art/concepts/da-06-enemies-vacuum-divers.png" id="8_enemies"]
 [ext_resource type="Texture2D" uid="uid://dr7qrdwgybamb" path="res://art/concepts/da-07-enemy-pilot-lifecycle.png" id="9_pilots"]
+[ext_resource type="Texture2D" uid="uid://dsd16sifxhb7n" path="res://art/concepts/da-08-abyssal-mission.png" id="10_abyssal"]
 
 [sub_resource type="Resource" id="GalleryEntry_master"]
 script = ExtResource("2_entry")
@@ -51,6 +52,12 @@ display_name = "COQUES ET PILOTES"
 category = &"enemies"
 board_texture = ExtResource("9_pilots")
 
+[sub_resource type="Resource" id="GalleryEntry_abyssal"]
+script = ExtResource("2_entry")
+display_name = "MISSION 2 ABYSSALE"
+category = &"environment"
+board_texture = ExtResource("10_abyssal")
+
 [resource]
 script = ExtResource("1_catalog")
-entries = Array[ExtResource("2_entry")]([SubResource("GalleryEntry_master"), SubResource("GalleryEntry_characters"), SubResource("GalleryEntry_environment"), SubResource("GalleryEntry_vfx"), SubResource("GalleryEntry_ui"), SubResource("GalleryEntry_enemies"), SubResource("GalleryEntry_pilots")])
+entries = Array[ExtResource("2_entry")]([SubResource("GalleryEntry_master"), SubResource("GalleryEntry_characters"), SubResource("GalleryEntry_environment"), SubResource("GalleryEntry_vfx"), SubResource("GalleryEntry_ui"), SubResource("GalleryEntry_enemies"), SubResource("GalleryEntry_pilots"), SubResource("GalleryEntry_abyssal")])

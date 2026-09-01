@@ -1,8 +1,22 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://7lknxpry13wr"]
 
 [ext_resource type="PackedScene" path="res://terrain/ground_pieces/ground_piece_2d.tscn" id="1_piece"]
 [ext_resource type="Resource" path="res://terrain/kits/abyssal/definitions/tide_engine_bridge_medium.tres" id="2_definition"]
+[ext_resource type="Texture2D" uid="uid://byrus5s0txo0x" path="res://art/terrain/pieces/abyssal/tide-engine-bridge-medium-v001.png" id="3_akkq7"]
 
-[node name="TideEngineBridgeMedium" instance=ExtResource("1_piece")]
+[node name="TideEngineBridgeMedium" unique_id=101681124 instance=ExtResource("1_piece")]
 definition = ExtResource("2_definition")
 ground_mode = 0
+
+[node name="Presentation" parent="." index="0"]
+z_index = -1
+position = Vector2(-384, -96)
+texture = ExtResource("3_akkq7")
+
+[node name="Collision" parent="PermanentBody" index="0"]
+position = Vector2(-2.3932495, -8.414368)
+scale = Vector2(0.99327356, 1.0316092)
+polygon = PackedVector2Array(-222, 40, -190, 45, -135, 68, -2, 77, 196, 69, 224, 90, 218, 112, 138, 204, 88, 131, 6, 173, -56, 214, -152, 151, -219, 82)
+
+[node name="DestructibleStamp" parent="." index="2"]
+visible = false

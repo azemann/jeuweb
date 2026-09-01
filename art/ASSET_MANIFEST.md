@@ -16,6 +16,11 @@ elles restent toutefois des livrables runtime pour la galerie interne.
 | `concepts/da-05-ui-flow.png` | imagegen intégré | Boot, Start et HUD | référence |
 | `concepts/da-06-enemies-vacuum-divers.png` | imagegen intégré | coques aspirateurs-scaphandres | référence canonique |
 | `concepts/da-07-enemy-pilot-lifecycle.png` | imagegen intégré | éjection et pilotes | référence canonique |
+| `concepts/da-08-abyssal-mission.png` | ImageGen intégré, références DA-01/DA-03 et pack abyssal `e2b81a5` | Mission 2, ruines techno-abyssales et kit de structures | référence |
+
+La planche DA-08 reste une référence de style et de vocabulaire. Elle ne doit
+pas être découpée directement en sprites gameplay ; les pièces publiées passent
+par `pipeline/assets/` puis par `GroundPieceDefinition`.
 
 ## Côte toxique — assets runtime v001
 

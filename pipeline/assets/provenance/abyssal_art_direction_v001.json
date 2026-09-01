@@ -1,0 +1,14 @@
+{
+  "schema": "jeuweb.asset-provenance.v1",
+  "lot": "abyssal-art-direction-v001",
+  "created_on": "2026-09-01",
+  "generator": "built-in image_gen",
+  "references": [
+    "/home/evan/Dev/Dev-github/my-space/projets/jeuweb-abyssal-asset-pack-v001/review/abyssal-contact-sheet.jpg",
+    "art/concepts/da-01-master-board.png",
+    "art/concepts/da-03-environment-destruction.png"
+  ],
+  "source": "pipeline/assets/sources/imagegen/concepts/abyssal_mission_v001/da-08-abyssal-mission-source-v001.png",
+  "runtime": "art/concepts/da-08-abyssal-mission.png",
+  "status": "reference"
+}

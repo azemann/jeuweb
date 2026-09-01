@@ -74,6 +74,12 @@ func _run() -> void:
 		_check(map.camera_bounds == Rect2(0, 0, 2560, 720), "Les limites caméra Mission 2 doivent suivre world_size.")
 		_check(map.authored_segments().size() == 1, "Le blockout Mission 2 doit exposer un acte auteur.")
 		_check(map.find_spawn(&"player_start") != null, "Mission 2 doit exposer un spawn joueur initial.")
+		var visual_root := map.get_node_or_null("Visual") as Node2D
+		var abyssal_tint := map.get_node_or_null("Visual/FarBackground/AbyssalTint") as ColorRect
+		var mid_glow := map.get_node_or_null("Visual/MidGlow") as ColorRect
+		_check(visual_root != null and visual_root.z_index < -10, "Le fond Mission 2 doit rester derrière le gameplay.")
+		_check(abyssal_tint != null and abyssal_tint.z_index < -10 and abyssal_tint.color.a < 0.5, "L'aplat abyssal ne doit plus masquer les Ground Pieces dans l'éditeur.")
+		_check(mid_glow != null and mid_glow.z_index < -10 and mid_glow.color.a < 0.35, "La lueur de blockout doit rester décorative et légère.")
 		var pieces_root := map.get_node_or_null("Gameplay/GroundPieces")
 		_check(pieces_root != null and pieces_root.get_child_count() == 5, "Mission 2 doit placer les cinq premières occurrences de Ground Pieces.")
 		for node_name in ["EntryBlackCoral", "FirstDropSlope", "TideEngineBridge", "PearlWallGate", "ExitBlackCoral"]:

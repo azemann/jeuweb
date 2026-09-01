@@ -36,7 +36,7 @@ func _run() -> void:
 	var catalog := load("res://screens/gallery/gallery_catalog.tres") as GalleryCatalog
 	_check(catalog != null, "GalleryCatalog illisible.")
 	if catalog != null:
-		_check(catalog.entries.size() == 7, "Le catalogue doit contenir sept planches.")
+		_check(catalog.entries.size() == 8, "Le catalogue doit contenir les huit planches de direction artistique publiées.")
 		for entry in catalog.entries:
 			_check(entry != null and entry.board_texture != null, "Une planche du catalogue n'a pas de texture.")
 

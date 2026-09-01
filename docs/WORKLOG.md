@@ -1762,3 +1762,21 @@
 - limite volontaire : aucun ennemi, checkpoint, background final ou boucle de
   victoire Mission 2 n'est inventé dans cette tranche ; le but est seulement de
   tester le sol et les raccords dans l'éditeur.
+
+## 2026-09-01 — DA Mission 2 abyssale et vocabulaire de structures
+
+- généré et publié `art/concepts/da-08-abyssal-mission.png` comme nouvelle
+  planche de direction artistique pour Mission 2 ;
+- conservé la source ImageGen sous
+  `pipeline/assets/sources/imagegen/concepts/abyssal_mission_v001/` et ajouté
+  recette/provenance dédiées ;
+- ajouté DA-08 au `GalleryCatalog`, qui passe de sept à huit planches ;
+- créé `docs/assets/MISSION_2_ABYSSAL_ART_DIRECTION_AND_STRUCTURE_KIT.md` pour
+  fixer les règles visuelles abyssales et une liste de pièces terrain de
+  structure à produire par lots ;
+- corrigé le blockout Mission 2 : le fond `Visual` reste masqué si l'auteur a
+  décoché l'œil, et ses aplats sont désormais derrière le gameplay avec une
+  opacité réduite s'ils sont rallumés ;
+- limite volontaire : les nombreuses pièces listées ne sont pas encore toutes
+  publiées en sprites runtime ; le prochain lot doit produire les modules
+  prioritaires avant de densifier les props et hazards.
