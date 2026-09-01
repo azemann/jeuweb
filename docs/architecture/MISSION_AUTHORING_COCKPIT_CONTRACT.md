@@ -12,6 +12,8 @@ car `jeuweb` compose ses missions directement dans des scènes maîtresses Godot
   `MissionMapDefinition` ;
 - composition level design/game art : scène maître sous `maps/missions/` ;
 - test jouable : scène déclarée par `MissionMapDefinition.playtest_scene_path` ;
+- test runtime depuis le menu principal : `MissionTestSelectScreen`, alimenté
+  par `MissionMapCatalog` et lançant `PrototypeMissionScreen` ;
 - cockpit éditeur : plugin `addons/mission_authoring`.
 
 ## Règles
@@ -24,8 +26,15 @@ car `jeuweb` compose ses missions directement dans des scènes maîtresses Godot
   une scène maître et une scène de playtest existantes.
 - L'écran de playtest peut hériter de `prototype_mission_screen.tscn` et
   surcharger seulement `mission_definition_override`.
+- Le bouton `Mission` du menu principal ne doit pas coder une mission unique :
+  il ouvre un sélecteur de test alimenté par le catalogue.
+- Le sélecteur runtime ne possède pas le player, le HUD, les spawners ou la
+  carte chargée ; il instancie seulement `PrototypeMissionScreen` et lui
+  transmet la `MissionMapDefinition` choisie.
 
 ## Validation
 
 `tests/mission_authoring_tools_contract_test.gd` protège l'activation du plugin,
 les chemins de playtest du catalogue et l'instanciation des scènes de test.
+`tests/mission_playtest_selector_contract_test.gd` protège le sélecteur runtime
+et le routage du bouton `Mission` vers ce sélecteur.

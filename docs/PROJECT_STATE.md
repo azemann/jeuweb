@@ -236,6 +236,10 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - le plugin éditeur `Mission Authoring` expose un dock `Missions` qui lit
   `MissionMapCatalog`, ouvre la `MissionMapDefinition`, ouvre la scène maître
   et lance la scène de playtest déclarée par chaque mission ;
+- le bouton `Mission` du menu principal ouvre maintenant
+  `MissionTestSelectScreen`, qui lit `MissionMapCatalog` et lance chaque
+  mission dans `PrototypeMissionScreen` avec le player, le HUD, les spawners et
+  les projectiles canoniques ;
 - le kit terrain abyssal publie désormais vingt-cinq scènes Ground Pieces
   glissables : socle v001, variantes v002 de raccords et cinq grands socles
   v004 générés pour une seule hauteur de sol lisible ; Mission 2 en place
@@ -254,6 +258,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
 - identité et contrat d'une carte : `MissionMapDefinition.tres` ;
 - point d'entrée de test d'une carte :
   `MissionMapDefinition.playtest_scene_path` ;
+- test runtime depuis le menu principal :
+  `MissionTestSelectScreen`, qui route seulement le choix de mission vers
+  `PrototypeMissionScreen` ;
 - cockpit d'édition/test : plugin `addons/mission_authoring`, qui lit le
   catalogue sans posséder les missions ;
 - placement final : scène maîtresse de carte ;
@@ -560,10 +567,10 @@ catalogues.
 - limite volontaire : `DestructibleTerrain` est présent mais ne génère pas à
   l'entrée de scène, car ce premier blockout ne définit pas encore de zones
   destructibles ni de pièces Carvable de mission validées ;
-- prochaine action recommandée : ouvrir Mission 2 dans Godot, jouer le
-  parcours au clavier/manette, déplacer les pièces à la main, vérifier
-  pivots/surfaces de marche, puis décider des premiers hazards, checkpoints et
-  rencontres.
+- prochaine action recommandée : ouvrir Mission 2 depuis Start → Mission →
+  Mission 2, jouer le parcours au clavier/manette, déplacer les pièces à la
+  main, vérifier pivots/surfaces de marche, puis décider des premiers hazards,
+  checkpoints et rencontres.
 
 ## Prochaine tranche recommandée
 
@@ -590,6 +597,7 @@ env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config 
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/pickup_interaction_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/player_asset_integration_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_camera_progression_test.gd
+env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_playtest_selector_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/mission_run_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/encounter_cadence_contract_test.gd
 env XDG_DATA_HOME=/tmp/jeuweb-test-data XDG_CONFIG_HOME=/tmp/jeuweb-test-config XDG_CACHE_HOME=/tmp/jeuweb-test-cache /home/evan/.local/bin/godot --headless --path . --script res://tests/permanent_ground_module_test.gd
@@ -606,7 +614,7 @@ python3 pipeline/assets/tools/validate_industrial_toxic_enemy_roster.py
 python3 pipeline/assets/tools/validate_enemy_animation_roster_v002.py
 ```
 
-Dernière validation complète : 2026-09-01, le profil `structure` passe 36/36.
+Dernière validation complète : 2026-09-01, le profil `structure` passe 37/37.
 Dernière validation complète avant cette tranche : le profil `content` passe
 1/1, le pipeline des explosions de barils est reproductible bit à bit et
 `git diff --check` ne signale aucun défaut.

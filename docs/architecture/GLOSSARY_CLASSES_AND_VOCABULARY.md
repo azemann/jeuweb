@@ -146,6 +146,7 @@ les identifiants de contenu stables `snake_case` dans un `StringName`.
 | `BootFlow` | Control | Joue l'introduction puis signale que le menu peut apparaître. |
 | `StartFlow` | Control | Expose les commandes du menu principal par signaux. |
 | `BootStartFlowTheme` | Resource | Associe backgrounds, emblème, cadres, ornements et marqueurs à une peau de démarrage réutilisable. |
+| `MissionTestSelectScreen` | Control | Liste les missions du catalogue et lance chacune dans le runtime prototype avec le player canonique. |
 | `PrototypeMissionScreen` | Control | Assemble temporairement mission, HUD et retour au menu. |
 | `MissionHUDTheme` | Resource | Associe cadres, portrait, icônes et couleurs à une peau de HUD réutilisable. |
 | `MissionHUD` | Control | Présente vie, armure, arme, munitions, objectifs, Boss et Overdrive sans posséder leurs données. |

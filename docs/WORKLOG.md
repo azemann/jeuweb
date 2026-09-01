@@ -1836,3 +1836,21 @@
   pour tester Mission 2 sans dupliquer toute la scène de mission runtime ;
 - ajouté `mission_authoring_tools_contract_test.gd` pour protéger le plugin,
   les chemins de playtest et l'instanciation des scènes de test.
+
+## 2026-09-01 — Sélecteur runtime de test missions
+
+- clarifié le besoin auteur : tester facilement chaque mission avec le player
+  canonique, sans passer obligatoirement par le dock éditeur ;
+- ajouté `MissionTestSelectScreen`, écran `Control` alimenté par
+  `MissionMapCatalog`, avec un bouton par mission publiée ;
+- branché le bouton `Mission` du menu principal sur ce sélecteur via
+  `AppFlowConfig.tres` ;
+- chaque choix instancie `PrototypeMissionScreen` et transmet uniquement la
+  `MissionMapDefinition` choisie par `mission_definition_override`, donc le
+  player, le HUD, les spawners, l'inventaire et les projectiles restent ceux du
+  runtime canonique ;
+- ajouté `mission_playtest_selector_contract_test.gd` et inscrit
+  `MissionTestSelectScreen` dans le glossaire des classes ;
+- validation : `./scripts/run-tests.sh` passe le profil `structure` à 37/37 ;
+- non pris dans cette tranche : les modifications auteur en cours dans
+  `maps/missions/mission2/mission_2.tscn`, qui restent hors commit.
