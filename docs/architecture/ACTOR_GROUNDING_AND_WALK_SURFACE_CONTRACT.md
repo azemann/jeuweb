@@ -61,7 +61,9 @@ Pour une pièce Permanent ou Breakable :
 
 Pour Carvable, l'aperçu auteur de ce contour est volontairement masqué et la
 collision locale désactivée. Le masque runtime est la seule autorité après
-chaque destruction.
+chaque destruction. Une map qui contient au moins une pièce Carvable doit donc
+laisser `Runtime/DestructibleTerrain.generate_on_ready` actif afin que le
+joueur et les ennemis rencontrent immédiatement les collisions de chunks.
 
 ## Règles visuelles
 

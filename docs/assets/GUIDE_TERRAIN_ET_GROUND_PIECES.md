@@ -150,7 +150,9 @@ GroundPiece2D
 L'instance dans la map choisira son mode depuis l'Inspector :
 
 - `Permanent` : collision statique, jamais creusée ;
-- `Carvable` : contribution au terrain raster et cratères façon Worms ;
+- `Carvable` : contribution au terrain raster et cratères façon Worms ; la
+  collision joueur/ennemis vient de `DestructibleTerrain2D` généré au lancement,
+  pas d'une collision locale parallèle dans la pièce ;
 - `Breakable` : objet entier possédant une vie et une variante détruite.
 
 ## Catalogue extensible pour les futurs niveaux

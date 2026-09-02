@@ -1867,3 +1867,18 @@
 - renforcé `abyssal_ground_kit_contract_test.gd` pour empêcher les grands
   socles générés de revenir en `Carvable` par défaut ;
 - validation ciblée : `abyssal_ground_kit_contract_test.gd` passe.
+
+## 2026-09-01 — Collision des pièces Carvable en playtest
+
+- clarifié la règle physique : une pièce `Carvable` ne doit pas réactiver sa
+  collision locale, car cela créerait une seconde autorité après les cratères ;
+- la collision joueur/ennemis vient du masque et des chunks de
+  `DestructibleTerrain2D`, générés au lancement de la map ;
+- supprimé le blocage `generate_on_ready = false` de Mission 2 pour que les
+  pièces Carvable deviennent solides et creusables dès le playtest ;
+- ajouté une validation dans `MissionMapRoot2D` : une map avec au moins une
+  `GroundPiece2D` Carvable doit laisser `Runtime/DestructibleTerrain` générer
+  au lancement ;
+- documenté la règle dans le contrat de surfaces marchables et le guide Ground
+  Pieces ;
+- validation : `./scripts/run-tests.sh` passe le profil `structure` à 37/37.

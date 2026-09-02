@@ -98,6 +98,8 @@ func _run() -> void:
 		_check(map.camera_bounds == Rect2(0, 0, 5120, 720), "Les limites caméra Mission 2 doivent suivre world_size.")
 		_check(map.authored_segments().size() == 2, "Le blockout Mission 2 doit exposer deux actes auteur.")
 		_check(map.find_spawn(&"player_start") != null, "Mission 2 doit exposer un spawn joueur initial.")
+		var terrain := map.destructible_terrain() as DestructibleTerrain2D
+		_check(terrain != null and terrain.generate_on_ready, "Mission 2 doit générer le terrain destructible pour que les pièces Carvable restent solides en playtest.")
 		var visual_root := map.get_node_or_null("Visual") as Node2D
 		var abyssal_tint := map.get_node_or_null("Visual/FarBackground/AbyssalTint") as ColorRect
 		var mid_glow := map.get_node_or_null("Visual/MidGlow") as ColorRect

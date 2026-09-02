@@ -165,6 +165,8 @@ func validation_errors() -> PackedStringArray:
 		errors.append("La branche Runtime/Effects est introuvable.")
 	if destructible_terrain() == null:
 		errors.append("Runtime/DestructibleTerrain est introuvable.")
+	else:
+		_validate_destructible_terrain_contract(errors)
 	if editor_preview_root() == null:
 		errors.append("La branche EditorPreview est introuvable.")
 	if str(default_spawn_id).is_empty() or find_spawn(default_spawn_id) == null:
@@ -198,6 +200,22 @@ func _validate_ground_pieces(parent: Node, errors: PackedStringArray) -> void:
 		for piece_error in piece.validation_errors():
 			var relative_path := parent.get_path_to(piece)
 			errors.append("Gameplay/GroundPieces/%s : %s" % [relative_path, piece_error])
+
+
+func _validate_destructible_terrain_contract(errors: PackedStringArray) -> void:
+	var terrain := destructible_terrain()
+	if terrain == null:
+		return
+	var pieces_root := gameplay_root().get_node_or_null("GroundPieces") if gameplay_root() != null else null
+	if pieces_root == null:
+		return
+	for child in pieces_root.find_children("*", "GroundPiece2D", true, false):
+		var piece := child as GroundPiece2DType
+		if piece == null or piece.ground_mode != GroundPiece2DType.GroundMode.CARVABLE:
+			continue
+		if not terrain.generate_on_ready:
+			errors.append("Runtime/DestructibleTerrain doit générer au lancement dès qu'une Ground Piece est Carvable.")
+		return
 
 
 func _validate_encounters(parent: Node, errors: PackedStringArray) -> void:

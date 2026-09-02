@@ -65,6 +65,9 @@ dérivés suivent translation, rotation, échelle non uniforme et miroir.
   ruine sans collision à zéro PV ;
 - composition des PNG et masques de plusieurs Ground Pieces dans le terrain
   destructible global, avec cratères continus entre leurs raccords ;
+- une map contenant des Ground Pieces `Carvable` doit générer
+  `Runtime/DestructibleTerrain` au lancement afin que joueur et ennemis
+  conservent une collision immédiate via les chunks destructibles ;
 - style de sol permanent partagé et réglable par Resource dans l'Inspector ;
 - masque alpha et collisions par chunks de 128 px ;
 - cratères locaux sans reconstruction du bitmap complet ; masque et rendu sont
@@ -553,9 +556,9 @@ catalogues.
   short/long, pilier de support, arche traversable, colonnes intacte/brisée et
   murs nacrés small/large ;
 - cinq grands socles v004 générés remplacent la v003 refusée et deviennent la
-  base principale du sol de Mission 2 ; ils sont `Permanent` par défaut pour
-  être immédiatement solides en playtest, tandis que les pièces v002 sont
-  considérées comme raccords et compléments ;
+  base principale du sol de Mission 2 ; ils restent `Permanent` par défaut
+  pour les gros appuis, tandis que toute pièce passée en `Carvable` reste
+  solide via `DestructibleTerrain2D` généré au lancement ;
 - `GroundPieceDefinition` reste l'autorité de chaque `piece_id`, texture,
   pivot, contour et surface de marche ; `GroundPiece2D` garde le mode et le
   Transform auteur instance par instance ;

@@ -195,7 +195,6 @@ y_sort_enabled = true
 z_index = 8
 script = ExtResource("5_terrain_script")
 profile = ExtResource("6_terrain_profile")
-generate_on_ready = false
 
 [node name="EditorPreview" type="Node2D" parent="." unique_id=288934850 groups=["map_authoring_preview"]]
 
